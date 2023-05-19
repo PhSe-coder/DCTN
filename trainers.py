@@ -21,7 +21,7 @@ class ABSADataModule(LightningDataModule):
 
     def __post_init__(self):
         super().__init__()
-        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=128)
+        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=100)
         self.dataloader = partial(DataLoader,
                                   batch_size=self.batch_size,
                                   num_workers=self.num_workers)
