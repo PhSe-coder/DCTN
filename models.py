@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import List
 import os
 from transformers.modeling_outputs import TokenClassifierOutput
@@ -6,26 +5,27 @@ from lightning.pytorch import LightningModule
 from constants import TAGS
 from torch.optim import AdamW
 from eval import absa_evaluate, evaluate
-from model import BertForTokenClassification, MIBert
+from model import BertForTokenClassification
 from optimization import BertAdam
-from transformers import BertTokenizer
+from transformers import BertTokenizer, BertModel
 
 
-class MIBertClassifier(LightningModule):
+class FDGRModel(LightningModule):
 
-    def __init__(self, alpha: float, tau: float, pretrained_model: str, **kwargs):
+    def __init__(self,
+                 num_labels: int,
+                 output_dir: str,
+                 lr: float,
+                 pretrained_model_name="bert-base-uncased"):
         super().__init__()
         self.save_hyperparameters()
         self.automatic_optimization = False
-        self.model = MIBert.from_pretrained(pretrained_model,
-                                            alpha,
-                                            tau,
-                                            num_labels=kwargs.get("num_labels"))
-        self.lr = kwargs.get('lr')
-        self.output_dir: str = kwargs.get("output_dir")
-        self.tokenizer = kwargs.get('tokenizer')
+        self.model = BertModel.from_pretrained(pretrained_model_name,
+                                            num_labels=num_labels)
+        self.lr = lr
+        self.output_dir: str = output_dir
+        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
 
-    # Using custom or multiple metrics (default_hp_metric=False)
     def on_train_start(self):
         self.logger.log_hyperparams(self.hparams)
 
@@ -36,8 +36,6 @@ class MIBertClassifier(LightningModule):
         params = [(k, v) for k, v in self.named_parameters()
                   if v.requires_grad == True and 'pooler' not in k]
         pretrained_param_optimizer = [n for n in params if 'bert' in n[0]]
-        custom_param_optimizer = [n for n in params if 'bert' not in n[0] and 'mi_loss' not in n[0]]
-        mi_loss_optimizer = [n for n in params if 'mi_loss' in n[0]]
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
         pretrained_params = [{
             'params':
@@ -51,14 +49,8 @@ class MIBertClassifier(LightningModule):
         }]
         # bert_opt = AdamW(pretrained_params, self.lr, amsgrad=True)
         bert_opt = BertAdam(pretrained_params, self.lr)
-        params = [{
-            'params': [p for n, p in custom_param_optimizer],
-            'lr': self.lr
-        }, {
-            'params': [p for n, p in mi_loss_optimizer],
-            'lr': 1e-4
-        }]
-        custom_opt = AdamW(params, amsgrad=True, weight_decay=0.1)
+        params = [n for n in params if 'bert' not in n[0]]
+        custom_opt = AdamW(params, self.lr, weight_decay=1e-2, amsgrad=True)
         return [bert_opt, custom_opt]
 
     def training_step(self, train_batch, batch_idx):
@@ -131,14 +123,6 @@ class MIBertClassifier(LightningModule):
                 content = f'test_pre: {ae_test_pre:.4f}, test_rec: {ae_test_rec:.4f}, test_f1: {ae_test_f1:.4f}'
                 f.write(content)
 
-    @staticmethod
-    def add_model_specific_args(parent_parser):
-        parser = parent_parser.add_argument_group("MIBert")
-        parser.add_argument("--alpha",
-                            type=float,
-                            help='the weight parameter of the Mutual Information loss')
-        return parent_parser
-
 
 class BertClassifier(LightningModule):
 
@@ -155,7 +139,7 @@ class BertClassifier(LightningModule):
         self.automatic_optimization = False
         self.model = BertForTokenClassification.from_pretrained(pretrained_model_name,
                                                                 num_labels=self.num_labels)
-        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=128)
+        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.valid_out = []
         self.test_out = []
 
