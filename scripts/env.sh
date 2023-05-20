@@ -10,5 +10,6 @@ pip install openpyxl==3.1.1
 pip install SciencePlots==2.0.0
 pip install -i https://pypi.org/simple stanza==1.5.0
 pip install -i https://pypi.org/simple notebook==6.5.4
+pip install fasttext==0.9.2
 pip install pandas==2.0.0
 pip install yapf
