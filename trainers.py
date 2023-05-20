@@ -4,7 +4,7 @@ from lightning.pytorch import LightningDataModule
 import torch
 from torch.utils.data import DataLoader
 from transformers import BertTokenizer
-from dataset import MyDataset
+from dataset import ModelDataset
 from functools import partial
 from lightning.pytorch.cli import LightningCLI
 
@@ -12,12 +12,13 @@ from lightning.pytorch.cli import LightningCLI
 @dataclass
 class ABSADataModule(LightningDataModule):
     batch_size: int
+    k2t_file: str
+    t2k_file: str
     num_workers: int = 0
     pretrained_model = "bert-base-uncased"
     train_file: List[str] = None
     validation_file: str = None
     test_file: str = None
-
 
     def __post_init__(self):
         super().__init__()
@@ -28,11 +29,14 @@ class ABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            self.train_set = MyDataset(self.train_file, self.tokenizer)
+            self.train_set = ModelDataset(self.train_file, self.k2t_file, self.t2k_file,
+                                          self.target, self.tokenizer)
         if stage in ('fit', 'validate'):
-            self.val_set = MyDataset(self.validation_file, self.tokenizer)
+            self.val_set = ModelDataset(self.validation_file, self.k2t_file, self.t2k_file,
+                                        self.target, self.tokenizer)
         if stage == 'test':
-            self.test_set = MyDataset(self.test_file, self.tokenizer)
+            self.test_set = ModelDataset(self.test_file, self.k2t_file, self.t2k_file, self.target,
+                                         self.tokenizer)
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)
@@ -42,6 +46,7 @@ class ABSADataModule(LightningDataModule):
 
     def test_dataloader(self):
         return self.dataloader(self.test_set, shuffle=False)
+
 
 if __name__ == '__main__':
     torch.set_float32_matmul_precision('high')
