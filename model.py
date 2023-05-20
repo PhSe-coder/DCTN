@@ -87,7 +87,7 @@ class BertForTokenClassification(BertPreTrainedModel):
         super(BertForTokenClassification, self).__init__(config)
         self.num_labels = config.num_labels
         self.bert = BertModel(config)
-        self.dropout = nn.Dropout(0.2)
+        self.dropout = nn.Dropout(0.1)
         self.classifier = nn.Linear(config.hidden_size, config.num_labels)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
 
@@ -96,8 +96,7 @@ class BertForTokenClassification(BertPreTrainedModel):
                 token_type_ids: Tensor = None,
                 attention_mask: Tensor = None,
                 valid_mask: Tensor = None,
-                gold_labels: Tensor = None,
-                **kwargs):
+                gold_labels: Tensor = None):
         outputs = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]
         sequence_output = self.dropout(sequence_output)

@@ -47,7 +47,6 @@ class FDGRModel(LightningModule):
             'weight_decay':
             0.0
         }]
-        # bert_opt = AdamW(pretrained_params, self.lr, amsgrad=True)
         bert_opt = BertAdam(pretrained_params, self.lr)
         params = [n for n in params if 'bert' not in n[0]]
         custom_opt = AdamW(params, self.lr, weight_decay=1e-2, amsgrad=True)
@@ -168,7 +167,7 @@ class BertClassifier(LightningModule):
     def training_step(self, train_batch, batch_idx):
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch[0])
+        outputs = self.forward(**train_batch['original'])
         loss = outputs.loss
         self.manual_backward(loss)
         opt.step()
@@ -176,8 +175,9 @@ class BertClassifier(LightningModule):
         return loss
 
     def validation_step(self, batch, batch_idx):
-        targets = batch[0].pop("gold_labels")
-        outputs: TokenClassifierOutput = self.forward(**batch[0])
+        batch = batch['original']
+        targets = batch.pop("gold_labels")
+        outputs: TokenClassifierOutput = self.forward(**batch)
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.argmax(dim=-1).tolist(), targets.tolist())
         self.valid_out.append((pred_list, gold_list))
@@ -193,11 +193,12 @@ class BertClassifier(LightningModule):
         self.valid_out.clear()
 
     def test_step(self, batch, batch_idx):
-        targets = batch[0].pop("gold_labels")
-        outputs: TokenClassifierOutput = self.forward(**batch[0])
+        batch = batch['original']
+        targets = batch.pop("gold_labels")
+        outputs: TokenClassifierOutput = self.forward(**batch)
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
-        sentence = self.tokenizer.batch_decode(batch[0].get("input_ids"), skip_special_tokens=True)
+        sentence = self.tokenizer.batch_decode(batch.get("input_ids"), skip_special_tokens=True)
         self.test_out.append((pred_list, gold_list, sentence))
         return pred_list, gold_list, sentence
 

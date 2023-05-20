@@ -14,9 +14,10 @@ class ABSADataModule(LightningDataModule):
     batch_size: int
     k2t_file: str
     t2k_file: str
+    target: str
     num_workers: int = 0
     pretrained_model = "bert-base-uncased"
-    train_file: List[str] = None
+    train_file: str = None
     validation_file: str = None
     test_file: str = None
 

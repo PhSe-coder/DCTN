@@ -60,11 +60,15 @@ class ModelDataset(Dataset):
                                                         truncation=True)
         wordpiece_tokens = self.tokenizer.convert_ids_to_tokens(tok_dict.input_ids)
         labels = transform(text, labels, wordpiece_tokens, self.tokenizer.all_special_tokens)
+        valid_mask = tok_dict.attention_mask.copy()
+        valid_mask[0] = 0
+        valid_mask[len(valid_mask) - valid_mask[::-1].index(1) - 1] = 0
         data = {
             "input_ids": as_tensor(tok_dict.input_ids),
             "gold_labels": as_tensor(labels),
             "attention_mask": as_tensor(tok_dict.attention_mask),
             "token_type_ids": as_tensor(tok_dict.token_type_ids),
+            "valid_mask": as_tensor(valid_mask)
         }
         return data
 
