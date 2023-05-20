@@ -163,5 +163,5 @@ cython_debug/
 .vscode/
 
 # excel files
-.xlsx
-.xls
+*.xlsx
+*.xls
