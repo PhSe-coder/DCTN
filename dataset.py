@@ -1,6 +1,7 @@
 import json
 import linecache
 import random
+import torch
 import os.path as osp
 from typing import Dict, List, Tuple
 
@@ -74,7 +75,9 @@ class ModelDataset(Dataset):
 
     def build_contrast(self, text: str) -> Tuple[int, str]:
         tokens = text.split()
-        candidate_indices = [index for index, token in enumerate(tokens) if token in self.t2k[self.domain].keys()]
+        candidate_indices = [
+            index for index, token in enumerate(tokens) if token in self.t2k[self.domain].keys() and index < 100
+        ]
         if not candidate_indices:
             return -1, text
         index = random.choice(candidate_indices)
@@ -91,15 +94,33 @@ class ModelDataset(Dataset):
             token = random.choice(self.k2t[self.target][f"NN.{k.split('.')[1]}"])
         contrast_text = f"{' '.join(tokens[:index])} {token} {' '.join(tokens[index+1:])}"
         return index, contrast_text
+    
+    def clip(self, orignal_words: List[str], contrast_words: List[str], index: int):
+        orig_tokens = self.tokenizer.convert_tokens_to_ids(orignal_words[index])
+        cont_tokens = self.tokenizer.convert_tokens_to_ids(contrast_words[index])
+        while len(orig_tokens) > len(cont_tokens):
+            orig_tokens.pop()
+        while len(orig_tokens) < len(cont_tokens):
+            cont_tokens.pop()
+        orignal_words[index] = self.tokenizer.convert_tokens_to_string(orig_tokens)
+        contrast_words[index] = self.tokenizer.convert_tokens_to_string(cont_tokens)
+        return len(orig_tokens)
 
     def __getitem__(self, index):
         # `getline` method start from index 1 rather than 0
         line = linecache.getline(self.datafile, index + 1).strip()
         text, gold_labels = line.rsplit("***")
+        i, contrast_text = self.build_contrast(text)
+        words, cont_words = text.split(' '), contrast_text.split(' ')
+        text, contrast_text = ' '.join(words), ' '.join(cont_words)
         original = self.process(text, gold_labels.split())
-        index, contrast_text = self.build_contrast(text)
         contrast = self.process(contrast_text, gold_labels.split())
-        return {"original": original, "contrast": contrast, "replace_index": index}
+        replace_index = torch.zeros_like(original['input_ids'])
+        if index != -1:
+            bpe_len: int = self.clip(words, cont_words, i)
+            start = len(self.tokenizer.convert_tokens_to_ids(self.tokenizer.cls_token + ' ' + words[:i])) + 1
+            replace_index[start: start+bpe_len] = 1
+        return {"original": original, "contrast": contrast, "replace_index": replace_index}
 
     def __len__(self):
         return self.total
@@ -109,11 +130,8 @@ if __name__ == "__main__":
     from transformers import BertTokenizer
 
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", model_max_length=100)
-    dataset = ModelDataset("./processed/tmp/rest.train.txt",
-                           "./data/knowledge2token.json",
-                            "./data/token2knowledge.json",
-                            "laptop",
-                            tokenizer)
+    dataset = ModelDataset("./processed/tmp/rest.train.txt", "./data/knowledge2token.json",
+                           "./data/token2knowledge.json", "laptop", tokenizer)
     from torch.utils.data import DataLoader
 
     dataloader = DataLoader(dataset, 16, True)

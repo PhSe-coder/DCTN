@@ -1,12 +1,13 @@
 from dataclasses import dataclass
-from typing import List
-from lightning.pytorch import LightningDataModule
+from functools import partial
+
 import torch
+from lightning.pytorch import LightningDataModule
+from lightning.pytorch.cli import LightningCLI
 from torch.utils.data import DataLoader
 from transformers import BertTokenizer
+
 from dataset import ModelDataset
-from functools import partial
-from lightning.pytorch.cli import LightningCLI
 
 
 @dataclass

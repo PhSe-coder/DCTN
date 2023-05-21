@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 from abc import ABC, abstractmethod
 from torch.nn.parameter import Parameter
-
+from torch import Tensor
 
 class UpperBound(nn.Module, ABC):
 
@@ -65,6 +65,7 @@ class CLUBForCategorical(nn.Module):  # Update 04/27/2022
 
     def learning_loss(self, inputs, labels):
         return -self.loglikeli(inputs, labels)
+
 
 class UpperWithPosterior(UpperBound):
     """
@@ -169,7 +170,7 @@ class CLUB(nn.Module):  # CLUB: Mutual Information Contrastive Learning Upper Bo
             x_samples, y_samples : samples from X and Y, having shape [sample_size, x_dim/y_dim] 
     '''
 
-    def __init__(self, x_dim, y_dim, hidden_size):
+    def __init__(self, x_dim: int, y_dim: int, hidden_size: int = None):
         super(CLUB, self).__init__()
         # p_mu outputs mean of q(Y|X)
         #print("create CLUB with dim {}, {}, hiddensize {}".format(x_dim, y_dim, hidden_size))
@@ -204,6 +205,7 @@ class CLUB(nn.Module):  # CLUB: Mutual Information Contrastive Learning Upper Bo
 
     def learning_loss(self, x_samples, y_samples):
         return -self.loglikeli(x_samples, y_samples)
+
 
 class vCLUB(UpperBound):
     """
@@ -265,28 +267,19 @@ class vCLUB(UpperBound):
 
 class InfoNCE(nn.Module):
 
-    def __init__(self, x_dim, y_dim, hidden_size=None):
+    def __init__(self, x_dim: int, y_dim: int, hidden_size: int = None):
         super(InfoNCE, self).__init__()
-        if hidden_size is None:
-            hidden_size = (x_dim + y_dim) // 2
-        # self.down_p = nn.Sequential(nn.Linear(x_dim, y_dim), nn.ReLU())
-        # self.bilinear = nn.Bilinear(y_dim, y_dim, 1, False)
+        hidden_size = hidden_size or (x_dim + y_dim) // 2
         self.w = Parameter(nn.init.kaiming_uniform_(torch.randn(1, x_dim, y_dim)))
-        # self.F_func = nn.Sequential(nn.Linear(x_dim + y_dim, hidden_size), nn.ReLU(),
-        #                             nn.Linear(hidden_size, 1))
 
-    def forward(self, x_samples, y_samples):  # samples have shape [sample_size, dim]
+    def forward(self, x_samples: Tensor, y_samples: Tensor):  # samples have shape [sample_size, dim]
         # shuffle and concatenate
         sample_size = y_samples.shape[0]
 
         x_tile = x_samples.unsqueeze(0).repeat((sample_size, 1, 1))
         y_tile = y_samples.unsqueeze(1).repeat((1, sample_size, 1))
-        # T0 = self.bilinear(self.down_p(x_samples), y_samples)
-        # T1 = self.bilinear(self.down_p(x_tile), y_tile)
         T0 = torch.einsum("ij,mjk,ik->im", [x_samples, self.w, y_samples])
         T1 = torch.einsum("bij,mjk,bik->bim", [x_tile, self.w, y_tile])
-        # T0 = self.F_func(torch.cat([x_samples, y_samples], dim=-1))
-        # T1 = self.F_func(torch.cat([x_tile, y_tile], dim=-1))  #[sample_size, sample_size, 1]
 
         lower_bound = T0.mean() - (T1.logsumexp(dim=1).mean() - np.log(sample_size))
         return lower_bound
