@@ -21,13 +21,13 @@ class FDGRModel(BertPreTrainedModel):
         self.hc_dim: int = config.hidden_size // 2
         self.ht_dim: int = config.hidden_size // 2
         # feature disentanglement module
-        self.mlp = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.LeakyReLU(),
+        self.mlp = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.GELU(),
                                  nn.Linear(config.hidden_size, self.hc_dim + self.ht_dim),
-                                 nn.LeakyReLU())
+                                 nn.GELU())
         self.decoder = nn.Sequential(nn.Linear(self.hc_dim + self.ht_dim, config.hidden_size),
-                                     nn.LeakyReLU(),
+                                     nn.GELU(),
                                      nn.Linear(config.hidden_size, config.hidden_size),
-                                     nn.LeakyReLU())
+                                     nn.GELU())
         self.mse = nn.MSELoss()
         self.club_loss = CLUB(self.ht_dim, self.ht_dim, self.ht_dim)
         self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
