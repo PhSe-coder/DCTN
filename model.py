@@ -18,8 +18,8 @@ class FDGRModel(BertPreTrainedModel):
         self.bert = BertModel(config)
         self.num_labels = config.num_labels
         self.dropout = nn.Dropout(0.1)
-        self.hc_dim: int = config.hidden_size / 2
-        self.ht_dim: int = config.hidden_size / 2
+        self.hc_dim: int = config.hidden_size // 2
+        self.ht_dim: int = config.hidden_size // 2
         # feature disentanglement module
         self.mlp = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.LeakyReLU(),
                                  nn.Linear(config.hidden_size, self.hc_dim + self.ht_dim),
