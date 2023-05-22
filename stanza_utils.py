@@ -11,7 +11,7 @@ nlp = stanza.Pipeline("en",
                       tokenize_pretokenized=True,
                       download_method=DownloadMethod.REUSE_RESOURCES)
 
-__all__ = ['annotation', 'annotation_plus']
+__all__ = ['annotation', 'annotation_plus', 'Sentence']
 
 def annotation(text: str) -> Sentence:
     """sentence annotation
