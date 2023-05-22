@@ -19,7 +19,7 @@ def transform(
     special_tokens: List[str],
 ) -> List[int]:
     text_tokens = text.split()
-    assert len(text_tokens) == len(text_labels)
+    assert len(text_tokens) == len(text_labels), text
     token_tuples = list(zip(text_tokens, text_labels))
     i, offset = 0, 0
     labels: List[str] = []
@@ -104,7 +104,7 @@ class ModelDataset(Dataset):
             orig_tokens.pop()
         while len(orig_tokens) < len(cont_tokens):
             cont_tokens.pop()
-        orignal_words[index] = self.tokenizer.convert_tokens_to_string(orig_tokens)
+        orignal_words[index] = self.tokenizer.convert_tokens_to_string(orig_tokens).replace(' ', '')
         contrast_words[index] = self.tokenizer.convert_tokens_to_string(cont_tokens).replace(' ', '')
         return len(orig_tokens)
 
