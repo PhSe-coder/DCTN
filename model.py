@@ -13,13 +13,15 @@ logger = logging.getLogger(__name__)
 
 class FDGRModel(BertPreTrainedModel):
 
-    def __init__(self, config):
+    def __init__(self, config, alpha: float, beta: float):
         super(FDGRModel, self).__init__(config)
         self.bert = BertModel(config)
         self.num_labels = config.num_labels
         self.dropout = nn.Dropout(0.1)
         self.hc_dim: int = config.hidden_size // 2
         self.ht_dim: int = config.hidden_size // 2
+        self.register_buffer("alpha", torch.as_tensor(alpha))
+        self.register_buffer("beta", torch.as_tensor(beta))
         # feature disentanglement module
         self.mlp = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.GELU(),
                                  nn.Linear(config.hidden_size, self.hc_dim + self.ht_dim),
@@ -32,7 +34,7 @@ class FDGRModel(BertPreTrainedModel):
         self.club_loss = CLUB(self.ht_dim, self.ht_dim, self.ht_dim)
         self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
-        self.classifier = nn.Linear(config.hidden_size, config.num_labels)
+        self.classifier = nn.Linear(self.hc_dim, config.num_labels)
 
     def forward(self,
                 original: Dict[str, Tensor],
@@ -43,7 +45,6 @@ class FDGRModel(BertPreTrainedModel):
             input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
             token_type_ids = torch.cat([original['token_type_ids'], contrast['token_type_ids']])
             attention_mask = torch.cat([original['attention_mask'], contrast['attention_mask']])
-            valid_mask = torch.cat([original['valid_mask'], contrast['valid_mask']])
             sequence_output = self.bert(input_ids,
                                         token_type_ids=token_type_ids,
                                         attention_mask=attention_mask)[0]
@@ -60,31 +61,31 @@ class FDGRModel(BertPreTrainedModel):
             # Orthogonal loss
             orthogonal_loss = torch.matmul(
                 hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1],
-                ht.view(-1, self.ht_dim)[attention_mask.view(-1) == 1].T).sum(dim=-1).mean()
+                ht.view(-1, self.ht_dim)[attention_mask.view(-1) == 1].T).abs().mean()
             # auto-encoder loss
             reconstruct_loss = self.mse(
-                mlp.view(-1, self.hc_dim + self.ht_dim)[attention_mask.view(-1) == 1],
-                self.decoder(mlp).view(-1, self.hc_dim + self.ht_dim)[attention_mask.view(-1) == 1])
+                sequence_output.view(-1, sequence_output.size(-1))[attention_mask.view(-1) == 1],
+                self.decoder(mlp).view(-1, sequence_output.size(-1))[attention_mask.view(-1) == 1])
             # token-invariant representation loss
             orig_ht, cont_ht = ht.chunk(2)
-            active_replace_mask = replace_index.view(-1)[active_mask] == 1
-            inactive_replace_mask = replace_index.view(-1)[active_mask] == 0
+            active_replace_mask = replace_index.view(-1) == 1
+            inactive_replace_mask = replace_index.view(-1) == 0
             replaced_token_loss = self.mse(
-                orig_ht.view(-1, self.ht_dim)[active_mask and active_replace_mask],
-                cont_ht.view(-1, self.ht_dim)[active_mask and active_replace_mask],
+                orig_ht.view(-1, self.ht_dim)[active_mask & active_replace_mask],
+                cont_ht.view(-1, self.ht_dim)[active_mask & active_replace_mask],
             )
             unreplaced_token_loss = self.club_loss(
-                orig_ht.view(-1, self.ht_dim)[active_mask and inactive_replace_mask],
-                cont_ht.view(-1, self.ht_dim)[active_mask and inactive_replace_mask],
+                orig_ht.view(-1, self.ht_dim)[active_mask & inactive_replace_mask],
+                cont_ht.view(-1, self.ht_dim)[active_mask & inactive_replace_mask],
             )
-            token_loss = replaced_token_loss + unreplaced_token_loss
+            token_loss = replaced_token_loss + self.alpha * unreplaced_token_loss
             # domain distribution loss
             orig_hc, cont_hc = hc.chunk(2)
             domain_loss = self.mi_loss(
                 orig_hc.view(-1, self.hc_dim)[active_mask],
                 cont_hc.view(-1, self.hc_dim)[active_mask],
             )
-            loss = ce_loss + orthogonal_loss + reconstruct_loss + token_loss + domain_loss
+            loss = ce_loss + orthogonal_loss + reconstruct_loss + token_loss + self.beta * domain_loss
         else:
             input_ids = original['input_ids']
             attention_mask = original['attention_mask']

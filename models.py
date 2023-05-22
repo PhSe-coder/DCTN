@@ -16,6 +16,8 @@ class FDGRClassifer(LightningModule):
                  num_labels: int,
                  output_dir: str,
                  lr: float,
+                 alpha: float = 0.01,
+                 beta: float = 0.001,
                  pretrained_model_name="bert-base-uncased"):
         super(FDGRClassifer, self).__init__()
         self.save_hyperparameters()
@@ -23,7 +25,8 @@ class FDGRClassifer(LightningModule):
         self.num_labels = num_labels
         self.output_dir = output_dir
         self.lr = lr
-        self.model = FDGRModel.from_pretrained(pretrained_model_name, num_labels=self.num_labels)
+        self.model = FDGRModel.from_pretrained(pretrained_model_name, num_labels=self.num_labels, alpha=alpha,
+                                               beta=beta)
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.valid_out = []
         self.test_out = []
@@ -32,7 +35,10 @@ class FDGRClassifer(LightningModule):
         self.logger.log_hyperparams(self.hparams)
 
     def forward(self, batch):
-        return self.model(batch)
+        original = batch["original"]
+        contrast = batch["contrast"]
+        replace_index = batch["replace_index"]
+        return self.model(original, contrast, replace_index)
 
     def configure_optimizers(self):
         params = [(k, v) for k, v in self.named_parameters()
@@ -50,7 +56,7 @@ class FDGRClassifer(LightningModule):
             0.0
         }]
         bert_opt = BertAdam(pretrained_params, self.lr)
-        custom_params = [n for n in params if 'bert' not in n[0]]
+        custom_params = [p for n, p in params if 'bert' not in n[0]]
         custom_opt = AdamW(custom_params, self.lr, weight_decay=1e-2, amsgrad=True)
         return [bert_opt, custom_opt]
 
@@ -74,13 +80,14 @@ class FDGRClassifer(LightningModule):
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
         return pred_list, gold_list
 
-    def on_validation_epoch_end(self, outputs):
+    def on_validation_epoch_end(self):
         gold_Y, pred_Y = [], []
-        for pred_list, gold_list in outputs:
+        for pred_list, gold_list in self.valid_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
         val_pre, val_rec, val_f1 = absa_evaluate(pred_Y, gold_Y)
         self.log_dict({"val_pre": val_pre, "val_rec": val_rec, "val_f1": val_f1})
+        self.valid_out.clear()
 
     def test_step(self, batch, batch_idx):
         batch = batch["original"]
@@ -91,9 +98,9 @@ class FDGRClassifer(LightningModule):
         sentence = self.tokenizer.batch_decode(batch.get("input_ids"), skip_special_tokens=True)
         return pred_list, gold_list, sentence
 
-    def on_test_epoch_end(self, outputs) -> None:
+    def on_test_epoch_end(self) -> None:
         gold_Y, pred_Y, text = [], [], []
-        for pred_list, gold_list, sentence in outputs:
+        for pred_list, gold_list, sentence in self.test_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
             text.extend(sentence)
@@ -125,6 +132,7 @@ class FDGRClassifer(LightningModule):
             with open(os.path.join(path, "ae_prediction.txt"), "w") as f:
                 content = f'test_pre: {ae_test_pre:.4f}, test_rec: {ae_test_rec:.4f}, test_f1: {ae_test_f1:.4f}'
                 f.write(content)
+        self.test_out.clear()
 
 
 class BertClassifier(LightningModule):
