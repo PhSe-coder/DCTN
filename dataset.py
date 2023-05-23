@@ -53,7 +53,6 @@ class ModelDataset(Dataset):
         self.domain = osp.basename(self.datafile).split('.')[0]
         self.total = sum(1 for _ in open(filename, "rb"))
         self.tokenizer = tokenizer
-        self.bpe_tokenize = tokenizer.wordpiece_tokenizer.tokenize
 
     def process(self, text: str, labels: List[str]) -> Dict[str, Tensor]:
         tok_dict: Dict[str, List[int]] = self.tokenizer(text,

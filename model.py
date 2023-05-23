@@ -1,12 +1,13 @@
 import logging
 from typing import Dict
+from lightning import LightningModule
 import torch
 import torch.nn as nn
 import torch.nn.functional as f
 from transformers import BertModel, BertPreTrainedModel
 from torch import Tensor
 from transformers.modeling_outputs import TokenClassifierOutput
-from mi_estimators import CLUB, InfoNCE
+from mi_estimators import vCLUB, InfoNCE
 
 logger = logging.getLogger(__name__)
 
@@ -25,13 +26,12 @@ class FDGRModel(BertPreTrainedModel):
         # feature disentanglement module
         self.mlp = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.GELU(),
                                  nn.Linear(config.hidden_size, self.hc_dim + self.ht_dim),
-                                 nn.GELU())
+                                 nn.GELU(), nn.LayerNorm(self.hc_dim + self.ht_dim, 1e-12))
         self.decoder = nn.Sequential(nn.Linear(self.hc_dim + self.ht_dim, config.hidden_size),
-                                     nn.GELU(),
-                                     nn.Linear(config.hidden_size, config.hidden_size),
-                                     nn.GELU())
+                                     nn.GELU(), nn.Linear(config.hidden_size, config.hidden_size),
+                                     nn.GELU(), nn.LayerNorm(config.hidden_size, 1e-12))
         self.mse = nn.MSELoss()
-        self.club_loss = CLUB(self.ht_dim, self.ht_dim, self.ht_dim)
+        self.club_loss = vCLUB()
         self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
         self.classifier = nn.Linear(self.hc_dim, config.num_labels)
@@ -48,7 +48,6 @@ class FDGRModel(BertPreTrainedModel):
             sequence_output = self.bert(input_ids,
                                         token_type_ids=token_type_ids,
                                         attention_mask=attention_mask)[0]
-            sequence_output = self.dropout(sequence_output)
             mlp = self.mlp(sequence_output)
             hc, ht = torch.split(mlp, [self.hc_dim, self.ht_dim], dim=-1)
             logits: Tensor = self.classifier(hc)
@@ -70,22 +69,30 @@ class FDGRModel(BertPreTrainedModel):
             orig_ht, cont_ht = ht.chunk(2)
             active_replace_mask = replace_index.view(-1) == 1
             inactive_replace_mask = replace_index.view(-1) == 0
-            replaced_token_loss = self.mse(
+            replaced_token_loss = self.club_loss.update(
                 orig_ht.view(-1, self.ht_dim)[active_mask & active_replace_mask],
                 cont_ht.view(-1, self.ht_dim)[active_mask & active_replace_mask],
             )
-            unreplaced_token_loss = self.club_loss(
+            unreplaced_token_loss = self.mse(
                 orig_ht.view(-1, self.ht_dim)[active_mask & inactive_replace_mask],
                 cont_ht.view(-1, self.ht_dim)[active_mask & inactive_replace_mask],
             )
-            token_loss = replaced_token_loss + self.alpha * unreplaced_token_loss
+            token_loss = self.alpha * replaced_token_loss + unreplaced_token_loss
             # domain distribution loss
             orig_hc, cont_hc = hc.chunk(2)
-            domain_loss = self.mi_loss(
+            domain_loss = self.mi_loss.learning_loss(
                 orig_hc.view(-1, self.hc_dim)[active_mask],
                 cont_hc.view(-1, self.hc_dim)[active_mask],
             )
-            loss = ce_loss + orthogonal_loss + reconstruct_loss + token_loss + self.beta * domain_loss
+            # self.log_dict({
+            #     "ce_loss": ce_loss.item(),
+            #     "orthogonal_loss": orthogonal_loss.item(),
+            #     "reconstruct_loss": reconstruct_loss.item(),
+            #     "replaced_token_loss": replaced_token_loss.item(),
+            #     "unreplaced_token_loss": unreplaced_token_loss.item(),
+            #     "domain_loss": domain_loss.item(),
+            # })
+            loss = ce_loss + 0.01 * orthogonal_loss + 0.1 * reconstruct_loss + token_loss + self.beta * domain_loss
         else:
             input_ids = original['input_ids']
             attention_mask = original['attention_mask']

@@ -17,7 +17,7 @@ class ABSADataModule(LightningDataModule):
     t2k_file: str
     target: str
     num_workers: int = 0
-    pretrained_model = "bert-base-uncased"
+    pretrained_model: str = "bert-base-uncased"
     train_file: str = None
     validation_file: str = None
     test_file: str = None

@@ -1,5 +1,6 @@
-from typing import List
+from typing import Dict, List
 import os
+import torch
 from transformers.modeling_outputs import TokenClassifierOutput
 from lightning.pytorch import LightningModule
 from constants import TAGS
@@ -7,7 +8,10 @@ from torch.optim import AdamW
 from eval import absa_evaluate, evaluate
 from model import BertForTokenClassification, FDGRModel
 from optimization import BertAdam
-from transformers import BertTokenizer
+from transformers import BertTokenizer, BertModel, BertConfig
+import torch.nn as nn
+from mi_estimators import vCLUB, InfoNCE
+from torch import Tensor
 
 
 class FDGRClassifer(LightningModule):
@@ -16,9 +20,26 @@ class FDGRClassifer(LightningModule):
                  num_labels: int,
                  output_dir: str,
                  lr: float,
-                 alpha: float = 0.01,
-                 beta: float = 0.001,
-                 pretrained_model_name="bert-base-uncased"):
+                 alpha: float = 0.001,
+                 beta: float = 0.01,
+                 pretrained_model_name: str = "bert-base-uncased"):
+        """FDGR model classifier by pytorch lightning
+
+        Parameters
+        ----------
+        num_labels : int
+            number of tag labels
+        output_dir : str
+            the output directory of the annotation results
+        lr : float
+            learning rate
+        alpha : float, optional
+            weight for InfoNCE loss
+        beta : float, optional
+            weight for CLUB loss
+        pretrained_model_name : str, optional
+            the specific pretrained model
+        """
         super(FDGRClassifer, self).__init__()
         self.save_hyperparameters()
         self.automatic_optimization = False
@@ -34,16 +55,12 @@ class FDGRClassifer(LightningModule):
     def on_train_start(self):
         self.logger.log_hyperparams(self.hparams)
 
-    def forward(self, batch):
-        original = batch["original"]
-        contrast = batch["contrast"]
-        replace_index = batch["replace_index"]
-        return self.model(original, contrast, replace_index)
+    def forward(self, *args, **kwargs):
+        return self.model(*args, **kwargs)
 
     def configure_optimizers(self):
-        params = [(k, v) for k, v in self.named_parameters()
-                  if v.requires_grad == True and 'pooler' not in k]
-        pretrained_param_optimizer = [n for n in params if 'bert' in n[0]]
+        pretrained_param_optimizer = [(k, v) for k, v in self.named_parameters()
+                                      if v.requires_grad == True and 'pooler' not in k]
         no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
         pretrained_params = [{
             'params':
@@ -55,29 +72,25 @@ class FDGRClassifer(LightningModule):
             'weight_decay':
             0.0
         }]
-        bert_opt = BertAdam(pretrained_params, self.lr)
-        custom_params = [p for n, p in params if 'bert' not in n[0]]
-        custom_opt = AdamW(custom_params, self.lr, weight_decay=1e-2, amsgrad=True)
-        return [bert_opt, custom_opt]
+        return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
 
     def training_step(self, train_batch, batch_idx):
-        opts = self.optimizers()
-        for opt in opts:
-            opt.zero_grad()
-        outputs = self.forward(train_batch)
+        opt = self.optimizers()
+        opt.zero_grad()
+        outputs = self.forward(**train_batch)
         loss = outputs.loss
         self.manual_backward(loss)
-        for opt in opts:
-            opt.step()
+        opt.step()
         self.log('train_loss', loss.item())
         return loss
 
     def validation_step(self, batch, batch_idx):
         batch = batch["original"]
         targets = batch.pop("gold_labels")
-        outputs: TokenClassifierOutput = self.model(batch)
+        outputs: TokenClassifierOutput = self.forward(batch)
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
+        self.valid_out.append((pred_list, gold_list))
         return pred_list, gold_list
 
     def on_validation_epoch_end(self):
@@ -92,10 +105,11 @@ class FDGRClassifer(LightningModule):
     def test_step(self, batch, batch_idx):
         batch = batch["original"]
         targets = batch.pop("gold_labels")
-        outputs: TokenClassifierOutput = self.model(batch)
+        outputs: TokenClassifierOutput = self.forward(batch)
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
         sentence = self.tokenizer.batch_decode(batch.get("input_ids"), skip_special_tokens=True)
+        self.test_out.append((pred_list, gold_list, sentence))
         return pred_list, gold_list, sentence
 
     def on_test_epoch_end(self) -> None:
@@ -141,7 +155,7 @@ class BertClassifier(LightningModule):
                  num_labels: int,
                  output_dir: str,
                  lr: float,
-                 pretrained_model_name="bert-base-uncased"):
+                 pretrained_model_name: str = "bert-base-uncased"):
         super(BertClassifier, self).__init__()
         self.save_hyperparameters()
         self.num_labels = num_labels
