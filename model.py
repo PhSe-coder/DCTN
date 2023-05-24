@@ -14,13 +14,13 @@ logger = logging.getLogger(__name__)
 
 class FDGRModel(BertPreTrainedModel):
 
-    def __init__(self, config, alpha: float, beta: float):
+    def __init__(self, config, alpha: float, beta: float, h_dim: int):
         super(FDGRModel, self).__init__(config)
         self.bert = BertModel(config)
         self.num_labels = config.num_labels
         self.dropout = nn.Dropout(0.1)
-        self.hc_dim: int = config.hidden_size // 2
-        self.ht_dim: int = config.hidden_size // 2
+        self.hc_dim = h_dim
+        self.ht_dim = h_dim
         self.register_buffer("alpha", torch.as_tensor(alpha))
         self.register_buffer("beta", torch.as_tensor(beta))
         # feature disentanglement module
@@ -39,7 +39,8 @@ class FDGRModel(BertPreTrainedModel):
     def forward(self,
                 original: Dict[str, Tensor],
                 contrast: Dict[str, Tensor] = None,
-                replace_index: Tensor = None):
+                replace_index: Tensor = None,
+                log_dict=None):
         loss = None
         if self.training:
             input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
@@ -84,14 +85,14 @@ class FDGRModel(BertPreTrainedModel):
                 orig_hc.view(-1, self.hc_dim)[active_mask],
                 cont_hc.view(-1, self.hc_dim)[active_mask],
             )
-            # self.log_dict({
-            #     "ce_loss": ce_loss.item(),
-            #     "orthogonal_loss": orthogonal_loss.item(),
-            #     "reconstruct_loss": reconstruct_loss.item(),
-            #     "replaced_token_loss": replaced_token_loss.item(),
-            #     "unreplaced_token_loss": unreplaced_token_loss.item(),
-            #     "domain_loss": domain_loss.item(),
-            # })
+            log_dict({
+                "ce_loss": ce_loss.item(),
+                "orthogonal_loss": orthogonal_loss.item(),
+                "reconstruct_loss": reconstruct_loss.item(),
+                "replaced_token_loss": replaced_token_loss.item(),
+                "unreplaced_token_loss": unreplaced_token_loss.item(),
+                "domain_loss": domain_loss.item(),
+            })
             loss = ce_loss + 0.01 * orthogonal_loss + 0.1 * reconstruct_loss + token_loss + self.beta * domain_loss
         else:
             input_ids = original['input_ids']

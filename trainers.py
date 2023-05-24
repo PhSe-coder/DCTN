@@ -9,7 +9,6 @@ from transformers import BertTokenizer
 
 from dataset import ModelDataset
 
-
 @dataclass
 class ABSADataModule(LightningDataModule):
     batch_size: int

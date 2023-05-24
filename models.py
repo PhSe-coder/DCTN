@@ -1,17 +1,14 @@
-from typing import Dict, List
 import os
-import torch
-from transformers.modeling_outputs import TokenClassifierOutput
+from typing import List
+
 from lightning.pytorch import LightningModule
+from transformers import BertTokenizer
+from transformers.modeling_outputs import TokenClassifierOutput
+
 from constants import TAGS
-from torch.optim import AdamW
 from eval import absa_evaluate, evaluate
 from model import BertForTokenClassification, FDGRModel
 from optimization import BertAdam
-from transformers import BertTokenizer, BertModel, BertConfig
-import torch.nn as nn
-from mi_estimators import vCLUB, InfoNCE
-from torch import Tensor
 
 
 class FDGRClassifer(LightningModule):
@@ -22,6 +19,7 @@ class FDGRClassifer(LightningModule):
                  lr: float,
                  alpha: float = 0.001,
                  beta: float = 0.01,
+                 h_dim: int = 384,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -37,6 +35,8 @@ class FDGRClassifer(LightningModule):
             weight for InfoNCE loss
         beta : float, optional
             weight for CLUB loss
+        h_dim : int, optionl
+            the dim of the disentangled features
         pretrained_model_name : str, optional
             the specific pretrained model
         """
@@ -47,7 +47,7 @@ class FDGRClassifer(LightningModule):
         self.output_dir = output_dir
         self.lr = lr
         self.model = FDGRModel.from_pretrained(pretrained_model_name, num_labels=self.num_labels, alpha=alpha,
-                                               beta=beta)
+                                               beta=beta, h_dim=h_dim)
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.valid_out = []
         self.test_out = []
@@ -77,7 +77,7 @@ class FDGRClassifer(LightningModule):
     def training_step(self, train_batch, batch_idx):
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch)
+        outputs = self.forward(**train_batch, log_dict=self.log_dict)
         loss = outputs.loss
         self.manual_backward(loss)
         opt.step()
