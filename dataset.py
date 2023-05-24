@@ -72,56 +72,63 @@ class ModelDataset(Dataset):
         }
         return data
 
-    def build_contrast(self, text: str) -> Tuple[int, str]:
+    def build_contrast(self, text: str) -> Tuple[List[int], str]:
         tokens = text.split()
+        contrast_tokens = tokens.copy()
         candidate_indices = [
             index for index, token in enumerate(tokens)
             if token in self.t2k[self.domain].keys() and index < 100
         ]
         if not candidate_indices:
-            return -1, text
-        index = random.choice(candidate_indices)
-        candidate_token = tokens[index]
-        candidate_knowledges = self.t2k[self.domain][candidate_token]
-        k_set = set()
-        for k in candidate_knowledges:
-            if k in self.k2t[self.target]:
-                k_set.update(self.k2t[self.target][k])
-        if k_set:
-            token = random.choice(list(k_set))
-        else:
-            k = random.choice(candidate_knowledges)
-            key = random.choice(tuple(self.k2t[self.target].keys()))
-            token = random.choice(self.k2t[self.target][key])
-        contrast_text = f"{' '.join(tokens[:index])} {token} {' '.join(tokens[index+1:])}".strip()
-        return index, contrast_text
+            return [], text
+        indicies = random.sample(candidate_indices, k=int(len(candidate_indices) * 0.2 + 1))
+        for index in indicies:
+            candidate_token = contrast_tokens[index]
+            candidate_knowledges = self.t2k[self.domain][candidate_token]
+            k_set = set()
+            for k in candidate_knowledges:
+                if k in self.k2t[self.target]:
+                    k_set.update(self.k2t[self.target][k])
+            if k_set:
+                token = random.choice(list(k_set))
+            else:
+                k = random.choice(candidate_knowledges)
+                key = random.choice(tuple(self.k2t[self.target].keys()))
+                token = random.choice(self.k2t[self.target][key])
+            contrast_tokens[index] = token
+        contrast_text = ' '.join(contrast_tokens)
+        return indicies, contrast_text
 
-    def clip(self, orignal_words: List[str], contrast_words: List[str], index: int):
-        orig_tokens = self.tokenizer.tokenize(orignal_words[index])
-        cont_tokens = self.tokenizer.tokenize(contrast_words[index])
-        while len(orig_tokens) > len(cont_tokens):
-            orig_tokens.pop()
-        while len(orig_tokens) < len(cont_tokens):
-            cont_tokens.pop()
-        orignal_words[index] = self.tokenizer.convert_tokens_to_string(orig_tokens).replace(' ', '')
-        contrast_words[index] = self.tokenizer.convert_tokens_to_string(cont_tokens).replace(' ', '')
-        return len(orig_tokens)
+    def clip(self, orignal_words: List[str], contrast_words: List[str], indicies: List[int]):
+        ret: List[int] = []
+        for index in indicies:
+            orig_tokens = self.tokenizer.tokenize(orignal_words[index])
+            cont_tokens = self.tokenizer.tokenize(contrast_words[index])
+            while len(orig_tokens) > len(cont_tokens):
+                orig_tokens.pop()
+            while len(orig_tokens) < len(cont_tokens):
+                cont_tokens.pop()
+            orignal_words[index] = self.tokenizer.convert_tokens_to_string(orig_tokens).replace(' ', '')
+            contrast_words[index] = self.tokenizer.convert_tokens_to_string(cont_tokens).replace(' ', '')
+            ret.append(len(orig_tokens))
+        return ret
 
     def __getitem__(self, index):
         # `getline` method start from index 1 rather than 0
         line = linecache.getline(self.datafile, index + 1).strip()
         text, gold_labels = line.rsplit("***")
-        i, contrast_text = self.build_contrast(text)
+        indicies, contrast_text = self.build_contrast(text)
         words, cont_words = text.split(' '), contrast_text.split(' ')
-        if i != -1:
-            bpe_len: int = self.clip(words, cont_words, i)
+        if indicies:
+            bpe_lens: List[int] = self.clip(words, cont_words, indicies)
             text, contrast_text = ' '.join(words), ' '.join(cont_words)
-            start =  len(self.tokenizer.tokenize(' '.join(words[:i]))) + 1
         original = self.process(text, gold_labels.split())
         contrast = self.process(contrast_text, gold_labels.split())
         replace_index = torch.zeros_like(original['input_ids'])
-        if i != -1:
-            replace_index[start:start + bpe_len] = 1
+        if indicies:
+            for i, bpe_len in zip(indicies, bpe_lens):
+                start =  len(self.tokenizer.tokenize(' '.join(words[:i]))) + 1
+                replace_index[start:start + bpe_len] = 1
         return {"original": original, "contrast": contrast, "replace_index": replace_index}
 
     def __len__(self):
