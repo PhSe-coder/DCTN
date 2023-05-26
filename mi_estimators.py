@@ -1,11 +1,13 @@
-import numpy as np
-
 import math
+from abc import ABC, abstractmethod
+
+import numpy as np
 import torch
 import torch.nn as nn
-from abc import ABC, abstractmethod
-from torch.nn.parameter import Parameter
 from torch import Tensor
+from torch.functional import F
+from torch.nn.parameter import Parameter
+
 
 class UpperBound(nn.Module, ABC):
 
@@ -272,7 +274,8 @@ class InfoNCE(nn.Module):
         hidden_size = hidden_size or (x_dim + y_dim) // 2
         self.w = Parameter(nn.init.kaiming_uniform_(torch.randn(1, x_dim, y_dim)))
 
-    def forward(self, x_samples: Tensor, y_samples: Tensor):  # samples have shape [sample_size, dim]
+    def forward(self, x_samples: Tensor,
+                y_samples: Tensor):  # samples have shape [sample_size, dim]
         # shuffle and concatenate
         sample_size = y_samples.shape[0]
 
@@ -326,3 +329,10 @@ def kl_norm(mu, log_var):
     """
 
     return -0.5 * torch.sum(1 + log_var - mu**2 - log_var.exp(), dim=1).mean()
+
+
+def jsd(p: Tensor, q: Tensor):
+    total_m = (p + q).log_softmax(-1) * 0.5
+    loss = F.kl_div(p.log_softmax(-1), total_m, reduction="batchmean", log_target=True)
+    loss += F.kl_div(q.log_softmax(-1), total_m, reduction="batchmean", log_target=True)
+    return (0.5 * loss)

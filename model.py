@@ -1,28 +1,28 @@
 import logging
 from typing import Dict
-from lightning import LightningModule
 import torch
 import torch.nn as nn
-import torch.nn.functional as f
-from transformers import BertModel, BertPreTrainedModel
+from transformers import BertModel, BertPreTrainedModel, BertTokenizer
 from torch import Tensor
 from transformers.modeling_outputs import TokenClassifierOutput
-from mi_estimators import vCLUB, InfoNCE
+from mi_estimators import jsd, InfoNCE
 
 logger = logging.getLogger(__name__)
 
 
 class FDGRModel(BertPreTrainedModel):
 
-    def __init__(self, config, alpha: float, beta: float, h_dim: int):
+    def __init__(self, config, alpha: float, beta: float, h_dim: int, tokenizer: BertTokenizer):
         super(FDGRModel, self).__init__(config)
         self.bert = BertModel(config)
         self.num_labels = config.num_labels
+        self.tokenizer = tokenizer
         self.dropout = nn.Dropout(0.1)
         self.hc_dim = h_dim
         self.ht_dim = h_dim
         self.register_buffer("alpha", torch.as_tensor(alpha))
         self.register_buffer("beta", torch.as_tensor(beta))
+        self.ht_project = nn.Linear(config.hidden_size, h_dim)
         # feature disentanglement module
         self.mlp = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.GELU(),
                                  nn.Linear(config.hidden_size, self.hc_dim + self.ht_dim),
@@ -31,7 +31,6 @@ class FDGRModel(BertPreTrainedModel):
                                      nn.GELU(), nn.Linear(config.hidden_size, config.hidden_size),
                                      nn.GELU(), nn.LayerNorm(config.hidden_size, 1e-12))
         self.mse = nn.MSELoss()
-        self.club_loss = vCLUB()
         self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
         self.classifier = nn.Linear(self.hc_dim, config.num_labels)
@@ -46,6 +45,7 @@ class FDGRModel(BertPreTrainedModel):
             input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
             token_type_ids = torch.cat([original['token_type_ids'], contrast['token_type_ids']])
             attention_mask = torch.cat([original['attention_mask'], contrast['attention_mask']])
+            valid_mask = torch.cat([original['valid_mask'], contrast['valid_mask']])
             sequence_output = self.bert(input_ids,
                                         token_type_ids=token_type_ids,
                                         attention_mask=attention_mask)[0]
@@ -67,33 +67,42 @@ class FDGRModel(BertPreTrainedModel):
                 sequence_output.view(-1, sequence_output.size(-1))[attention_mask.view(-1) == 1],
                 self.decoder(mlp).view(-1, sequence_output.size(-1))[attention_mask.view(-1) == 1])
             # token-invariant representation loss
-            orig_ht, cont_ht = ht.chunk(2)
-            active_replace_mask = replace_index.view(-1) == 1
-            inactive_replace_mask = replace_index.view(-1) == 0
-            replaced_token_loss = self.club_loss.update(
-                orig_ht.view(-1, self.ht_dim)[active_mask & active_replace_mask],
-                cont_ht.view(-1, self.ht_dim)[active_mask & active_replace_mask],
-            )
-            unreplaced_token_loss = self.mse(
-                orig_ht.view(-1, self.ht_dim)[active_mask & inactive_replace_mask],
-                cont_ht.view(-1, self.ht_dim)[active_mask & inactive_replace_mask],
-            )
-            token_loss = self.alpha * replaced_token_loss + unreplaced_token_loss
-            # domain distribution loss
+            valid_input_ids = input_ids.view(-1)[valid_mask.view(-1) == 1].unsqueeze(-1)
+            count: int = valid_mask.count_nonzero().item()
+            tensor_cls = self.tokenizer.cls_token_id * torch.ones(
+                count, 1, device=input_ids.device, dtype=torch.int64)
+            tensor_sep = self.tokenizer.sep_token_id * torch.ones(
+                count, 1, device=input_ids.device, dtype=torch.int64)
+            concat_tensors = torch.cat([tensor_cls, valid_input_ids, tensor_sep], dim=-1)
+            outputs = self.bert(concat_tensors)[0][:, 1]
+            ht_loss = self.mse(self.ht_project(outputs),
+                               ht.view(-1, self.ht_dim)[valid_mask.view(-1) == 1])
+            # context-specific representation loss
             orig_hc, cont_hc = hc.chunk(2)
-            domain_loss = self.mi_loss.learning_loss(
+            replace_index_weights = (replace_index / replace_index.sum(-1, keepdim=True)).nan_to_num(0)
+            hc_loss = self.mse(
+                (orig_hc * replace_index_weights.unsqueeze(-1)).sum(1)[replace_index.sum(-1) != 0],
+                (cont_hc * replace_index_weights.unsqueeze(-1)).sum(1)[replace_index.sum(-1) != 0],
+            )
+            # domain distribution loss
+            info_loss = self.mi_loss.learning_loss(
                 orig_hc.view(-1, self.hc_dim)[active_mask],
                 cont_hc.view(-1, self.hc_dim)[active_mask],
             )
+            jsd_loss = jsd(
+                orig_logits.view(-1, self.num_labels)[original['valid_mask'].view(-1) == 1],
+                cont_logits.view(-1, self.num_labels)[contrast['valid_mask'].view(-1) == 1])
+            domain_loss = info_loss + jsd_loss
             log_dict({
                 "ce_loss": ce_loss.item(),
                 "orthogonal_loss": orthogonal_loss.item(),
                 "reconstruct_loss": reconstruct_loss.item(),
-                "replaced_token_loss": replaced_token_loss.item(),
-                "unreplaced_token_loss": unreplaced_token_loss.item(),
-                "domain_loss": domain_loss.item(),
+                "replaced_token_loss": ht_loss.item(),
+                "unreplaced_token_loss": hc_loss.item(),
+                "info_loss": info_loss.item(),
+                "jsd_loss": jsd_loss.item()
             })
-            loss = ce_loss + 0.01 * orthogonal_loss + 0.1 * reconstruct_loss + token_loss + self.beta * domain_loss
+            loss = ce_loss + 0.01 * orthogonal_loss + 0.1 * reconstruct_loss + hc_loss + ht_loss + self.beta * domain_loss
         else:
             input_ids = original['input_ids']
             attention_mask = original['attention_mask']

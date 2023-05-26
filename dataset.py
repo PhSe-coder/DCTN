@@ -81,7 +81,7 @@ class ModelDataset(Dataset):
         ]
         if not candidate_indices:
             return [], text
-        indicies = random.sample(candidate_indices, k=int(len(candidate_indices) * 0.2 + 1))
+        indicies = random.sample(candidate_indices, k=1)
         for index in indicies:
             candidate_token = contrast_tokens[index]
             candidate_knowledges = self.t2k[self.domain][candidate_token]

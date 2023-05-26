@@ -46,9 +46,9 @@ class FDGRClassifer(LightningModule):
         self.num_labels = num_labels
         self.output_dir = output_dir
         self.lr = lr
-        self.model = FDGRModel.from_pretrained(pretrained_model_name, num_labels=self.num_labels, alpha=alpha,
-                                               beta=beta, h_dim=h_dim)
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
+        self.model = FDGRModel.from_pretrained(pretrained_model_name, num_labels=self.num_labels, alpha=alpha,
+                                               beta=beta, h_dim=h_dim, tokenizer=self.tokenizer)
         self.valid_out = []
         self.test_out = []
 
