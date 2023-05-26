@@ -39,7 +39,9 @@ class FDGRModel(BertPreTrainedModel):
                 original: Dict[str, Tensor],
                 contrast: Dict[str, Tensor] = None,
                 replace_index: Tensor = None,
-                log_dict=None):
+                log_dict=None,
+                batch_rate: float=1.0,
+                current_epoch: int=-1):
         loss = None
         if self.training:
             input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
@@ -92,17 +94,21 @@ class FDGRModel(BertPreTrainedModel):
             jsd_loss = jsd(
                 orig_logits.view(-1, self.num_labels)[original['valid_mask'].view(-1) == 1],
                 cont_logits.view(-1, self.num_labels)[contrast['valid_mask'].view(-1) == 1])
-            domain_loss = info_loss + jsd_loss
+            domain_loss = self.beta * info_loss + jsd_loss
             log_dict({
                 "ce_loss": ce_loss.item(),
                 "orthogonal_loss": orthogonal_loss.item(),
                 "reconstruct_loss": reconstruct_loss.item(),
-                "replaced_token_loss": ht_loss.item(),
-                "unreplaced_token_loss": hc_loss.item(),
+                "ht_loss": ht_loss.item(),
+                "hc_loss": hc_loss.item(),
                 "info_loss": info_loss.item(),
                 "jsd_loss": jsd_loss.item()
             })
-            loss = ce_loss + 0.01 * orthogonal_loss + 0.1 * reconstruct_loss + hc_loss + ht_loss + self.beta * domain_loss
+            loss = ce_loss
+            if current_epoch == 0 and batch_rate < 0.5:
+                pass
+            else:
+                loss += 0.01 * orthogonal_loss + 0.1 * reconstruct_loss + hc_loss + ht_loss + domain_loss
         else:
             input_ids = original['input_ids']
             attention_mask = original['attention_mask']
