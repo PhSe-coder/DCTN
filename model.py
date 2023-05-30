@@ -32,7 +32,7 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                                      nn.ReLU(), nn.LayerNorm(config.hidden_size, 1e-12))
         self.mse = nn.MSELoss()
         # self.mmd_loss = MMD_loss()
-        self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
+        self.mi_loss = InfoNCE(self.ha_dim, self.ha_dim)
 
     def forward(self,
                 original: Dict[str, Tensor],
@@ -100,13 +100,15 @@ class FDGRModel(nn.Module):
         pretrained_model_name = weights["hyper_parameters"]["pretrained_model_name"]
         h_dim = weights["hyper_parameters"]["h_dim"]
         self.fdgr = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim)
-        self.fdgr.load_state_dict({k.replace("model.", ''): v for k, v in weights['state_dict'].items()})
+        self.fdgr.load_state_dict(
+            {k.replace("model.", ''): v
+             for k, v in weights['state_dict'].items()})
         self.num_labels = num_labels
-        # self.att = nn.MultiheadAttention(self.ha_dim, self.num_heads, batch_first=True)
+        # self.att = nn.MultiheadAttention(h_dim, 2, batch_first=True)
         # self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
         # self.club_loss = vCLUB()
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
-        self.classifier = nn.Linear(self.fdgr.hc_dim, num_labels)
+        self.classifier = nn.Linear(h_dim, num_labels)
         # self.mmd_loss = MMD_loss()
         # self.pos_emb = nn.Embedding(len(POS_DICT), self.pos_dim, POS_DICT.get(self.tokenizer.pad_token))
         # self.domain_classifier = nn.Sequential(RevGrad(), nn.Linear(config.hidden_size, 1))
@@ -124,7 +126,8 @@ class FDGRModel(nn.Module):
                                                    context_contrast, original_index_select,
                                                    context_index_select, log_dict)
         ha, hc = outputs.hidden_states
-        logits: Tensor = self.classifier(ha.chunk(3)[0])
+        original_ha = ha.chunk(3)[0]
+        logits: Tensor = self.classifier(original_ha)
         active_mask = original['valid_mask'].view(-1) == 1
         active_logits = logits.view(-1, self.num_labels)[active_mask]
         ce_loss = self.loss_fct(logits.view(-1, self.num_labels), original['gold_labels'].view(-1))
