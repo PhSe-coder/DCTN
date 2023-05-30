@@ -1,0 +1,39 @@
+# lightning.pytorch==2.0.0
+seed_everything: 42
+model:
+  class_path: models.FDGRClassifer
+  init_args:
+    num_labels: 7
+    output_dir: /root/FDGR/out
+    lr: 3e-5
+    model: 
+      class_path: model.FDGRModel
+      init_args:
+        num_labels: 7
+        pretrained_path: /root/autodl-tmp/lightning_logs/version_0/checkpoints/bert-absa-epoch=49.ckpt
+data:
+  class_path: ABSADataModule
+  init_args:
+    batch_size: 32
+    num_workers: 16
+    k2t_file: ./data/knowledge2token.json
+    t2k_file: ./data/token2knowledge.json
+    target: restaurant
+    train_file: ./processed/dataset/service.train.txt
+    validation_file: ./processed/dataset/service.validation.txt
+    test_file: ./processed/dataset/restaurant.test.txt
+trainer:
+  accelerator: gpu
+  enable_progress_bar: True
+  max_epochs: 15
+  default_root_dir: /root/autodl-tmp
+  log_every_n_steps: 10
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+      init_args: 
+        save_last: True
+        verbose: True
+        monitor: val_f1
+        mode: max
+        filename: bert-absa-{epoch:02d}-{val_f1:.2f}
+ckpt_path: /root/autodl-tmp/lightning_logs/version_3/checkpoints/last.ckpt
