@@ -7,8 +7,68 @@ from transformers.modeling_outputs import TokenClassifierOutput
 
 from constants import TAGS
 from eval import absa_evaluate, evaluate
-from model import BertForTokenClassification, FDGRModel
+from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
+
+
+class PretrainedFDGRClassifer(LightningModule):
+
+    def __init__(self,
+                 num_labels: int,
+                 lr: float,
+                 h_dim: int = 300,
+                 pretrained_model_name: str = "bert-base-uncased"):
+        """pretraining FDGR model classifier
+
+        Parameters
+        ----------
+        num_labels : int
+            number of tag labels
+        lr : float
+            learning rate
+        h_dim : int, optionl
+            the dim of the disentangled features
+        pretrained_model_name : str, optional
+            the specific pretrained model
+        """
+        super(PretrainedFDGRClassifer, self).__init__()
+        self.save_hyperparameters()
+        self.automatic_optimization = False
+        self.num_labels = num_labels
+        self.lr = lr
+        self.model = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim=h_dim)
+
+    def on_train_start(self):
+        self.logger.log_hyperparams(self.hparams)
+
+    def forward(self, *args, **kwargs):
+        return self.model(*args, **kwargs)
+
+    def configure_optimizers(self):
+        pretrained_param_optimizer = [(k, v) for k, v in self.named_parameters()
+                                      if v.requires_grad == True and 'pooler' not in k]
+        no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
+        pretrained_params = [{
+            'params':
+            [p for n, p in pretrained_param_optimizer if not any(nd in n for nd in no_decay)],
+            'weight_decay':
+            1e-2
+        }, {
+            'params': [p for n, p in pretrained_param_optimizer if any(nd in n for nd in no_decay)],
+            'weight_decay':
+            0.0
+        }]
+        return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
+
+    def training_step(self, train_batch, batch_idx):
+        opt = self.optimizers()
+        opt.zero_grad()
+        outputs = self.forward(**train_batch, log_dict=self.log_dict)
+        loss = outputs.loss
+        self.manual_backward(loss)
+        opt.step()
+        self.log('train_loss', loss.item())
+        return loss
 
 
 class FDGRClassifer(LightningModule):
@@ -17,9 +77,7 @@ class FDGRClassifer(LightningModule):
                  num_labels: int,
                  output_dir: str,
                  lr: float,
-                 alpha: float = 0.001,
-                 beta: float = 0.01,
-                 h_dim: int = 384,
+                 model: FDGRModel,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -31,28 +89,19 @@ class FDGRClassifer(LightningModule):
             the output directory of the annotation results
         lr : float
             learning rate
-        alpha : float, optional
-            weight for InfoNCE loss
-        beta : float, optional
-            weight for CLUB loss
         h_dim : int, optionl
             the dim of the disentangled features
         pretrained_model_name : str, optional
             the specific pretrained model
         """
         super(FDGRClassifer, self).__init__()
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=['model'])
         self.automatic_optimization = False
         self.num_labels = num_labels
         self.output_dir = output_dir
         self.lr = lr
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
-        self.model = FDGRModel.from_pretrained(pretrained_model_name,
-                                               num_labels=self.num_labels,
-                                               alpha=alpha,
-                                               beta=beta,
-                                               h_dim=h_dim,
-                                               tokenizer=self.tokenizer)
+        self.model = model
         self.valid_out = []
         self.test_out = []
 
@@ -79,13 +128,9 @@ class FDGRClassifer(LightningModule):
         return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
 
     def training_step(self, train_batch, batch_idx):
-        batch_rate = batch_idx * 1.0 / self.trainer.num_training_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch,
-                               log_dict=self.log_dict,
-                               batch_rate=batch_rate,
-                               current_epoch=self.trainer.current_epoch)
+        outputs = self.forward(**train_batch, log_dict=self.log_dict)
         loss = outputs.loss
         self.manual_backward(loss)
         opt.step()
@@ -93,9 +138,9 @@ class FDGRClassifer(LightningModule):
         return loss
 
     def validation_step(self, batch, batch_idx):
+        outputs: TokenClassifierOutput = self.forward(**batch)
         batch = batch["original"]
         targets = batch.pop("gold_labels")
-        outputs: TokenClassifierOutput = self.forward(batch)
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
         self.valid_out.append((pred_list, gold_list))
@@ -111,9 +156,9 @@ class FDGRClassifer(LightningModule):
         self.valid_out.clear()
 
     def test_step(self, batch, batch_idx):
+        outputs: TokenClassifierOutput = self.forward(**batch)
         batch = batch["original"]
         targets = batch.pop("gold_labels")
-        outputs: TokenClassifierOutput = self.forward(batch)
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
         sentence = self.tokenizer.batch_decode(batch.get("input_ids"), skip_special_tokens=True)

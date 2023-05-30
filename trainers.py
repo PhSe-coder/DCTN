@@ -49,6 +49,34 @@ class ABSADataModule(LightningDataModule):
         return self.dataloader(self.test_set, shuffle=False)
 
 
+@dataclass
+class PretraninedABSADataModule(LightningDataModule):
+    batch_size: int
+    k2t_file: str
+    t2k_file: str
+    target: str
+    num_workers: int = 0
+    pretrained_model: str = "bert-base-uncased"
+    train_file: str = None
+    validation_file: str = None
+    test_file: str = None
+
+    def __post_init__(self):
+        super().__init__()
+        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=100)
+        self.dataloader = partial(DataLoader,
+                                  batch_size=self.batch_size,
+                                  num_workers=self.num_workers)
+
+    def setup(self, stage):
+        if stage == 'fit':
+            self.train_set = ModelDataset(self.train_file, self.k2t_file, self.t2k_file,
+                                          self.target, self.tokenizer)
+
+    def train_dataloader(self):
+        return self.dataloader(self.train_set, shuffle=True)
+
+
 if __name__ == '__main__':
     torch.set_float32_matmul_precision('high')
     LightningCLI(save_config_kwargs={"overwrite": True})

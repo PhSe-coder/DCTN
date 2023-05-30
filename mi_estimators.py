@@ -332,7 +332,7 @@ def kl_norm(mu, log_var):
 
 
 def jsd(p: Tensor, q: Tensor):
-    total_m = (p + q).log_softmax(-1) * 0.5
+    total_m =  0.5 * (p + q).log_softmax(-1)
     loss = F.kl_div(p.log_softmax(-1), total_m, reduction="batchmean", log_target=True)
     loss += F.kl_div(q.log_softmax(-1), total_m, reduction="batchmean", log_target=True)
     return (0.5 * loss)
