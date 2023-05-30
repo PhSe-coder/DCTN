@@ -18,7 +18,7 @@ data:
 trainer:
   accelerator: gpu
   enable_progress_bar: True
-  max_epochs: 100
+  max_epochs: 50
   default_root_dir: /root/autodl-tmp
   log_every_n_steps: 10
   callbacks:
