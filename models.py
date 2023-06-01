@@ -61,9 +61,11 @@ class PretrainedFDGRClassifer(LightningModule):
         return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
 
     def training_step(self, train_batch, batch_idx):
+        batch_rate: float = (1.0 * batch_idx + self.trainer.num_training_batches *
+                             self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch, log_dict=self.log_dict)
+        outputs = self.forward(**train_batch, log_dict=self.log_dict, batch_rate=batch_rate)
         loss = outputs.loss
         self.manual_backward(loss)
         opt.step()
@@ -128,9 +130,11 @@ class FDGRClassifer(LightningModule):
         return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
 
     def training_step(self, train_batch, batch_idx):
+        batch_rate: float = (1.0 * batch_idx + self.trainer.num_training_batches *
+                             self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch, log_dict=self.log_dict)
+        outputs = self.forward(**train_batch, log_dict=self.log_dict, batch_rate=batch_rate)
         loss = outputs.loss
         self.manual_backward(loss)
         opt.step()

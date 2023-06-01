@@ -2,11 +2,10 @@ import logging
 from typing import Dict
 import torch
 import torch.nn as nn
-from transformers import BertModel, BertPreTrainedModel, BertTokenizer
+from transformers import BertModel, BertPreTrainedModel
 from torch import Tensor
 from transformers.modeling_outputs import TokenClassifierOutput
-from mi_estimators import InfoNCE
-from mmd import MMD_loss
+from mi_estimators import InfoNCE, CLUBMean, vCLUB
 
 logger = logging.getLogger(__name__)
 
@@ -17,9 +16,9 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         super(FDGRPretrainedModel, self).__init__(config)
         self.config = config
         self.bert = BertModel(config)
-        self.dropout = nn.Dropout(0.1)
         self.ha_dim = h_dim
         self.hc_dim = h_dim
+        self.hidden_size: int = config.hidden_size
         # feature disentanglement module
         self.ha_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
                                         nn.ReLU(), nn.Linear(config.hidden_size, self.ha_dim),
@@ -31,8 +30,10 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                                      nn.ReLU(), nn.Linear(config.hidden_size, config.hidden_size),
                                      nn.ReLU(), nn.LayerNorm(config.hidden_size, 1e-12))
         self.mse = nn.MSELoss()
-        # self.mmd_loss = MMD_loss()
         self.mi_loss = InfoNCE(self.ha_dim, self.ha_dim)
+        self.cross_mi_loss = InfoNCE(config.hidden_size, self.ha_dim)
+        self.club_loss = CLUBMean(self.ha_dim, self.hc_dim)
+        self.orthogonal_loss = vCLUB()
 
     def forward(self,
                 original: Dict[str, Tensor],
@@ -41,55 +42,69 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                 context_contrast: Dict[str, Tensor] = None,
                 original_index_select: Tensor = None,
                 context_index_select: Tensor = None,
-                log_dict=None):
-        input_ids = torch.cat(
-            [original['input_ids'], word_contrast['input_ids'], context_contrast["input_ids"]])
-        token_type_ids = torch.cat([
-            original['token_type_ids'], word_contrast['token_type_ids'],
-            context_contrast["token_type_ids"]
-        ])
-        attention_mask = torch.cat([
-            original['attention_mask'], word_contrast['attention_mask'],
-            context_contrast["attention_mask"]
-        ])
+                log_dict=None,
+                batch_rate: int = -1):
+        input_ids = torch.cat([original['input_ids'], word_contrast['input_ids']])
+        token_type_ids = torch.cat([original['token_type_ids'], word_contrast['token_type_ids']])
+        attention_mask = torch.cat([original['attention_mask'], word_contrast['attention_mask']])
         seq_output: Tensor = self.bert(input_ids,
                                        token_type_ids=token_type_ids,
                                        attention_mask=attention_mask)[0]
-        ha, hc = self.ha_encoder(seq_output), self.hc_encoder(seq_output)
-        orig_ha, word_cont_ha, context_cont_ha = ha.chunk(3)
-        orig_hc, word_cont_hc, context_cont_hc = hc.chunk(3)
+        orig_seq_output, word_cont_seq_output = seq_output.chunk(2)
+        ha = self.ha_encoder(seq_output)
+        hc = self.hc_encoder(seq_output)
+        orig_ha, word_cont_ha = ha.chunk(2)
+        orig_hc, word_cont_hc = hc.chunk(2)
         # orthogonal loss
-        orthogonal_loss = torch.matmul(
+        # orthogonal_loss = torch.matmul(
+        #     ha.view(-1, self.ha_dim)[attention_mask.view(-1) == 1],
+        #     hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1].T).abs().mean()
+        orthogonal_loss = self.orthogonal_loss.update(
             ha.view(-1, self.ha_dim)[attention_mask.view(-1) == 1],
-            hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1].T).abs().mean()
+            hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1])
         # auto-encoder loss
+        decoded = self.decoder(torch.cat([ha, hc], dim=-1))
         reconstruct_loss = self.mse(
-            seq_output.view(-1, seq_output.size(-1))[attention_mask.view(-1) == 1],
-            self.decoder(torch.cat([ha, hc],
-                                   dim=-1)).view(-1,
-                                                 seq_output.size(-1))[attention_mask.view(-1) == 1])
+            seq_output.view(-1, self.hidden_size)[attention_mask.view(-1) == 1],
+            decoded.view(-1, self.hidden_size)[attention_mask.view(-1) == 1])
         # attribute-specific representation loss
+        assert torch.all(original['attention_mask'] == word_contrast['attention_mask']).item() == 1
         active_mask = original['attention_mask'].view(-1) == 1
         ha_loss = self.mi_loss.learning_loss(
             orig_ha.view(-1, self.ha_dim)[active_mask],
             word_cont_ha.view(-1, self.ha_dim)[active_mask])
-        # contenc-specific representation loss
-        batch_size = original["input_ids"].size(0)
-        t1, t2 = [], []
-        for i in range(batch_size):
-            s1, s2 = original_index_select[i], context_index_select[i]
-            t1.append(orig_hc[i].index_select(0, s1[s1 != -1]))
-            t2.append(context_cont_hc[i].index_select(0, s2[s2 != -1]))
-        hc_loss = self.mi_loss.learning_loss(torch.cat(t1), torch.cat(t2))
+        cross_mi_loss = self.cross_mi_loss.learning_loss(
+            orig_seq_output.view(-1, self.hidden_size)[active_mask],
+            word_cont_ha.view(-1, self.ha_dim)[active_mask])
+        cross_mi_loss += self.cross_mi_loss.learning_loss(
+            word_cont_seq_output.view(-1, self.hidden_size)[active_mask],
+            orig_ha.view(-1, self.ha_dim)[active_mask])
+        # content-specific representation loss
+        active_replace_mask = replace_index.view(-1) == 1
+        inactive_replace_mask = replace_index.view(-1) == 0
+        hc_loss_replaced = self.club_loss.learning_loss(
+            orig_hc.view(-1, self.hc_dim)[active_mask & active_replace_mask],
+            word_cont_hc.view(-1, self.hc_dim)[active_mask & active_replace_mask],
+        )
+        hc_loss_unreplaced = self.mse(
+            orig_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
+            word_cont_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
+        )
         if log_dict:
             log_dict({
                 "orthogonal_loss": orthogonal_loss.item(),
                 "reconstruct_loss": reconstruct_loss.item(),
                 "ha_loss": ha_loss.item(),
-                "hc_loss": hc_loss.item(),
+                "cross_mi_loss": cross_mi_loss.item(),
+                "hc_loss_replaced": hc_loss_replaced.item(),
+                "hc_loss_unreplaced": hc_loss_unreplaced.item(),
             })
-        loss = 0.1 * orthogonal_loss + reconstruct_loss + ha_loss + hc_loss
+        loss = self.weight(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
+            self.weight(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
         return TokenClassifierOutput(loss=loss, hidden_states=(ha, hc))
+
+    def weight(self, batch_rate: float) -> Tensor:
+        return 0.1 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 1.0 / 3)))
 
 
 class FDGRModel(nn.Module):
@@ -121,12 +136,13 @@ class FDGRModel(nn.Module):
                 context_contrast: Dict[str, Tensor] = None,
                 original_index_select: Tensor = None,
                 context_index_select: Tensor = None,
-                log_dict=None):
+                log_dict=None,
+                batch_rate: int = -1):
         outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index,
                                                    context_contrast, original_index_select,
-                                                   context_index_select, log_dict)
+                                                   context_index_select, log_dict, batch_rate)
         ha, hc = outputs.hidden_states
-        original_ha = ha.chunk(3)[0]
+        original_ha = ha.chunk(2)[0]
         logits: Tensor = self.classifier(original_ha)
         active_mask = original['valid_mask'].view(-1) == 1
         active_logits = logits.view(-1, self.num_labels)[active_mask]

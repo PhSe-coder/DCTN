@@ -188,9 +188,9 @@ class ModelDataset(Dataset):
             "original": original,
             "word_contrast": word_contrast,
             "replace_index": replace_index,
-            "context_contrast": context_contrast,
-            "original_index_select": original_index_select,
-            "context_index_select": context_index_select
+            # "context_contrast": context_contrast,
+            # "original_index_select": original_index_select,
+            # "context_index_select": context_index_select
         }
 
     def func(self, tokens: List[str], rand_tokens: List[str], anns: List[str], rand_anns: List[str],
