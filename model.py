@@ -39,9 +39,6 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                 original: Dict[str, Tensor],
                 word_contrast: Dict[str, Tensor] = None,
                 replace_index: Tensor = None,
-                context_contrast: Dict[str, Tensor] = None,
-                original_index_select: Tensor = None,
-                context_index_select: Tensor = None,
                 log_dict=None,
                 batch_rate: int = -1):
         input_ids = torch.cat([original['input_ids'], word_contrast['input_ids']])
@@ -56,9 +53,6 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         orig_ha, word_cont_ha = ha.chunk(2)
         orig_hc, word_cont_hc = hc.chunk(2)
         # orthogonal loss
-        # orthogonal_loss = torch.matmul(
-        #     ha.view(-1, self.ha_dim)[attention_mask.view(-1) == 1],
-        #     hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1].T).abs().mean()
         orthogonal_loss = self.orthogonal_loss.update(
             ha.view(-1, self.ha_dim)[attention_mask.view(-1) == 1],
             hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1])
@@ -119,28 +113,17 @@ class FDGRModel(nn.Module):
             {k.replace("model.", ''): v
              for k, v in weights['state_dict'].items()})
         self.num_labels = num_labels
-        # self.att = nn.MultiheadAttention(h_dim, 2, batch_first=True)
-        # self.mi_loss = InfoNCE(self.hc_dim, self.hc_dim)
-        # self.club_loss = vCLUB()
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
         self.classifier = nn.Linear(h_dim, num_labels)
-        # self.mmd_loss = MMD_loss()
-        # self.pos_emb = nn.Embedding(len(POS_DICT), self.pos_dim, POS_DICT.get(self.tokenizer.pad_token))
-        # self.domain_classifier = nn.Sequential(RevGrad(), nn.Linear(config.hidden_size, 1))
-        # self.domain_loss = nn.BCEWithLogitsLoss()
 
     def forward(self,
                 original: Dict[str, Tensor],
                 word_contrast: Dict[str, Tensor] = None,
                 replace_index: Tensor = None,
-                context_contrast: Dict[str, Tensor] = None,
-                original_index_select: Tensor = None,
-                context_index_select: Tensor = None,
                 log_dict=None,
                 batch_rate: int = -1):
-        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index,
-                                                   context_contrast, original_index_select,
-                                                   context_index_select, log_dict, batch_rate)
+        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, log_dict,
+                                                   batch_rate)
         ha, hc = outputs.hidden_states
         original_ha = ha.chunk(2)[0]
         logits: Tensor = self.classifier(original_ha)

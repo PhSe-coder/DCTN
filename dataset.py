@@ -124,22 +124,6 @@ class ModelDataset(Dataset):
         contrast_text = ' '.join(contrast_tokens)
         return contrast_text, indicies, bpe_lens
 
-    # def clip(self, orignal_words: List[str], contrast_words: List[str], indicies: List[int]):
-    #     ret: List[int] = []
-    #     for index in indicies:
-    #         orig_tokens = self.tokenizer.tokenize(orignal_words[index])
-    #         cont_tokens = self.tokenizer.tokenize(contrast_words[index])
-    #         while len(orig_tokens) > len(cont_tokens):
-    #             orig_tokens.pop()
-    #         while len(orig_tokens) < len(cont_tokens):
-    #             cont_tokens.pop()
-    #         orignal_words[index] = self.tokenizer.convert_tokens_to_string(orig_tokens).replace(
-    #             ' ', '')
-    #         contrast_words[index] = self.tokenizer.convert_tokens_to_string(cont_tokens).replace(
-    #             ' ', '')
-    #         ret.append(len(orig_tokens))
-    #     return ret
-
     def __getitem__(self, index):
         # `getline` method start from index 1 rather than 0
         line = linecache.getline(self.datafile, index + 1).strip()
@@ -153,44 +137,10 @@ class ModelDataset(Dataset):
             for i, bpe_len in zip(indicies, bpe_lens):
                 start = len(self.tokenizer.tokenize(' '.join(tokens[:i]))) + 1
                 replace_index[start:start + bpe_len] = 1
-        original_index_select = -torch.ones_like(original["input_ids"])
-        context_contrast = self.process(text, gold_labels.split(), ann_list)
-        context_index_select = torch.Tensor(original_index_select)
-        candidate_indices = [
-            index for index, token in enumerate(tokens)
-            if token in self.t2k[self.domain].keys() and index < 100
-        ]
-        candidate_anns = [ann_list[i] for i in candidate_indices]
-        candidate_tokens = [tokens[i] for i in candidate_indices]
-        if candidate_indices:
-            while True:
-                rand_index = random.randint(1, self.total)
-                rand_line = linecache.getline(self.datafile, rand_index).strip()
-                text, annotations, gold_labels = rand_line.rsplit("***")
-                ann_set = set(annotations.split()) & set(candidate_anns)
-                if ann_set:
-                    break
-            rand_tokens = text.split()
-            indicies, rand_indicies, bpe_lens = self.func(tokens, rand_tokens, ann_list,
-                                                          annotations.split(), ann_set)
-            context_contrast = self.process(' '.join(rand_tokens), gold_labels.split(),
-                                            annotations.split())
-            context_index_select = -torch.ones_like(context_contrast["input_ids"])
-            idx = 0
-            for i, rand_i, bpe_len in zip(indicies, rand_indicies, bpe_lens):
-                start = len(self.tokenizer.tokenize(' '.join(tokens[:i]))) + 1
-                rand_start = len(self.tokenizer.tokenize(' '.join(rand_tokens[:rand_i]))) + 1
-                for i_bpe_len in range(bpe_len):
-                    original_index_select[idx] = start + i_bpe_len
-                    context_index_select[idx] = rand_start + i_bpe_len
-                    idx += 1
         return {
             "original": original,
             "word_contrast": word_contrast,
             "replace_index": replace_index,
-            # "context_contrast": context_contrast,
-            # "original_index_select": original_index_select,
-            # "context_index_select": context_index_select
         }
 
     def func(self, tokens: List[str], rand_tokens: List[str], anns: List[str], rand_anns: List[str],
