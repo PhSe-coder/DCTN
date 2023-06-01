@@ -126,11 +126,11 @@ class FDGRModel(nn.Module):
                                                    batch_rate)
         ha, hc = outputs.hidden_states
         original_ha = ha.chunk(2)[0]
-        logits: Tensor = self.classifier(original_ha)
+        logits: Tensor = self.classifier(original_ha) / 2
         active_mask = original['valid_mask'].view(-1) == 1
         active_logits = logits.view(-1, self.num_labels)[active_mask]
         ce_loss = self.loss_fct(logits.view(-1, self.num_labels), original['gold_labels'].view(-1))
-        loss = ce_loss + 0.01 * outputs.loss
+        loss = ce_loss  + 0.01 * outputs.loss
         return TokenClassifierOutput(logits=active_logits, loss=loss)
 
 
