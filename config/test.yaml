@@ -21,7 +21,7 @@ data:
     target: restaurant
     train_file: ./processed/dataset/service.train.txt
     validation_file: ./processed/dataset/service.validation.txt
-    test_file: ./processed/dataset/laptop.test.txt
+    test_file: ./processed/dataset/restaurant.test.txt
 trainer:
   accelerator: gpu
   enable_progress_bar: True
@@ -36,4 +36,4 @@ trainer:
         monitor: val_f1
         mode: max
         filename: bert-absa-{epoch:02d}-{val_f1:.2f}
-ckpt_path: /root/autodl-tmp/lightning_logs/version_4/checkpoints/bert-absa-epoch=03-val_f1=0.62.ckpt
+ckpt_path: /root/autodl-tmp/lightning_logs/version_25/checkpoints/bert-absa-epoch=03-val_f1=0.63.ckpt
