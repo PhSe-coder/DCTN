@@ -5,7 +5,7 @@ import torch.nn as nn
 from transformers import BertModel, BertPreTrainedModel
 from torch import Tensor
 from transformers.modeling_outputs import TokenClassifierOutput
-from mi_estimators import InfoNCE, CLUBMean, vCLUB
+from mi_estimators import InfoNCE, CLUBMean, vCLUB, jsd
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +39,7 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                 original: Dict[str, Tensor],
                 word_contrast: Dict[str, Tensor] = None,
                 replace_index: Tensor = None,
+                labeled: Tensor = None,
                 log_dict=None,
                 batch_rate: int = -1):
         input_ids = torch.cat([original['input_ids'], word_contrast['input_ids']])
@@ -93,11 +94,14 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                 "hc_loss_replaced": hc_loss_replaced.item(),
                 "hc_loss_unreplaced": hc_loss_unreplaced.item(),
             })
-        loss = self.weight(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
-            self.weight(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
+        loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
+            self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
         return TokenClassifierOutput(loss=loss, hidden_states=(ha, hc))
 
-    def weight(self, batch_rate: float) -> Tensor:
+    def weight1(self, batch_rate: float):
+        return 0.1 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 1.0 / 3)))
+
+    def weight2(self, batch_rate: float) -> Tensor:
         return 0.1 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 1.0 / 3)))
 
 
@@ -109,28 +113,32 @@ class FDGRModel(nn.Module):
         pretrained_model_name = weights["hyper_parameters"]["pretrained_model_name"]
         h_dim = weights["hyper_parameters"]["h_dim"]
         self.fdgr = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim)
-        self.fdgr.load_state_dict(
-            {k.replace("model.", ''): v
-             for k, v in weights['state_dict'].items()})
+        # self.fdgr.load_state_dict(
+        #     {k.replace("model.", ''): v
+        #      for k, v in weights['state_dict'].items()})
         self.num_labels = num_labels
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
         self.classifier = nn.Linear(h_dim, num_labels)
+        self.mi_loss = InfoNCE(h_dim, num_labels)
 
     def forward(self,
                 original: Dict[str, Tensor],
                 word_contrast: Dict[str, Tensor] = None,
                 replace_index: Tensor = None,
+                labeled: Tensor = None,
                 log_dict=None,
                 batch_rate: int = -1):
-        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, log_dict,
+        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, labeled, log_dict,
                                                    batch_rate)
         ha, hc = outputs.hidden_states
-        original_ha = ha.chunk(2)[0]
-        logits: Tensor = self.classifier(original_ha) / 2
+        logits: Tensor = self.classifier(ha.chunk(2)[0]) / 2
         active_mask = original['valid_mask'].view(-1) == 1
+        label_mask = labeled.view(-1) == 1
         active_logits = logits.view(-1, self.num_labels)[active_mask]
-        ce_loss = self.loss_fct(logits.view(-1, self.num_labels), original['gold_labels'].view(-1))
-        loss = ce_loss  + 0.01 * outputs.loss
+        ce_loss = self.loss_fct(logits.view(-1, self.num_labels)[label_mask], 
+                                original['gold_labels'].view(-1)[label_mask])
+        # loss = ce_loss + 0.01 * outputs.loss
+        loss = ce_loss + 0.01 * self.mi_loss.learning_loss(ha.chunk(2)[0].view(-1, ha.size(-1))[active_mask], active_logits)
         return TokenClassifierOutput(logits=active_logits, loss=loss)
 
 

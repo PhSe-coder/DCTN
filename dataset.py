@@ -67,7 +67,7 @@ def pos_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
 class ModelDataset(Dataset):
 
     def __init__(self, filename: str, knowledge2token: str, token2knowledge: str, target: str,
-                 tokenizer: BertTokenizer):
+                 tokenizer: BertTokenizer, labeled: bool=True):
         self.datafile = filename
         self.k2t: Dict[str, Dict[str, List[str]]] = json.load(open(knowledge2token, "r"))
         self.t2k: Dict[str, Dict[str, List[str]]] = json.load(open(token2knowledge, "r"))
@@ -76,6 +76,7 @@ class ModelDataset(Dataset):
         self.total = sum(1 for _ in open(filename, "rb"))
         self.tokenizer = tokenizer
         self.training = filename.endswith(".train.txt")
+        self.labeled = labeled
 
     def process(self, text: str, labels: List[str], anns: List[str]) -> Dict[str, Tensor]:
         tok_dict: Dict[str, List[int]] = self.tokenizer(text,
@@ -111,7 +112,10 @@ class ModelDataset(Dataset):
         max_count = int(len(candidate_indices) * 0.2 + 1)
         while len(candidate_indices) != 0 and len(indicies) < max_count:
             index = random.choice(candidate_indices)
-            token_list = self.k2t[self.target].get(annotations[index])
+            domains = list(self.k2t.keys())
+            domains.remove(self.domain)
+            target = random.choice(domains)
+            token_list = self.k2t[target].get(annotations[index])
             bpe_len = len(self.tokenizer.tokenize(contrast_tokens[index]))
             while token_list and len(indicies) < max_count:
                 token = random.choice(token_list)
@@ -133,6 +137,8 @@ class ModelDataset(Dataset):
         original = self.process(text, gold_labels.split(), ann_list)
         word_contrast = self.process(contrast_text, gold_labels.split(), ann_list)
         replace_index = torch.zeros_like(original["input_ids"])
+        one = torch.ones_like(original["input_ids"], dtype=torch.bool)
+        zero = torch.zeros_like(original["input_ids"], dtype=torch.bool)
         if indicies:
             for i, bpe_len in zip(indicies, bpe_lens):
                 start = len(self.tokenizer.tokenize(' '.join(tokens[:i]))) + 1
@@ -141,6 +147,7 @@ class ModelDataset(Dataset):
             "original": original,
             "word_contrast": word_contrast,
             "replace_index": replace_index,
+            "labeled": one if self.labeled else zero
         }
 
     def func(self, tokens: List[str], rand_tokens: List[str], anns: List[str], rand_anns: List[str],

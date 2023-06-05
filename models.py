@@ -1,6 +1,6 @@
 import os
 from typing import List
-
+import torch
 from lightning.pytorch import LightningModule
 from transformers import BertTokenizer
 from transformers.modeling_outputs import TokenClassifierOutput
@@ -143,8 +143,9 @@ class FDGRClassifer(LightningModule):
 
     def validation_step(self, batch, batch_idx):
         outputs: TokenClassifierOutput = self.forward(**batch)
+        labeled = batch["labeled"]
         batch = batch["original"]
-        targets = batch.pop("gold_labels")
+        targets = batch.pop("gold_labels")[torch.all(labeled, dim=-1)]
         logits = outputs.logits
         pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
         self.valid_out.append((pred_list, gold_list))
