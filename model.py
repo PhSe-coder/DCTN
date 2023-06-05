@@ -63,17 +63,27 @@ class FDGRPretrainedModel(BertPreTrainedModel):
             seq_output.view(-1, self.hidden_size)[attention_mask.view(-1) == 1],
             decoded.view(-1, self.hidden_size)[attention_mask.view(-1) == 1])
         # attribute-specific representation loss
-        assert torch.all(original['attention_mask'] == word_contrast['attention_mask']).item() == 1
-        active_mask = original['attention_mask'].view(-1) == 1
+        assert torch.all(original['valid_mask'] == word_contrast['valid_mask']).item() == 1
+        active_mask = original['valid_mask'].view(-1) == 1
+        mask = None
+        # count = active_mask.count_nonzero()
+        # o = original['input_ids'].view(-1)[active_mask]
+        # w = word_contrast['input_ids'].view(-1)[active_mask]
+        # mask = torch.empty(count, count, device=active_mask.device)
+        # for i in range(count):
+        #     mask[i] = (o - w[i]) == 0
+        # mask = mask.mul(torch.eye(count, dtype=torch.int32, device=active_mask.device) ^ 1)
         ha_loss = self.mi_loss.learning_loss(
             orig_ha.view(-1, self.ha_dim)[active_mask],
-            word_cont_ha.view(-1, self.ha_dim)[active_mask])
+            word_cont_ha.view(-1, self.ha_dim)[active_mask],
+            mask
+        )
         cross_mi_loss = self.cross_mi_loss.learning_loss(
             orig_seq_output.view(-1, self.hidden_size)[active_mask],
-            word_cont_ha.view(-1, self.ha_dim)[active_mask])
+            word_cont_ha.view(-1, self.ha_dim)[active_mask], mask)
         cross_mi_loss += self.cross_mi_loss.learning_loss(
             word_cont_seq_output.view(-1, self.hidden_size)[active_mask],
-            orig_ha.view(-1, self.ha_dim)[active_mask])
+            orig_ha.view(-1, self.ha_dim)[active_mask], mask)
         # content-specific representation loss
         active_replace_mask = replace_index.view(-1) == 1
         inactive_replace_mask = replace_index.view(-1) == 0
@@ -113,9 +123,9 @@ class FDGRModel(nn.Module):
         pretrained_model_name = weights["hyper_parameters"]["pretrained_model_name"]
         h_dim = weights["hyper_parameters"]["h_dim"]
         self.fdgr = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim)
-        # self.fdgr.load_state_dict(
-        #     {k.replace("model.", ''): v
-        #      for k, v in weights['state_dict'].items()})
+        self.fdgr.load_state_dict(
+            {k.replace("model.", ''): v
+             for k, v in weights['state_dict'].items()})
         self.num_labels = num_labels
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
         self.classifier = nn.Linear(h_dim, num_labels)
@@ -128,17 +138,19 @@ class FDGRModel(nn.Module):
                 labeled: Tensor = None,
                 log_dict=None,
                 batch_rate: int = -1):
-        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, labeled, log_dict,
-                                                   batch_rate)
+        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, labeled,
+                                                   log_dict, batch_rate)
         ha, hc = outputs.hidden_states
         logits: Tensor = self.classifier(ha.chunk(2)[0]) / 2
         active_mask = original['valid_mask'].view(-1) == 1
         label_mask = labeled.view(-1) == 1
         active_logits = logits.view(-1, self.num_labels)[active_mask]
-        ce_loss = self.loss_fct(logits.view(-1, self.num_labels)[label_mask], 
-                                original['gold_labels'].view(-1)[label_mask])
+        ce_loss = self.loss_fct(
+            logits.view(-1, self.num_labels)[label_mask],
+            original['gold_labels'].view(-1)[label_mask])
         # loss = ce_loss + 0.01 * outputs.loss
-        loss = ce_loss + 0.01 * self.mi_loss.learning_loss(ha.chunk(2)[0].view(-1, ha.size(-1))[active_mask], active_logits)
+        loss = ce_loss + 0.01 * self.mi_loss.learning_loss(
+            ha.chunk(2)[0].view(-1, ha.size(-1))[active_mask], active_logits)
         return TokenClassifierOutput(logits=active_logits, loss=loss)
 
 

@@ -316,20 +316,21 @@ class InfoNCE(nn.Module):
         self.w = Parameter(nn.init.kaiming_uniform_(torch.randn(1, x_dim, y_dim)))
 
     def forward(self, x_samples: Tensor,
-                y_samples: Tensor):  # samples have shape [sample_size, dim]
+                y_samples: Tensor, mask: Tensor=None):  # samples have shape [sample_size, dim]
         # shuffle and concatenate
         sample_size = y_samples.shape[0]
 
         x_tile = x_samples.unsqueeze(0).repeat((sample_size, 1, 1))
         y_tile = y_samples.unsqueeze(1).repeat((1, sample_size, 1))
         T0 = torch.einsum("ij,mjk,ik->im", [x_samples, self.w, y_samples])
-        T1 = torch.einsum("bij,mjk,bik->bim", [x_tile, self.w, y_tile])
-
-        lower_bound = T0.mean() - (T1.logsumexp(dim=1).mean() - np.log(sample_size))
+        T1 = torch.einsum("bij,mjk,bik->bim", [x_tile, self.w, y_tile]).squeeze(-1)
+        if mask is None:
+            mask = torch.zeros_like(T1, device=T1.device)
+        lower_bound = T0.mean() - ((T1-10000 * mask).logsumexp(dim=1).mean() - np.log(sample_size))
         return lower_bound
 
-    def learning_loss(self, x_samples, y_samples):
-        return -self.forward(x_samples, y_samples)
+    def learning_loss(self, x_samples, y_samples, mask=None):
+        return -self.forward(x_samples, y_samples, mask)
 
 
 def kl_div(param1, param2):
