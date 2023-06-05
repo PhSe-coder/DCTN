@@ -16,3 +16,4 @@ pip install yapf
 pip install -i https://pypi.org/simple tensorboard==2.13.0 tensorboardX==2.6
 pip install nltk==3.7
 pip install pytorch_revgrad==0.2.0
+pip install omegaconf==2.3.0
