@@ -1,30 +1,31 @@
-# lightning.pytorch==2.0.0
-seed_everything: 42
-model:
-  class_path: models.PretrainedFDGRClassifer
-  init_args:
-    num_labels: 7
-    lr: 2e-5
-    h_dim: 300
+ckpt_path: null
 data:
   class_path: PretraninedABSADataModule
   init_args:
     batch_size: 16
-    num_workers: 16
     k2t_file: ./data/knowledge2token.json
+    num_workers: 16
+    source_train_file: ./processed/dataset/service.train.txt
     t2k_file: ./data/token2knowledge.json
     target: restaurant
-    train_file: ./processed/dataset/service.train.txt
+    target_train_file: ./processed/dataset/restaurant.train.txt
+model:
+  class_path: models.PretrainedFDGRClassifer
+  init_args:
+    h_dim: 300
+    lr: 2e-5
+    num_labels: 7
+seed_everything: 42
 trainer:
   accelerator: gpu
-  enable_progress_bar: True
-  max_epochs: 50
-  default_root_dir: /root/autodl-tmp
-  log_every_n_steps: 10
   callbacks:
-    - class_path: lightning.pytorch.callbacks.ModelCheckpoint
-      init_args: 
-        verbose: True
-        save_weights_only: True
-        filename: bert-absa-{epoch:02d}
-ckpt_path: null
+  - class_path: lightning.pytorch.callbacks.ModelCheckpoint
+    init_args:
+      dirpath: /root/autodl-tmp/models
+      filename: pretrained-fdgr-service-restaurant-dim=300-max-epoch=30
+      save_weights_only: true
+      verbose: true
+  default_root_dir: /root/autodl-tmp
+  enable_progress_bar: true
+  log_every_n_steps: 10
+  max_epochs: 30
