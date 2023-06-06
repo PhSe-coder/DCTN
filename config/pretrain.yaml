@@ -21,8 +21,8 @@ trainer:
   callbacks:
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /root/autodl-tmp/models
-      filename: pretrained-fdgr-service-restaurant-dim=300-max-epoch=30
+      dirpath: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=30
+      filename: pretrained-fdgr.ckpt
       save_weights_only: true
       verbose: true
   default_root_dir: /root/autodl-tmp

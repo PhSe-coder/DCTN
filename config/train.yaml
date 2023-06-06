@@ -18,7 +18,7 @@ model:
       class_path: model.FDGRModel
       init_args:
         num_labels: 7
-        pretrained_path: /root/autodl-tmp/models/pretrained-fdgr-service-restaurant-dim=300-max-epoch=30-v1.ckpt
+        pretrained_path: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=30/pretrained-fdgr.ckpt-v1.ckpt
     num_labels: 7
     output_dir: /root/FDGR/out
 seed_everything: 42
@@ -40,4 +40,4 @@ trainer:
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 15
+  max_epochs: 30
