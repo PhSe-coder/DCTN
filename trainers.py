@@ -6,6 +6,7 @@ from lightning.pytorch import LightningDataModule
 from lightning.pytorch.cli import LightningCLI
 from torch.utils.data import DataLoader, ConcatDataset
 from transformers import BertTokenizer
+from torch.utils.data.sampler import WeightedRandomSampler
 
 from dataset import ModelDataset
 
@@ -35,7 +36,7 @@ class ABSADataModule(LightningDataModule):
                                           self.target, self.tokenizer)
             target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file,
                                           self.target, self.tokenizer, False)
-            self.train_set = ConcatDataset([source, target])
+            self.train_set = source
         if stage in ('fit', 'validate'):
             self.val_set = ModelDataset(self.validation_file, self.k2t_file, self.t2k_file,
                                         self.target, self.tokenizer)
@@ -79,7 +80,7 @@ class PretraninedABSADataModule(LightningDataModule):
                                           self.target, self.tokenizer)
             target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file,
                                           self.target, self.tokenizer, False)
-            self.train_set = ConcatDataset([source, target])
+            self.train_set = source
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)

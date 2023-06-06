@@ -20,12 +20,9 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         self.hc_dim = h_dim
         self.hidden_size: int = config.hidden_size
         # feature disentanglement module
-        self.ha_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-                                        nn.ReLU(), nn.Linear(config.hidden_size, self.ha_dim),
-                                        nn.ReLU(), nn.LayerNorm(self.ha_dim, 1e-12))
-        self.hc_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-                                        nn.ReLU(), nn.Linear(config.hidden_size, self.hc_dim),
-                                        nn.ReLU(), nn.LayerNorm(self.hc_dim, 1e-12))
+        self.encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.ReLU(),
+                                     nn.Linear(config.hidden_size, self.ha_dim + self.hc_dim),
+                                     nn.ReLU(), nn.LayerNorm(self.ha_dim + self.hc_dim, 1e-12))
         self.decoder = nn.Sequential(nn.Linear(self.ha_dim + self.hc_dim, config.hidden_size),
                                      nn.ReLU(), nn.Linear(config.hidden_size, config.hidden_size),
                                      nn.ReLU(), nn.LayerNorm(config.hidden_size, 1e-12))
@@ -42,42 +39,102 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                 labeled: Tensor = None,
                 log_dict=None,
                 batch_rate: int = -1):
+        assert torch.all(original['attention_mask'] == word_contrast['attention_mask']).item() == 1
         input_ids = torch.cat([original['input_ids'], word_contrast['input_ids']])
         token_type_ids = torch.cat([original['token_type_ids'], word_contrast['token_type_ids']])
         attention_mask = torch.cat([original['attention_mask'], word_contrast['attention_mask']])
         seq_output: Tensor = self.bert(input_ids,
                                        token_type_ids=token_type_ids,
                                        attention_mask=attention_mask)[0]
-        orig_seq_output, word_cont_seq_output = seq_output.chunk(2)
-        ha = self.ha_encoder(seq_output)
-        hc = self.hc_encoder(seq_output)
+        # orig_seq_output, word_cont_seq_output = seq_output.chunk(2)
+        encoded = self.encoder(seq_output)
+        ha, hc = torch.chunk(encoded, 2, -1)
+        # auto-encoder loss
+        decoded = self.decoder(encoded)
+        reconstruct_loss = self.mse(
+            seq_output.view(-1, self.hidden_size)[attention_mask.view(-1) == 1],
+            decoded.view(-1, self.hidden_size)[attention_mask.view(-1) == 1])
         orig_ha, word_cont_ha = ha.chunk(2)
         orig_hc, word_cont_hc = hc.chunk(2)
         # orthogonal loss
         orthogonal_loss = self.orthogonal_loss.update(
             ha.view(-1, self.ha_dim)[attention_mask.view(-1) == 1],
             hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1])
-        # auto-encoder loss
-        decoded = self.decoder(torch.cat([ha, hc], dim=-1))
-        reconstruct_loss = self.mse(
-            seq_output.view(-1, self.hidden_size)[attention_mask.view(-1) == 1],
-            decoded.view(-1, self.hidden_size)[attention_mask.view(-1) == 1])
         # attribute-specific representation loss
-        assert torch.all(original['valid_mask'] == word_contrast['valid_mask']).item() == 1
-        active_mask = original['valid_mask'].view(-1) == 1
+        active_mask = original['attention_mask'].view(-1) == 1
         mask = None
-        # count = active_mask.count_nonzero()
-        # o = original['input_ids'].view(-1)[active_mask]
-        # w = word_contrast['input_ids'].view(-1)[active_mask]
-        # mask = torch.empty(count, count, device=active_mask.device)
-        # for i in range(count):
-        #     mask[i] = (o - w[i]) == 0
-        # mask = mask.mul(torch.eye(count, dtype=torch.int32, device=active_mask.device) ^ 1)
+        count = active_mask.count_nonzero()
+        o = original['input_ids'].view(-1)[active_mask]
+        w = word_contrast['input_ids'].view(-1)[active_mask]
+        mask = torch.empty(count, count, device=active_mask.device)
+        for i in range(count):
+            mask[i] = (o - w[i]) == 0
+        mask = mask.mul(torch.eye(count, dtype=torch.int32, device=active_mask.device) ^ 1)
         ha_loss = self.mi_loss.learning_loss(
             orig_ha.view(-1, self.ha_dim)[active_mask],
-            word_cont_ha.view(-1, self.ha_dim)[active_mask],
-            mask
+            word_cont_ha.view(-1, self.ha_dim)[active_mask], mask)
+        # cross_mi_loss = self.cross_mi_loss.learning_loss(
+        #     orig_seq_output.view(-1, self.hidden_size)[active_mask],
+        #     word_cont_ha.view(-1, self.ha_dim)[active_mask], mask)
+        # cross_mi_loss += self.cross_mi_loss.learning_loss(
+        #     word_cont_seq_output.view(-1, self.hidden_size)[active_mask],
+        #     orig_ha.view(-1, self.ha_dim)[active_mask], mask)
+        # content-specific representation loss
+        active_replace_mask = replace_index.view(-1) == 1
+        inactive_replace_mask = replace_index.view(-1) == 0
+        hc_loss_replaced = self.club_loss.learning_loss(
+            orig_hc.view(-1, self.hc_dim)[active_mask & active_replace_mask],
+            word_cont_hc.view(-1, self.hc_dim)[active_mask & active_replace_mask],
         )
+        hc_loss_unreplaced = self.mse(
+            orig_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
+            word_cont_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
+        )
+        if log_dict:
+            log_dict({
+                "orthogonal_loss": orthogonal_loss.item(),
+                "reconstruct_loss": reconstruct_loss.item(),
+                "ha_loss": ha_loss.item(),
+                # "cross_mi_loss": cross_mi_loss.item(),
+                "hc_loss_replaced": hc_loss_replaced.item(),
+                "hc_loss_unreplaced": hc_loss_unreplaced.item(),
+            })
+        loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + \
+            self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
+        return TokenClassifierOutput(loss=loss, hidden_states=ha)
+
+    def compute_loss(self, seq_output: Tensor, active_mask: Tensor, original: Tensor,
+                     word_contrast: Tensor, replace_index: Tensor):
+        if len(seq_output) == 0:
+            return 0, 0, 0, 0, 0, 0
+        orig_seq_output, word_cont_seq_output = seq_output.chunk(2)
+        ha = self.ha_encoder(seq_output)
+        hc = self.hc_encoder(seq_output)
+        # auto-encoder loss
+        decoded = self.decoder(torch.cat([ha, hc], dim=-1))
+        active_mask_concat = torch.cat([active_mask, active_mask])
+        reconstruct_loss = self.mse(
+            seq_output.view(-1, self.hidden_size)[active_mask_concat.view(-1) == 1],
+            decoded.view(-1, self.hidden_size)[active_mask_concat.view(-1) == 1])
+        orig_ha, word_cont_ha = ha.chunk(2)
+        orig_hc, word_cont_hc = hc.chunk(2)
+        # orthogonal loss
+        orthogonal_loss = self.orthogonal_loss.update(
+            ha.view(-1, self.ha_dim)[active_mask_concat.view(-1) == 1],
+            hc.view(-1, self.hc_dim)[active_mask_concat.view(-1) == 1])
+        # attribute-specific representation loss
+        active_mask = active_mask.view(-1) == 1
+        mask = None
+        count = active_mask.count_nonzero()
+        o = original['input_ids'].view(-1)[active_mask]
+        w = word_contrast['input_ids'].view(-1)[active_mask]
+        mask = torch.empty(count, count, device=active_mask.device)
+        for i in range(count):
+            mask[i] = (o - w[i]) == 0
+        mask = mask.mul(torch.eye(count, dtype=torch.int32, device=active_mask.device) ^ 1)
+        ha_loss = self.mi_loss.learning_loss(
+            orig_ha.view(-1, self.ha_dim)[active_mask],
+            word_cont_ha.view(-1, self.ha_dim)[active_mask], mask)
         cross_mi_loss = self.cross_mi_loss.learning_loss(
             orig_seq_output.view(-1, self.hidden_size)[active_mask],
             word_cont_ha.view(-1, self.ha_dim)[active_mask], mask)
@@ -95,24 +152,13 @@ class FDGRPretrainedModel(BertPreTrainedModel):
             orig_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
             word_cont_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
         )
-        if log_dict:
-            log_dict({
-                "orthogonal_loss": orthogonal_loss.item(),
-                "reconstruct_loss": reconstruct_loss.item(),
-                "ha_loss": ha_loss.item(),
-                "cross_mi_loss": cross_mi_loss.item(),
-                "hc_loss_replaced": hc_loss_replaced.item(),
-                "hc_loss_unreplaced": hc_loss_unreplaced.item(),
-            })
-        loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
-            self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
-        return TokenClassifierOutput(loss=loss, hidden_states=(ha, hc))
+        return orthogonal_loss, reconstruct_loss, ha_loss, cross_mi_loss, hc_loss_replaced, hc_loss_unreplaced
 
     def weight1(self, batch_rate: float):
-        return 0.1 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 1.0 / 3)))
+        return 0.01 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 2.0 / 3))) + 0.001
 
     def weight2(self, batch_rate: float) -> Tensor:
-        return 0.1 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 1.0 / 3)))
+        return 0.01 * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 2.0 / 3))) + 0.001
 
 
 class FDGRModel(nn.Module):
@@ -140,7 +186,7 @@ class FDGRModel(nn.Module):
                 batch_rate: int = -1):
         outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, labeled,
                                                    log_dict, batch_rate)
-        ha, hc = outputs.hidden_states
+        ha = outputs.hidden_states
         logits: Tensor = self.classifier(ha.chunk(2)[0]) / 2
         active_mask = original['valid_mask'].view(-1) == 1
         label_mask = labeled.view(-1) == 1
@@ -148,9 +194,7 @@ class FDGRModel(nn.Module):
         ce_loss = self.loss_fct(
             logits.view(-1, self.num_labels)[label_mask],
             original['gold_labels'].view(-1)[label_mask])
-        # loss = ce_loss + 0.01 * outputs.loss
-        loss = ce_loss + 0.01 * self.mi_loss.learning_loss(
-            ha.chunk(2)[0].view(-1, ha.size(-1))[active_mask], active_logits)
+        loss = ce_loss + 0.01 * outputs.loss
         return TokenClassifierOutput(logits=active_logits, loss=loss)
 
 
