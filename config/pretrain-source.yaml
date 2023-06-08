@@ -15,17 +15,17 @@ model:
     h_dim: 300
     lr: 2e-5
     num_labels: 7
+    p: 1.0
 seed_everything: 42
 trainer:
   accelerator: gpu
   callbacks:
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=30
-      filename: pretrained-fdgr.ckpt
-      save_weights_only: true
+      dirpath: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=15-p=1.0
+      save_last: true
       verbose: true
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 30
+  max_epochs: 15
