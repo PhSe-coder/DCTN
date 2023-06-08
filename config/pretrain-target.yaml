@@ -16,14 +16,14 @@ model:
     h_dim: 300
     lr: 2e-5
     num_labels: 7
-    p: 0.6
+    p: 1.0
 seed_everything: 42
 trainer:
   accelerator: gpu
   callbacks:
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=30-p=0.6
+      dirpath: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=30-p=1.0
       filename: pretrained-fdgr
       save_last: true
       save_weights_only: true
