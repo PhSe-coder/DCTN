@@ -4,19 +4,29 @@ import torch
 from lightning.pytorch import LightningModule
 from transformers import BertTokenizer
 from transformers.modeling_outputs import TokenClassifierOutput
-
+import torch.nn as nn
+from torch import as_tensor
 from constants import TAGS
 from eval import absa_evaluate, evaluate
 from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
 
+class LossWeight:
+    @staticmethod
+    def weight1(batch_rate: float, tau = 0.01):
+        return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 2.0 / 3))) + 0.001
 
-class PretrainedFDGRClassifer(LightningModule):
+    @staticmethod
+    def weight2(batch_rate: float, tau = 0.01):
+        return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 2.0 / 3))) + 0.001
+
+class PretrainedFDGRClassifer(LightningModule, LossWeight):
 
     def __init__(self,
                  num_labels: int,
                  lr: float,
                  h_dim: int = 300,
+                 p: float = 1.0,
                  pretrained_model_name: str = "bert-base-uncased"):
         """pretraining FDGR model classifier
 
@@ -28,14 +38,17 @@ class PretrainedFDGRClassifer(LightningModule):
             learning rate
         h_dim : int, optionl
             the dim of the disentangled features
+        p: float
+            weight of the source loss
         pretrained_model_name : str, optional
             the specific pretrained model
         """
         super(PretrainedFDGRClassifer, self).__init__()
-        self.save_hyperparameters()
+        self.save_hyperparameters(ignore=["p"])
         self.automatic_optimization = False
         self.num_labels = num_labels
         self.lr = lr
+        self.p = p
         self.model = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim=h_dim)
 
     def on_train_start(self):
@@ -65,21 +78,39 @@ class PretrainedFDGRClassifer(LightningModule):
                              self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch, log_dict=self.log_dict, batch_rate=batch_rate)
-        loss = outputs.loss
+        ret1 = self.forward(**train_batch[0])
+        ret2 = self.forward(**train_batch[1])
+        orthogonal_loss = self.p * ret1.loss["orthogonal_loss"] + (1 - self.p) * ret2.loss["orthogonal_loss"]
+        reconstruct_loss = self.p * ret1.loss["reconstruct_loss"] + (1 - self.p) * ret2.loss["reconstruct_loss"]
+        ha_loss = self.p * ret1.loss["ha_loss"] + (1 - self.p) * ret2.loss["ha_loss"]
+        cross_mi_loss = self.p * ret1.loss["cross_mi_loss"] + (1 - self.p) * ret2.loss["cross_mi_loss"]
+        hc_loss_replaced = self.p * ret1.loss["hc_loss_replaced"] + (1 - self.p) * ret2.loss["hc_loss_replaced"]
+        hc_loss_unreplaced = self.p * ret1.loss["hc_loss_unreplaced"] + (1 - self.p) * ret2.loss["hc_loss_unreplaced"]
+        loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
+            self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
         self.manual_backward(loss)
         opt.step()
         self.log('train_loss', loss.item())
+        self.log_dict({
+            "orthogonal_loss": orthogonal_loss.item(),
+            "reconstruct_loss": reconstruct_loss.item(),
+            "ha_loss": ha_loss.item(),
+            "cross_mi_loss": cross_mi_loss.item(),
+            "hc_loss_replaced": hc_loss_replaced.item(),
+            "hc_loss_unreplaced": hc_loss_unreplaced.item(),
+        })
         return loss
 
 
-class FDGRClassifer(LightningModule):
+
+class FDGRClassifer(LightningModule, LossWeight):
 
     def __init__(self,
                  num_labels: int,
                  output_dir: str,
                  lr: float,
                  model: FDGRModel,
+                 coff: float = 0.02,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -91,6 +122,8 @@ class FDGRClassifer(LightningModule):
             the output directory of the annotation results
         lr : float
             learning rate
+        coff: float
+            the weight of the sub loss
         h_dim : int, optionl
             the dim of the disentangled features
         pretrained_model_name : str, optional
@@ -102,6 +135,7 @@ class FDGRClassifer(LightningModule):
         self.num_labels = num_labels
         self.output_dir = output_dir
         self.lr = lr
+        self.coff = coff
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.model = model
         self.valid_out = []
@@ -134,11 +168,29 @@ class FDGRClassifer(LightningModule):
                              self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch, log_dict=self.log_dict, batch_rate=batch_rate)
-        loss = outputs.loss
+        outputs = self.forward(**train_batch)
+        ce_loss = outputs.loss["ce_loss"]
+        orthogonal_loss = outputs.loss["orthogonal_loss"]
+        reconstruct_loss = outputs.loss["reconstruct_loss"]
+        ha_loss = outputs.loss["ha_loss"]
+        cross_mi_loss = outputs.loss["cross_mi_loss"]
+        hc_loss_replaced = outputs.loss["hc_loss_replaced"]
+        hc_loss_unreplaced = outputs.loss["hc_loss_unreplaced"]
+        sub_loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
+            self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
+        loss = ce_loss + self.coff * sub_loss
         self.manual_backward(loss)
         opt.step()
         self.log('train_loss', loss.item())
+        self.log_dict({
+            "ce_loss": ce_loss.item(),
+            "orthogonal_loss": orthogonal_loss.item(),
+            "reconstruct_loss": reconstruct_loss.item(),
+            "ha_loss": ha_loss.item(),
+            "cross_mi_loss": cross_mi_loss.item(),
+            "hc_loss_replaced": hc_loss_replaced.item(),
+            "hc_loss_unreplaced": hc_loss_unreplaced.item(),
+        })
         return loss
 
     def validation_step(self, batch, batch_idx):

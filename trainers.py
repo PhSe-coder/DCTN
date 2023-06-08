@@ -4,11 +4,12 @@ from functools import partial
 import torch
 from lightning.pytorch import LightningDataModule
 from lightning.pytorch.cli import LightningCLI
-from torch.utils.data import DataLoader, ConcatDataset
+from torch.utils.data import ConcatDataset, DataLoader
 from transformers import BertTokenizer
-from torch.utils.data.sampler import WeightedRandomSampler
 
+import models
 from dataset import ModelDataset
+
 
 @dataclass
 class ABSADataModule(LightningDataModule):
@@ -32,10 +33,10 @@ class ABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file,
-                                          self.target, self.tokenizer)
-            target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file,
-                                          self.target, self.tokenizer, False)
+            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file, self.target,
+                                  self.tokenizer)
+            target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
+                                  self.tokenizer, False)
             self.train_set = source
         if stage in ('fit', 'validate'):
             self.val_set = ModelDataset(self.validation_file, self.k2t_file, self.t2k_file,
@@ -66,6 +67,7 @@ class PretraninedABSADataModule(LightningDataModule):
     target_train_file: str = None
     validation_file: str = None
     test_file: str = None
+    use_target: bool = False
 
     def __post_init__(self):
         super().__init__()
@@ -76,11 +78,13 @@ class PretraninedABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file,
-                                          self.target, self.tokenizer)
-            target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file,
-                                          self.target, self.tokenizer, False)
-            self.train_set = source
+            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file, self.target,
+                                  self.tokenizer)
+            target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
+                                  self.tokenizer, False)
+            # self.train_set = source if not self.use_target else target
+            self.train_set = ModelDataset([self.source_train_file, self.target_train_file],
+                                          self.k2t_file, self.t2k_file, self.target, self.tokenizer)
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)

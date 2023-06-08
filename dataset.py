@@ -3,7 +3,7 @@ import linecache
 import random
 import torch
 import os.path as osp
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set, Tuple, Union
 from transformers import BertTokenizer
 from torch import Tensor, as_tensor
 from torch.utils.data import Dataset
@@ -66,16 +66,19 @@ def pos_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
 
 class ModelDataset(Dataset):
 
-    def __init__(self, filename: str, knowledge2token: str, token2knowledge: str, target: str,
+    def __init__(self, filenames: Union[str, List[str]], knowledge2token: str, token2knowledge: str, target: str,
                  tokenizer: BertTokenizer, labeled: bool=True):
-        self.datafile = filename
+        if isinstance(filenames, str):
+            filenames = [filenames]
+        self.datafiles = filenames
         self.k2t: Dict[str, Dict[str, List[str]]] = json.load(open(knowledge2token, "r"))
         self.t2k: Dict[str, Dict[str, List[str]]] = json.load(open(token2knowledge, "r"))
         self.target = target
-        self.domain = osp.basename(self.datafile).split('.')[0]
-        self.total = sum(1 for _ in open(filename, "rb"))
+        self.domain = osp.basename(filenames[0]).split('.')[0]
+        self.file_map = {filename: sum(1 for _ in open(filename, "rb")) for filename in filenames}
+        self.total = min(self.file_map.values())
         self.tokenizer = tokenizer
-        self.training = filename.endswith(".train.txt")
+        self.training = filenames[0].endswith(".train.txt")
         self.labeled = labeled
 
     def process(self, text: str, labels: List[str], anns: List[str]) -> Dict[str, Tensor]:
@@ -129,26 +132,31 @@ class ModelDataset(Dataset):
         return contrast_text, indicies, bpe_lens
 
     def __getitem__(self, index):
+        data = []
         # `getline` method start from index 1 rather than 0
-        line = linecache.getline(self.datafile, index + 1).strip()
-        text, annotations, gold_labels = line.rsplit("***")
-        tokens, ann_list = text.split(), annotations.split()
-        contrast_text, indicies, bpe_lens = self.build_contrast(text, ann_list)
-        original = self.process(text, gold_labels.split(), ann_list)
-        word_contrast = self.process(contrast_text, gold_labels.split(), ann_list)
-        replace_index = torch.zeros_like(original["input_ids"])
-        one = torch.ones_like(original["input_ids"], dtype=torch.bool)
-        zero = torch.zeros_like(original["input_ids"], dtype=torch.bool)
-        if indicies:
-            for i, bpe_len in zip(indicies, bpe_lens):
-                start = len(self.tokenizer.tokenize(' '.join(tokens[:i]))) + 1
-                replace_index[start:start + bpe_len] = 1
-        return {
-            "original": original,
-            "word_contrast": word_contrast,
-            "replace_index": replace_index,
-            "labeled": one if self.labeled else zero
-        }
+        for datafile in self.datafiles:
+            line = linecache.getline(datafile, index + 1).strip()
+            text, annotations, gold_labels = line.rsplit("***")
+            tokens, ann_list = text.split(), annotations.split()
+            contrast_text, indicies, bpe_lens = self.build_contrast(text, ann_list)
+            original = self.process(text, gold_labels.split(), ann_list)
+            word_contrast = self.process(contrast_text, gold_labels.split(), ann_list)
+            replace_index = torch.zeros_like(original["input_ids"])
+            one = torch.ones_like(original["input_ids"], dtype=torch.bool)
+            zero = torch.zeros_like(original["input_ids"], dtype=torch.bool)
+            if indicies:
+                for i, bpe_len in zip(indicies, bpe_lens):
+                    start = len(self.tokenizer.tokenize(' '.join(tokens[:i]))) + 1
+                    replace_index[start:start + bpe_len] = 1
+            data.append({
+                "original": original,
+                "word_contrast": word_contrast,
+                "replace_index": replace_index,
+                "labeled": one if self.labeled else zero
+            })
+        if len(data) == 1:
+            return data[0]
+        return data
 
     def func(self, tokens: List[str], rand_tokens: List[str], anns: List[str], rand_anns: List[str],
              ann_set: Set[str]):
