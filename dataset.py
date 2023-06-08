@@ -74,7 +74,6 @@ class ModelDataset(Dataset):
         self.k2t: Dict[str, Dict[str, List[str]]] = json.load(open(knowledge2token, "r"))
         self.t2k: Dict[str, Dict[str, List[str]]] = json.load(open(token2knowledge, "r"))
         self.target = target
-        self.domain = osp.basename(filenames[0]).split('.')[0]
         self.file_map = {filename: sum(1 for _ in open(filename, "rb")) for filename in filenames}
         self.total = min(self.file_map.values())
         self.tokenizer = tokenizer
@@ -103,12 +102,13 @@ class ModelDataset(Dataset):
         return data
 
     def build_contrast(self, text: str,
-                       annotations: List[str]) -> Tuple[List[int], List[int], List[int]]:
+                       annotations: List[str],
+                       domain) -> Tuple[List[int], List[int], List[int]]:
         tokens = text.split()
         contrast_tokens = tokens.copy()
         candidate_indices = [
             index for index, token in enumerate(tokens)
-            if token in self.t2k[self.domain].keys() and index < 100
+            if token in self.t2k[domain].keys() and index < 100
         ]
         indicies = []
         bpe_lens = []
@@ -116,7 +116,7 @@ class ModelDataset(Dataset):
         while len(candidate_indices) != 0 and len(indicies) < max_count:
             index = random.choice(candidate_indices)
             domains = list(self.k2t.keys())
-            domains.remove(self.domain)
+            domains.remove(domain)
             target = random.choice(domains)
             token_list = self.k2t[target].get(annotations[index])
             bpe_len = len(self.tokenizer.tokenize(contrast_tokens[index]))
@@ -138,7 +138,8 @@ class ModelDataset(Dataset):
             line = linecache.getline(datafile, index + 1).strip()
             text, annotations, gold_labels = line.rsplit("***")
             tokens, ann_list = text.split(), annotations.split()
-            contrast_text, indicies, bpe_lens = self.build_contrast(text, ann_list)
+            domain = osp.basename(datafile).split('.')[0]
+            contrast_text, indicies, bpe_lens = self.build_contrast(text, ann_list, domain)
             original = self.process(text, gold_labels.split(), ann_list)
             word_contrast = self.process(contrast_text, gold_labels.split(), ann_list)
             replace_index = torch.zeros_like(original["input_ids"])
