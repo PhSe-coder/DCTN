@@ -33,7 +33,7 @@ with open("config/pretrain-source.yaml", "w") as f:
 
 with open("config/pretrain-target.yaml") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
-config["ckpt_path"] = "last"
+# config["ckpt_path"] = "last"
 config["data"]["init_args"]["use_target"] = True
 config["data"]["init_args"]["target"] = args.target
 source_train_file = config["data"]["init_args"]["source_train_file"]

@@ -1,4 +1,4 @@
-ckpt_path: last
+ckpt_path: null
 data:
   class_path: PretraninedABSADataModule
   init_args:
