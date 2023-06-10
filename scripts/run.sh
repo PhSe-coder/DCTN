@@ -9,4 +9,5 @@ do
     model_path=/root/autodl-tmp/lightning_logs/*/checkpoints/fdgr-*.ckpt
     declare -a paths=($(ls -v $model_path)) # list all the model checkpoints
     python trainers.py test --config config/test.yaml --ckpt_path ${paths[-1]}
+    echo "coff: $coff"
 done
