@@ -13,12 +13,12 @@ from optimization import BertAdam
 
 class LossWeight:
     @staticmethod
-    def weight1(batch_rate: float, tau = 0.01):
-        return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 2.0 / 3))) + 0.001
+    def weight1(batch_rate: float, tau = 0.1):
+        return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 3.0 / 4))) + 0.001
 
     @staticmethod
-    def weight2(batch_rate: float, tau = 0.01):
-        return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 2.0 / 3))) + 0.001
+    def weight2(batch_rate: float, tau = 0.1):
+        return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 3.0 / 4))) + 0.001
 
 class PretrainedFDGRClassifer(LightningModule, LossWeight):
 
@@ -93,9 +93,9 @@ class PretrainedFDGRClassifer(LightningModule, LossWeight):
         self.log('train_loss', loss.item())
         self.log_dict({
             "orthogonal_loss": orthogonal_loss.item(),
-            "reconstruct_loss": reconstruct_loss.item(),
+            # "reconstruct_loss": reconstruct_loss.item(),
             "ha_loss": ha_loss.item(),
-            "cross_mi_loss": cross_mi_loss.item(),
+            # "cross_mi_loss": cross_mi_loss.item(),
             "hc_loss_replaced": hc_loss_replaced.item(),
             "hc_loss_unreplaced": hc_loss_unreplaced.item(),
         })

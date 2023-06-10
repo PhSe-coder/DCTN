@@ -30,12 +30,12 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         self.hc_dim = h_dim
         self.hidden_size: int = config.hidden_size
         # feature disentanglement module
-        self.ha_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.ReLU(),
-                                     nn.Linear(config.hidden_size, self.ha_dim),
-                                     nn.ReLU(), nn.LayerNorm(self.ha_dim, 1e-12))
-        self.hc_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size), nn.ReLU(),
-                                     nn.Linear(config.hidden_size, self.hc_dim),
-                                     nn.ReLU(), nn.LayerNorm(self.hc_dim, 1e-12))
+        self.ha_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
+                                        nn.ReLU(), nn.Linear(config.hidden_size, self.ha_dim),
+                                        nn.ReLU(), nn.LayerNorm(self.ha_dim, 1e-12))
+        self.hc_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
+                                        nn.ReLU(), nn.Linear(config.hidden_size, self.hc_dim),
+                                        nn.ReLU(), nn.LayerNorm(self.hc_dim, 1e-12))
         self.decoder = nn.Sequential(nn.Linear(self.ha_dim + self.hc_dim, config.hidden_size),
                                      nn.ReLU(), nn.Linear(config.hidden_size, config.hidden_size),
                                      nn.ReLU(), nn.LayerNorm(config.hidden_size, 1e-12))
@@ -90,6 +90,13 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         cross_mi_loss += self.cross_mi_loss.learning_loss(
             word_cont_seq_output.view(-1, self.hidden_size)[active_mask],
             orig_ha.view(-1, self.ha_dim)[active_mask], mask)
+        # cross_mi_loss += self.cross_mi_loss.learning_loss(
+        #     orig_seq_output.view(-1, self.hidden_size)[active_mask],
+        #     word_cont_hc.view(-1, self.ha_dim)[active_mask], mask)
+        # cross_mi_loss += self.cross_mi_loss.learning_loss(
+        #     word_cont_seq_output.view(-1, self.hidden_size)[active_mask],
+        #     orig_hc.view(-1, self.hc_dim)[active_mask], mask)
+        # cross_mi_loss *= 0.25
         # content-specific representation loss
         active_replace_mask = replace_index.view(-1) == 1
         inactive_replace_mask = replace_index.view(-1) == 0
@@ -101,15 +108,17 @@ class FDGRPretrainedModel(BertPreTrainedModel):
             orig_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
             word_cont_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
         )
-        
-        return TokenClassifierOutput(loss={
-            "orthogonal_loss": orthogonal_loss,
-            "reconstruct_loss": reconstruct_loss,
-            "ha_loss": ha_loss,
-            "cross_mi_loss": cross_mi_loss,
-            "hc_loss_replaced": hc_loss_replaced,
-            "hc_loss_unreplaced": hc_loss_unreplaced,
-        },hidden_states=ha)
+
+        return TokenClassifierOutput(
+            loss={
+                "orthogonal_loss": orthogonal_loss,
+                "reconstruct_loss": reconstruct_loss,
+                "ha_loss": ha_loss,
+                "cross_mi_loss": cross_mi_loss,
+                "hc_loss_replaced": hc_loss_replaced,
+                "hc_loss_unreplaced": hc_loss_unreplaced,
+            },
+            hidden_states=(orig_ha, orig_hc))
 
 
 class FDGRModel(nn.Module):
@@ -134,8 +143,8 @@ class FDGRModel(nn.Module):
                 replace_index: Tensor = None,
                 labeled: Tensor = None):
         outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, labeled)
-        ha = outputs.hidden_states
-        logits: Tensor = self.classifier(ha.chunk(2)[0]) / 2
+        ha, hc = outputs.hidden_states
+        logits: Tensor = self.classifier(ha) / 2
         active_mask = original['valid_mask'].view(-1) == 1
         label_mask = labeled.view(-1) == 1
         active_logits = logits.view(-1, self.num_labels)[active_mask]
