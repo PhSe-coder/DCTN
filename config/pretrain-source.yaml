@@ -5,7 +5,7 @@ data:
     batch_size: 16
     k2t_file: ./data/knowledge2token.json
     num_workers: 16
-    source_train_file: ./processed/dataset/service.train.txt
+    source_train_file: ./processed/dataset/laptop.train.txt
     t2k_file: ./data/token2knowledge.json
     target: restaurant
     target_train_file: ./processed/dataset/restaurant.train.txt
@@ -15,14 +15,14 @@ model:
     h_dim: 300
     lr: 2e-5
     num_labels: 7
-    p: 1.0
+    p: 0.5
 seed_everything: 42
 trainer:
   accelerator: gpu
   callbacks:
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      dirpath: /root/autodl-tmp/models/service-restaurant/dim=300-max-epoch=15-p=1.0
+      dirpath: /root/autodl-tmp/models/laptop-restaurant/dim=300-max-epoch=15-p=0.5
       save_last: true
       verbose: true
   default_root_dir: /root/autodl-tmp
