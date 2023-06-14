@@ -6,6 +6,7 @@ import torch
 import torch.nn as nn
 from torch import Tensor
 from transformers import BertModel, BertPreTrainedModel
+from constants import DEPREL_DICT, POS_DICT
 
 from mi_estimators import CLUBMean, InfoNCE, jsd, vCLUB
 
@@ -109,16 +110,15 @@ class FDGRPretrainedModel(BertPreTrainedModel):
             word_cont_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
         )
 
-        return TokenClassifierOutput(
-            loss={
-                "orthogonal_loss": orthogonal_loss,
-                "reconstruct_loss": reconstruct_loss,
-                "ha_loss": ha_loss,
-                "cross_mi_loss": cross_mi_loss,
-                "hc_loss_replaced": hc_loss_replaced,
-                "hc_loss_unreplaced": hc_loss_unreplaced,
-            },
-            hidden_states=(orig_ha, orig_hc))
+        return TokenClassifierOutput(loss={
+            "orthogonal_loss": orthogonal_loss,
+            "reconstruct_loss": reconstruct_loss,
+            "ha_loss": ha_loss,
+            "cross_mi_loss": cross_mi_loss,
+            "hc_loss_replaced": hc_loss_replaced,
+            "hc_loss_unreplaced": hc_loss_unreplaced,
+        },
+                                     hidden_states=(orig_ha, orig_hc))
 
 
 class FDGRModel(nn.Module):
@@ -133,9 +133,11 @@ class FDGRModel(nn.Module):
             {k.replace("model.", ''): v
              for k, v in weights['state_dict'].items()}, False)
         self.num_labels = num_labels
-        self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
-        self.classifier = nn.Linear(h_dim, num_labels)
         self.mi_loss = InfoNCE(h_dim, num_labels)
+        self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
+        self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
+        self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
+        self.classifier = nn.Linear(h_dim * 2 + 30 + 30, num_labels)
 
     def forward(self,
                 original: Dict[str, Tensor],
@@ -143,16 +145,28 @@ class FDGRModel(nn.Module):
                 replace_index: Tensor = None,
                 labeled: Tensor = None):
         outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index, labeled)
-        ha, hc = outputs.hidden_states
-        logits: Tensor = self.classifier(ha) / 2
         active_mask = original['valid_mask'].view(-1) == 1
-        label_mask = labeled.view(-1) == 1
+        ha, hc = outputs.hidden_states
+        pos = self.pos_embedding(original["pos_ids"])
+        dep = self.dep_embedding(original["dep_ids"])
+        hidden_state = torch.cat([ha, hc, pos, dep],
+                                 -1).view(-1, self.classifier.in_features)[active_mask]
+        logits: Tensor = self.classifier(torch.cat([ha, hc, pos, dep], -1)) / 2
         active_logits = logits.view(-1, self.num_labels)[active_mask]
-        ce_loss = self.loss_fct(
-            logits.view(-1, self.num_labels)[label_mask],
-            original['gold_labels'].view(-1)[label_mask])
+        ce_loss = self.loss_fct(logits.view(-1, self.num_labels), original['gold_labels'].view(-1))
         outputs.loss["ce_loss"] = ce_loss
-        return TokenClassifierOutput(logits=active_logits, loss=outputs.loss)
+        pos_eye = torch.eye(self.pos_embedding.num_embeddings,
+                            device=self.pos_embedding.weight.device)
+        dep_eye = torch.eye(self.dep_embedding.num_embeddings,
+                            device=self.dep_embedding.weight.device)
+        outputs.loss["aux_loss"] = torch.norm(
+            torch.mm(self.pos_embedding.weight, self.pos_embedding.weight.T) *
+            (1 - pos_eye)) / (self.pos_embedding.num_embeddings ** 2)+ torch.norm(
+                torch.mm(self.dep_embedding.weight, self.dep_embedding.weight.T) -
+                (1 - dep_eye)) / (self.dep_embedding.num_embeddings ** 2)
+        return TokenClassifierOutput(logits=active_logits,
+                                     loss=outputs.loss,
+                                     hidden_states=hidden_state)
 
 
 class BertForTokenClassification(BertPreTrainedModel):

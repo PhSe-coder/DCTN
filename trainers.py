@@ -37,7 +37,8 @@ class ABSADataModule(LightningDataModule):
                                   self.tokenizer)
             target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
                                   self.tokenizer, False)
-            self.train_set = source
+            self.train_set = ModelDataset([self.source_train_file, self.target_train_file],
+                                          self.k2t_file, self.t2k_file, self.target, self.tokenizer)
         if stage in ('fit', 'validate'):
             self.val_set = ModelDataset(self.validation_file, self.k2t_file, self.t2k_file,
                                         self.target, self.tokenizer)

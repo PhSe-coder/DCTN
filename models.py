@@ -10,6 +10,7 @@ from constants import TAGS
 from eval import absa_evaluate, evaluate
 from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
+from mi_estimators import InfoNCE
 
 class LossWeight:
     @staticmethod
@@ -111,6 +112,7 @@ class FDGRClassifer(LightningModule, LossWeight):
                  lr: float,
                  model: FDGRModel,
                  coff: float = 0.02,
+                 coff_mi: float = 0.02,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -136,8 +138,10 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.output_dir = output_dir
         self.lr = lr
         self.coff = coff
+        self.coff_mi = coff_mi
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.model = model
+        self.mi_loss = InfoNCE(model.classifier.in_features, num_labels)
         self.valid_out = []
         self.test_out = []
 
@@ -168,7 +172,8 @@ class FDGRClassifer(LightningModule, LossWeight):
                              self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch)
+        outputs = self.forward(**train_batch[0])
+        target_outputs = self.forward(**train_batch[1])
         ce_loss = outputs.loss["ce_loss"]
         orthogonal_loss = outputs.loss["orthogonal_loss"]
         reconstruct_loss = outputs.loss["reconstruct_loss"]
@@ -176,9 +181,12 @@ class FDGRClassifer(LightningModule, LossWeight):
         cross_mi_loss = outputs.loss["cross_mi_loss"]
         hc_loss_replaced = outputs.loss["hc_loss_replaced"]
         hc_loss_unreplaced = outputs.loss["hc_loss_unreplaced"]
+        aux_loss = outputs.loss["aux_loss"]
         sub_loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
             self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
-        loss = ce_loss + self.coff * sub_loss
+        mi_loss = self.mi_loss.learning_loss(torch.cat([outputs.hidden_states, target_outputs.hidden_states]), 
+                                             torch.cat([outputs.logits, target_outputs.logits]).softmax(-1))
+        loss = ce_loss + self.coff * sub_loss + 0.1 * aux_loss + self.coff_mi * mi_loss
         self.manual_backward(loss)
         opt.step()
         self.log('train_loss', loss.item())
@@ -188,8 +196,10 @@ class FDGRClassifer(LightningModule, LossWeight):
             "reconstruct_loss": reconstruct_loss.item(),
             "ha_loss": ha_loss.item(),
             "cross_mi_loss": cross_mi_loss.item(),
+            "mi_loss": mi_loss.item(),
             "hc_loss_replaced": hc_loss_replaced.item(),
             "hc_loss_unreplaced": hc_loss_unreplaced.item(),
+            "aux_loss": aux_loss.item()
         })
         return loss
 

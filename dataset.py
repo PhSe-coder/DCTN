@@ -9,7 +9,7 @@ from torch import Tensor, as_tensor
 from torch.utils.data import Dataset
 from transformers.utils.generic import PaddingStrategy
 
-from constants import POS_DICT, TAGS
+from constants import POS_DICT, TAGS, DEPREL_DICT
 
 
 def transform(
@@ -63,6 +63,27 @@ def pos_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
         pos_ids.append(pos)
     return pos_ids
 
+def dep_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str],
+                  special_tokens: List[str], pad_token):
+    index = 0
+    dep_ids = []
+    offset = 0
+    for wordpiece_token in wordpiece_tokens:
+        if wordpiece_token in special_tokens:
+            if wordpiece_token == pad_token:
+                pos = DEPREL_DICT.get(pad_token)
+            else:
+                pos = DEPREL_DICT.get('O')
+        else:
+            offset += len(wordpiece_token.replace("##", ''))
+            ann = anns[index].split('.')[1]
+            if offset == len(tokens[index]):
+                index += 1
+                offset = 0
+            pos = DEPREL_DICT.get(ann, DEPREL_DICT.get('O'))
+        dep_ids.append(pos)
+    return dep_ids
+
 
 class ModelDataset(Dataset):
 
@@ -91,13 +112,16 @@ class ModelDataset(Dataset):
         valid_mask[len(valid_mask) - valid_mask[::-1].index(1) - 1] = 0
         pos_ids = pos_transform(text.split(), anns, wordpiece_tokens, self.tokenizer.all_special_tokens,
                                 self.tokenizer.pad_token)
+        dep_ids = dep_transform(text.split(), anns, wordpiece_tokens, self.tokenizer.all_special_tokens,
+                                self.tokenizer.pad_token)
         data = {
             "input_ids": as_tensor(tok_dict.input_ids),
             "gold_labels": as_tensor(labels),
             "attention_mask": as_tensor(tok_dict.attention_mask),
             "token_type_ids": as_tensor(tok_dict.token_type_ids),
             "valid_mask": as_tensor(valid_mask),
-            "pos_ids": as_tensor(pos_ids)
+            "pos_ids": as_tensor(pos_ids),
+            "dep_ids": as_tensor(dep_ids)
         }
         return data
 
