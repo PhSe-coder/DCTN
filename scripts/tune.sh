@@ -4,7 +4,7 @@ export HF_DATASETS_OFFLINE=1
 
 # python trainers.py fit --config config/pretrain-source.yaml
 
-for p in 1.0 0.8 0.6 0.4 0.2 0
+for p in 0 # 1.0 0.8 0.6 0.4 0.2
 do
     python config/update.py --source laptop --target restaurant --max_pretrain_epochs 15 --max_train_epochs 15 --dim 300 --p $p
     python trainers.py fit --config config/pretrain-target.yaml --trainer.enable_progress_bar false

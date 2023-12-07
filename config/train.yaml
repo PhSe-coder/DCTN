@@ -20,7 +20,7 @@ model:
       class_path: model.FDGRModel
       init_args:
         num_labels: 7
-        pretrained_path: /root/autodl-tmp/models/laptop-restaurant/dim=300-max-epoch=30-p=0.5/pretrained-fdgr-v1.ckpt
+        pretrained_path: /root/autodl-tmp/models/laptop-restaurant/dim=300-max-epoch=30-p=0.0/pretrained-fdgr-v1.ckpt
     num_labels: 7
     output_dir: /root/FDGR/out
 seed_everything: 42
