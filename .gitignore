@@ -165,3 +165,7 @@ cython_debug/
 # excel files
 *.xlsx
 *.xls
+
+
+# processed files
+processed/
