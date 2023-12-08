@@ -3,7 +3,7 @@ from stanza import DownloadMethod
 from stanza.models.common.doc import Sentence
 from typing import List
 
-# stanza.download("en")
+stanza.download("en")
 # set tokenize_pretokenized=True to prevent further tokenization or sentence segmentation
 # see more: https://stanfordnlp.github.io/stanza/tokenize.html#start-with-pretokenized-text
 nlp = stanza.Pipeline("en",
