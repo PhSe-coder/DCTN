@@ -16,7 +16,7 @@ from stanza_utils import *
 
 ALLOWED_POS = ("NN", "NNS", "NNP")
 ALLOWED_DEP = ("nsubj", "compound", "obj", "obl", "conj", "nmod", "amod", "root", "punct")
-# nltk.download('stopwords')
+nltk.download('stopwords')
 parser = ArgumentParser(description="Data split")
 parser.add_argument("--data-dir", type=str, default="./data")
 parser.add_argument("--threshold", type=float, default=0.3)
@@ -46,8 +46,8 @@ def most_common_words(sentences: List[Sentence]) -> List[str]:
     ret = Counter()
     for sentence in sentences:
         words = [
-            token.get("lemma", token["text"]).lower() for token in sentence.to_dict()
-            if token.get("lemma", token["text"]).lower() not in stopword_sets
+            w for token in sentence.to_dict()
+            if (w:=token.get("lemma", token["text"]).lower()) not in stopword_sets
             and token["xpos"] in ALLOWED_POS and token["deprel"] in ALLOWED_DEP
         ]
         ret.update(Counter(words))

@@ -6,9 +6,10 @@ sentis = {
     "0": "T-NEU",
     "-1": "T-NEG"
 }
-for file in glob("FDGR/data/twitter.*"):
-    dirname = osp.join(osp.dirname(file), "dataset")
-    fw = open(osp.join(dirname, osp.basename(file)), "w")
+for file in glob("data/raw/*.raw"):
+    dirname = osp.join(osp.split(osp.dirname(file))[0], "dataset")
+    file_name = osp.splitext(osp.basename(file))[0]
+    fw = open(osp.join(dirname, file_name + ".txt"), "w")
     with open(file, "r") as f:
         while True:
             line, aspect, polarity = f.readline().strip(), f.readline().strip(), f.readline().strip()
@@ -22,8 +23,25 @@ for file in glob("FDGR/data/twitter.*"):
                 fw.write(f"{text}***{' '.join(anns)}\n")
                 anns[i] = 'O'
     fw.close()
-for file in glob("FDGR/data/laptop.*") + glob("FDGR/data/restaurant.*"):
-    dirname = osp.join(osp.dirname(file), "dataset")
+for file in glob("data/raw/*.raw"):
+    dirname = osp.dirname(file)
+    file_name = osp.splitext(osp.basename(file))[0]
+    fw = open(osp.join(dirname, file_name + ".txt"), "w")
+    with open(file, "r") as f:
+        while True:
+            line, aspect, polarity = f.readline().strip(), f.readline().strip(), f.readline().strip()
+            if not line: break
+            text = line.replace("$T$", aspect)
+            words = line.split(' ')
+            anns = ['O'] * len(words)
+            for i, word in enumerate(words):
+                if word != "$T$": continue
+                anns[i] = ' '.join([sentis[polarity]] * len(aspect.split(' ')))
+            assert len(words) == len(anns)
+            fw.write(f"{text}***{' '.join(anns)}\n")
+    fw.close()
+for file in glob("FDGR/data/raw/laptop.*") + glob("FDGR/data/raw/restaurant.*"):
+    dirname = osp.join(osp.split(osp.dirname(file))[0], "dataset")
     fw = open(osp.join(dirname, osp.basename(file)), "w")
     with open(file, "r") as f:
         for line in f:
