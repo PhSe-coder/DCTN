@@ -18,7 +18,7 @@ ALLOWED_POS = ("NN", "NNS", "NNP")
 ALLOWED_DEP = ("nsubj", "compound", "obj", "obl", "conj", "nmod", "amod", "root", "punct")
 nltk.download('stopwords')
 parser = ArgumentParser(description="Data split")
-parser.add_argument("--data-dir", type=str, default="./data")
+parser.add_argument("--data-dir", type=str, default="./data/raw")
 parser.add_argument("--threshold", type=float, default=0.3)
 parser.add_argument("--dest", type=str, default="./data")
 
