@@ -1,5 +1,9 @@
 # Learning Robust Representations for Aspect-Based Sentiment Analysis via Feature Disentanglement
-environment settings: 
+Environment settings: 
 ```shell
-source ./scripts/env.sh
+bash ./scripts/env.sh
+```
+Data preprocess:
+```shell
+bash ./scripts/process.sh
 ```
