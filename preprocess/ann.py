@@ -34,7 +34,7 @@ if __name__ == "__main__":
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     args = parser.parse_args()
-    logger.info("annotate train set to obtain the pos/deprel labels, save the results in %s",
+    logger.info("Annotate train set to obtain the pos/deprel labels, and saving the results in %s",
                 args.dest)
     makedirs(args.dest, exist_ok=True)
     for file in glob(osp.join(args.src, "*.txt")):

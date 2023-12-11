@@ -9,7 +9,7 @@ import torch
 from torch.utils.data import random_split
 
 parser = ArgumentParser(description="Data split")
-parser.add_argument("--src", type=str, default="./data")
+parser.add_argument("--src", type=str, default="./data/dataset")
 parser.add_argument("--dest", type=str, default="./processed/tmp")
 parser.add_argument("--seed", type=int, default=42, help="random seed")
 parser.add_argument("--ratio", type=float, default=0.7, help="split ratio of train set")
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     args = parser.parse_args()
-    logger.info("split train set into train/validation dataset, save in %s", args.dest)
+    logger.info("Split train set into train/validation dataset, and saving in %s", args.dest)
     makedirs(args.dest, exist_ok=True)
     for file in glob(osp.join(args.src, "*.train.txt")):
         train_set, valid_set = split(file, args.ratio, args.seed)
@@ -37,6 +37,6 @@ if __name__ == "__main__":
             f.writelines(train_set)
         with open(osp.join(args.dest, osp.split(file)[1].replace("train", "validation")), "w") as f:
             f.writelines(valid_set)
-    logger.info("copy test dataset into %s", args.dest)
+    logger.info("Copy test dataset into %s", args.dest)
     for file in glob(osp.join(args.src, "*.test.txt")):
         copy(file, args.dest)
