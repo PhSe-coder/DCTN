@@ -12,14 +12,17 @@ from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
 from mi_estimators import InfoNCE
 
+
 class LossWeight:
+
     @staticmethod
-    def weight1(batch_rate: float, tau = 0.1):
+    def weight1(batch_rate: float, tau=0.1):
         return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 3.0 / 4))) + 0.001
 
     @staticmethod
-    def weight2(batch_rate: float, tau = 0.1):
+    def weight2(batch_rate: float, tau=0.1):
         return tau * torch.sigmoid(torch.as_tensor(20 * (batch_rate - 3.0 / 4))) + 0.001
+
 
 class PretrainedFDGRClassifer(LightningModule, LossWeight):
 
@@ -81,12 +84,17 @@ class PretrainedFDGRClassifer(LightningModule, LossWeight):
         opt.zero_grad()
         ret1 = self.forward(**train_batch[0])
         ret2 = self.forward(**train_batch[1])
-        orthogonal_loss = self.p * ret1.loss["orthogonal_loss"] + (1 - self.p) * ret2.loss["orthogonal_loss"]
-        reconstruct_loss = self.p * ret1.loss["reconstruct_loss"] + (1 - self.p) * ret2.loss["reconstruct_loss"]
+        orthogonal_loss = self.p * ret1.loss["orthogonal_loss"] + (
+            1 - self.p) * ret2.loss["orthogonal_loss"]
+        reconstruct_loss = self.p * ret1.loss["reconstruct_loss"] + (
+            1 - self.p) * ret2.loss["reconstruct_loss"]
         ha_loss = self.p * ret1.loss["ha_loss"] + (1 - self.p) * ret2.loss["ha_loss"]
-        cross_mi_loss = self.p * ret1.loss["cross_mi_loss"] + (1 - self.p) * ret2.loss["cross_mi_loss"]
-        hc_loss_replaced = self.p * ret1.loss["hc_loss_replaced"] + (1 - self.p) * ret2.loss["hc_loss_replaced"]
-        hc_loss_unreplaced = self.p * ret1.loss["hc_loss_unreplaced"] + (1 - self.p) * ret2.loss["hc_loss_unreplaced"]
+        cross_mi_loss = self.p * ret1.loss["cross_mi_loss"] + (1 -
+                                                               self.p) * ret2.loss["cross_mi_loss"]
+        hc_loss_replaced = self.p * ret1.loss["hc_loss_replaced"] + (
+            1 - self.p) * ret2.loss["hc_loss_replaced"]
+        hc_loss_unreplaced = self.p * ret1.loss["hc_loss_unreplaced"] + (
+            1 - self.p) * ret2.loss["hc_loss_unreplaced"]
         loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
             self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
         self.manual_backward(loss)
@@ -101,7 +109,6 @@ class PretrainedFDGRClassifer(LightningModule, LossWeight):
             "hc_loss_unreplaced": hc_loss_unreplaced.item(),
         })
         return loss
-
 
 
 class FDGRClassifer(LightningModule, LossWeight):
@@ -141,7 +148,7 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.coff_mi = coff_mi
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.model = model
-        self.mi_loss = InfoNCE(model.classifier.in_features, num_labels)
+        # self.mi_loss = InfoNCE(model.classifier.in_features, num_labels)
         self.valid_out = []
         self.test_out = []
 
@@ -184,8 +191,9 @@ class FDGRClassifer(LightningModule, LossWeight):
         aux_loss = outputs.loss["aux_loss"]
         sub_loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
             self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
-        mi_loss = self.mi_loss.learning_loss(torch.cat([outputs.hidden_states, target_outputs.hidden_states]), 
-                                             torch.cat([outputs.logits, target_outputs.logits]).softmax(-1))
+        mi_loss = self.mi_loss.learning_loss(
+            torch.cat([outputs.hidden_states, target_outputs.hidden_states]),
+            torch.cat([outputs.logits, target_outputs.logits]).softmax(-1))
         loss = ce_loss + self.coff * sub_loss + 0.1 * aux_loss + self.coff_mi * mi_loss
         self.manual_backward(loss)
         opt.step()

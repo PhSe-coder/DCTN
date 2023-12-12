@@ -63,6 +63,7 @@ def pos_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
         pos_ids.append(pos)
     return pos_ids
 
+
 def dep_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str],
                   special_tokens: List[str], pad_token):
     index = 0
@@ -87,19 +88,22 @@ def dep_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
 
 class ModelDataset(Dataset):
 
-    def __init__(self, filenames: Union[str, List[str]], knowledge2token: str, token2knowledge: str, target: str,
-                 tokenizer: BertTokenizer, labeled: bool=True):
+    def __init__(self, filenames: Union[str, List[str]], synonyms: str, target: str,
+                 tokenizer: BertTokenizer):
         if isinstance(filenames, str):
             filenames = [filenames]
         self.datafiles = filenames
-        self.k2t: Dict[str, Dict[str, List[str]]] = json.load(open(knowledge2token, "r"))
-        self.t2k: Dict[str, Dict[str, List[str]]] = json.load(open(token2knowledge, "r"))
+        self.synonyms: Dict[str, Dict[str, List[List[str | int]]]] = json.load(open(synonyms, 'r'))
         self.target = target
         self.file_map = {filename: sum(1 for _ in open(filename, "rb")) for filename in filenames}
         self.total = min(self.file_map.values())
         self.tokenizer = tokenizer
         self.training = filenames[0].endswith(".train.txt")
-        self.labeled = labeled
+        self.vad_laxicon: Dict[str, Tuple[float, float, float]] = {}
+        with open("./NRC-VAD-Lexicon.txt", "r") as f:
+            for line in f:
+                word, v, a, d = line.split('\t')
+                self.vad_laxicon[word] = (float(v), float(a), float(d))
 
     def process(self, text: str, labels: List[str], anns: List[str]) -> Dict[str, Tensor]:
         tok_dict: Dict[str, List[int]] = self.tokenizer(text,
@@ -110,10 +114,11 @@ class ModelDataset(Dataset):
         valid_mask = tok_dict.attention_mask.copy()
         valid_mask[0] = 0
         valid_mask[len(valid_mask) - valid_mask[::-1].index(1) - 1] = 0
-        pos_ids = pos_transform(text.split(), anns, wordpiece_tokens, self.tokenizer.all_special_tokens,
-                                self.tokenizer.pad_token)
-        dep_ids = dep_transform(text.split(), anns, wordpiece_tokens, self.tokenizer.all_special_tokens,
-                                self.tokenizer.pad_token)
+        pos_ids = pos_transform(text.split(), anns, wordpiece_tokens,
+                                self.tokenizer.all_special_tokens, self.tokenizer.pad_token)
+        dep_ids = dep_transform(text.split(), anns, wordpiece_tokens,
+                                self.tokenizer.all_special_tokens, self.tokenizer.pad_token)
+        vad = [self.vad_laxicon[word] for word in text.split()]
         data = {
             "input_ids": as_tensor(tok_dict.input_ids),
             "gold_labels": as_tensor(labels),
@@ -121,54 +126,45 @@ class ModelDataset(Dataset):
             "token_type_ids": as_tensor(tok_dict.token_type_ids),
             "valid_mask": as_tensor(valid_mask),
             "pos_ids": as_tensor(pos_ids),
-            "dep_ids": as_tensor(dep_ids)
+            "dep_ids": as_tensor(dep_ids),
+            "vad": as_tensor(vad)
         }
         return data
 
-    def build_contrast(self, text: str,
-                       annotations: List[str],
-                       domain) -> Tuple[List[int], List[int], List[int]]:
+    def build_contrast_sample(self, text: str,
+                              domain: str) -> Tuple[List[int], List[int], List[int]]:
         tokens = text.split()
         contrast_tokens = tokens.copy()
         candidate_indices = [
-            index for index, token in enumerate(tokens)
-            if token in self.t2k[domain].keys() and index < 100
+            i for i, token in enumerate(tokens) if token in self.synonyms[domain].keys()
         ]
         indicies = []
         bpe_lens = []
-        max_count = int(len(candidate_indices) * 0.2 + 1)
-        while len(candidate_indices) != 0 and len(indicies) < max_count:
-            index = random.choice(candidate_indices)
-            domains = list(self.k2t.keys())
-            domains.remove(domain)
-            target = random.choice(domains)
-            token_list = self.k2t[target].get(annotations[index])
+        for index in candidate_indices:
+            token_list = self.synonyms[domain].get(tokens[index])
             bpe_len = len(self.tokenizer.tokenize(contrast_tokens[index]))
-            while token_list and len(indicies) < max_count:
-                token = random.choice(token_list)
+            while token_list:
+                token, weight = random.choice(token_list)
                 if len(self.tokenizer.tokenize(token)) == bpe_len:
                     contrast_tokens[index] = token
                     indicies.append(index)
                     bpe_lens.append(bpe_len)
                 token_list.remove(token)
-            candidate_indices.remove(index)
         contrast_text = ' '.join(contrast_tokens)
         return contrast_text, indicies, bpe_lens
 
     def __getitem__(self, index):
         data = []
-        # `getline` method start from index 1 rather than 0
         for datafile in self.datafiles:
+            # `getline` method start from index 1 rather than 0
             line = linecache.getline(datafile, index + 1).strip()
-            text, annotations, gold_labels = line.rsplit("***")
+            text, annotations, gold_labels = line.rsplit("***", maxsplit=3)
             tokens, ann_list = text.split(), annotations.split()
             domain = osp.basename(datafile).split('.')[0]
-            contrast_text, indicies, bpe_lens = self.build_contrast(text, ann_list, domain)
+            contrast_text, indicies, bpe_lens = self.build_contrast_sample(text, domain)
             original = self.process(text, gold_labels.split(), ann_list)
             word_contrast = self.process(contrast_text, gold_labels.split(), ann_list)
             replace_index = torch.zeros_like(original["input_ids"])
-            one = torch.ones_like(original["input_ids"], dtype=torch.bool)
-            zero = torch.zeros_like(original["input_ids"], dtype=torch.bool)
             if indicies:
                 for i, bpe_len in zip(indicies, bpe_lens):
                     start = len(self.tokenizer.tokenize(' '.join(tokens[:i]))) + 1
@@ -176,8 +172,7 @@ class ModelDataset(Dataset):
             data.append({
                 "original": original,
                 "word_contrast": word_contrast,
-                "replace_index": replace_index,
-                "labeled": one if self.labeled else zero
+                "replace_index": replace_index
             })
         if len(data) == 1:
             return data[0]

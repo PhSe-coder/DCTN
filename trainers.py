@@ -4,10 +4,9 @@ from functools import partial
 import torch
 from lightning.pytorch import LightningDataModule
 from lightning.pytorch.cli import LightningCLI
-from torch.utils.data import ConcatDataset, DataLoader
+from torch.utils.data import DataLoader
 from transformers import BertTokenizer
 
-import models
 from dataset import ModelDataset
 
 
@@ -36,7 +35,7 @@ class ABSADataModule(LightningDataModule):
             source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file, self.target,
                                   self.tokenizer)
             target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
-                                  self.tokenizer, False)
+                                  self.tokenizer)
             self.train_set = ModelDataset([self.source_train_file, self.target_train_file],
                                           self.k2t_file, self.t2k_file, self.target, self.tokenizer)
         if stage in ('fit', 'validate'):
