@@ -8,7 +8,7 @@ from torch import Tensor
 from transformers import BertModel, BertPreTrainedModel
 from constants import DEPREL_DICT, POS_DICT
 
-from mi_estimators import CLUBMean, InfoNCE, vCLUB
+from mi_estimators import InfoNCE, vCLUB
 
 logger = logging.getLogger(__name__)
 
@@ -42,9 +42,6 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                                      nn.ReLU(), nn.LayerNorm(config.hidden_size, 1e-12))
         self.mse = nn.MSELoss()
         self.mi_loss = InfoNCE(self.ha_dim, self.ha_dim)
-        # self.cross_mi_loss = InfoNCE(config.hidden_size, self.ha_dim)
-        # self.club_loss = CLUBMean(self.ha_dim, self.hc_dim)
-        # self.orthogonal_loss = vCLUB()
         self.club_loss = vCLUB()
         self.v_layer = nn.Linear(self.hc_dim, self.hc_dim)
         self.a_layer = nn.Linear(self.hc_dim, self.hc_dim)
@@ -53,10 +50,7 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         self.proj_a = nn.Linear(self.hc_dim, 1)
         self.proj_d = nn.Linear(self.hc_dim, 1)
 
-    def forward(self,
-                original: Dict[str, Tensor],
-                contrast: Dict[str, Tensor] = None,
-                replace_index: Tensor = None):
+    def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
         assert torch.all(original['attention_mask'] == contrast['attention_mask']).item() == 1
         input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
         token_type_ids = torch.cat([original['token_type_ids'], contrast['token_type_ids']])
@@ -80,7 +74,6 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         orig_hc, cont_hc = hc.chunk(2)
         # 3. attribute-specific representation loss
         active_mask = original['attention_mask'].view(-1) == 1
-        mask = None
         count = active_mask.count_nonzero()
         o = original['input_ids'].view(-1)[active_mask]
         w = contrast['input_ids'].view(-1)[active_mask]
@@ -91,26 +84,6 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         ha_loss = self.mi_loss.learning_loss(
             orig_ha.view(-1, self.ha_dim)[active_mask],
             cont_ha.view(-1, self.ha_dim)[active_mask], mask)
-        # mi_loss between ha and seq_output
-        # cross_mi_loss = self.cross_mi_loss.learning_loss(
-        #     orig_seq_output.view(-1, self.hidden_size)[active_mask],
-        #     cont_ha.view(-1, self.ha_dim)[active_mask], mask)
-        # cross_mi_loss += self.cross_mi_loss.learning_loss(
-        #     cont_seq_output.view(-1, self.hidden_size)[active_mask],
-        #     orig_ha.view(-1, self.ha_dim)[active_mask], mask)
-
-        # content-specific representation loss
-        # active_replace_mask = replace_index.view(-1) == 1
-        # inactive_replace_mask = replace_index.view(-1) == 0
-        # hc_loss_replaced = self.club_loss.learning_loss(
-        #     orig_hc.view(-1, self.hc_dim)[active_mask & active_replace_mask],
-        #     cont_hc.view(-1, self.hc_dim)[active_mask & active_replace_mask],
-        # )
-        # hc_loss_unreplaced = self.mse(
-        #     orig_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
-        #     cont_hc.view(-1, self.hc_dim)[active_mask & inactive_replace_mask],
-        # )
-
         # 4. vad loss
         v, a, d = self.v_layer(hc), self.a_layer(hc), self.d_layer(hc)
         proj_v, proj_a, proj_d = self.proj_v(v), self.proj_a(a), self.proj_d(d)
@@ -119,18 +92,14 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         # 5. orthogonal loss
         stacked = torch.stack([v, a, d], 0)
         orthogonal_loss = torch.square(torch.norm(torch.mm(stacked, stacked.T) - torch.eye(3)))
-        return TokenClassifierOutput(
-            loss={
-                "club_loss": club_loss,
-                "orthogonal_loss": orthogonal_loss,
-                "reconstruct_loss": reconstruct_loss,
-                "ha_loss": ha_loss,
-                "vad_loss": vad_loss
-                # "cross_mi_loss": cross_mi_loss,
-                # "hc_loss_replaced": hc_loss_replaced,
-                # "hc_loss_unreplaced": hc_loss_unreplaced,
-            },
-            hidden_states=(orig_ha, orig_hc))
+        return TokenClassifierOutput(loss={
+            "club_loss": club_loss,
+            "orthogonal_loss": orthogonal_loss,
+            "reconstruct_loss": reconstruct_loss,
+            "ha_loss": ha_loss,
+            "vad_loss": vad_loss
+        },
+                                     hidden_states=(orig_ha, orig_hc))
 
 
 class FDGRModel(nn.Module):
@@ -141,45 +110,28 @@ class FDGRModel(nn.Module):
         pretrained_model_name = weights["hyper_parameters"]["pretrained_model_name"]
         h_dim = weights["hyper_parameters"]["h_dim"]
         self.fdgr = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim)
-        self.fdgr.load_state_dict(
-            {
-                k.replace("model.", ''): v
-                for k, v in weights['state_dict'].items()
-            }, False)
+        # self.fdgr.load_state_dict(
+        #     {
+        #         k.replace("model.", ''): v
+        #         for k, v in weights['state_dict'].items()
+        #     }, False)
         self.num_labels = num_labels
-        self.mi_loss = InfoNCE(h_dim, num_labels)
         self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
         self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
+        self.classifier = nn.Linear(h_dim, num_labels)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
-        self.classifier = nn.Linear(h_dim * 2 + 30 + 30, num_labels)
 
-    def forward(self,
-                original: Dict[str, Tensor],
-                word_contrast: Dict[str, Tensor] = None,
-                replace_index: Tensor = None):
-        outputs: TokenClassifierOutput = self.fdgr(original, word_contrast, replace_index)
-        active_mask = original['valid_mask'].view(-1) == 1
+    def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
+        outputs: TokenClassifierOutput = self.fdgr(original, contrast)
+        valid_mask = original['valid_mask']
         ha, hc = outputs.hidden_states
         pos = self.pos_embedding(original["pos_ids"])
         dep = self.dep_embedding(original["dep_ids"])
-        hidden_state = torch.cat([ha, hc, pos, dep],
-                                 -1).view(-1, self.classifier.in_features)[active_mask]
-        logits: Tensor = self.classifier(torch.cat([ha, hc, pos, dep], -1)) / 2
-        active_logits = logits.view(-1, self.num_labels)[active_mask]
-        ce_loss = self.loss_fct(logits.view(-1, self.num_labels), original['gold_labels'].view(-1))
+        emb = torch.mul(hc, (valid_mask / valid_mask.sum(-1)).unsqueeze(-1)).sum(1)
+        logits: Tensor = self.classifier(emb)
+        ce_loss = self.loss_fct(logits,torch.cat(original['gold_labels'], contrast["gold_labels"]))
         outputs.loss["ce_loss"] = ce_loss
-        pos_eye = torch.eye(self.pos_embedding.num_embeddings,
-                            device=self.pos_embedding.weight.device)
-        dep_eye = torch.eye(self.dep_embedding.num_embeddings,
-                            device=self.dep_embedding.weight.device)
-        outputs.loss["aux_loss"] = torch.norm(
-            torch.mm(self.pos_embedding.weight, self.pos_embedding.weight.T) *
-            (1 - pos_eye)) / (self.pos_embedding.num_embeddings**2) + torch.norm(
-                torch.mm(self.dep_embedding.weight, self.dep_embedding.weight.T) -
-                (1 - dep_eye)) / (self.dep_embedding.num_embeddings**2)
-        return TokenClassifierOutput(logits=active_logits,
-                                     loss=outputs.loss,
-                                     hidden_states=hidden_state)
+        return TokenClassifierOutput(logits=logits, loss=outputs.loss, hidden_states=emb)
 
 
 class BertForTokenClassification(BertPreTrainedModel):
@@ -201,11 +153,9 @@ class BertForTokenClassification(BertPreTrainedModel):
         outputs = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]
         sequence_output = self.dropout(sequence_output)
-        logits = self.classifier(sequence_output)
+        emb = torch.mul(sequence_output, (valid_mask / valid_mask.sum(-1)).unsqueeze(-1)).sum(1)
+        logits = self.classifier(emb)
         loss = None
         if gold_labels is not None:
-            loss = self.loss_fct(logits.view(-1, self.num_labels), gold_labels.view(-1))
-        active_mask = valid_mask.view(-1) == 1
-        active_logits = logits.view(-1, self.num_labels)[active_mask]
-        hidden_states = sequence_output.view(-1, sequence_output.size(-1))[active_mask]
-        return TokenClassifierOutput(logits=active_logits, loss=loss, hidden_states=hidden_states)
+            loss = self.loss_fct(logits, gold_labels)
+        return TokenClassifierOutput(logits=logits, loss=loss, hidden_states=emb)

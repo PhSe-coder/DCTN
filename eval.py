@@ -1,5 +1,21 @@
 from typing import List, Tuple
 
+def alsc_evaluate(pred_Y: List[int], gold_Y: List[int]):
+    assert len(pred_Y) == len(gold_Y)
+    TP, FN, FP = 0, 0, 0
+    for pred, gold in zip(pred_Y, gold_Y):
+        gold_aspects = tag2aspect_sentiment(gold)
+        pred_aspects = tag2aspect_sentiment(pred)
+        hits_num = match(pred=pred_aspects, gold=gold_aspects)
+        TP += hits_num
+        FP += (len(pred_aspects) - hits_num)
+        FN += (len(gold_aspects) - hits_num)
+
+    pre = float(TP) / float(TP + FP + 0.00001)
+    rec = float(TP) / float(TP + FN + 0.00001)
+    f1 = 2 * pre * rec / (pre + rec + 0.00001)
+
+    return pre, rec, f1
 
 def absa_evaluate(pred_Y: List[List[Tuple]], gold_Y: List[List[Tuple]]):
     assert len(gold_Y) == len(pred_Y)

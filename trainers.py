@@ -6,20 +6,18 @@ from lightning.pytorch import LightningDataModule
 from lightning.pytorch.cli import LightningCLI
 from torch.utils.data import DataLoader
 from transformers import BertTokenizer
-
 from dataset import ModelDataset
 
 
 @dataclass
 class ABSADataModule(LightningDataModule):
     batch_size: int
-    k2t_file: str
-    t2k_file: str
+    vad_lexicon: str
     target: str
     num_workers: int = 0
     pretrained_model: str = "bert-base-uncased"
-    source_train_file: str = None
-    target_train_file: str = None
+    train_file: str = None
+    contrast_file: str = None
     validation_file: str = None
     test_file: str = None
 
@@ -32,18 +30,14 @@ class ABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file, self.target,
-                                  self.tokenizer)
-            target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
-                                  self.tokenizer)
-            self.train_set = ModelDataset([self.source_train_file, self.target_train_file],
-                                          self.k2t_file, self.t2k_file, self.target, self.tokenizer)
+            self.train_set = ModelDataset(self.train_file, self.contrast_file, self.vad_lexicon,
+                                          self.target, self.tokenizer)
         if stage in ('fit', 'validate'):
-            self.val_set = ModelDataset(self.validation_file, self.k2t_file, self.t2k_file,
+            self.val_set = ModelDataset(self.validation_file, self.contrast_file, self.vad_lexicon,
                                         self.target, self.tokenizer)
         if stage == 'test':
-            self.test_set = ModelDataset(self.test_file, self.k2t_file, self.t2k_file, self.target,
-                                         self.tokenizer)
+            self.test_set = ModelDataset(self.test_file, self.contrast_file, self.vad_lexicon,
+                                         self.target, self.tokenizer)
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)

@@ -8,6 +8,8 @@ stanza.download("en")
 # see more: https://stanfordnlp.github.io/stanza/tokenize.html#start-with-pretokenized-text
 nlp = stanza.Pipeline("en",
                       processors='tokenize,pos,depparse,lemma',
+                      verbose=False,
+                      use_gpu=True,
                       tokenize_pretokenized=True,
                       download_method=DownloadMethod.REUSE_RESOURCES)
 

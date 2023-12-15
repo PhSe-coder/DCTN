@@ -4,13 +4,12 @@ import torch
 from lightning.pytorch import LightningModule
 from transformers import BertTokenizer
 from transformers.modeling_outputs import TokenClassifierOutput
-import torch.nn as nn
 from torch import as_tensor
 from constants import TAGS
 from eval import absa_evaluate, evaluate
 from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
-from mi_estimators import InfoNCE
+from torchmetrics.classification import MulticlassF1Score
 
 
 class LossWeight:
@@ -119,7 +118,6 @@ class FDGRClassifer(LightningModule, LossWeight):
                  lr: float,
                  model: FDGRModel,
                  coff: float = 0.02,
-                 coff_mi: float = 0.02,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -145,10 +143,8 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.output_dir = output_dir
         self.lr = lr
         self.coff = coff
-        self.coff_mi = coff_mi
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.model = model
-        # self.mi_loss = InfoNCE(model.classifier.in_features, num_labels)
         self.valid_out = []
         self.test_out = []
 
@@ -180,44 +176,33 @@ class FDGRClassifer(LightningModule, LossWeight):
         opt = self.optimizers()
         opt.zero_grad()
         outputs = self.forward(**train_batch[0])
-        target_outputs = self.forward(**train_batch[1])
+        # target_outputs = self.forward(**train_batch[1])
         ce_loss = outputs.loss["ce_loss"]
         orthogonal_loss = outputs.loss["orthogonal_loss"]
         reconstruct_loss = outputs.loss["reconstruct_loss"]
         ha_loss = outputs.loss["ha_loss"]
-        cross_mi_loss = outputs.loss["cross_mi_loss"]
-        hc_loss_replaced = outputs.loss["hc_loss_replaced"]
-        hc_loss_unreplaced = outputs.loss["hc_loss_unreplaced"]
-        aux_loss = outputs.loss["aux_loss"]
-        sub_loss = self.weight1(batch_rate) * orthogonal_loss + reconstruct_loss + ha_loss + cross_mi_loss + \
-            self.weight2(batch_rate) * hc_loss_replaced + hc_loss_unreplaced
-        mi_loss = self.mi_loss.learning_loss(
-            torch.cat([outputs.hidden_states, target_outputs.hidden_states]),
-            torch.cat([outputs.logits, target_outputs.logits]).softmax(-1))
-        loss = ce_loss + self.coff * sub_loss + 0.1 * aux_loss + self.coff_mi * mi_loss
+        club_loss = outputs.loss["club_loss"]
+        vad_loss = outputs.loss["vad_loss"]
+        sub_loss = orthogonal_loss + reconstruct_loss + ha_loss + club_loss + vad_loss
+        loss = ce_loss + self.coff * sub_loss
         self.manual_backward(loss)
         opt.step()
         self.log('train_loss', loss.item())
         self.log_dict({
-            "ce_loss": ce_loss.item(),
+            "club_loss": club_loss.item(),
             "orthogonal_loss": orthogonal_loss.item(),
             "reconstruct_loss": reconstruct_loss.item(),
             "ha_loss": ha_loss.item(),
-            "cross_mi_loss": cross_mi_loss.item(),
-            "mi_loss": mi_loss.item(),
-            "hc_loss_replaced": hc_loss_replaced.item(),
-            "hc_loss_unreplaced": hc_loss_unreplaced.item(),
-            "aux_loss": aux_loss.item()
+            "vad_loss": vad_loss.item()
         })
         return loss
 
     def validation_step(self, batch, batch_idx):
         outputs: TokenClassifierOutput = self.forward(**batch)
-        labeled = batch["labeled"]
         batch = batch["original"]
-        targets = batch.pop("gold_labels")[torch.all(labeled, dim=-1)]
+        targets = batch.pop("gold_labels")
         logits = outputs.logits
-        pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
+        pred_list, gold_list = logits.argmax(dim=-1).tolist(), targets.tolist()
         self.valid_out.append((pred_list, gold_list))
         return pred_list, gold_list
 
@@ -226,8 +211,8 @@ class FDGRClassifer(LightningModule, LossWeight):
         for pred_list, gold_list in self.valid_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
-        val_pre, val_rec, val_f1 = absa_evaluate(pred_Y, gold_Y)
-        self.log_dict({"val_pre": val_pre, "val_rec": val_rec, "val_f1": val_f1})
+        val_f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
+        self.log_dict({"val_f1": val_f1})
         self.valid_out.clear()
 
     def test_step(self, batch, batch_idx):
@@ -235,45 +220,17 @@ class FDGRClassifer(LightningModule, LossWeight):
         batch = batch["original"]
         targets = batch.pop("gold_labels")
         logits = outputs.logits
-        pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
-        sentence = self.tokenizer.batch_decode(batch.get("input_ids"), skip_special_tokens=True)
-        self.test_out.append((pred_list, gold_list, sentence))
-        return pred_list, gold_list, sentence
+        pred_list, gold_list = logits.argmax(dim=-1).tolist(), targets.tolist()
+        self.test_out.append((pred_list, gold_list))
+        return pred_list, gold_list
 
     def on_test_epoch_end(self) -> None:
-        gold_Y, pred_Y, text = [], [], []
-        for pred_list, gold_list, sentence in self.test_out:
+        gold_Y, pred_Y = [], []
+        for pred_list, gold_list in self.test_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
-            text.extend(sentence)
-        absa_test_pre, absa_test_rec, absa_test_f1 = absa_evaluate(pred_Y, gold_Y)
-        self.log_dict({
-            "absa_test_pre": round(absa_test_pre, 4),
-            "absa_test_rec": round(absa_test_rec, 4),
-            "absa_test_f1": round(absa_test_f1, 4)
-        })
-        ae_test_pre, ae_test_rec, ae_test_f1 = evaluate(pred_Y, gold_Y)
-        self.log_dict({
-            "ae_test_pre": round(ae_test_pre, 4),
-            "ae_test_rec": round(ae_test_rec, 4),
-            "ae_test_f1": round(ae_test_f1, 4)
-        })
-        if self.local_rank == 0:
-            version = 0
-            path = os.path.join(self.output_dir, str(version))
-            while os.path.exists(path):
-                version += 1
-                path = os.path.join(self.output_dir, str(version))
-            os.makedirs(path, exist_ok=True)
-            with open(os.path.join(path, "predict.txt"), "w") as f:
-                for i in range(len(gold_Y)):
-                    f.write(f"{text[i]}***{' '.join(pred_Y[i])}***{' '.join(gold_Y[i])}\n")
-            with open(os.path.join(path, "absa_prediction.txt"), "w") as f:
-                content = f'test_pre: {absa_test_pre:.4f}, test_rec: {absa_test_rec:.4f}, test_f1: {absa_test_f1:.4f}'
-                f.write(content)
-            with open(os.path.join(path, "ae_prediction.txt"), "w") as f:
-                content = f'test_pre: {ae_test_pre:.4f}, test_rec: {ae_test_rec:.4f}, test_f1: {ae_test_f1:.4f}'
-                f.write(content)
+        f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
+        self.log_dict({"test_f1": round(f1, 4)})
         self.test_out.clear()
 
 
@@ -333,7 +290,7 @@ class BertClassifier(LightningModule):
         targets = batch.pop("gold_labels")
         outputs: TokenClassifierOutput = self.forward(**batch)
         logits = outputs.logits
-        pred_list, gold_list = id2label(logits.argmax(dim=-1).tolist(), targets.tolist())
+        pred_list, gold_list = logits.argmax(dim=-1).tolist(), targets.tolist()
         self.valid_out.append((pred_list, gold_list))
         return pred_list, gold_list
 
@@ -342,8 +299,8 @@ class BertClassifier(LightningModule):
         for pred_list, gold_list in self.valid_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
-        val_pre, val_rec, val_f1 = absa_evaluate(pred_Y, gold_Y)
-        self.log_dict({"val_pre": val_pre, "val_rec": val_rec, "val_f1": val_f1})
+        val_f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
+        self.log_dict({"val_f1": val_f1})
         self.valid_out.clear()
 
     def test_step(self, batch, batch_idx):
@@ -351,45 +308,17 @@ class BertClassifier(LightningModule):
         targets = batch.pop("gold_labels")
         outputs: TokenClassifierOutput = self.forward(**batch)
         logits = outputs.logits
-        pred_list, gold_list = id2label(logits.detach().argmax(dim=-1).tolist(), targets.tolist())
-        sentence = self.tokenizer.batch_decode(batch.get("input_ids"), skip_special_tokens=True)
-        self.test_out.append((pred_list, gold_list, sentence))
-        return pred_list, gold_list, sentence
+        pred_list, gold_list = logits.argmax(dim=-1).tolist(), targets.tolist()
+        self.test_out.append((pred_list, gold_list))
+        return pred_list, gold_list
 
     def on_test_epoch_end(self) -> None:
-        gold_Y, pred_Y, text = [], [], []
-        for pred_list, gold_list, sentence in self.test_out:
+        gold_Y, pred_Y = [], []
+        for pred_list, gold_list in self.test_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
-            text.extend(sentence)
-        absa_test_pre, absa_test_rec, absa_test_f1 = absa_evaluate(pred_Y, gold_Y)
-        self.log_dict({
-            "absa_test_pre": round(absa_test_pre, 4),
-            "absa_test_rec": round(absa_test_rec, 4),
-            "absa_test_f1": round(absa_test_f1, 4)
-        })
-        ae_test_pre, ae_test_rec, ae_test_f1 = evaluate(pred_Y, gold_Y)
-        self.log_dict({
-            "ae_test_pre": round(ae_test_pre, 4),
-            "ae_test_rec": round(ae_test_rec, 4),
-            "ae_test_f1": round(ae_test_f1, 4)
-        })
-        if self.local_rank == 0:
-            version = 0
-            path = os.path.join(self.output_dir, str(version))
-            while os.path.exists(path):
-                version += 1
-                path = os.path.join(self.output_dir, str(version))
-            os.makedirs(path, exist_ok=True)
-            with open(os.path.join(path, "predict.txt"), "w") as f:
-                for i in range(len(gold_Y)):
-                    f.write(f"{text[i]}***{' '.join(pred_Y[i])}***{' '.join(gold_Y[i])}\n")
-            with open(os.path.join(path, "absa_prediction.txt"), "w") as f:
-                content = f'test_pre: {absa_test_pre:.4f}, test_rec: {absa_test_rec:.4f}, test_f1: {absa_test_f1:.4f}'
-                f.write(content)
-            with open(os.path.join(path, "ae_prediction.txt"), "w") as f:
-                content = f'test_pre: {ae_test_pre:.4f}, test_rec: {ae_test_rec:.4f}, test_f1: {ae_test_f1:.4f}'
-                f.write(content)
+        f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
+        self.log_dict({"test_f1": round(f1, 4)})
         self.test_out.clear()
 
 
