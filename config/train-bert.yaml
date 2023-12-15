@@ -3,31 +3,26 @@ data:
   class_path: ABSADataModule
   init_args:
     batch_size: 16
-    num_workers: 16
+    num_workers: 1
     target: laptop
+    synonyms: ./data/synonyms.json
     vad_lexicon: ./NRC-VAD-Lexicon.txt
-    train_file: ./processed/dataset/restaurant.train.txt
-    contranst_file: ./processed/dataset/restaurant.contrast.train.txt
+    source_train_file: ./processed/dataset/restaurant.train.txt
+    target_train_file: ./processed/dataset/laptop.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt
 model:
-  class_path: models.FDGRClassifer
+  class_path: models.BertClassifier
   init_args:
-    coff: 0.02
     lr: 2e-5
-    model:
-      class_path: model.FDGRModel
-      init_args:
-        num_labels: 
-        pretrained_path: /root/autodl-tmp/models/laptop-restaurant/dim=300-max-epoch=30-p=0.0/pretrained-fdgr-v1.ckpt
     num_labels: 3
-    output_dir: /root/FDGR/out
+    output_dir: /root/BERT/out
 seed_everything: 42
 trainer:
   accelerator: gpu
   callbacks:
   - class_path: lightning.pytorch.callbacks.ModelCheckpoint
     init_args:
-      filename: fdgr-alsc-{epoch:02d}-{val_f1:.2f}
+      filename: bert-alsc-{epoch:02d}-{val_f1:.2f}
       mode: max
       monitor: val_f1
       save_last: false
@@ -35,4 +30,4 @@ trainer:
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 15
+  max_epochs: 3
