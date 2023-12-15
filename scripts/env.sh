@@ -4,7 +4,7 @@ conda activate fdgr
 conda install -y pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install transformers==4.35.2
 pip install lightning==2.1.2
-pip install -i https://pypi.org/simple jsonargparse[signatures]==4.20.0
+pip install -i https://pypi.org/simple jsonargparse[signatures]==4.27.1
 pip install matplotlib==3.8.2
 pip install openpyxl==3.1.2
 pip install SciencePlots==2.0.0
