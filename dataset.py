@@ -82,6 +82,25 @@ def dep_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
     return dep_ids
 
 
+def vad_transform(tokens: List[str], vads: List[Tuple[float, float, float]],
+                  defalut_vad: Tuple[float, float,
+                                     float], wordpiece_tokens: List[str], special_tokens):
+    index = 0
+    vad_ids: List[Tuple[float, float, float]] = []
+    offset = 0
+    for wordpiece_token in wordpiece_tokens:
+        if wordpiece_token in special_tokens:
+            vad = defalut_vad
+        else:
+            offset += len(wordpiece_token.replace("##", ''))
+            vad = vads[index]
+            if offset == len(tokens[index]):
+                index += 1
+                offset = 0
+        vad_ids.append(vad)
+    return vad_ids
+
+
 def get_polarity(anns: List[str]) -> int:
     tag = {"T-NEG": -1, "T-NEU": 0, "T-POS": 1}
     for ann in anns:
@@ -116,16 +135,15 @@ class ModelDataset(Dataset):
         valid_mask = tok_dict.attention_mask.copy()
         valid_mask[0] = 0
         valid_mask[len(valid_mask) - valid_mask[::-1].index(1) - 1] = 0
-        pos_anns = [ann.split('.')[0] for ann in anns]
-        dep_anns = [ann.split('.')[1] for ann in anns]
+        pos_anns = [ann.rsplit('.', maxsplit=1)[0] for ann in anns]
+        dep_anns = [ann.rsplit('.', maxsplit=1)[1] for ann in anns]
         pos_ids = pos_transform(text.split(), pos_anns, wordpiece_tokens,
                                 self.tokenizer.all_special_tokens, self.tokenizer.pad_token)
         dep_ids = dep_transform(text.split(), dep_anns, wordpiece_tokens,
                                 self.tokenizer.all_special_tokens, self.tokenizer.pad_token)
-        vad = [
-            self.vad_laxicon.get(word, (0.5, 0.5, 0.5))
-            for word in self.tokenizer.convert_ids_to_tokens(tok_dict.input_ids)
-        ]
+        vad_ids = vad_transform(
+            text.split(), [self.vad_laxicon.get(token, (0.5, 0.5, 0.5)) for token in text.split()],
+            (0.5, 0.5, 0.5), wordpiece_tokens, self.tokenizer.all_special_tokens)
         data = {
             "input_ids": as_tensor(tok_dict.input_ids),
             "aspect_ids": as_tensor(as_tensor(label_ids) > 0, dtype=torch.int32),
@@ -135,7 +153,7 @@ class ModelDataset(Dataset):
             "valid_mask": as_tensor(valid_mask),
             "pos_ids": as_tensor(pos_ids),
             "dep_ids": as_tensor(dep_ids),
-            "vad": as_tensor(vad)
+            "vad": as_tensor(vad_ids)
         }
         return data
 
@@ -143,10 +161,10 @@ class ModelDataset(Dataset):
         # `getline` method start from index 1 rather than 0
         line = linecache.getline(self.datafile, index + 1).strip()
         contrast_line = linecache.getline(self.contrast_datafile, index + 1).strip()
-        text, annotations, gold_labels = line.rsplit("***", maxsplit=3)
-        original = self.process(text, annotations, gold_labels.split())
-        text, annotations, gold_labels = contrast_line.rsplit("***", maxsplit=3)
-        contrast = self.process(text, annotations, gold_labels.split())
+        text, annotations, gold_labels = line.rsplit("***", maxsplit=2)
+        original = self.process(text, annotations.split(), gold_labels.split())
+        text, annotations, gold_labels = contrast_line.rsplit("***", maxsplit=2)
+        contrast = self.process(text, annotations.split(), gold_labels.split())
         return {"original": original, "contrast": contrast}
 
     def __len__(self):
@@ -155,10 +173,13 @@ class ModelDataset(Dataset):
 
 if __name__ == "__main__":
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", model_max_length=100)
-    dataset = ModelDataset("./processed/dataset/restaurant.train.txt", "./data/synonyms.json",
-                           "./NRC-VAD-Lexicon.txt", "laptop", tokenizer)
+    dataset = ModelDataset("./processed/dataset/twitter.test.txt",
+                           "./processed/dataset/twitter.contrast.test.txt", "./NRC-VAD-Lexicon.txt",
+                           "laptop", tokenizer)
     from torch.utils.data import DataLoader
     from tqdm import tqdm
-    dataloader = DataLoader(dataset, 16, False, num_workers=16)
+    from lightning import seed_everything
+    seed_everything(42)
+    dataloader = DataLoader(dataset, 16, False, num_workers=24)
     for batch in tqdm(dataloader):
         pass
