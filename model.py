@@ -102,19 +102,11 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                                      hidden_states=(orig_ha, orig_hc))
 
 
-class FDGRModel(nn.Module):
+class FDGRModel(BertPreTrainedModel):
 
-    def __init__(self, num_labels: int, pretrained_path: str):
-        super(FDGRModel, self).__init__()
-        weights = torch.load(pretrained_path)
-        pretrained_model_name = weights["hyper_parameters"]["pretrained_model_name"]
-        h_dim = weights["hyper_parameters"]["h_dim"]
-        self.fdgr = FDGRPretrainedModel.from_pretrained(pretrained_model_name, h_dim)
-        # self.fdgr.load_state_dict(
-        #     {
-        #         k.replace("model.", ''): v
-        #         for k, v in weights['state_dict'].items()
-        #     }, False)
+    def __init__(self, config, num_labels, h_dim):
+        super(FDGRModel, self).__init__(config)
+        self.fdgr = FDGRPretrainedModel(config, h_dim)
         self.num_labels = num_labels
         self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
         self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
@@ -127,9 +119,9 @@ class FDGRModel(nn.Module):
         ha, hc = outputs.hidden_states
         pos = self.pos_embedding(original["pos_ids"])
         dep = self.dep_embedding(original["dep_ids"])
-        emb = torch.mul(hc, (valid_mask / valid_mask.sum(-1)).unsqueeze(-1)).sum(1)
+        emb = torch.mul(hc, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         logits: Tensor = self.classifier(emb)
-        ce_loss = self.loss_fct(logits,torch.cat(original['gold_labels'], contrast["gold_labels"]))
+        ce_loss = self.loss_fct(logits, torch.cat(original['gold_labels'], contrast["gold_labels"]))
         outputs.loss["ce_loss"] = ce_loss
         return TokenClassifierOutput(logits=logits, loss=outputs.loss, hidden_states=emb)
 
@@ -157,7 +149,8 @@ class BertForTokenClassification(BertPreTrainedModel):
         outputs = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]
         sequence_output = self.dropout(sequence_output)
-        emb = torch.mul(sequence_output, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
+        emb = torch.mul(sequence_output,
+                        (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         logits = self.classifier(emb)
         loss = None
         if gold_labels is not None:

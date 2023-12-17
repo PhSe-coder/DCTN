@@ -112,10 +112,9 @@ class FDGRClassifer(LightningModule, LossWeight):
 
     def __init__(self,
                  num_labels: int,
-                 output_dir: str,
                  lr: float,
-                 model: FDGRModel,
                  coff: float = 0.02,
+                 h_dim: int = 50,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -123,8 +122,6 @@ class FDGRClassifer(LightningModule, LossWeight):
         ----------
         num_labels : int
             number of tag labels
-        output_dir : str
-            the output directory of the annotation results
         lr : float
             learning rate
         coff: float
@@ -135,14 +132,13 @@ class FDGRClassifer(LightningModule, LossWeight):
             the specific pretrained model
         """
         super(FDGRClassifer, self).__init__()
-        self.save_hyperparameters(ignore=['model'])
+        self.save_hyperparameters()
         self.automatic_optimization = False
         self.num_labels = num_labels
-        self.output_dir = output_dir
         self.lr = lr
         self.coff = coff
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
-        self.model = model
+        self.model: FDGRModel = FDGRModel.from_pretrained(pretrained_model_name, num_labels, h_dim)
         self.valid_out = []
         self.test_out = []
 
@@ -173,8 +169,7 @@ class FDGRClassifer(LightningModule, LossWeight):
                              self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        outputs = self.forward(**train_batch[0])
-        # target_outputs = self.forward(**train_batch[1])
+        outputs = self.forward(**train_batch)
         ce_loss = outputs.loss["ce_loss"]
         orthogonal_loss = outputs.loss["orthogonal_loss"]
         reconstruct_loss = outputs.loss["reconstruct_loss"]
@@ -222,13 +217,13 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.test_out.append((pred_list, gold_list))
         return pred_list, gold_list
 
-    def on_test_epoch_end(self) -> None:
+    def on_test_epoch_end(self):
         gold_Y, pred_Y = [], []
         for pred_list, gold_list in self.test_out:
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
-        f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
-        self.log_dict({"test_f1": round(f1, 4)})
+        test_f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
+        self.log_dict({"test_f1": test_f1})
         self.test_out.clear()
 
 
@@ -236,13 +231,11 @@ class BertClassifier(LightningModule):
 
     def __init__(self,
                  num_labels: int,
-                 output_dir: str,
                  lr: float,
                  pretrained_model_name: str = "bert-base-uncased"):
         super(BertClassifier, self).__init__()
         self.save_hyperparameters()
         self.num_labels = num_labels
-        self.output_dir = output_dir
         self.lr = lr
         self.automatic_optimization = False
         self.model = BertForTokenClassification.from_pretrained(pretrained_model_name,
