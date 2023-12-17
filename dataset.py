@@ -102,7 +102,7 @@ def vad_transform(tokens: List[str], vads: List[Tuple[float, float, float]],
 
 
 def get_polarity(anns: List[str]) -> int:
-    tag = {"T-NEG": -1, "T-NEU": 0, "T-POS": 1}
+    tag = {"T-NEG": 0, "T-NEU": 1, "T-POS": 2} # non-negative mapping
     for ann in anns:
         if ann != 'O':
             return tag[ann]
@@ -146,14 +146,14 @@ class ModelDataset(Dataset):
             (0.5, 0.5, 0.5), wordpiece_tokens, self.tokenizer.all_special_tokens)
         data = {
             "input_ids": as_tensor(tok_dict.input_ids),
-            "aspect_ids": as_tensor(as_tensor(label_ids) > 0, dtype=torch.int32),
-            "gold_labels": as_tensor(polarity),
-            "attention_mask": as_tensor(tok_dict.attention_mask),
             "token_type_ids": as_tensor(tok_dict.token_type_ids),
+            "attention_mask": as_tensor(tok_dict.attention_mask),
             "valid_mask": as_tensor(valid_mask),
+            "gold_labels": as_tensor(polarity),
+            "aspect_ids": as_tensor(as_tensor(label_ids) > 0, dtype=torch.int32),
             "pos_ids": as_tensor(pos_ids),
             "dep_ids": as_tensor(dep_ids),
-            "vad": as_tensor(vad_ids)
+            "vad_ids": as_tensor(vad_ids)
         }
         return data
 
@@ -163,9 +163,12 @@ class ModelDataset(Dataset):
         contrast_line = linecache.getline(self.contrast_datafile, index + 1).strip()
         text, annotations, gold_labels = line.rsplit("***", maxsplit=2)
         original = self.process(text, annotations.split(), gold_labels.split())
-        text, annotations, gold_labels = contrast_line.rsplit("***", maxsplit=2)
-        contrast = self.process(text, annotations.split(), gold_labels.split())
-        return {"original": original, "contrast": contrast}
+        if contrast_line:
+            text, annotations, gold_labels = contrast_line.rsplit("***", maxsplit=2)
+            contrast = self.process(text, annotations.split(), gold_labels.split())
+            return {"original": original, "contrast": contrast}
+        else:
+            return {"original": original}
 
     def __len__(self):
         return self.total
