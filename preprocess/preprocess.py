@@ -1,28 +1,17 @@
+import logging
 from glob import glob
 import os.path as osp
-
+import os
 sentis = {
     "1": "T-POS",
     "0": "T-NEU",
     "-1": "T-NEG"
 }
-for file in glob("data/raw/*.raw"):
-    dirname = osp.join(osp.split(osp.dirname(file))[0], "dataset")
-    file_name = osp.splitext(osp.basename(file))[0]
-    fw = open(osp.join(dirname, file_name + ".txt"), "w")
-    with open(file, "r") as f:
-        while True:
-            line, aspect, polarity = f.readline().strip(), f.readline().strip(), f.readline().strip()
-            if not line: break
-            text = line.replace("$T$", aspect)
-            words = line.split(' ')
-            anns = ['O'] * len(words)
-            for i, word in enumerate(words):
-                if word != "$T$": continue
-                anns[i] = ' '.join([sentis[polarity] for _ in aspect.split(' ')])
-                fw.write(f"{text}***{' '.join(anns)}\n")
-                anns[i] = 'O'
-    fw.close()
+
+logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.info("Split the sentence having multiple aspect terms")
 for file in glob("data/raw/*.raw"):
     dirname = osp.dirname(file)
     file_name = osp.splitext(osp.basename(file))[0]
@@ -40,7 +29,29 @@ for file in glob("data/raw/*.raw"):
             assert len(words) == len(anns)
             fw.write(f"{text}***{' '.join(anns)}\n")
     fw.close()
-for file in glob("FDGR/data/raw/laptop.*") + glob("FDGR/data/raw/restaurant.*"):
+os.makedirs("data/dataset", exist_ok=True)
+for file in glob("data/raw/*.raw"):
+    dirname = osp.join(osp.split(osp.dirname(file))[0], "dataset")
+    file_name = osp.splitext(osp.basename(file))[0]
+    fw = open(osp.join(dirname, file_name + ".txt"), "w")
+    with open(file, "r") as f:
+        while True:
+            line, aspect, polarity = f.readline().strip(), f.readline().strip(), f.readline().strip()
+            if not line: break
+            text = line.replace("$T$", aspect)
+            words = line.split(' ')
+            anns = ['O'] * len(words)
+            for i in range(len(words)):
+                if words[i] == "$T$":
+                    anns[i] = ' '.join(['O' for _ in aspect.split(' ')])
+            for i, word in enumerate(words):
+                if word != "$T$": continue
+                temp = anns[i]
+                anns[i] = ' '.join([sentis[polarity] for _ in aspect.split(' ')])
+                fw.write(f"{text}***{' '.join(anns)}\n")
+                anns[i] = temp
+    fw.close()
+for file in glob("data/raw/laptop.*") + glob("data/raw/restaurant.*"):
     dirname = osp.join(osp.split(osp.dirname(file))[0], "dataset")
     fw = open(osp.join(dirname, osp.basename(file)), "w")
     with open(file, "r") as f:

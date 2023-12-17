@@ -43,32 +43,35 @@ def build_contrast_sample(text: str, labels: List[str], tokenizer: BertTokenizer
     return contrast_text, contrast_labels
 
 
-def annotate(file: str, dest: str, tokenizer: BertTokenizer):
+def annotate(file: str, dest: str, synonyms: Dict[str, Dict[str, List[List[str | int]]]],
+             tokenizer: BertTokenizer):
     lines = [line for line in open(file, "r")]
-    documents = [line.split("***")[0] for line in lines]
-    labels = [line.split("***")[1] for line in lines]
+    documents = [line.rsplit("***", maxsplit=1)[0] for line in lines]
+    labels = [line.rsplit("***", maxsplit=1)[1].strip() for line in lines]
     sentences = annotation_plus(documents)
     domain = get_domain(file)
     results = [
-        build_contrast_sample(text, gold_labels.split(), tokenizer, domain)
+        build_contrast_sample(text, gold_labels.split(), tokenizer, synonyms, domain)
         for text, gold_labels in zip(documents, labels)
     ]
     contrast_documents, contrast_labels = [r[0] for r in results], [r[1] for r in results]
     contrast_sentences = annotation_plus(contrast_documents)
     f = open(osp.join(dest, osp.split(file)[1]), "w")
-    f1 = open(osp.join(dest, '.'.join(osp.split(file)[1].split('.').insert(1, "contrast"))), "w")
+    fname = osp.split(file)[1].split('.')
+    fname.insert(1, "contrast")
+    f1 = open(osp.join(dest, '.'.join(fname)), "w")
     l = len(sentences)
     for i in tqdm(range(l), desc=file, total=l):
         ann = ' '.join(f'{w["xpos"]}.{w["deprel"]}' for w in sentences[i].to_dict())
         cont_ann = ' '.join(f'{w["xpos"]}.{w["deprel"]}' for w in contrast_sentences[i].to_dict())
-        f.write(f"{documents[i]}***{ann}***{labels[i]}")
-        f1.write(f"{contrast_documents[i]}***{cont_ann}***{contrast_labels[i]}")
+        f.write(f"{documents[i]}***{ann}***{labels[i]}\n")
+        f1.write(f"{contrast_documents[i]}***{cont_ann}***{contrast_labels[i]}\n")
     f.close()
     f1.close()
 
 
 if __name__ == "__main__":
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s')
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     args = parser.parse_args()
@@ -78,4 +81,4 @@ if __name__ == "__main__":
     tokenizer: BertTokenizer = BertTokenizer.from_pretrained(args.pretrained_model,
                                                              model_max_length=100)
     for file in glob(osp.join(args.src, "*.txt")):
-        annotate(file, args.dest, tokenizer)
+        annotate(file, args.dest, synonyms, tokenizer)

@@ -81,7 +81,7 @@ if __name__ == "__main__":
     ft = fasttext.load_model('cc.en.300.bin')
     args = parser.parse_args()
     for file in glob(osp.join(args.data_dir, "**.train.txt")):
-        documents = [line.split("***")[0] for line in open(file, "r")]
+        documents = [line.rsplit("***", maxsplit=1)[0] for line in open(file, "r")]
         sentences = annotation_plus(documents)
         common_words = most_common_words(sentences)
         domain = get_domain(file)
