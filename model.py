@@ -149,11 +149,15 @@ class BertForTokenClassification(BertPreTrainedModel):
                 token_type_ids: Tensor = None,
                 attention_mask: Tensor = None,
                 valid_mask: Tensor = None,
-                gold_labels: Tensor = None):
+                gold_labels: Tensor = None,
+                aspect_ids: Tensor = None,
+                pos_ids: Tensor = None,
+                dep_ids: Tensor = None,
+                vad_ids: Tensor = None):
         outputs = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]
         sequence_output = self.dropout(sequence_output)
-        emb = torch.mul(sequence_output, (valid_mask / valid_mask.sum(-1)).unsqueeze(-1)).sum(1)
+        emb = torch.mul(sequence_output, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         logits = self.classifier(emb)
         loss = None
         if gold_labels is not None:

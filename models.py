@@ -1,4 +1,3 @@
-import os
 from typing import List
 import torch
 from lightning.pytorch import LightningModule
@@ -6,7 +5,6 @@ from transformers import BertTokenizer
 from transformers.modeling_outputs import TokenClassifierOutput
 from torch import as_tensor
 from constants import TAGS
-from eval import absa_evaluate, evaluate
 from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
 from torchmetrics.classification import MulticlassF1Score
@@ -318,7 +316,7 @@ class BertClassifier(LightningModule):
             pred_Y.extend(pred_list)
             gold_Y.extend(gold_list)
         f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
-        self.log_dict({"test_f1": round(f1, 4)})
+        self.log_dict({"test_f1": f1})
         self.test_out.clear()
 
 
