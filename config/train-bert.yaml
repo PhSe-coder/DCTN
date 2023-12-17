@@ -13,7 +13,6 @@ model:
   init_args:
     lr: 2e-5
     num_labels: 3
-    output_dir: /root/BERT/out
 seed_everything: 42
 trainer:
   accelerator: gpu
@@ -28,4 +27,4 @@ trainer:
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 3
+  max_epochs: 5

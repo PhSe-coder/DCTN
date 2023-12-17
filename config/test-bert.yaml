@@ -11,7 +11,6 @@ model:
   init_args:
     lr: 3e-5
     num_labels: 3
-    output_dir: /root/FDGR/out
 seed_everything: 42
 trainer:
   accelerator: gpu
@@ -19,4 +18,4 @@ trainer:
   enable_progress_bar: true
   log_every_n_steps: 10
   max_epochs: 15
-ckpt_path: /root/autodl-tmp/lightning_logs/version_8/checkpoints/bert-alsc-epoch=02-val_f1=0.68.ckpt
+ckpt_path: /root/autodl-tmp/lightning_logs/version_0/checkpoints/bert-alsc-epoch=01-val_f1=0.69.ckpt
