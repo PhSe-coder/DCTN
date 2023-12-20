@@ -2,22 +2,16 @@ data:
   class_path: ABSADataModule
   init_args:
     batch_size: 64
-    k2t_file: ./data/knowledge2token.json
-    num_workers: 16
-    t2k_file: ./data/token2knowledge.json
-    target: restaurant
+    num_workers: 24
+    vad_lexicon: ./NRC-VAD-Lexicon.txt
     test_file: ./processed/dataset/restaurant.test.txt
+    graph_suffix: .graph
 model:
   class_path: models.FDGRClassifer
   init_args:
+    coff: 0.02
     lr: 3e-5
-    model:
-      class_path: model.FDGRModel
-      init_args:
-        num_labels: 7
-        pretrained_path: /root/autodl-tmp/models/laptop-restaurant/dim=300-max-epoch=30-p=0.0/pretrained-fdgr-v1.ckpt
-    num_labels: 7
-    output_dir: /root/FDGR/out
+    num_labels: 3
 seed_everything: 42
 trainer:
   accelerator: gpu
