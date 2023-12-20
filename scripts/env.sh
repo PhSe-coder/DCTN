@@ -16,4 +16,5 @@ pip install yapf==0.40.2
 pip install -i https://pypi.org/simple tensorboard==2.15.1 tensorboardX==2.6.2.2
 pip install nltk==3.8.1
 pip install pytorch_revgrad==0.2.0
+conda install -c dglteam/label/cu118 dgl==1.1.2.cu118
 # pip install omegaconf==2.3.0
