@@ -1,5 +1,6 @@
 import json
 import logging
+import pickle
 import os.path as osp
 from argparse import ArgumentParser
 from glob import glob
@@ -8,7 +9,7 @@ import random
 from typing import Dict, List, Tuple
 from transformers import BertTokenizer
 from tqdm import tqdm
-
+import numpy as np
 from stanza_utils import annotation_plus
 
 parser = ArgumentParser(description="Data annotation")
@@ -43,6 +44,10 @@ def build_contrast_sample(text: str, labels: List[str], tokenizer: BertTokenizer
     return contrast_text, contrast_labels
 
 
+def generate_graph(sentence: List):
+    return [w["head"] - 1 for w in sentence]
+
+
 def annotate(file: str, dest: str, synonyms: Dict[str, Dict[str, List[List[str | int]]]],
              tokenizer: BertTokenizer):
     lines = [line for line in open(file, "r")]
@@ -58,16 +63,30 @@ def annotate(file: str, dest: str, synonyms: Dict[str, Dict[str, List[List[str |
     contrast_sentences = annotation_plus(contrast_documents)
     f = open(osp.join(dest, osp.split(file)[1]), "w")
     fname = osp.split(file)[1].split('.')
+    fname_np = fname.copy()
+    fname_np[-1] = "graph"
     fname.insert(1, "contrast")
     f1 = open(osp.join(dest, '.'.join(fname)), "w")
     l = len(sentences)
+    id2graph: List[np.ndarray] = []
+    contrast_id2graph: List[np.ndarray] = []
+    f1name_np = fname.copy()
+    f1name_np[-1] = "graph"
+    fout = open(osp.join(dest, '.'.join(fname_np)), "wb")
+    f1out = open(osp.join(dest, '.'.join(f1name_np)), "wb")
     for i in tqdm(range(l), desc=file, total=l):
         ann = ' '.join(f'{w["xpos"]}.{w["deprel"]}' for w in sentences[i].to_dict())
         cont_ann = ' '.join(f'{w["xpos"]}.{w["deprel"]}' for w in contrast_sentences[i].to_dict())
         f.write(f"{documents[i]}***{ann}***{labels[i]}\n")
         f1.write(f"{contrast_documents[i]}***{cont_ann}***{contrast_labels[i]}\n")
+        id2graph.append(generate_graph(sentences[i].to_dict()))
+        contrast_id2graph.append(generate_graph(contrast_sentences[i].to_dict()))
     f.close()
     f1.close()
+    pickle.dump(id2graph, fout)
+    pickle.dump(contrast_id2graph, f1out)
+    fout.close()
+    f1out.close()
 
 
 if __name__ == "__main__":
