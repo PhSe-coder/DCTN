@@ -4,20 +4,16 @@ data:
   init_args:
     batch_size: 16
     num_workers: 24
-    target: laptop
     vad_lexicon: ./NRC-VAD-Lexicon.txt
     train_file: ./processed/dataset/restaurant.train.txt
     contranst_file: ./processed/dataset/restaurant.contrast.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt
+    graph_suffix: .graph
 model:
   class_path: models.FDGRClassifer
   init_args:
     coff: 0.02
     lr: 2e-5
-    model:
-      class_path: model.FDGRModel
-      init_args:
-        num_labels: 
     num_labels: 3
 seed_everything: 42
 trainer:
