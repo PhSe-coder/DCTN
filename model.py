@@ -65,7 +65,7 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         club_loss = self.club_loss.update(
             ha.view(-1, self.ha_dim)[attention_mask.view(-1) == 1],
             hc.view(-1, self.hc_dim)[attention_mask.view(-1) == 1])
-        # 2. auto-encoder loss
+        # 2. reconstruct loss
         decoded = self.decoder(torch.cat([ha, hc], -1))
         reconstruct_loss = self.mse(
             seq_output.view(-1, self.hidden_size)[attention_mask.view(-1) == 1],
@@ -94,8 +94,8 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         orthogonal_loss = torch.square(torch.norm(torch.mm(stacked, stacked.T) - torch.eye(3)))
         return TokenClassifierOutput(loss={
             "club_loss": club_loss,
-            "orthogonal_loss": orthogonal_loss,
             "reconstruct_loss": reconstruct_loss,
+            "orthogonal_loss": orthogonal_loss,
             "ha_loss": ha_loss,
             "vad_loss": vad_loss
         },
