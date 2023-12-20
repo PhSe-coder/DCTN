@@ -4,7 +4,7 @@ data:
   init_args:
     batch_size: 16
     num_workers: 24
-    vad_lexicon: ./NRC-VAD-Lexicon.txt
+    vad_lexicon_file: ./NRC-VAD-Lexicon.txt
     train_file: ./processed/dataset/restaurant.train.txt
     contranst_file: ./processed/dataset/restaurant.contrast.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt

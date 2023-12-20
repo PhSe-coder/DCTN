@@ -5,7 +5,7 @@ data:
     batch_size: 16
     num_workers: 24
     target: laptop
-    vad_lexicon: ./NRC-VAD-Lexicon.txt
+    vad_lexicon_file: ./NRC-VAD-Lexicon.txt
     train_file: ./processed/dataset/restaurant.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt
 model:

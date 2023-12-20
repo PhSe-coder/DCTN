@@ -3,7 +3,7 @@ data:
   init_args:
     batch_size: 64
     num_workers: 24
-    vad_lexicon: ./NRC-VAD-Lexicon.txt
+    vad_lexicon_file: ./NRC-VAD-Lexicon.txt
     test_file: ./processed/dataset/restaurant.test.txt
     graph_suffix: .graph
 model:
