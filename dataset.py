@@ -1,5 +1,9 @@
+from dataclasses import dataclass
 import linecache
+import numpy as np
 import torch
+import pickle
+from pathlib import Path
 from typing import Dict, List, Tuple
 from transformers import BertTokenizer
 from torch import Tensor, as_tensor
@@ -39,7 +43,7 @@ def transform(
 
 
 def pos_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str],
-                  special_tokens: List[str], pad_token):
+                  special_tokens: List[str], pad_token: str):
     index = 0
     pos_ids = []
     offset = 0
@@ -61,7 +65,7 @@ def pos_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
 
 
 def dep_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str],
-                  special_tokens: List[str], pad_token):
+                  special_tokens: List[str], pad_token: str):
     index = 0
     dep_ids = []
     offset = 0
@@ -80,6 +84,34 @@ def dep_transform(tokens: List[str], anns: List[str], wordpiece_tokens: List[str
             pos = DEPREL_DICT.get(ann, DEPREL_DICT.get('O'))
         dep_ids.append(pos)
     return dep_ids
+
+
+def graph_transform(tokens: List[str], graph: List[int], wordpiece_tokens: List[str],
+                    special_tokens: List[str], unk_token: str):
+    l = len(wordpiece_tokens)
+    graph_ids = np.zeros((l, l))
+    index, offset = 0, 0
+    ids: List[List[int]] = []
+    for i, w in enumerate(wordpiece_tokens):
+        if w in special_tokens and w != unk_token: continue
+        if offset == 0: ids.append([])
+        offset += len(w.replace("##", ''))
+        ids[index].append(i)
+        if offset == len(tokens[index]) or w == unk_token:
+            index += 1
+            offset = 0
+    index, offset = 0, 0
+    for i, w in enumerate(wordpiece_tokens):
+        if w in special_tokens: continue
+        offset += len(w.replace("##", ''))
+        gi = graph[index]
+        if gi != -1:
+            graph_ids[i, ids[gi]] = 1
+            graph_ids[ids[gi], i] = 1
+        if offset == len(tokens[index]):
+            index += 1
+            offset = 0
+    return graph_ids
 
 
 def vad_transform(tokens: List[str], vads: List[Tuple[float, float, float]],
@@ -102,30 +134,31 @@ def vad_transform(tokens: List[str], vads: List[Tuple[float, float, float]],
 
 
 def get_polarity(anns: List[str]) -> int:
-    tag = {"T-NEG": 0, "T-NEU": 1, "T-POS": 2} # non-negative mapping
+    tag = {"T-NEG": 0, "T-NEU": 1, "T-POS": 2}  # non-negative mapping
     for ann in anns:
         if ann != 'O':
             return tag[ann]
     raise ValueError("label list must contains a aspect term.")
 
 
+@dataclass
 class ModelDataset(Dataset):
+    datafile: str
+    contrast_datafile: str
+    tokenizer: BertTokenizer
+    vad_laxicon: Dict[str, Tuple[float, float, float]]
+    graph_suffix = ".graph"
 
-    def __init__(self, filename: str, contrast_filename: str, vad_lexicon: str, target: str,
-                 tokenizer: BertTokenizer):
-        self.datafile = filename
-        self.contrast_datafile = contrast_filename
-        self.target = target
-        self.total = sum(1 for _ in open(filename, "rb"))
-        self.tokenizer = tokenizer
-        self.training = filename.endswith(".train.txt")
-        self.vad_laxicon: Dict[str, Tuple[float, float, float]] = {}
-        with open(vad_lexicon, "r") as f:
-            for line in f:
-                word, v, a, d = line.split('\t')
-                self.vad_laxicon[word] = (float(v), float(a), float(d))
+    def __post_init__(self):
+        super().__init__()
+        self.total = sum(1 for _ in open(self.datafile, "rb"))
+        with open(str(Path(self.datafile).with_suffix(self.graph_suffix)), "rb") as f:
+            self.id2head: List[int] = pickle.load(f)
+        with open(str(Path(self.contrast_datafile).with_suffix(self.graph_suffix)), "rb") as f:
+            self.contrast_id2head: List[int] = pickle.load(f)
 
-    def process(self, text: str, anns: List[str], labels: List[str]) -> Dict[str, Tensor]:
+    def process(self, text: str, anns: List[str], graph: List[int],
+                labels: List[str]) -> Dict[str, Tensor]:
         tok_dict: Dict[str, List[int]] = self.tokenizer(text,
                                                         padding=PaddingStrategy.MAX_LENGTH,
                                                         truncation=True)
@@ -141,6 +174,8 @@ class ModelDataset(Dataset):
                                 self.tokenizer.all_special_tokens, self.tokenizer.pad_token)
         dep_ids = dep_transform(text.split(), dep_anns, wordpiece_tokens,
                                 self.tokenizer.all_special_tokens, self.tokenizer.pad_token)
+        graph_ids = graph_transform(text.split(), graph, wordpiece_tokens,
+                                    self.tokenizer.all_special_tokens, self.tokenizer.unk_token)
         vad_ids = vad_transform(
             text.split(), [self.vad_laxicon.get(token, (0.5, 0.5, 0.5)) for token in text.split()],
             (0.5, 0.5, 0.5), wordpiece_tokens, self.tokenizer.all_special_tokens)
@@ -153,6 +188,7 @@ class ModelDataset(Dataset):
             "aspect_ids": as_tensor(as_tensor(label_ids) > 0, dtype=torch.int32),
             "pos_ids": as_tensor(pos_ids),
             "dep_ids": as_tensor(dep_ids),
+            "graph_ids": torch.from_numpy(graph_ids),
             "vad_ids": as_tensor(vad_ids)
         }
         return data
@@ -160,12 +196,13 @@ class ModelDataset(Dataset):
     def __getitem__(self, index):
         # `getline` method start from index 1 rather than 0
         line = linecache.getline(self.datafile, index + 1).strip()
-        contrast_line = linecache.getline(self.contrast_datafile, index + 1).strip()
         text, annotations, gold_labels = line.rsplit("***", maxsplit=2)
-        original = self.process(text, annotations.split(), gold_labels.split())
-        if contrast_line:
+        original = self.process(text, annotations.split(), self.id2head[index], gold_labels.split())
+        if self.contrast_datafile is not None:
+            contrast_line = linecache.getline(self.contrast_datafile, index + 1).strip()
             text, annotations, gold_labels = contrast_line.rsplit("***", maxsplit=2)
-            contrast = self.process(text, annotations.split(), gold_labels.split())
+            contrast = self.process(text, annotations.split(), self.contrast_id2head[index],
+                                    gold_labels.split())
             return {"original": original, "contrast": contrast}
         else:
             return {"original": original}
@@ -176,9 +213,13 @@ class ModelDataset(Dataset):
 
 if __name__ == "__main__":
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", model_max_length=100)
-    dataset = ModelDataset("./processed/dataset/twitter.test.txt",
-                           "./processed/dataset/twitter.contrast.test.txt", "./NRC-VAD-Lexicon.txt",
-                           "laptop", tokenizer)
+    vad_laxicon: Dict[str, Tuple[float, float, float]] = {}
+    with open("NRC-VAD-Lexicon.txt", "r") as f:
+        for line in f:
+            word, v, a, d = line.split('\t')
+            vad_laxicon[word] = (float(v), float(a), float(d))
+    dataset = ModelDataset("./processed/dataset/twitter.train.txt",
+                           "./processed/dataset/twitter.contrast.train.txt", tokenizer, vad_laxicon)
     from torch.utils.data import DataLoader
     from tqdm import tqdm
     from lightning import seed_everything

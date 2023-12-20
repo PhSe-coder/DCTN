@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from functools import partial
+from typing import Dict, Tuple
 
 import torch
 from lightning.pytorch import LightningDataModule
@@ -12,32 +13,37 @@ from dataset import ModelDataset
 @dataclass
 class ABSADataModule(LightningDataModule):
     batch_size: int
-    vad_lexicon: str
-    target: str
+    vad_lexicon_file: str
     num_workers: int = 0
     pretrained_model: str = "bert-base-uncased"
     train_file: str = None
     contrast_file: str = None
     validation_file: str = None
     test_file: str = None
+    graph_suffix: str = ".graph"
 
     def __post_init__(self):
         super().__init__()
         self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=100)
+        self.vad_laxicon: Dict[str, Tuple[float, float, float]] = {}
+        with open(self.vad_lexicon_file, "r") as f:
+            for line in f:
+                word, v, a, d = line.split('\t')
+                self.vad_laxicon[word] = (float(v), float(a), float(d))
         self.dataloader = partial(DataLoader,
                                   batch_size=self.batch_size,
                                   num_workers=self.num_workers)
 
     def setup(self, stage):
         if stage == 'fit':
-            self.train_set = ModelDataset(self.train_file, self.contrast_file, self.vad_lexicon,
-                                          self.target, self.tokenizer)
+            self.train_set = ModelDataset(self.train_file, self.contrast_file, self.vad_laxicon,
+                                          self.tokenizer, self.graph_suffix)
         if stage in ('fit', 'validate'):
-            self.val_set = ModelDataset(self.validation_file, self.contrast_file, self.vad_lexicon,
-                                        self.target, self.tokenizer)
+            self.val_set = ModelDataset(self.validation_file, self.contrast_file, self.vad_laxicon,
+                                        self.tokenizer, self.graph_suffix)
         if stage == 'test':
-            self.test_set = ModelDataset(self.test_file, self.contrast_file, self.vad_lexicon,
-                                         self.target, self.tokenizer)
+            self.test_set = ModelDataset(self.test_file, self.contrast_file, self.vad_laxicon,
+                                         self.tokenizer, self.graph_suffix)
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)
