@@ -8,6 +8,7 @@ data:
     train_file: ./processed/dataset/restaurant.train.txt
     contrast_file: ./processed/dataset/restaurant.contrast.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt
+    contrast_file: ./processed/dataset/restaurant.contrast.train.txt
     graph_suffix: .graph
 model:
   class_path: models.FDGRClassifer
