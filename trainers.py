@@ -36,14 +36,14 @@ class ABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            self.train_set = ModelDataset(self.train_file, self.contrast_file, self.vad_laxicon,
-                                          self.tokenizer, self.graph_suffix)
+            self.train_set = ModelDataset(self.train_file, self.vad_laxicon,
+                                          self.tokenizer, self.contrast_file, self.graph_suffix)
         if stage in ('fit', 'validate'):
-            self.val_set = ModelDataset(self.validation_file, self.contrast_file, self.vad_laxicon,
-                                        self.tokenizer, self.graph_suffix)
+            self.val_set = ModelDataset(self.validation_file, self.vad_laxicon,
+                                        self.tokenizer, graph_suffix=self.graph_suffix)
         if stage == 'test':
-            self.test_set = ModelDataset(self.test_file, self.contrast_file, self.vad_laxicon,
-                                         self.tokenizer, self.graph_suffix)
+            self.test_set = ModelDataset(self.test_file, self.vad_laxicon,
+                                         self.tokenizer, graph_suffix=self.graph_suffix)
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)

@@ -144,18 +144,18 @@ def get_polarity(anns: List[str]) -> int:
 @dataclass
 class ModelDataset(Dataset):
     datafile: str
-    contrast_datafile: str
-    tokenizer: BertTokenizer
     vad_laxicon: Dict[str, Tuple[float, float, float]]
-    graph_suffix = ".graph"
+    tokenizer: BertTokenizer
+    contrast_datafile: str = None
+    graph_suffix: str = ".graph"
 
     def __post_init__(self):
-        super().__init__()
         self.total = sum(1 for _ in open(self.datafile, "rb"))
         with open(str(Path(self.datafile).with_suffix(self.graph_suffix)), "rb") as f:
             self.id2head: List[int] = pickle.load(f)
-        with open(str(Path(self.contrast_datafile).with_suffix(self.graph_suffix)), "rb") as f:
-            self.contrast_id2head: List[int] = pickle.load(f)
+        if self.contrast_datafile is not None:
+            with open(str(Path(self.contrast_datafile).with_suffix(self.graph_suffix)), "rb") as f:
+                self.contrast_id2head: List[int] = pickle.load(f)
 
     def process(self, text: str, anns: List[str], graph: List[int],
                 labels: List[str]) -> Dict[str, Tensor]:
@@ -218,12 +218,12 @@ if __name__ == "__main__":
         for line in f:
             word, v, a, d = line.split('\t')
             vad_laxicon[word] = (float(v), float(a), float(d))
-    dataset = ModelDataset("./processed/dataset/twitter.train.txt",
-                           "./processed/dataset/twitter.contrast.train.txt", tokenizer, vad_laxicon)
+    dataset = ModelDataset("./processed/dataset/restaurant.train.txt",
+                           "./processed/dataset/restaurant.contrast.train.txt", vad_laxicon, tokenizer)
     from torch.utils.data import DataLoader
     from tqdm import tqdm
     from lightning import seed_everything
     seed_everything(42)
-    dataloader = DataLoader(dataset, 16, False, num_workers=24)
+    dataloader = DataLoader(dataset, 16, True, num_workers=24)
     for batch in tqdm(dataloader):
         pass

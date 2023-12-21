@@ -51,6 +51,16 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         self.proj_d = nn.Linear(self.hc_dim, 1)
 
     def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
+        if not self.training:
+            input_ids = original['input_ids']
+            token_type_ids = original['token_type_ids']
+            attention_mask = original['attention_mask']
+            seq_output: Tensor = self.bert(input_ids,
+                                           token_type_ids=token_type_ids,
+                                           attention_mask=attention_mask)[0]
+            ha: Tensor = self.ha_encoder(seq_output)
+            hc: Tensor = self.hc_encoder(seq_output)
+            return TokenClassifierOutput(hidden_states=(ha, hc))
         assert torch.all(original['attention_mask'] == contrast['attention_mask']).item() == 1
         input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
         token_type_ids = torch.cat([original['token_type_ids'], contrast['token_type_ids']])
@@ -88,7 +98,7 @@ class FDGRPretrainedModel(BertPreTrainedModel):
         v, a, d = self.v_layer(hc), self.a_layer(hc), self.d_layer(hc)
         proj_v, proj_a, proj_d = self.proj_v(v), self.proj_a(a), self.proj_d(d)
         vad_loss = self.mse(torch.cat([proj_v, proj_a, proj_d], -1),
-                            torch.cat(original["vad"], contrast["vad"]))
+                            torch.cat([original["vad_ids"], contrast["vad_ids"]]))
         # 5. orthogonal loss
         stacked = torch.stack([v, a, d], 0)
         orthogonal_loss = torch.square(torch.norm(torch.mm(stacked, stacked.T) - torch.eye(3)))
@@ -121,8 +131,9 @@ class FDGRModel(BertPreTrainedModel):
         dep = self.dep_embedding(original["dep_ids"])
         emb = torch.mul(hc, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         logits: Tensor = self.classifier(emb)
-        ce_loss = self.loss_fct(logits, torch.cat(original['gold_labels'], contrast["gold_labels"]))
-        outputs.loss["ce_loss"] = ce_loss
+        if self.training:
+            outputs.loss["ce_loss"] = self.loss_fct(
+                logits, torch.cat(original['gold_labels'], contrast["gold_labels"]))
         return TokenClassifierOutput(logits=logits, loss=outputs.loss, hidden_states=emb)
 
 
