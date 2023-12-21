@@ -9,11 +9,12 @@ data:
     contrast_file: ./processed/dataset/restaurant.contrast.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt
     contrast_file: ./processed/dataset/restaurant.contrast.train.txt
+    test_file: ./processed/dataset/laptop.test.txt
     graph_suffix: .graph
 model:
   class_path: models.FDGRClassifer
   init_args:
-    coff: 0.02
+    coff: 0.01
     lr: 2e-5
     num_labels: 3
 seed_everything: 42
