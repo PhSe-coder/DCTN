@@ -92,4 +92,5 @@ class PretraninedABSADataModule(LightningDataModule):
 
 if __name__ == '__main__':
     torch.set_float32_matmul_precision('high')
-    LightningCLI(save_config_kwargs={"overwrite": True})
+    li = LightningCLI(save_config_kwargs={"overwrite": True})
+    li.trainer.test(ckpt_path="best")

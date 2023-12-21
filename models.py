@@ -1,5 +1,6 @@
 from typing import List
 import torch
+import torch.nn as nn
 from lightning.pytorch import LightningModule
 from transformers import BertTokenizer
 from transformers.modeling_outputs import TokenClassifierOutput
@@ -139,6 +140,7 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.coff = coff
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.model: FDGRModel = FDGRModel.from_pretrained(pretrained_model_name, num_labels, h_dim)
+        self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
         self.valid_out = []
         self.test_out = []
 
@@ -169,8 +171,10 @@ class FDGRClassifer(LightningModule, LossWeight):
                              self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
+        original, contrast = train_batch["original"], train_batch["contrast"]
         outputs = self.forward(**train_batch)
-        ce_loss = outputs.loss["ce_loss"]
+        ce_loss = self.loss_fct(outputs.logits,
+                                torch.cat([original['gold_labels'], contrast["gold_labels"]]))
         orthogonal_loss = outputs.loss["orthogonal_loss"]
         reconstruct_loss = outputs.loss["reconstruct_loss"]
         ha_loss = outputs.loss["ha_loss"]
