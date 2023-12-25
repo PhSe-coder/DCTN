@@ -1,4 +1,3 @@
-ckpt_path: null
 data:
   class_path: ABSADataModule
   init_args:
@@ -8,13 +7,13 @@ data:
     train_file: ./processed/dataset/restaurant.train.txt
     contrast_file: ./processed/dataset/restaurant.contrast.train.txt
     validation_file: ./processed/dataset/restaurant.validation.txt
-    contrast_file: ./processed/dataset/restaurant.contrast.train.txt
     test_file: ./processed/dataset/laptop.test.txt
     graph_suffix: .graph
 model:
   class_path: models.FDGRClassifer
   init_args:
-    coff: 0.01
+    h_dim: 300
+    coff: 0.00
     lr: 2e-5
     num_labels: 3
 seed_everything: 42
@@ -31,4 +30,4 @@ trainer:
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 15
+  max_epochs: 5
