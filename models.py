@@ -1,11 +1,8 @@
-from typing import List
 import torch
-import torch.nn as nn
 from lightning.pytorch import LightningModule
-from transformers import BertTokenizer
+from transformers import BertTokenizer, BertConfig
 from transformers.modeling_outputs import TokenClassifierOutput
 from torch import as_tensor
-from constants import TAGS
 from model import BertForTokenClassification, FDGRModel, FDGRPretrainedModel
 from optimization import BertAdam
 from torchmetrics.classification import MulticlassF1Score
@@ -115,7 +112,7 @@ class FDGRClassifer(LightningModule, LossWeight):
                  num_labels: int,
                  lr: float,
                  coff: float = 0.02,
-                 h_dim: int = 50,
+                 h_dim: int = 300,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -139,8 +136,10 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.lr = lr
         self.coff = coff
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
-        self.model: FDGRModel = FDGRModel.from_pretrained(pretrained_model_name, num_labels, h_dim)
-        self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
+        config = BertConfig.from_pretrained(pretrained_model_name, num_labels=num_labels)
+        config.name_or_path = pretrained_model_name
+        self.model = FDGRModel(config, h_dim)
+
         self.valid_out = []
         self.test_out = []
 
@@ -171,10 +170,8 @@ class FDGRClassifer(LightningModule, LossWeight):
                              self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
-        original, contrast = train_batch["original"], train_batch["contrast"]
         outputs = self.forward(**train_batch)
-        ce_loss = self.loss_fct(outputs.logits,
-                                torch.cat([original['gold_labels'], contrast["gold_labels"]]))
+        ce_loss = outputs.loss["ce_loss"]
         orthogonal_loss = outputs.loss["orthogonal_loss"]
         reconstruct_loss = outputs.loss["reconstruct_loss"]
         ha_loss = outputs.loss["ha_loss"]
@@ -242,8 +239,7 @@ class BertClassifier(LightningModule):
         self.num_labels = num_labels
         self.lr = lr
         self.automatic_optimization = False
-        self.model = BertForTokenClassification.from_pretrained(pretrained_model_name,
-                                                                num_labels=self.num_labels)
+        self.model = BertForTokenClassification(pretrained_model_name, num_labels)
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
         self.valid_out = []
         self.test_out = []
@@ -315,17 +311,3 @@ class BertClassifier(LightningModule):
         f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
         self.log_dict({"test_f1": f1})
         self.test_out.clear()
-
-
-def id2label(predict: List[int], gold: List[List[int]]):
-    gold_Y: List[List[str]] = []
-    pred_Y: List[List[str]] = []
-    for _gold in gold:
-        gold_list = [TAGS[_gold[i]] for i in range(len(_gold)) if _gold[i] != -1]
-        gold_Y.append(gold_list)
-    idx = 0
-    for item in gold_Y:
-        pred_Y.append([TAGS[pred] for pred in predict[idx:idx + len(item)]])
-        idx += len(item)
-    assert idx == len(predict)
-    return pred_Y, gold_Y

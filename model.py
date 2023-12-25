@@ -5,7 +5,7 @@ from typing import Dict, Optional, Tuple, Union
 import torch
 import torch.nn as nn
 from torch import Tensor
-from transformers import BertModel, BertPreTrainedModel
+from transformers import BertModel, BertConfig
 from constants import DEPREL_DICT, POS_DICT
 
 from mi_estimators import InfoNCE, vCLUB
@@ -21,12 +21,11 @@ class TokenClassifierOutput():
     attentions: Optional[Tuple[torch.FloatTensor]] = None
 
 
-class FDGRPretrainedModel(BertPreTrainedModel):
+class FDGRPretrainedModel(nn.Module):
 
-    def __init__(self, config, h_dim: int):
-        super(FDGRPretrainedModel, self).__init__(config)
-        self.config = config
-        self.bert = BertModel(config)
+    def __init__(self, config: BertConfig, h_dim: int):
+        super(FDGRPretrainedModel, self).__init__()
+        self.bert = BertModel.from_pretrained(config.name_or_path)
         self.ha_dim = h_dim
         self.hc_dim = h_dim
         self.hidden_size: int = config.hidden_size
@@ -113,15 +112,16 @@ class FDGRPretrainedModel(BertPreTrainedModel):
                                      hidden_states=(ha, hc))
 
 
-class FDGRModel(BertPreTrainedModel):
+class FDGRModel(nn.Module):
 
-    def __init__(self, config, num_labels, h_dim):
-        super(FDGRModel, self).__init__(config)
+    def __init__(self, config: BertConfig, h_dim: int):
+        super(FDGRModel, self).__init__()
         self.fdgr = FDGRPretrainedModel(config, h_dim)
-        self.num_labels = num_labels
+        self.num_labels: int = config.num_labels
         self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
         self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
-        self.classifier = nn.Linear(h_dim, num_labels)
+        self.classifier = nn.Linear(h_dim, self.num_labels)
+        self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
 
     def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
         outputs: TokenClassifierOutput = self.fdgr(original, contrast)
@@ -134,19 +134,23 @@ class FDGRModel(BertPreTrainedModel):
             valid_mask = original['valid_mask']
             pos = self.pos_embedding(original["pos_ids"])
             dep = self.dep_embedding(original["dep_ids"])
-        emb = torch.mul(hc, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
+        emb = torch.mul(ha, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         logits: Tensor = self.classifier(emb)
+        if self.training:
+            outputs.loss["ce_loss"] = self.loss_fct(
+                logits, torch.cat([original['gold_labels'], contrast["gold_labels"]]))
         return TokenClassifierOutput(logits=logits, loss=outputs.loss, hidden_states=emb)
 
 
-class BertForTokenClassification(BertPreTrainedModel):
+class BertForTokenClassification(nn.Module):
 
-    def __init__(self, config):
-        super(BertForTokenClassification, self).__init__(config)
-        self.num_labels = config.num_labels
-        self.bert = BertModel(config)
+    def __init__(self, pretrained_model_name, num_labels):
+        super(BertForTokenClassification, self).__init__()
+        self.num_labels = num_labels
+        self.bert = BertModel.from_pretrained(pretrained_model_name, num_labels=num_labels)
+        config = BertConfig.from_pretrained(pretrained_model_name)
         self.dropout = nn.Dropout(0.1)
-        self.classifier = nn.Linear(config.hidden_size, config.num_labels)
+        self.classifier = nn.Linear(config.hidden_size, num_labels)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
 
     def forward(self,
@@ -158,6 +162,7 @@ class BertForTokenClassification(BertPreTrainedModel):
                 aspect_ids: Tensor = None,
                 pos_ids: Tensor = None,
                 dep_ids: Tensor = None,
+                graph_ids: Tensor = None,
                 vad_ids: Tensor = None):
         outputs = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
         sequence_output = outputs[0]

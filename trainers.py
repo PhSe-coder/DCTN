@@ -36,14 +36,18 @@ class ABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            self.train_set = ModelDataset(self.train_file, self.vad_laxicon,
-                                          self.tokenizer, self.contrast_file, self.graph_suffix)
+            self.train_set = ModelDataset(self.train_file, self.vad_laxicon, self.tokenizer,
+                                          self.contrast_file, self.graph_suffix)
         if stage in ('fit', 'validate'):
-            self.val_set = ModelDataset(self.validation_file, self.vad_laxicon,
-                                        self.tokenizer, graph_suffix=self.graph_suffix)
+            self.val_set = ModelDataset(self.validation_file,
+                                        self.vad_laxicon,
+                                        self.tokenizer,
+                                        graph_suffix=self.graph_suffix)
         if stage == 'test':
-            self.test_set = ModelDataset(self.test_file, self.vad_laxicon,
-                                         self.tokenizer, graph_suffix=self.graph_suffix)
+            self.test_set = ModelDataset(self.test_file,
+                                         self.vad_laxicon,
+                                         self.tokenizer,
+                                         graph_suffix=self.graph_suffix)
 
     def train_dataloader(self):
         return self.dataloader(self.train_set, shuffle=True)
@@ -92,5 +96,6 @@ class PretraninedABSADataModule(LightningDataModule):
 
 if __name__ == '__main__':
     torch.set_float32_matmul_precision('high')
-    li = LightningCLI(save_config_kwargs={"overwrite": True})
-    li.trainer.test(ckpt_path="best")
+    ln = LightningCLI(save_config_kwargs={"overwrite": True}, run=False)
+    ln.trainer.fit(ln.model, datamodule=ln.datamodule)
+    ln.trainer.test(ln.model, ckpt_path="best", datamodule=ln.datamodule)
