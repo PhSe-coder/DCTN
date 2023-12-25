@@ -18,4 +18,5 @@ trainer:
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 15
+  max_epochs: 5
+ckpt_path: best
