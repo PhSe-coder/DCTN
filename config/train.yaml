@@ -12,8 +12,8 @@ data:
 model:
   class_path: models.FDGRClassifer
   init_args:
-    h_dim: 300
-    coff: 0.001
+    h_dim: 100
+    coff: 0.1
     lr: 2e-5
     num_labels: 3
 seed_everything: 42
@@ -30,4 +30,4 @@ trainer:
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
   log_every_n_steps: 10
-  max_epochs: 5
+  max_epochs: 10

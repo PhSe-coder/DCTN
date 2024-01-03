@@ -24,7 +24,7 @@ trainer:
       filename: fdgr-alsc-{epoch:02d}-{val_f1:.2f}
       mode: max
       monitor: val_f1
-      save_last: false
+      save_last: true
       verbose: true
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true
