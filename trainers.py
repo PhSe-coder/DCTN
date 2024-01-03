@@ -98,4 +98,4 @@ if __name__ == '__main__':
     torch.set_float32_matmul_precision('high')
     ln = LightningCLI(save_config_kwargs={"overwrite": True}, run=False)
     ln.trainer.fit(ln.model, datamodule=ln.datamodule)
-    ln.trainer.test(ln.model, ckpt_path="best", datamodule=ln.datamodule)
+    ln.trainer.test(ln.model, ckpt_path="last", datamodule=ln.datamodule)
