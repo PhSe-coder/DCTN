@@ -13,7 +13,7 @@ model:
   class_path: models.FDGRClassifer
   init_args:
     h_dim: 300
-    coff: 0.00
+    coff: 0.001
     lr: 2e-5
     num_labels: 3
 seed_everything: 42
@@ -25,7 +25,7 @@ trainer:
       filename: fdgr-alsc-{epoch:02d}-{val_f1:.2f}
       mode: max
       monitor: val_f1
-      save_last: false
+      save_last: true
       verbose: true
   default_root_dir: /root/autodl-tmp
   enable_progress_bar: true

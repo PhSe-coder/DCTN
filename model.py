@@ -1,14 +1,16 @@
 import logging
 from dataclasses import dataclass
 from typing import Dict, Optional, Tuple, Union
-
 import torch
 import torch.nn as nn
+import dgl
+from dgl.nn import GraphConv
 from torch import Tensor
 from transformers import BertModel, BertConfig
 from constants import DEPREL_DICT, POS_DICT
 
 from mi_estimators import InfoNCE, vCLUB
+from span_extractors import EndpointSpanExtractor
 
 logger = logging.getLogger(__name__)
 
@@ -100,8 +102,7 @@ class FDGRPretrainedModel(nn.Module):
         # 5. orthogonal loss
         stacked = torch.stack([v, a, d], -2)  # [batch_size, seq_len, 3, h_dim]
         I = torch.eye(3, device=stacked.device)
-        orthogonal_loss = torch.square(
-            torch.norm(torch.matmul(stacked, stacked.transpose(-1, -2)) - I))
+        orthogonal_loss = torch.norm(torch.matmul(stacked, stacked.transpose(-1, -2)) - I)
         return TokenClassifierOutput(loss={
             "club_loss": club_loss,
             "reconstruct_loss": reconstruct_loss,
@@ -116,25 +117,57 @@ class FDGRModel(nn.Module):
 
     def __init__(self, config: BertConfig, h_dim: int):
         super(FDGRModel, self).__init__()
+        self.h_dim = h_dim
         self.fdgr = FDGRPretrainedModel(config, h_dim)
         self.num_labels: int = config.num_labels
         self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
         self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
-        self.classifier = nn.Linear(h_dim, self.num_labels)
+        self.conv1 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
+        self.conv2 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
+        self.span_extractor = EndpointSpanExtractor(h_dim,
+                                                    combination="x,y",
+                                                    num_width_embeddings=4,
+                                                    span_width_embedding_dim=50,
+                                                    bucket_widths=True)
+        self.classifier = nn.Linear(3 * h_dim + 50, self.num_labels)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
 
     def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
         outputs: TokenClassifierOutput = self.fdgr(original, contrast)
         ha, hc = outputs.hidden_states
         if self.training:
+            att_mask = torch.cat([original['attention_mask'], contrast['attention_mask']])
             valid_mask = torch.cat([original['valid_mask'], contrast['valid_mask']])
-            pos = self.pos_embedding(torch.cat([original["pos_ids"], contrast["pos_ids"]]))
-            dep = self.dep_embedding(torch.cat([original["dep_ids"], contrast["dep_ids"]]))
+            pos_ids = torch.cat([original["pos_ids"], contrast["pos_ids"]])
+            dep_ids = torch.cat([original["dep_ids"], contrast["dep_ids"]])
+            graph_ids = torch.cat([original['graph_ids'], contrast['graph_ids']])
+            aspect_ids = torch.cat([original['aspect_ids'], contrast['aspect_ids']])
+            span_indices = torch.cat([original['span_indices'], contrast['span_indices']])
         else:
+            att_mask = original['attention_mask']
             valid_mask = original['valid_mask']
-            pos = self.pos_embedding(original["pos_ids"])
-            dep = self.dep_embedding(original["dep_ids"])
-        emb = torch.mul(ha, (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
+            pos_ids = original["pos_ids"]
+            dep_ids = original["dep_ids"]
+            graph_ids = original['graph_ids']
+            aspect_ids = original['aspect_ids']
+            span_indices = original['span_indices']
+        batch_size = pos_ids.size(0)
+        pos = self.pos_embedding(pos_ids)
+        dep = self.dep_embedding(dep_ids)
+        g = dgl.batch([
+            dgl.graph(torch.nonzero(adj_mat, as_tuple=True), num_nodes=adj_mat.size(-1))
+            for adj_mat in graph_ids
+        ])
+        h = self.conv1(g, ha.view(-1, self.h_dim))
+        h = self.conv2(g, h.view(-1, self.h_dim))
+        # sequence representetion
+        mean = torch.mul(ha.view(batch_size, -1, self.h_dim),
+                         (att_mask / att_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
+        # emb = torch.mul(h.view(batch_size, -1, self.h_dim),
+        #                 (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
+        spans = self.span_extractor(h.view(batch_size, -1, self.h_dim), span_indices,
+                                    att_mask).squeeze(1)
+        emb = torch.cat([spans, mean], dim=-1)
         logits: Tensor = self.classifier(emb)
         if self.training:
             outputs.loss["ce_loss"] = self.loss_fct(
@@ -160,6 +193,7 @@ class BertForTokenClassification(nn.Module):
                 valid_mask: Tensor = None,
                 gold_labels: Tensor = None,
                 aspect_ids: Tensor = None,
+                span_indices: Tensor = None,
                 pos_ids: Tensor = None,
                 dep_ids: Tensor = None,
                 graph_ids: Tensor = None,

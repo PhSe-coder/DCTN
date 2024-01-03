@@ -179,18 +179,22 @@ class ModelDataset(Dataset):
         vad_ids = vad_transform(
             text.split(), [self.vad_laxicon.get(token, (0.5, 0.5, 0.5)) for token in text.split()],
             (0.5, 0.5, 0.5), wordpiece_tokens, self.tokenizer.all_special_tokens)
-        data = {
-            "input_ids": as_tensor(tok_dict.input_ids),
-            "token_type_ids": as_tensor(tok_dict.token_type_ids),
-            "attention_mask": as_tensor(tok_dict.attention_mask),
-            "valid_mask": as_tensor(valid_mask),
-            "gold_labels": as_tensor(polarity),
-            "aspect_ids": as_tensor(as_tensor(label_ids) > 0, dtype=torch.int32),
-            "pos_ids": as_tensor(pos_ids),
-            "dep_ids": as_tensor(dep_ids),
-            "graph_ids": torch.from_numpy(graph_ids),
-            "vad_ids": as_tensor(vad_ids)
-        }
+        try:
+            data = {
+                "input_ids": as_tensor(tok_dict.input_ids),
+                "token_type_ids": as_tensor(tok_dict.token_type_ids),
+                "attention_mask": as_tensor(tok_dict.attention_mask),
+                "valid_mask": as_tensor(valid_mask),
+                "gold_labels": as_tensor(polarity),
+                "aspect_ids": as_tensor(as_tensor(label_ids) > 0).int(),
+                "span_indices": (as_tensor(label_ids) > 0).nonzero().squeeze(1)[[0, -1]].unsqueeze(0),
+                "pos_ids": as_tensor(pos_ids),
+                "dep_ids": as_tensor(dep_ids),
+                "graph_ids": torch.from_numpy(graph_ids),
+                "vad_ids": as_tensor(vad_ids)
+            }
+        except Exception as e:
+            raise e
         return data
 
     def __getitem__(self, index):
