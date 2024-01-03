@@ -1,31 +1,7 @@
 {
   "laptop": {
-    "ACER": [
-      [
-        "maple tree",
-        0.559
-      ],
-      [
-        "dell",
-        0.534
-      ],
-      [
-        "maples",
-        0.518
-      ],
-      [
-        "maple trees",
-        0.512
-      ],
-      [
-        "maple",
-        0.511
-      ],
-      [
-        "netbook",
-        0.51
-      ]
-    ],
+    "320GB": [],
+    "500gb": [],
     "ASUS": [
       [
         "asuncion",
@@ -70,69 +46,6 @@
         0.51
       ]
     ],
-    "Alienware": [
-      [
-        "alien",
-        0.751
-      ],
-      [
-        "alienage",
-        0.699
-      ],
-      [
-        "alienate",
-        0.69
-      ],
-      [
-        "alienated",
-        0.664
-      ],
-      [
-        "aliens",
-        0.648
-      ],
-      [
-        "space invader",
-        0.626
-      ],
-      [
-        "alienation",
-        0.617
-      ],
-      [
-        "estrange",
-        0.614
-      ],
-      [
-        "alienating",
-        0.608
-      ],
-      [
-        "space invaders",
-        0.566
-      ],
-      [
-        "extraterrestrial",
-        0.557
-      ],
-      [
-        "estrangement",
-        0.542
-      ],
-      [
-        "alien abduction",
-        0.529
-      ],
-      [
-        "extraterrestrials",
-        0.519
-      ],
-      [
-        "estranged",
-        0.514
-      ]
-    ],
-    "Applecare": [],
     "Asus": [
       [
         "asuncion",
@@ -525,56 +438,6 @@
         0.535
       ]
     ],
-    "Compaq": [
-      [
-        "hewlett packard",
-        0.682
-      ],
-      [
-        "thinkpad",
-        0.615
-      ],
-      [
-        "omnibook",
-        0.586
-      ],
-      [
-        "dell",
-        0.582
-      ],
-      [
-        "toshiba",
-        0.58
-      ],
-      [
-        "laptop",
-        0.57
-      ],
-      [
-        "ibm",
-        0.551
-      ],
-      [
-        "extensa",
-        0.549
-      ],
-      [
-        "compaq computer",
-        0.547
-      ],
-      [
-        "laptops",
-        0.543
-      ],
-      [
-        "intel",
-        0.529
-      ],
-      [
-        "laptop computer",
-        0.507
-      ]
-    ],
     "Computer": [
       [
         "computers",
@@ -705,26 +568,42 @@
         0.501
       ]
     ],
-    "D620": [
+    "Core2": [
       [
-        "d###",
-        0.636
+        "core",
+        0.772
       ],
       [
-        "d####",
-        0.59
+        "cored",
+        0.737
       ],
       [
-        "dice",
-        0.553
+        "cores",
+        0.733
       ],
       [
-        "b1",
-        0.525
+        "coreless",
+        0.691
       ],
       [
-        "a7",
-        0.506
+        "quadcore",
+        0.658
+      ],
+      [
+        "coring",
+        0.624
+      ],
+      [
+        "decore",
+        0.585
+      ],
+      [
+        "unicore",
+        0.568
+      ],
+      [
+        "corer",
+        0.527
       ]
     ],
     "DELL": [
@@ -743,346 +622,6 @@
       [
         "hewlett packard",
         0.517
-      ]
-    ],
-    "DV6000": [
-      [
-        "dvd",
-        0.77
-      ],
-      [
-        "hd dvd",
-        0.769
-      ],
-      [
-        "dvds",
-        0.757
-      ],
-      [
-        "sacd",
-        0.725
-      ],
-      [
-        "dvd ram",
-        0.715
-      ],
-      [
-        "dvd burner",
-        0.701
-      ],
-      [
-        "blu ray disc",
-        0.692
-      ],
-      [
-        "dvd rom",
-        0.689
-      ],
-      [
-        "vcd",
-        0.674
-      ],
-      [
-        "blu ray",
-        0.674
-      ],
-      [
-        "optical disc",
-        0.67
-      ],
-      [
-        "hd",
-        0.641
-      ],
-      [
-        "video recorder",
-        0.628
-      ],
-      [
-        "pvr",
-        0.624
-      ],
-      [
-        "dvr",
-        0.622
-      ],
-      [
-        "videodisc",
-        0.615
-      ],
-      [
-        "videocassette recorder",
-        0.601
-      ],
-      [
-        "vcr",
-        0.595
-      ],
-      [
-        "tivo",
-        0.58
-      ],
-      [
-        "vhs",
-        0.579
-      ],
-      [
-        "discs",
-        0.573
-      ],
-      [
-        "video cassette recorder",
-        0.57
-      ],
-      [
-        "uhd",
-        0.569
-      ],
-      [
-        "cd",
-        0.567
-      ],
-      [
-        "laserdisc",
-        0.566
-      ],
-      [
-        "minidisc",
-        0.566
-      ],
-      [
-        "cd rw",
-        0.565
-      ],
-      [
-        "disc",
-        0.553
-      ],
-      [
-        "high definition",
-        0.548
-      ],
-      [
-        "high definition television",
-        0.541
-      ],
-      [
-        "digipak",
-        0.541
-      ],
-      [
-        "hdtv",
-        0.539
-      ],
-      [
-        "dtv",
-        0.536
-      ],
-      [
-        "boxsets",
-        0.524
-      ],
-      [
-        "standard definition",
-        0.52
-      ],
-      [
-        "boxset",
-        0.517
-      ],
-      [
-        "cd rom",
-        0.515
-      ],
-      [
-        "discman",
-        0.514
-      ],
-      [
-        "videocassette",
-        0.51
-      ],
-      [
-        "bd",
-        0.509
-      ],
-      [
-        "recordable",
-        0.506
-      ],
-      [
-        "dv",
-        0.504
-      ]
-    ],
-    "DV9000": [
-      [
-        "dvd",
-        0.77
-      ],
-      [
-        "hd dvd",
-        0.769
-      ],
-      [
-        "dvds",
-        0.757
-      ],
-      [
-        "sacd",
-        0.725
-      ],
-      [
-        "dvd ram",
-        0.715
-      ],
-      [
-        "dvd burner",
-        0.701
-      ],
-      [
-        "blu ray disc",
-        0.692
-      ],
-      [
-        "dvd rom",
-        0.689
-      ],
-      [
-        "vcd",
-        0.674
-      ],
-      [
-        "blu ray",
-        0.674
-      ],
-      [
-        "optical disc",
-        0.67
-      ],
-      [
-        "hd",
-        0.641
-      ],
-      [
-        "video recorder",
-        0.628
-      ],
-      [
-        "pvr",
-        0.624
-      ],
-      [
-        "dvr",
-        0.622
-      ],
-      [
-        "videodisc",
-        0.615
-      ],
-      [
-        "videocassette recorder",
-        0.601
-      ],
-      [
-        "vcr",
-        0.595
-      ],
-      [
-        "tivo",
-        0.58
-      ],
-      [
-        "vhs",
-        0.579
-      ],
-      [
-        "discs",
-        0.573
-      ],
-      [
-        "video cassette recorder",
-        0.57
-      ],
-      [
-        "uhd",
-        0.569
-      ],
-      [
-        "cd",
-        0.567
-      ],
-      [
-        "laserdisc",
-        0.566
-      ],
-      [
-        "minidisc",
-        0.566
-      ],
-      [
-        "cd rw",
-        0.565
-      ],
-      [
-        "disc",
-        0.553
-      ],
-      [
-        "high definition",
-        0.548
-      ],
-      [
-        "high definition television",
-        0.541
-      ],
-      [
-        "digipak",
-        0.541
-      ],
-      [
-        "hdtv",
-        0.539
-      ],
-      [
-        "dtv",
-        0.536
-      ],
-      [
-        "boxsets",
-        0.524
-      ],
-      [
-        "standard definition",
-        0.52
-      ],
-      [
-        "boxset",
-        0.517
-      ],
-      [
-        "cd rom",
-        0.515
-      ],
-      [
-        "discman",
-        0.514
-      ],
-      [
-        "videocassette",
-        0.51
-      ],
-      [
-        "bd",
-        0.509
-      ],
-      [
-        "recordable",
-        0.506
-      ],
-      [
-        "dv",
-        0.504
       ]
     ],
     "Dell": [
@@ -1234,60 +773,6 @@
       ],
       [
         "windows",
-        0.503
-      ]
-    ],
-    "Eee": [
-      [
-        "eeee",
-        0.584
-      ],
-      [
-        "netbook",
-        0.525
-      ]
-    ],
-    "EeePC": [
-      [
-        "ooooo",
-        0.538
-      ],
-      [
-        "oooo",
-        0.519
-      ],
-      [
-        "oooooh",
-        0.507
-      ],
-      [
-        "aaaah",
-        0.504
-      ]
-    ],
-    "Emachines": [
-      [
-        "emaciated",
-        0.711
-      ],
-      [
-        "emaciation",
-        0.674
-      ],
-      [
-        "emacs",
-        0.647
-      ],
-      [
-        "emac",
-        0.618
-      ],
-      [
-        "imac",
-        0.509
-      ],
-      [
-        "gaunt",
         0.503
       ]
     ],
@@ -1519,430 +1004,174 @@
         0.531
       ]
     ],
-    "IPad": [
+    "Intel": [
       [
-        "ipod touch",
-        0.77
+        "wintel",
+        0.682
       ],
       [
-        "ipads",
-        0.74
+        "amd",
+        0.679
       ],
       [
-        "iphones",
-        0.717
-      ],
-      [
-        "itouch",
-        0.711
-      ],
-      [
-        "ipod",
-        0.711
-      ],
-      [
-        "ibooks",
-        0.664
-      ],
-      [
-        "idevice",
-        0.66
-      ],
-      [
-        "apple computer",
-        0.656
-      ],
-      [
-        "amazon kindle",
-        0.652
-      ],
-      [
-        "ios",
-        0.648
-      ],
-      [
-        "ibook",
-        0.634
-      ],
-      [
-        "smartphone",
-        0.626
-      ],
-      [
-        "tablet",
-        0.597
-      ],
-      [
-        "macbook",
-        0.591
-      ],
-      [
-        "imac",
-        0.59
-      ],
-      [
-        "apple",
-        0.585
-      ],
-      [
-        "smartphones",
-        0.581
-      ],
-      [
-        "ipods",
-        0.57
-      ],
-      [
-        "apps",
-        0.566
-      ],
-      [
-        "e reader",
-        0.566
-      ],
-      [
-        "blackberry smartphone",
-        0.561
-      ],
-      [
-        "android",
-        0.55
-      ],
-      [
-        "phablet",
-        0.55
-      ],
-      [
-        "app",
-        0.549
-      ],
-      [
-        "androids",
-        0.548
-      ],
-      [
-        "netbook",
-        0.543
-      ],
-      [
-        "tree fruit",
-        0.539
-      ],
-      [
-        "tablet pc",
-        0.533
-      ],
-      [
-        "n##",
-        0.529
-      ],
-      [
-        "tablets",
-        0.526
-      ],
-      [
-        "jailbroken",
-        0.525
-      ],
-      [
-        "ultrabook",
-        0.517
-      ],
-      [
-        "zune",
-        0.517
-      ],
-      [
-        "facetime",
-        0.516
-      ],
-      [
-        "mobile phones",
-        0.511
-      ],
-      [
-        "mobile device",
-        0.51
-      ],
-      [
-        "mp3 player",
-        0.508
-      ],
-      [
-        "powerbook",
-        0.507
-      ]
-    ],
-    "ITouch": [
-      [
-        "ipad",
-        0.711
-      ],
-      [
-        "iphone",
-        0.702
-      ],
-      [
-        "iphone 3gs",
-        0.701
-      ],
-      [
-        "iphone 3g",
-        0.687
-      ],
-      [
-        "apple computer",
-        0.68
-      ],
-      [
-        "mp3 player",
-        0.629
-      ],
-      [
-        "ipods",
-        0.616
-      ],
-      [
-        "touch",
-        0.606
-      ],
-      [
-        "ibook",
-        0.581
-      ],
-      [
-        "imac",
-        0.575
-      ],
-      [
-        "click wheel",
-        0.57
-      ],
-      [
-        "tactile sensation",
-        0.565
-      ],
-      [
-        "ibooks",
-        0.563
-      ],
-      [
-        "idevice",
-        0.559
-      ],
-      [
-        "toucheth",
-        0.537
-      ],
-      [
-        "zune",
-        0.534
-      ],
-      [
-        "france telecom",
-        0.533
-      ],
-      [
-        "iphones",
-        0.53
-      ],
-      [
-        "multitouch",
-        0.517
-      ],
-      [
-        "macbook",
-        0.516
-      ],
-      [
-        "discman",
-        0.508
-      ],
-      [
-        "touchscreen",
-        0.504
-      ]
-    ],
-    "Iphone": [
-      [
-        "smartphone",
-        0.746
-      ],
-      [
-        "ipod touch",
-        0.733
-      ],
-      [
-        "blackberry smartphone",
-        0.713
-      ],
-      [
-        "ios",
-        0.708
-      ],
-      [
-        "itouch",
-        0.702
-      ],
-      [
-        "ipod",
-        0.689
-      ],
-      [
-        "n##",
-        0.68
-      ],
-      [
-        "idevice",
+        "pentium",
         0.678
       ],
       [
-        "camera phone",
-        0.659
+        "cpu",
+        0.669
       ],
       [
-        "mobile phones",
-        0.656
+        "computer hardware",
+        0.653
       ],
       [
-        "smartphones",
-        0.642
+        "chipset",
+        0.652
       ],
       [
-        "androids",
-        0.633
+        "celeron",
+        0.645
       ],
       [
-        "app",
-        0.633
+        "motherboard",
+        0.623
       ],
       [
-        "android",
-        0.632
+        "x##",
+        0.617
       ],
       [
-        "blackberry",
-        0.632
+        "mobo",
+        0.613
       ],
       [
-        "apps",
-        0.627
+        "motherboards",
+        0.612
       ],
       [
-        "crackberry",
-        0.624
+        "gpu",
+        0.59
       ],
       [
-        "blackberries",
-        0.604
+        "uniprocessor",
+        0.59
       ],
       [
-        "apple computer",
-        0.584
+        "ssd",
+        0.586
       ],
       [
-        "cellphone",
+        "mainboard",
+        0.581
+      ],
+      [
+        "chipmaker",
         0.577
       ],
       [
-        "apple",
-        0.574
+        "quad core",
+        0.572
       ],
       [
-        "droid",
-        0.573
+        "microprocessor",
+        0.568
       ],
       [
-        "whatsapp",
+        "processor",
         0.565
       ],
       [
-        "phablet",
-        0.562
+        "microprocessors",
+        0.557
       ],
       [
-        "jailbroken",
-        0.562
+        "dual core",
+        0.552
       ],
       [
-        "keitai",
-        0.561
+        "ultrabook",
+        0.548
       ],
       [
-        "cellphones",
-        0.559
+        "microarchitecture",
+        0.538
       ],
       [
-        "ipads",
-        0.556
+        "transputer",
+        0.536
       ],
       [
-        "phones",
-        0.554
+        "superscalar",
+        0.535
       ],
       [
-        "ibooks",
-        0.553
+        "so dimm",
+        0.534
       ],
       [
-        "facetime",
-        0.551
+        "compaq",
+        0.529
       ],
       [
-        "cameraphone",
-        0.544
+        "dell",
+        0.526
       ],
       [
-        "tree fruit",
-        0.544
+        "ahci",
+        0.524
       ],
       [
-        "mobile device",
-        0.542
-      ],
-      [
-        "handphone",
-        0.537
-      ],
-      [
-        "handset",
-        0.532
-      ],
-      [
-        "mobile phone",
+        "multicore",
         0.522
       ],
       [
-        "ipods",
+        "microcode",
+        0.522
+      ],
+      [
+        "overclock",
         0.521
       ],
       [
-        "cellular telephone",
+        "ibm",
+        0.521
+      ],
+      [
+        "multiprocessor",
         0.517
       ],
       [
-        "zune",
-        0.517
+        "gpus",
+        0.515
       ],
       [
-        "verizon",
-        0.517
+        "southbridge",
+        0.511
       ],
       [
-        "cell phone",
-        0.513
+        "uefi",
+        0.508
       ],
       [
-        "blackberrys",
-        0.51
-      ],
-      [
-        "ibook",
+        "risc",
         0.507
       ],
       [
-        "amazon kindle",
+        "agp",
+        0.506
+      ],
+      [
+        "msi",
         0.505
+      ],
+      [
+        "quadcore",
+        0.504
+      ],
+      [
+        "overclocking",
+        0.504
       ]
     ],
     "Iphoto": [
@@ -2463,168 +1692,6 @@
         0.502
       ]
     ],
-    "LAPTOPS": [
-      [
-        "laptop computers",
-        0.792
-      ],
-      [
-        "netbook",
-        0.769
-      ],
-      [
-        "ultrabook",
-        0.758
-      ],
-      [
-        "ibook",
-        0.718
-      ],
-      [
-        "ultraportable",
-        0.705
-      ],
-      [
-        "macbook",
-        0.698
-      ],
-      [
-        "notebooks",
-        0.697
-      ],
-      [
-        "powerbook",
-        0.685
-      ],
-      [
-        "thinkpad",
-        0.65
-      ],
-      [
-        "notebook",
-        0.65
-      ],
-      [
-        "lappy",
-        0.643
-      ],
-      [
-        "imac",
-        0.643
-      ],
-      [
-        "palmtop",
-        0.629
-      ],
-      [
-        "computers",
-        0.619
-      ],
-      [
-        "ibooks",
-        0.612
-      ],
-      [
-        "chromebook",
-        0.604
-      ],
-      [
-        "desktops",
-        0.587
-      ],
-      [
-        "omnibook",
-        0.579
-      ],
-      [
-        "port replicator",
-        0.575
-      ],
-      [
-        "chiclet keyboard",
-        0.571
-      ],
-      [
-        "wintel",
-        0.569
-      ],
-      [
-        "emac",
-        0.566
-      ],
-      [
-        "apple computer",
-        0.559
-      ],
-      [
-        "computer",
-        0.553
-      ],
-      [
-        "ipads",
-        0.546
-      ],
-      [
-        "compaq",
-        0.543
-      ],
-      [
-        "desktop",
-        0.541
-      ],
-      [
-        "ssd",
-        0.537
-      ],
-      [
-        "chromebox",
-        0.537
-      ],
-      [
-        "ipods",
-        0.532
-      ],
-      [
-        "hackintosh",
-        0.532
-      ],
-      [
-        "so dimm",
-        0.531
-      ],
-      [
-        "motherboards",
-        0.524
-      ],
-      [
-        "pcs",
-        0.522
-      ],
-      [
-        "motherboard",
-        0.521
-      ],
-      [
-        "pocket pc",
-        0.517
-      ],
-      [
-        "tablet pc",
-        0.513
-      ],
-      [
-        "docking station",
-        0.511
-      ],
-      [
-        "inspiron",
-        0.504
-      ],
-      [
-        "computor",
-        0.504
-      ]
-    ],
     "LCD": [
       [
         "gcf",
@@ -3077,302 +2144,6 @@
         0.537
       ]
     ],
-    "Logitech": [
-      [
-        "probit",
-        0.752
-      ],
-      [
-        "logistic",
-        0.738
-      ],
-      [
-        "nonparametric",
-        0.674
-      ],
-      [
-        "bivariate",
-        0.673
-      ],
-      [
-        "multicollinearity",
-        0.651
-      ],
-      [
-        "lognormal",
-        0.647
-      ],
-      [
-        "univariate",
-        0.64
-      ],
-      [
-        "anova",
-        0.64
-      ],
-      [
-        "multivariate analysis",
-        0.637
-      ],
-      [
-        "regression analysis",
-        0.624
-      ],
-      [
-        "ancova",
-        0.624
-      ],
-      [
-        "studentized",
-        0.624
-      ],
-      [
-        "heteroscedasticity",
-        0.622
-      ],
-      [
-        "homoscedasticity",
-        0.621
-      ],
-      [
-        "linear regression",
-        0.621
-      ],
-      [
-        "multivariate",
-        0.615
-      ],
-      [
-        "garch",
-        0.586
-      ],
-      [
-        "statistical",
-        0.584
-      ],
-      [
-        "statistics",
-        0.578
-      ],
-      [
-        "covariate",
-        0.575
-      ],
-      [
-        "overfitting",
-        0.568
-      ],
-      [
-        "multinomial",
-        0.566
-      ],
-      [
-        "cumulant",
-        0.566
-      ],
-      [
-        "geostatistical",
-        0.56
-      ],
-      [
-        "geostatistics",
-        0.555
-      ],
-      [
-        "ergodic",
-        0.55
-      ],
-      [
-        "hypergeometric",
-        0.546
-      ],
-      [
-        "statistic",
-        0.538
-      ],
-      [
-        "quantile",
-        0.537
-      ],
-      [
-        "periodogram",
-        0.536
-      ],
-      [
-        "variate",
-        0.527
-      ],
-      [
-        "correlation coefficient",
-        0.521
-      ],
-      [
-        "logistics",
-        0.516
-      ],
-      [
-        "autocorrelation",
-        0.512
-      ],
-      [
-        "bayesian",
-        0.511
-      ],
-      [
-        "mathematics",
-        0.51
-      ],
-      [
-        "covariance",
-        0.509
-      ],
-      [
-        "confidence interval",
-        0.507
-      ],
-      [
-        "logistical",
-        0.506
-      ],
-      [
-        "diophantine",
-        0.504
-      ],
-      [
-        "interquartile range",
-        0.504
-      ],
-      [
-        "statistical analysis",
-        0.503
-      ],
-      [
-        "poisson",
-        0.503
-      ]
-    ],
-    "MACBOOK": [
-      [
-        "ibooks",
-        0.799
-      ],
-      [
-        "apple computer",
-        0.786
-      ],
-      [
-        "hackintosh",
-        0.712
-      ],
-      [
-        "laptops",
-        0.698
-      ],
-      [
-        "macs",
-        0.686
-      ],
-      [
-        "laptop",
-        0.681
-      ],
-      [
-        "g4",
-        0.672
-      ],
-      [
-        "netbook",
-        0.668
-      ],
-      [
-        "macintosh",
-        0.665
-      ],
-      [
-        "macintoshes",
-        0.656
-      ],
-      [
-        "mac",
-        0.655
-      ],
-      [
-        "laptop computer",
-        0.654
-      ],
-      [
-        "g3",
-        0.642
-      ],
-      [
-        "ultrabook",
-        0.628
-      ],
-      [
-        "thinkpad",
-        0.615
-      ],
-      [
-        "laptop computers",
-        0.615
-      ],
-      [
-        "ipod touch",
-        0.606
-      ],
-      [
-        "ipad",
-        0.591
-      ],
-      [
-        "ultraportable",
-        0.589
-      ],
-      [
-        "apple",
-        0.58
-      ],
-      [
-        "ipod",
-        0.571
-      ],
-      [
-        "macos",
-        0.55
-      ],
-      [
-        "chromebook",
-        0.546
-      ],
-      [
-        "wintel",
-        0.536
-      ],
-      [
-        "tree fruit",
-        0.534
-      ],
-      [
-        "port replicator",
-        0.531
-      ],
-      [
-        "itouch",
-        0.516
-      ],
-      [
-        "trackpad",
-        0.516
-      ],
-      [
-        "ipods",
-        0.514
-      ],
-      [
-        "omnibook",
-        0.514
-      ]
-    ],
     "MBP": [
       [
         "gigabit",
@@ -3463,94 +2234,186 @@
         0.503
       ]
     ],
-    "MBPs": [
+    "MOTHERBOARD": [
       [
-        "gigabit",
-        0.76
+        "computer hardware",
+        0.731
       ],
       [
-        "kilobit",
-        0.705
+        "atx",
+        0.722
       ],
       [
-        "megabytes",
-        0.705
+        "cpu",
+        0.679
       ],
       [
-        "megabyte",
-        0.69
+        "chipset",
+        0.662
       ],
       [
-        "bps",
-        0.685
+        "overclocking",
+        0.639
       ],
       [
-        "mb",
-        0.656
+        "bios",
+        0.624
       ],
       [
-        "kb",
-        0.64
+        "intel",
+        0.623
       ],
       [
-        "kib",
-        0.64
+        "overclock",
+        0.611
       ],
       [
-        "kilobyte",
-        0.632
-      ],
-      [
-        "kbit",
-        0.617
-      ],
-      [
-        "terabit",
-        0.594
-      ],
-      [
-        "gb",
+        "gpu",
         0.589
       ],
       [
-        "gigabytes",
-        0.587
-      ],
-      [
-        "bitrate",
-        0.577
+        "ahci",
+        0.588
       ],
       [
         "gigabyte",
+        0.586
+      ],
+      [
+        "heatsink",
+        0.586
+      ],
+      [
+        "southbridge",
+        0.582
+      ],
+      [
+        "dimm",
+        0.577
+      ],
+      [
+        "pentium",
+        0.572
+      ],
+      [
+        "so dimm",
         0.57
       ],
       [
-        "baud",
-        0.537
+        "msi",
+        0.569
       ],
       [
-        "ghz",
+        "northbridge",
+        0.56
+      ],
+      [
+        "agp",
+        0.56
+      ],
+      [
+        "ssd",
+        0.555
+      ],
+      [
+        "graphics card",
+        0.554
+      ],
+      [
+        "celeron",
+        0.549
+      ],
+      [
+        "supermicro",
         0.532
       ],
       [
-        "gigahertz",
-        0.526
+        "backplane",
+        0.532
       ],
       [
-        "vdsl",
-        0.526
+        "evga",
+        0.531
       ],
       [
-        "terabyte",
-        0.522
+        "amd",
+        0.528
       ],
       [
-        "xdsl",
+        "uefi",
+        0.524
+      ],
+      [
+        "soyo",
+        0.521
+      ],
+      [
+        "laptops",
+        0.521
+      ],
+      [
+        "pcmcia",
+        0.521
+      ],
+      [
+        "sata",
+        0.515
+      ],
+      [
+        "dfi",
+        0.514
+      ],
+      [
+        "iwill",
         0.513
       ],
       [
-        "megahertz",
+        "wintel",
+        0.513
+      ],
+      [
+        "uniprocessor",
+        0.513
+      ],
+      [
+        "serial ata",
+        0.51
+      ],
+      [
+        "hdd",
+        0.509
+      ],
+      [
+        "vga",
+        0.507
+      ],
+      [
+        "ultrabook",
+        0.504
+      ],
+      [
+        "processor",
         0.503
+      ],
+      [
+        "pci",
+        0.503
+      ],
+      [
+        "netbook",
+        0.503
+      ],
+      [
+        "usb adapter",
+        0.503
+      ],
+      [
+        "port replicator",
+        0.502
+      ],
+      [
+        "abit",
+        0.501
       ]
     ],
     "Mac": [
@@ -3937,194 +2800,6 @@
         0.506
       ]
     ],
-    "NB205": [
-      [
-        "nbs",
-        0.626
-      ],
-      [
-        "nbe",
-        0.609
-      ],
-      [
-        "cbn",
-        0.51
-      ]
-    ],
-    "NETBOOK": [
-      [
-        "laptop computer",
-        0.788
-      ],
-      [
-        "laptops",
-        0.769
-      ],
-      [
-        "laptop computers",
-        0.747
-      ],
-      [
-        "chromebox",
-        0.724
-      ],
-      [
-        "wintel",
-        0.687
-      ],
-      [
-        "palmtop",
-        0.678
-      ],
-      [
-        "ibook",
-        0.671
-      ],
-      [
-        "macbook",
-        0.668
-      ],
-      [
-        "notebook",
-        0.653
-      ],
-      [
-        "lappy",
-        0.645
-      ],
-      [
-        "thinkpad",
-        0.643
-      ],
-      [
-        "tablet pc",
-        0.64
-      ],
-      [
-        "powerbook",
-        0.637
-      ],
-      [
-        "notebooks",
-        0.619
-      ],
-      [
-        "port replicator",
-        0.609
-      ],
-      [
-        "touchpad",
-        0.608
-      ],
-      [
-        "imac",
-        0.598
-      ],
-      [
-        "desktops",
-        0.596
-      ],
-      [
-        "phablet",
-        0.595
-      ],
-      [
-        "hackintosh",
-        0.594
-      ],
-      [
-        "tablet",
-        0.589
-      ],
-      [
-        "desktop",
-        0.589
-      ],
-      [
-        "ibooks",
-        0.586
-      ],
-      [
-        "ssd",
-        0.573
-      ],
-      [
-        "docking station",
-        0.571
-      ],
-      [
-        "chiclet keyboard",
-        0.562
-      ],
-      [
-        "bloatware",
-        0.554
-      ],
-      [
-        "smartphone",
-        0.548
-      ],
-      [
-        "trackpad",
-        0.545
-      ],
-      [
-        "ipad",
-        0.543
-      ],
-      [
-        "tablets",
-        0.541
-      ],
-      [
-        "pocket pc",
-        0.53
-      ],
-      [
-        "apple computer",
-        0.527
-      ],
-      [
-        "amazon kindle",
-        0.525
-      ],
-      [
-        "eee",
-        0.525
-      ],
-      [
-        "emac",
-        0.517
-      ],
-      [
-        "omnibook",
-        0.516
-      ],
-      [
-        "mobo",
-        0.513
-      ],
-      [
-        "wireless adapter",
-        0.51
-      ],
-      [
-        "acer",
-        0.51
-      ],
-      [
-        "hdd",
-        0.506
-      ],
-      [
-        "multiboot",
-        0.504
-      ],
-      [
-        "motherboard",
-        0.503
-      ]
-    ],
     "Netbook": [
       [
         "laptop computer",
@@ -4299,68 +2974,6 @@
         0.503
       ]
     ],
-    "Notebook": [
-      [
-        "jotter",
-        0.754
-      ],
-      [
-        "laptop",
-        0.707
-      ],
-      [
-        "laptop computer",
-        0.698
-      ],
-      [
-        "ultrabook",
-        0.682
-      ],
-      [
-        "laptop computers",
-        0.67
-      ],
-      [
-        "netbook",
-        0.653
-      ],
-      [
-        "laptops",
-        0.65
-      ],
-      [
-        "memo pad",
-        0.649
-      ],
-      [
-        "notepad",
-        0.619
-      ],
-      [
-        "cahier",
-        0.599
-      ],
-      [
-        "notepads",
-        0.581
-      ],
-      [
-        "palmtop",
-        0.58
-      ],
-      [
-        "ultraportable",
-        0.577
-      ],
-      [
-        "identification card",
-        0.524
-      ],
-      [
-        "ring binder",
-        0.513
-      ]
-    ],
     "Notebooks": [
       [
         "laptops",
@@ -4425,6 +3038,80 @@
       [
         "pencils",
         0.502
+      ]
+    ],
+    "Nvidia": [
+      [
+        "programming",
+        0.737
+      ],
+      [
+        "programing",
+        0.676
+      ],
+      [
+        "4gl",
+        0.65
+      ],
+      [
+        "hll",
+        0.608
+      ],
+      [
+        "metaprogramming",
+        0.597
+      ],
+      [
+        "programmers",
+        0.576
+      ],
+      [
+        "programmer",
+        0.555
+      ],
+      [
+        "application programming interface",
+        0.535
+      ],
+      [
+        "ifdef",
+        0.532
+      ],
+      [
+        "computer programming",
+        0.53
+      ],
+      [
+        "mvcc",
+        0.528
+      ],
+      [
+        "toplevel",
+        0.519
+      ],
+      [
+        "postgresql",
+        0.517
+      ],
+      [
+        "software",
+        0.516
+      ],
+      [
+        "object oriented",
+        0.513
+      ],
+      [
+        "programming language",
+        0.51
+      ],
+      [
+        "palm os",
+        0.508
+      ],
+      [
+        "raii",
+        0.504
       ]
     ],
     "OS": [
@@ -4682,124 +3369,6 @@
         0.501
       ]
     ],
-    "Pc": [
-      [
-        "pcs",
-        0.701
-      ],
-      [
-        "personal computers",
-        0.666
-      ],
-      [
-        "wireless adapter",
-        0.64
-      ],
-      [
-        "hackintosh",
-        0.586
-      ],
-      [
-        "computer",
-        0.578
-      ],
-      [
-        "mac",
-        0.566
-      ],
-      [
-        "wintel",
-        0.565
-      ],
-      [
-        "desktop",
-        0.555
-      ],
-      [
-        "wpc",
-        0.554
-      ],
-      [
-        "palmtop",
-        0.553
-      ],
-      [
-        "computer hardware",
-        0.551
-      ],
-      [
-        "emac",
-        0.543
-      ],
-      [
-        "macs",
-        0.541
-      ],
-      [
-        "desktops",
-        0.536
-      ],
-      [
-        "extended memory",
-        0.534
-      ],
-      [
-        "imac",
-        0.531
-      ],
-      [
-        "usb adapter",
-        0.53
-      ],
-      [
-        "computor",
-        0.524
-      ],
-      [
-        "laptop",
-        0.522
-      ],
-      [
-        "macintosh",
-        0.517
-      ],
-      [
-        "ammy",
-        0.514
-      ],
-      [
-        "laptop computer",
-        0.513
-      ],
-      [
-        "ms dos",
-        0.512
-      ],
-      [
-        "psp",
-        0.512
-      ],
-      [
-        "macintoshes",
-        0.511
-      ],
-      [
-        "ps 2",
-        0.509
-      ],
-      [
-        "docking station",
-        0.506
-      ],
-      [
-        "port replicator",
-        0.505
-      ],
-      [
-        "pocket pc",
-        0.503
-      ]
-    ],
     "Pentium": [
       [
         "celeron",
@@ -5052,46 +3621,170 @@
         0.502
       ]
     ],
-    "TOSHIBA": [
+    "SATA": [
       [
-        "hitachi",
-        0.688
+        "serial ata",
+        0.799
       ],
       [
-        "panasonic",
-        0.659
+        "ahci",
+        0.78
       ],
       [
-        "fujitsu",
-        0.643
+        "iscsi",
+        0.768
       ],
       [
-        "sony",
-        0.637
+        "ip san",
+        0.75
       ],
       [
-        "matsushita",
-        0.617
+        "eide",
+        0.723
       ],
       [
-        "sony pictures entertainment",
+        "atapi",
+        0.717
+      ],
+      [
+        "parallel ata",
+        0.699
+      ],
+      [
+        "jbod",
+        0.692
+      ],
+      [
+        "hdd",
+        0.661
+      ],
+      [
+        "ssd",
+        0.645
+      ],
+      [
+        "usb",
+        0.642
+      ],
+      [
+        "pata",
+        0.625
+      ],
+      [
+        "hard drives",
+        0.613
+      ],
+      [
+        "universal serial bus",
+        0.605
+      ],
+      [
+        "hard disk drive",
         0.603
       ],
       [
-        "jvc",
-        0.6
+        "harddrive",
+        0.598
       ],
       [
-        "samsung",
-        0.584
+        "pcmcia",
+        0.596
       ],
       [
-        "compaq",
+        "agp",
+        0.583
+      ],
+      [
+        "hard drive",
+        0.581
+      ],
+      [
+        "firewire",
         0.58
       ],
       [
-        "nec",
-        0.526
+        "pci",
+        0.573
+      ],
+      [
+        "ide",
+        0.573
+      ],
+      [
+        "gigabit",
+        0.566
+      ],
+      [
+        "s.m.a.r.t",
+        0.555
+      ],
+      [
+        "computer hardware",
+        0.55
+      ],
+      [
+        "hard disk",
+        0.549
+      ],
+      [
+        "usb adapter",
+        0.544
+      ],
+      [
+        "gigabyte",
+        0.538
+      ],
+      [
+        "non volatile memory",
+        0.537
+      ],
+      [
+        "harddisk",
+        0.536
+      ],
+      [
+        "diskless",
+        0.532
+      ],
+      [
+        "gb",
+        0.528
+      ],
+      [
+        "disk drive",
+        0.523
+      ],
+      [
+        "terabyte",
+        0.522
+      ],
+      [
+        "sdhc",
+        0.521
+      ],
+      [
+        "motherboards",
+        0.521
+      ],
+      [
+        "hot pluggable",
+        0.518
+      ],
+      [
+        "microdrive",
+        0.517
+      ],
+      [
+        "motherboard",
+        0.515
+      ],
+      [
+        "mobo",
+        0.514
+      ],
+      [
+        "hot swap",
+        0.507
       ]
     ],
     "Toshiba": [
@@ -5476,208 +4169,6 @@
         0.501
       ]
     ],
-    "VAIO": [
-      [
-        "mimamsa",
-        0.676
-      ],
-      [
-        "vaikuntha",
-        0.673
-      ],
-      [
-        "bhagat",
-        0.67
-      ],
-      [
-        "maitreyi",
-        0.667
-      ],
-      [
-        "hinduism",
-        0.667
-      ],
-      [
-        "swaminarayan",
-        0.666
-      ],
-      [
-        "vaishnava",
-        0.664
-      ],
-      [
-        "subhadra",
-        0.66
-      ],
-      [
-        "vasudeva",
-        0.658
-      ],
-      [
-        "advaita",
-        0.657
-      ],
-      [
-        "bharata",
-        0.651
-      ],
-      [
-        "narayan",
-        0.651
-      ],
-      [
-        "kamsa",
-        0.647
-      ],
-      [
-        "devaki",
-        0.638
-      ],
-      [
-        "maheshwari",
-        0.637
-      ],
-      [
-        "narasimha",
-        0.637
-      ],
-      [
-        "narayana",
-        0.637
-      ],
-      [
-        "hindu",
-        0.634
-      ],
-      [
-        "brahmana",
-        0.634
-      ],
-      [
-        "rukmini",
-        0.631
-      ],
-      [
-        "ambika",
-        0.631
-      ],
-      [
-        "bhakti",
-        0.63
-      ],
-      [
-        "hindu deity",
-        0.63
-      ],
-      [
-        "amaravati",
-        0.626
-      ],
-      [
-        "moksa",
-        0.625
-      ],
-      [
-        "renuka",
-        0.625
-      ],
-      [
-        "vinayaka",
-        0.624
-      ],
-      [
-        "tirtha",
-        0.622
-      ],
-      [
-        "sanyasi",
-        0.621
-      ],
-      [
-        "lalita",
-        0.619
-      ],
-      [
-        "ahalya",
-        0.616
-      ],
-      [
-        "gopala",
-        0.613
-      ],
-      [
-        "sampradaya",
-        0.612
-      ],
-      [
-        "puranas",
-        0.612
-      ],
-      [
-        "kausalya",
-        0.61
-      ],
-      [
-        "agnihotri",
-        0.609
-      ],
-      [
-        "bhaga",
-        0.607
-      ],
-      [
-        "bhatta",
-        0.607
-      ],
-      [
-        "sadhaka",
-        0.606
-      ],
-      [
-        "diksha",
-        0.606
-      ],
-      [
-        "karna",
-        0.606
-      ],
-      [
-        "atharvaveda",
-        0.605
-      ],
-      [
-        "durga",
-        0.605
-      ],
-      [
-        "sadhu",
-        0.605
-      ],
-      [
-        "yadava",
-        0.604
-      ],
-      [
-        "vyasa",
-        0.604
-      ],
-      [
-        "sannyasin",
-        0.604
-      ],
-      [
-        "sannyasi",
-        0.603
-      ],
-      [
-        "naraka",
-        0.603
-      ],
-      [
-        "vijaya",
-        0.603
-      ]
-    ],
     "Vaio": [
       [
         "mimamsa",
@@ -5991,10 +4482,18 @@
         0.503
       ]
     ],
-    "XPS": [
+    "XP": [
       [
-        "inspiron",
-        0.527
+        "yp",
+        0.755
+      ],
+      [
+        "exp",
+        0.539
+      ],
+      [
+        "role playing games",
+        0.511
       ]
     ],
     "acer": [
@@ -6069,68 +4568,6 @@
         0.503
       ]
     ],
-    "alienware": [
-      [
-        "alien",
-        0.751
-      ],
-      [
-        "alienage",
-        0.699
-      ],
-      [
-        "alienate",
-        0.69
-      ],
-      [
-        "alienated",
-        0.664
-      ],
-      [
-        "aliens",
-        0.648
-      ],
-      [
-        "space invader",
-        0.626
-      ],
-      [
-        "alienation",
-        0.617
-      ],
-      [
-        "estrange",
-        0.614
-      ],
-      [
-        "alienating",
-        0.608
-      ],
-      [
-        "space invaders",
-        0.566
-      ],
-      [
-        "extraterrestrial",
-        0.557
-      ],
-      [
-        "estrangement",
-        0.542
-      ],
-      [
-        "alien abduction",
-        0.529
-      ],
-      [
-        "extraterrestrials",
-        0.519
-      ],
-      [
-        "estranged",
-        0.514
-      ]
-    ],
     "antivirus": [
       [
         "antispyware",
@@ -6195,24 +4632,6 @@
       [
         "avast",
         0.508
-      ]
-    ],
-    "asus": [
-      [
-        "asuncion",
-        0.699
-      ],
-      [
-        "asunci\u00f3n",
-        0.655
-      ],
-      [
-        "paraguay",
-        0.538
-      ],
-      [
-        "asu",
-        0.506
       ]
     ],
     "battery": [
@@ -6313,6 +4732,136 @@
         0.519
       ]
     ],
+    "bloatware": [
+      [
+        "uninstall",
+        0.671
+      ],
+      [
+        "uninstaller",
+        0.664
+      ],
+      [
+        "adware",
+        0.664
+      ],
+      [
+        "spyware",
+        0.651
+      ],
+      [
+        "antispyware",
+        0.614
+      ],
+      [
+        "preloaded",
+        0.609
+      ],
+      [
+        "abandonware",
+        0.604
+      ],
+      [
+        "uninstalled",
+        0.604
+      ],
+      [
+        "malware",
+        0.592
+      ],
+      [
+        "preinstalled",
+        0.583
+      ],
+      [
+        "palm os",
+        0.572
+      ],
+      [
+        "uninstallation",
+        0.572
+      ],
+      [
+        "beos",
+        0.561
+      ],
+      [
+        "antivirus software",
+        0.557
+      ],
+      [
+        "software",
+        0.555
+      ],
+      [
+        "netbook",
+        0.554
+      ],
+      [
+        "mac os",
+        0.55
+      ],
+      [
+        "chromebook",
+        0.547
+      ],
+      [
+        "wintel",
+        0.547
+      ],
+      [
+        "defragmenter",
+        0.545
+      ],
+      [
+        "uefi",
+        0.54
+      ],
+      [
+        "final cut pro",
+        0.535
+      ],
+      [
+        "windows nt",
+        0.533
+      ],
+      [
+        "freeware",
+        0.529
+      ],
+      [
+        "service pack",
+        0.518
+      ],
+      [
+        "antivirus",
+        0.516
+      ],
+      [
+        "opensuse",
+        0.512
+      ],
+      [
+        "chromebox",
+        0.512
+      ],
+      [
+        "unbootable",
+        0.505
+      ],
+      [
+        "shareware",
+        0.505
+      ],
+      [
+        "start menu",
+        0.503
+      ],
+      [
+        "bootup",
+        0.501
+      ]
+    ],
     "bluetooth": [
       [
         "wireless",
@@ -6397,282 +4946,6 @@
       [
         "gprs",
         0.501
-      ]
-    ],
-    "booting": [
-      [
-        "boot",
-        0.794
-      ],
-      [
-        "multiboot",
-        0.771
-      ],
-      [
-        "booted",
-        0.742
-      ],
-      [
-        "bootable",
-        0.732
-      ],
-      [
-        "netboot",
-        0.717
-      ],
-      [
-        "bootup",
-        0.713
-      ],
-      [
-        "cowboy boot",
-        0.711
-      ],
-      [
-        "boot loader",
-        0.678
-      ],
-      [
-        "booter",
-        0.671
-      ],
-      [
-        "unbootable",
-        0.636
-      ],
-      [
-        "bootloader",
-        0.596
-      ],
-      [
-        "ugg boot",
-        0.589
-      ],
-      [
-        "runlevel",
-        0.578
-      ],
-      [
-        "ugg boots",
-        0.57
-      ],
-      [
-        "wellie",
-        0.56
-      ],
-      [
-        "rebooting",
-        0.551
-      ],
-      [
-        "boots",
-        0.548
-      ],
-      [
-        "reboot",
-        0.527
-      ],
-      [
-        "reboots",
-        0.525
-      ],
-      [
-        "jackboot",
-        0.524
-      ],
-      [
-        "diskless",
-        0.509
-      ],
-      [
-        "gumboot",
-        0.504
-      ],
-      [
-        "bootstrap",
-        0.503
-      ]
-    ],
-    "cd": [
-      [
-        "sacd",
-        0.795
-      ],
-      [
-        "digipak",
-        0.768
-      ],
-      [
-        "compact discs",
-        0.768
-      ],
-      [
-        "disc",
-        0.735
-      ],
-      [
-        "dvd",
-        0.729
-      ],
-      [
-        "cd rom",
-        0.719
-      ],
-      [
-        "discs",
-        0.709
-      ],
-      [
-        "vcd",
-        0.703
-      ],
-      [
-        "cd changer",
-        0.693
-      ],
-      [
-        "dvds",
-        0.688
-      ],
-      [
-        "liner notes",
-        0.679
-      ],
-      [
-        "compact disks",
-        0.666
-      ],
-      [
-        "dvd burner",
-        0.664
-      ],
-      [
-        "cd5",
-        0.664
-      ],
-      [
-        "cassettes",
-        0.663
-      ],
-      [
-        "cassette",
-        0.659
-      ],
-      [
-        "videodisc",
-        0.657
-      ],
-      [
-        "dvd rom",
-        0.653
-      ],
-      [
-        "audio cassette",
-        0.651
-      ],
-      [
-        "dvd ram",
-        0.644
-      ],
-      [
-        "minidisc",
-        0.638
-      ],
-      [
-        "audiocassette",
-        0.637
-      ],
-      [
-        "cd3",
-        0.624
-      ],
-      [
-        "hd dvd",
-        0.616
-      ],
-      [
-        "cassette tape",
-        0.612
-      ],
-      [
-        "discman",
-        0.606
-      ],
-      [
-        "disk",
-        0.593
-      ],
-      [
-        "blu ray disc",
-        0.593
-      ],
-      [
-        "disks",
-        0.585
-      ],
-      [
-        "laserdisc",
-        0.583
-      ],
-      [
-        "blu ray",
-        0.566
-      ],
-      [
-        "boxset",
-        0.565
-      ],
-      [
-        "diskette",
-        0.564
-      ],
-      [
-        "boxed set",
-        0.552
-      ],
-      [
-        "albums",
-        0.552
-      ],
-      [
-        "mp3",
-        0.551
-      ],
-      [
-        "recordable",
-        0.55
-      ],
-      [
-        "boxsets",
-        0.55
-      ],
-      [
-        "audiotape",
-        0.536
-      ],
-      [
-        "videocassette",
-        0.52
-      ],
-      [
-        "lp",
-        0.518
-      ],
-      [
-        "vinyl",
-        0.511
-      ],
-      [
-        "album",
-        0.509
-      ],
-      [
-        "vhs",
-        0.507
-      ],
-      [
-        "floppy disc",
-        0.507
       ]
     ],
     "charger": [
@@ -6945,230 +5218,6 @@
       [
         "quad core",
         0.504
-      ]
-    ],
-    "compaq": [
-      [
-        "hewlett packard",
-        0.682
-      ],
-      [
-        "thinkpad",
-        0.615
-      ],
-      [
-        "omnibook",
-        0.586
-      ],
-      [
-        "dell",
-        0.582
-      ],
-      [
-        "toshiba",
-        0.58
-      ],
-      [
-        "laptop",
-        0.57
-      ],
-      [
-        "ibm",
-        0.551
-      ],
-      [
-        "extensa",
-        0.549
-      ],
-      [
-        "compaq computer",
-        0.547
-      ],
-      [
-        "laptops",
-        0.543
-      ],
-      [
-        "intel",
-        0.529
-      ],
-      [
-        "laptop computer",
-        0.507
-      ]
-    ],
-    "compuer": [
-      [
-        "computational",
-        0.67
-      ],
-      [
-        "computation",
-        0.666
-      ],
-      [
-        "computations",
-        0.66
-      ],
-      [
-        "computability",
-        0.658
-      ],
-      [
-        "computer",
-        0.636
-      ],
-      [
-        "computing",
-        0.636
-      ],
-      [
-        "computerised",
-        0.63
-      ],
-      [
-        "microcomputing",
-        0.63
-      ],
-      [
-        "computor",
-        0.629
-      ],
-      [
-        "computer literate",
-        0.618
-      ],
-      [
-        "compute",
-        0.615
-      ],
-      [
-        "number cruncher",
-        0.603
-      ],
-      [
-        "computerize",
-        0.602
-      ],
-      [
-        "supercomputing",
-        0.597
-      ],
-      [
-        "computes",
-        0.594
-      ],
-      [
-        "computerized",
-        0.59
-      ],
-      [
-        "supercomputer",
-        0.575
-      ],
-      [
-        "computers",
-        0.573
-      ],
-      [
-        "computer science",
-        0.569
-      ],
-      [
-        "utility computing",
-        0.562
-      ],
-      [
-        "computerization",
-        0.557
-      ],
-      [
-        "ammy",
-        0.552
-      ],
-      [
-        "computationally",
-        0.55
-      ],
-      [
-        "quantum computing",
-        0.547
-      ],
-      [
-        "aspi",
-        0.544
-      ],
-      [
-        "udt",
-        0.544
-      ],
-      [
-        "computerisation",
-        0.539
-      ],
-      [
-        "supercomputers",
-        0.534
-      ],
-      [
-        "recompute",
-        0.534
-      ],
-      [
-        "eniac",
-        0.533
-      ],
-      [
-        "computerizing",
-        0.532
-      ],
-      [
-        "computed",
-        0.527
-      ],
-      [
-        "pseudocode",
-        0.527
-      ],
-      [
-        "minicomputer",
-        0.525
-      ],
-      [
-        "data processing",
-        0.517
-      ],
-      [
-        "transputer",
-        0.512
-      ],
-      [
-        "zero client",
-        0.511
-      ],
-      [
-        "enterprise application integration",
-        0.511
-      ],
-      [
-        "miggy",
-        0.508
-      ],
-      [
-        "difference engine",
-        0.507
-      ],
-      [
-        "scientific computing",
-        0.504
-      ],
-      [
-        "memory module",
-        0.503
-      ],
-      [
-        "algorithmics",
-        0.501
       ]
     ],
     "computer": [
@@ -7565,28 +5614,6 @@
         0.561
       ]
     ],
-    "d620": [
-      [
-        "d###",
-        0.636
-      ],
-      [
-        "d####",
-        0.59
-      ],
-      [
-        "dice",
-        0.553
-      ],
-      [
-        "b1",
-        0.525
-      ],
-      [
-        "a7",
-        0.506
-      ]
-    ],
     "dell": [
       [
         "compaq",
@@ -7965,6 +5992,200 @@
         0.508
       ]
     ],
+    "disk": [
+      [
+        "disc",
+        0.793
+      ],
+      [
+        "diskless",
+        0.779
+      ],
+      [
+        "floppy disc",
+        0.774
+      ],
+      [
+        "diskette",
+        0.765
+      ],
+      [
+        "harddisk",
+        0.738
+      ],
+      [
+        "data storage",
+        0.726
+      ],
+      [
+        "hard disk",
+        0.722
+      ],
+      [
+        "discs",
+        0.72
+      ],
+      [
+        "floppy disk",
+        0.71
+      ],
+      [
+        "hard disk drive",
+        0.707
+      ],
+      [
+        "optical disc",
+        0.698
+      ],
+      [
+        "harddrive",
+        0.681
+      ],
+      [
+        "hdd",
+        0.673
+      ],
+      [
+        "hard drive",
+        0.672
+      ],
+      [
+        "disk drive",
+        0.651
+      ],
+      [
+        "cd rw",
+        0.65
+      ],
+      [
+        "jbod",
+        0.648
+      ],
+      [
+        "dasd",
+        0.639
+      ],
+      [
+        "floppy",
+        0.638
+      ],
+      [
+        "cd rom",
+        0.629
+      ],
+      [
+        "minidisc",
+        0.629
+      ],
+      [
+        "intervertebral disc",
+        0.62
+      ],
+      [
+        "hard drives",
+        0.609
+      ],
+      [
+        "discoid",
+        0.608
+      ],
+      [
+        "bootable",
+        0.599
+      ],
+      [
+        "microdrive",
+        0.593
+      ],
+      [
+        "cd",
+        0.593
+      ],
+      [
+        "removable disk",
+        0.587
+      ],
+      [
+        "floppy disks",
+        0.58
+      ],
+      [
+        "dvd rom",
+        0.577
+      ],
+      [
+        "dvd ram",
+        0.565
+      ],
+      [
+        "defragment",
+        0.556
+      ],
+      [
+        "atapi",
+        0.552
+      ],
+      [
+        "dvd burner",
+        0.542
+      ],
+      [
+        "compact disc",
+        0.538
+      ],
+      [
+        "discoidal",
+        0.537
+      ],
+      [
+        "dvd",
+        0.536
+      ],
+      [
+        "repartitioning",
+        0.531
+      ],
+      [
+        "ahci",
+        0.53
+      ],
+      [
+        "scsi",
+        0.53
+      ],
+      [
+        "compact discs",
+        0.525
+      ],
+      [
+        "defragmenter",
+        0.522
+      ],
+      [
+        "filesystem",
+        0.519
+      ],
+      [
+        "defrag",
+        0.517
+      ],
+      [
+        "s.m.a.r.t",
+        0.515
+      ],
+      [
+        "fileserver",
+        0.51
+      ],
+      [
+        "repartition",
+        0.51
+      ],
+      [
+        "unbootable",
+        0.509
+      ]
+    ],
     "dv4": [
       [
         "dvd",
@@ -8289,58 +6510,6 @@
         0.503
       ]
     ],
-    "eMachine": [
-      [
-        "emaciated",
-        0.711
-      ],
-      [
-        "emaciation",
-        0.674
-      ],
-      [
-        "emacs",
-        0.647
-      ],
-      [
-        "emac",
-        0.618
-      ],
-      [
-        "imac",
-        0.509
-      ],
-      [
-        "gaunt",
-        0.503
-      ]
-    ],
-    "eMachines": [
-      [
-        "emaciated",
-        0.711
-      ],
-      [
-        "emaciation",
-        0.674
-      ],
-      [
-        "emacs",
-        0.647
-      ],
-      [
-        "emac",
-        0.618
-      ],
-      [
-        "imac",
-        0.509
-      ],
-      [
-        "gaunt",
-        0.503
-      ]
-    ],
     "ethernet": [
       [
         "ieee",
@@ -8659,60 +6828,6 @@
         0.509
       ]
     ],
-    "gadget": [
-      [
-        "gizmo",
-        0.727
-      ],
-      [
-        "gadgetry",
-        0.671
-      ],
-      [
-        "gadgeteer",
-        0.666
-      ],
-      [
-        "gismo",
-        0.645
-      ],
-      [
-        "contraption",
-        0.625
-      ],
-      [
-        "doodah",
-        0.614
-      ],
-      [
-        "gizmos",
-        0.608
-      ],
-      [
-        "doodad",
-        0.6
-      ],
-      [
-        "widget",
-        0.564
-      ],
-      [
-        "doohickey",
-        0.541
-      ],
-      [
-        "device",
-        0.535
-      ],
-      [
-        "thingamajig",
-        0.528
-      ],
-      [
-        "widgets",
-        0.501
-      ]
-    ],
     "gaming": [
       [
         "gamers",
@@ -8953,174 +7068,74 @@
         0.504
       ]
     ],
-    "harddrives": [
+    "graphics": [
       [
-        "disk drive",
-        0.775
+        "graphic",
+        0.77
       ],
       [
-        "jbod",
-        0.754
+        "vector graphics",
+        0.751
       ],
       [
-        "floppy disc",
-        0.748
+        "graphical",
+        0.658
       ],
       [
-        "floppy disk",
-        0.683
-      ],
-      [
-        "disk",
-        0.681
-      ],
-      [
-        "memory stick",
-        0.675
-      ],
-      [
-        "disks",
-        0.668
-      ],
-      [
-        "diskless",
-        0.665
-      ],
-      [
-        "data storage",
-        0.652
-      ],
-      [
-        "ahci",
-        0.643
-      ],
-      [
-        "diskette",
-        0.637
-      ],
-      [
-        "s.m.a.r.t",
-        0.634
-      ],
-      [
-        "microdrive",
+        "deep color",
         0.633
       ],
       [
-        "ssd",
-        0.63
+        "graphic artist",
+        0.569
       ],
       [
-        "usb",
-        0.625
+        "pixel shader",
+        0.567
       ],
       [
-        "minidisc",
-        0.613
+        "graphically",
+        0.559
       ],
       [
-        "memory card",
-        0.606
-      ],
-      [
-        "cd rw",
-        0.601
-      ],
-      [
-        "sata",
-        0.598
-      ],
-      [
-        "serial ata",
-        0.589
-      ],
-      [
-        "atapi",
-        0.585
-      ],
-      [
-        "optical disc",
-        0.584
-      ],
-      [
-        "hd",
-        0.583
-      ],
-      [
-        "dasd",
-        0.566
-      ],
-      [
-        "scsi",
+        "cel shading",
         0.554
       ],
       [
-        "floppy disks",
-        0.553
+        "opengl",
+        0.548
       ],
       [
-        "terabyte",
-        0.55
-      ],
-      [
-        "defragment",
-        0.55
-      ],
-      [
-        "computer hardware",
-        0.545
-      ],
-      [
-        "repartitioning",
-        0.542
-      ],
-      [
-        "dvd rom",
+        "raster image",
         0.541
       ],
       [
-        "bootable",
-        0.54
+        "shader",
+        0.534
       ],
       [
-        "flash memory",
-        0.539
+        "vram",
+        0.532
       ],
       [
-        "hhd",
-        0.538
+        "visuals",
+        0.529
       ],
       [
-        "non volatile memory",
-        0.528
-      ],
-      [
-        "cd rom",
+        "anti aliasing",
         0.524
       ],
       [
-        "usb port",
-        0.524
-      ],
-      [
-        "floppy",
-        0.523
-      ],
-      [
-        "dvd ram",
-        0.516
-      ],
-      [
-        "defrag",
+        "gpu",
         0.514
       ],
       [
-        "repartition",
+        "antialiasing",
         0.513
       ],
       [
-        "usb adapter",
-        0.504
+        "rasterization",
+        0.506
       ]
     ],
     "hardrive": [
@@ -9221,6 +7236,148 @@
       [
         "firmware",
         0.503
+      ]
+    ],
+    "headphone": [
+      [
+        "altec lansing",
+        0.736
+      ],
+      [
+        "earplug",
+        0.642
+      ],
+      [
+        "headsets",
+        0.633
+      ],
+      [
+        "condenser microphone",
+        0.622
+      ],
+      [
+        "earplugs",
+        0.616
+      ],
+      [
+        "microphone",
+        0.611
+      ],
+      [
+        "discman",
+        0.586
+      ],
+      [
+        "microphones",
+        0.585
+      ],
+      [
+        "subwoofer",
+        0.574
+      ],
+      [
+        "earpieces",
+        0.572
+      ],
+      [
+        "binaural",
+        0.571
+      ],
+      [
+        "speakers",
+        0.566
+      ],
+      [
+        "phono",
+        0.566
+      ],
+      [
+        "hi fi",
+        0.564
+      ],
+      [
+        "earmuff",
+        0.557
+      ],
+      [
+        "earmuffs",
+        0.554
+      ],
+      [
+        "speakerphone",
+        0.552
+      ],
+      [
+        "stereos",
+        0.551
+      ],
+      [
+        "audiophile",
+        0.551
+      ],
+      [
+        "stereo",
+        0.55
+      ],
+      [
+        "walkman",
+        0.543
+      ],
+      [
+        "bluetooth",
+        0.537
+      ],
+      [
+        "ipod",
+        0.536
+      ],
+      [
+        "ear",
+        0.532
+      ],
+      [
+        "mic",
+        0.527
+      ],
+      [
+        "loudspeaker",
+        0.525
+      ],
+      [
+        "amplifier",
+        0.52
+      ],
+      [
+        "boombox",
+        0.52
+      ],
+      [
+        "walkmans",
+        0.518
+      ],
+      [
+        "monaural",
+        0.515
+      ],
+      [
+        "audio",
+        0.515
+      ],
+      [
+        "mp3 player",
+        0.515
+      ],
+      [
+        "stereophonic",
+        0.507
+      ],
+      [
+        "mics",
+        0.506
+      ],
+      [
+        "ipod touch",
+        0.501
       ]
     ],
     "headphones": [
@@ -9485,140 +7642,6 @@
         0.506
       ]
     ],
-    "iMac": [
-      [
-        "g4",
-        0.746
-      ],
-      [
-        "g3",
-        0.722
-      ],
-      [
-        "hackintosh",
-        0.717
-      ],
-      [
-        "macs",
-        0.691
-      ],
-      [
-        "macintosh",
-        0.687
-      ],
-      [
-        "ipod touch",
-        0.686
-      ],
-      [
-        "mac",
-        0.679
-      ],
-      [
-        "macintoshes",
-        0.677
-      ],
-      [
-        "ipod",
-        0.666
-      ],
-      [
-        "laptops",
-        0.643
-      ],
-      [
-        "laptop",
-        0.632
-      ],
-      [
-        "laptop computer",
-        0.628
-      ],
-      [
-        "laptop computers",
-        0.603
-      ],
-      [
-        "apple",
-        0.598
-      ],
-      [
-        "netbook",
-        0.598
-      ],
-      [
-        "ipad",
-        0.59
-      ],
-      [
-        "ultrabook",
-        0.584
-      ],
-      [
-        "itouch",
-        0.575
-      ],
-      [
-        "thinkpad",
-        0.573
-      ],
-      [
-        "ipods",
-        0.566
-      ],
-      [
-        "macos",
-        0.565
-      ],
-      [
-        "port replicator",
-        0.561
-      ],
-      [
-        "tree fruit",
-        0.559
-      ],
-      [
-        "wintel",
-        0.548
-      ],
-      [
-        "ultraportable",
-        0.544
-      ],
-      [
-        "computer",
-        0.544
-      ],
-      [
-        "desktop",
-        0.541
-      ],
-      [
-        "omnibook",
-        0.535
-      ],
-      [
-        "docking station",
-        0.532
-      ],
-      [
-        "pc",
-        0.531
-      ],
-      [
-        "granny smith",
-        0.516
-      ],
-      [
-        "chromebook",
-        0.514
-      ],
-      [
-        "desktops",
-        0.509
-      ]
-    ],
     "iPod": [
       [
         "ipods",
@@ -9739,16 +7762,6 @@
       [
         "amazon kindle",
         0.51
-      ]
-    ],
-    "imovie": [
-      [
-        "imogene",
-        0.601
-      ],
-      [
-        "imogen",
-        0.536
       ]
     ],
     "ipad": [
@@ -10653,7 +8666,6 @@
         0.51
       ]
     ],
-    "lapdesk": [],
     "laptop": [
       [
         "ultrabook",
@@ -11610,72 +9622,6 @@
         0.514
       ]
     ],
-    "macs": [
-      [
-        "emac",
-        0.792
-      ],
-      [
-        "apple computer",
-        0.708
-      ],
-      [
-        "hackintosh",
-        0.691
-      ],
-      [
-        "imac",
-        0.691
-      ],
-      [
-        "macbook",
-        0.686
-      ],
-      [
-        "macos",
-        0.622
-      ],
-      [
-        "ibook",
-        0.619
-      ],
-      [
-        "powerbook",
-        0.617
-      ],
-      [
-        "ibooks",
-        0.592
-      ],
-      [
-        "g4",
-        0.548
-      ],
-      [
-        "mack",
-        0.548
-      ],
-      [
-        "pc",
-        0.541
-      ],
-      [
-        "g3",
-        0.536
-      ],
-      [
-        "apple",
-        0.524
-      ],
-      [
-        "macks",
-        0.521
-      ],
-      [
-        "tree fruit",
-        0.506
-      ]
-    ],
     "motherboard": [
       [
         "computer hardware",
@@ -11856,152 +9802,6 @@
       [
         "abit",
         0.501
-      ]
-    ],
-    "motherboards": [
-      [
-        "atx",
-        0.7
-      ],
-      [
-        "computer hardware",
-        0.682
-      ],
-      [
-        "chipset",
-        0.659
-      ],
-      [
-        "cpu",
-        0.633
-      ],
-      [
-        "overclocking",
-        0.623
-      ],
-      [
-        "bios",
-        0.614
-      ],
-      [
-        "intel",
-        0.612
-      ],
-      [
-        "overclock",
-        0.587
-      ],
-      [
-        "ahci",
-        0.583
-      ],
-      [
-        "dimm",
-        0.578
-      ],
-      [
-        "gigabyte",
-        0.575
-      ],
-      [
-        "so dimm",
-        0.573
-      ],
-      [
-        "msi",
-        0.569
-      ],
-      [
-        "southbridge",
-        0.567
-      ],
-      [
-        "pentium",
-        0.564
-      ],
-      [
-        "gpu",
-        0.556
-      ],
-      [
-        "heatsink",
-        0.546
-      ],
-      [
-        "northbridge",
-        0.537
-      ],
-      [
-        "agp",
-        0.537
-      ],
-      [
-        "soyo",
-        0.533
-      ],
-      [
-        "evga",
-        0.531
-      ],
-      [
-        "celeron",
-        0.531
-      ],
-      [
-        "graphics card",
-        0.53
-      ],
-      [
-        "ssd",
-        0.53
-      ],
-      [
-        "amd",
-        0.528
-      ],
-      [
-        "laptops",
-        0.524
-      ],
-      [
-        "sata",
-        0.521
-      ],
-      [
-        "uefi",
-        0.52
-      ],
-      [
-        "tyan",
-        0.518
-      ],
-      [
-        "supermicro",
-        0.518
-      ],
-      [
-        "iwill",
-        0.517
-      ],
-      [
-        "pcmcia",
-        0.513
-      ],
-      [
-        "serial ata",
-        0.511
-      ],
-      [
-        "abit",
-        0.51
-      ],
-      [
-        "backplane",
-        0.509
-      ],
-      [
-        "dfi",
-        0.509
       ]
     ],
     "mouse": [
@@ -12438,44 +10238,6 @@
       [
         "motherboard",
         0.503
-      ]
-    ],
-    "newegg": [
-      [
-        "newer",
-        0.717
-      ],
-      [
-        "newest",
-        0.707
-      ],
-      [
-        "newish",
-        0.598
-      ],
-      [
-        "newell",
-        0.588
-      ],
-      [
-        "newel",
-        0.582
-      ],
-      [
-        "new",
-        0.581
-      ],
-      [
-        "latest",
-        0.573
-      ],
-      [
-        "ceno",
-        0.557
-      ],
-      [
-        "recent",
-        0.505
       ]
     ],
     "notebook": [
@@ -12973,16 +10735,6 @@
         0.598
       ]
     ],
-    "portables": [
-      [
-        "portable",
-        0.553
-      ],
-      [
-        "ultraportable",
-        0.53
-      ]
-    ],
     "printer": [
       [
         "laserjet",
@@ -13157,6 +10909,152 @@
         0.502
       ]
     ],
+    "processor": [
+      [
+        "superscalar",
+        0.764
+      ],
+      [
+        "cpu",
+        0.761
+      ],
+      [
+        "coprocessor",
+        0.739
+      ],
+      [
+        "multiprocessor",
+        0.717
+      ],
+      [
+        "microprocessor",
+        0.707
+      ],
+      [
+        "celeron",
+        0.694
+      ],
+      [
+        "pentium",
+        0.682
+      ],
+      [
+        "fpu",
+        0.671
+      ],
+      [
+        "computer hardware",
+        0.662
+      ],
+      [
+        "multiprocessing",
+        0.656
+      ],
+      [
+        "gpu",
+        0.644
+      ],
+      [
+        "mpu",
+        0.627
+      ],
+      [
+        "quad core",
+        0.619
+      ],
+      [
+        "dual core",
+        0.617
+      ],
+      [
+        "transputer",
+        0.592
+      ],
+      [
+        "overclock",
+        0.587
+      ],
+      [
+        "x##",
+        0.585
+      ],
+      [
+        "microprocessors",
+        0.585
+      ],
+      [
+        "multicore",
+        0.584
+      ],
+      [
+        "risc",
+        0.574
+      ],
+      [
+        "intel",
+        0.565
+      ],
+      [
+        "chipset",
+        0.563
+      ],
+      [
+        "microcode",
+        0.562
+      ],
+      [
+        "quadcore",
+        0.561
+      ],
+      [
+        "vram",
+        0.544
+      ],
+      [
+        "overclocking",
+        0.538
+      ],
+      [
+        "vrm",
+        0.536
+      ],
+      [
+        "southbridge",
+        0.521
+      ],
+      [
+        "northbridge",
+        0.52
+      ],
+      [
+        "extended memory",
+        0.519
+      ],
+      [
+        "microarchitecture",
+        0.519
+      ],
+      [
+        "microcontroller",
+        0.518
+      ],
+      [
+        "cisc",
+        0.517
+      ],
+      [
+        "agp",
+        0.509
+      ],
+      [
+        "processing",
+        0.506
+      ],
+      [
+        "motherboard",
+        0.503
+      ]
+    ],
     "projector": [
       [
         "overhead projector",
@@ -13187,6 +11085,36 @@
         0.506
       ]
     ],
+    "quad-core": [
+      [
+        "quad",
+        0.658
+      ],
+      [
+        "quads",
+        0.613
+      ],
+      [
+        "quadrat",
+        0.578
+      ],
+      [
+        "quadruplet",
+        0.564
+      ],
+      [
+        "quadrangle",
+        0.555
+      ],
+      [
+        "quadrilateral",
+        0.522
+      ],
+      [
+        "quadruple",
+        0.505
+      ]
+    ],
     "radeon": [
       [
         "rade",
@@ -13203,148 +11131,6 @@
       [
         "rader",
         0.514
-      ]
-    ],
-    "router": [
-      [
-        "dhcp",
-        0.644
-      ],
-      [
-        "subnet",
-        0.614
-      ],
-      [
-        "internet protocol",
-        0.613
-      ],
-      [
-        "vpn",
-        0.609
-      ],
-      [
-        "routing",
-        0.584
-      ],
-      [
-        "modems",
-        0.58
-      ],
-      [
-        "modem",
-        0.577
-      ],
-      [
-        "ethernet",
-        0.564
-      ],
-      [
-        "ipv6",
-        0.563
-      ],
-      [
-        "wlan",
-        0.559
-      ],
-      [
-        "anycast",
-        0.558
-      ],
-      [
-        "l2tp",
-        0.556
-      ],
-      [
-        "pppoe",
-        0.552
-      ],
-      [
-        "ipv4",
-        0.551
-      ],
-      [
-        "netmask",
-        0.551
-      ],
-      [
-        "cable modem",
-        0.551
-      ],
-      [
-        "traceroute",
-        0.548
-      ],
-      [
-        "subnetwork",
-        0.546
-      ],
-      [
-        "datagram",
-        0.544
-      ],
-      [
-        "icmp",
-        0.544
-      ],
-      [
-        "ip",
-        0.543
-      ],
-      [
-        "internetwork",
-        0.538
-      ],
-      [
-        "ip address",
-        0.538
-      ],
-      [
-        "ethernet cable",
-        0.537
-      ],
-      [
-        "networking",
-        0.536
-      ],
-      [
-        "pptp",
-        0.531
-      ],
-      [
-        "subnetting",
-        0.523
-      ],
-      [
-        "peap",
-        0.519
-      ],
-      [
-        "tcp ip",
-        0.516
-      ],
-      [
-        "supernet",
-        0.513
-      ],
-      [
-        "wi fi",
-        0.509
-      ],
-      [
-        "wireless",
-        0.508
-      ],
-      [
-        "tkip",
-        0.505
-      ],
-      [
-        "adsl",
-        0.504
-      ],
-      [
-        "optical transceiver",
-        0.502
       ]
     ],
     "screen": [
@@ -13419,188 +11205,6 @@
       [
         "screengrab",
         0.501
-      ]
-    ],
-    "smartphone": [
-      [
-        "camera phone",
-        0.794
-      ],
-      [
-        "mobile phones",
-        0.784
-      ],
-      [
-        "iphone 3gs",
-        0.763
-      ],
-      [
-        "iphone 3g",
-        0.748
-      ],
-      [
-        "iphone",
-        0.746
-      ],
-      [
-        "cameraphone",
-        0.744
-      ],
-      [
-        "mobile device",
-        0.742
-      ],
-      [
-        "cellphone",
-        0.728
-      ],
-      [
-        "cellphones",
-        0.716
-      ],
-      [
-        "keitai",
-        0.712
-      ],
-      [
-        "mobile phone",
-        0.691
-      ],
-      [
-        "handset",
-        0.678
-      ],
-      [
-        "mobile",
-        0.678
-      ],
-      [
-        "dual sim",
-        0.673
-      ],
-      [
-        "phones",
-        0.672
-      ],
-      [
-        "cellular telephone",
-        0.671
-      ],
-      [
-        "cell phone",
-        0.665
-      ],
-      [
-        "handphone",
-        0.665
-      ],
-      [
-        "android",
-        0.664
-      ],
-      [
-        "androids",
-        0.66
-      ],
-      [
-        "idevice",
-        0.646
-      ],
-      [
-        "cellular phone",
-        0.644
-      ],
-      [
-        "tablet pc",
-        0.63
-      ],
-      [
-        "smartwatch",
-        0.629
-      ],
-      [
-        "ipad",
-        0.626
-      ],
-      [
-        "iphones",
-        0.626
-      ],
-      [
-        "cell phones",
-        0.622
-      ],
-      [
-        "long term evolution",
-        0.612
-      ],
-      [
-        "perambulating",
-        0.607
-      ],
-      [
-        "droid",
-        0.605
-      ],
-      [
-        "samsung",
-        0.602
-      ],
-      [
-        "huawei",
-        0.6
-      ],
-      [
-        "phone",
-        0.598
-      ],
-      [
-        "blackberry",
-        0.594
-      ],
-      [
-        "crackberry",
-        0.591
-      ],
-      [
-        "cellular phones",
-        0.591
-      ],
-      [
-        "nokia",
-        0.585
-      ],
-      [
-        "blackberries",
-        0.581
-      ],
-      [
-        "apps",
-        0.576
-      ],
-      [
-        "wcdma",
-        0.575
-      ],
-      [
-        "app",
-        0.57
-      ],
-      [
-        "tablet",
-        0.562
-      ],
-      [
-        "pda",
-        0.557
-      ],
-      [
-        "netbook",
-        0.548
-      ],
-      [
-        "whatsapp",
-        0.548
       ]
     ],
     "software": [
@@ -13785,64 +11389,6 @@
         0.514
       ]
     ],
-    "sony": [
-      [
-        "panasonic",
-        0.685
-      ],
-      [
-        "toshiba",
-        0.637
-      ],
-      [
-        "jvc",
-        0.545
-      ],
-      [
-        "walkmans",
-        0.541
-      ],
-      [
-        "samsung",
-        0.541
-      ],
-      [
-        "playstation",
-        0.533
-      ],
-      [
-        "walkman",
-        0.531
-      ],
-      [
-        "handheld console",
-        0.528
-      ],
-      [
-        "discman",
-        0.528
-      ],
-      [
-        "ps3",
-        0.521
-      ],
-      [
-        "xbox",
-        0.519
-      ],
-      [
-        "nintendo",
-        0.516
-      ],
-      [
-        "psx",
-        0.511
-      ],
-      [
-        "kinect",
-        0.503
-      ]
-    ],
     "spyware": [
       [
         "malware",
@@ -13999,6 +11545,96 @@
       [
         "nec",
         0.526
+      ]
+    ],
+    "touch-pad": [
+      [
+        "tactile sensation",
+        0.778
+      ],
+      [
+        "toucheth",
+        0.689
+      ],
+      [
+        "multitouch",
+        0.652
+      ],
+      [
+        "touching",
+        0.629
+      ],
+      [
+        "multi touch",
+        0.62
+      ],
+      [
+        "tactility",
+        0.613
+      ],
+      [
+        "toucher",
+        0.601
+      ],
+      [
+        "france telecom",
+        0.599
+      ],
+      [
+        "tactile",
+        0.59
+      ],
+      [
+        "tactus",
+        0.587
+      ],
+      [
+        "touchscreen",
+        0.584
+      ],
+      [
+        "haptic",
+        0.571
+      ],
+      [
+        "touchable",
+        0.569
+      ],
+      [
+        "touch screen",
+        0.566
+      ],
+      [
+        "touchtone",
+        0.56
+      ],
+      [
+        "touched",
+        0.555
+      ],
+      [
+        "feely",
+        0.544
+      ],
+      [
+        "itouch",
+        0.524
+      ],
+      [
+        "haptics",
+        0.523
+      ],
+      [
+        "human machine interface",
+        0.522
+      ],
+      [
+        "in touch",
+        0.513
+      ],
+      [
+        "touchy",
+        0.511
       ]
     ],
     "touchpad": [
@@ -14309,212 +11945,66 @@
         0.506
       ]
     ],
-    "tv": [
-      [
-        "tellies",
-        0.799
-      ],
-      [
-        "telecasting",
-        0.791
-      ],
-      [
-        "boob tube",
-        0.784
-      ],
-      [
-        "#####ish",
-        0.774
-      ],
-      [
-        "ab fab",
-        0.728
-      ],
-      [
-        "television stations",
-        0.727
-      ],
-      [
-        "upn",
-        0.717
-      ],
-      [
-        "bskyb",
-        0.717
-      ],
-      [
-        "untelevised",
-        0.71
-      ],
-      [
-        "teevee",
-        0.699
-      ],
-      [
-        "telecaster",
-        0.69
-      ],
-      [
-        "broadcasts",
-        0.684
-      ],
-      [
-        "broadcast",
-        0.681
-      ],
-      [
-        "telecast",
-        0.681
-      ],
-      [
-        "digital converter box",
-        0.68
-      ],
-      [
-        "televisual",
-        0.674
-      ],
-      [
-        "deutsche welle",
-        0.668
-      ],
-      [
-        "televised",
-        0.668
-      ],
-      [
-        "broadcasting",
-        0.666
-      ],
-      [
-        "cbs",
-        0.661
-      ],
-      [
-        "sitcoms",
-        0.659
-      ],
-      [
-        "rebroadcaster",
-        0.659
-      ],
-      [
-        "cablevision",
-        0.656
-      ],
-      [
-        "televise",
-        0.655
-      ],
-      [
-        "broadcaster",
-        0.646
-      ],
-      [
-        "playout",
-        0.643
-      ],
-      [
-        "pay per view",
-        0.637
-      ],
-      [
-        "chyron",
-        0.636
-      ],
-      [
-        "dvr",
-        0.636
-      ],
-      [
-        "broadcasted",
-        0.633
-      ],
-      [
-        "televisi\u00f3n",
-        0.632
-      ],
-      [
-        "channels",
-        0.63
-      ],
-      [
-        "tnn",
-        0.627
-      ],
-      [
-        "superstation",
-        0.626
-      ],
-      [
-        "broadcasters",
-        0.625
-      ],
-      [
-        "uhd",
-        0.619
-      ],
-      [
-        "high definition television",
-        0.612
-      ],
-      [
-        "stb",
-        0.611
-      ],
-      [
-        "pvr",
-        0.611
-      ],
-      [
-        "itv",
-        0.606
-      ]
-    ],
-    "typewriter": [
-      [
-        "qwerty keyboard",
-        0.694
-      ],
+    "typing": [
       [
         "typewriting",
-        0.683
-      ],
-      [
-        "typer",
-        0.65
-      ],
-      [
-        "typewritten",
-        0.611
+        0.731
       ],
       [
         "typist",
-        0.587
+        0.716
       ],
       [
-        "teleprinter",
-        0.578
+        "nimble fingers",
+        0.713
       ],
       [
-        "selectric",
-        0.553
+        "keyboarding",
+        0.71
       ],
       [
-        "typing",
+        "typer",
+        0.709
+      ],
+      [
+        "mistyping",
+        0.682
+      ],
+      [
+        "mistype",
+        0.63
+      ],
+      [
+        "qwerty keyboard",
+        0.626
+      ],
+      [
+        "mistyped",
+        0.615
+      ],
+      [
+        "typed",
+        0.581
+      ],
+      [
+        "carpal tunnel syndrome",
+        0.563
+      ],
+      [
+        "kpm",
+        0.559
+      ],
+      [
+        "keyboard",
+        0.557
+      ],
+      [
+        "typewriter",
         0.548
       ],
       [
-        "teletypewriter",
-        0.516
-      ],
-      [
-        "longhand",
-        0.511
-      ],
-      [
-        "teletype",
-        0.504
+        "typists",
+        0.519
       ]
     ],
     "usb": [
@@ -15042,204 +12532,6 @@
         0.503
       ]
     ],
-    "wireless": [
-      [
-        "wimax",
-        0.798
-      ],
-      [
-        "wi fi",
-        0.75
-      ],
-      [
-        "wlan",
-        0.738
-      ],
-      [
-        "femtocell",
-        0.704
-      ],
-      [
-        "wifi",
-        0.7
-      ],
-      [
-        "cordless",
-        0.699
-      ],
-      [
-        "cordless phone",
-        0.651
-      ],
-      [
-        "wireless modem",
-        0.641
-      ],
-      [
-        "hspa",
-        0.618
-      ],
-      [
-        "hsdpa",
-        0.616
-      ],
-      [
-        "dect",
-        0.609
-      ],
-      [
-        "bluetooth",
-        0.607
-      ],
-      [
-        "cable modem",
-        0.604
-      ],
-      [
-        "usb modem",
-        0.601
-      ],
-      [
-        "radiocommunication",
-        0.597
-      ],
-      [
-        "radiotelephone",
-        0.597
-      ],
-      [
-        "broadband",
-        0.596
-      ],
-      [
-        "gprs",
-        0.596
-      ],
-      [
-        "at t",
-        0.594
-      ],
-      [
-        "dual band",
-        0.592
-      ],
-      [
-        "###.##i",
-        0.59
-      ],
-      [
-        "modems",
-        0.586
-      ],
-      [
-        "radiotelephony",
-        0.583
-      ],
-      [
-        "modem",
-        0.572
-      ],
-      [
-        "long term evolution",
-        0.571
-      ],
-      [
-        "2.5g",
-        0.57
-      ],
-      [
-        "wideband",
-        0.568
-      ],
-      [
-        "umts",
-        0.568
-      ],
-      [
-        "wcdma",
-        0.565
-      ],
-      [
-        "radiocommunications",
-        0.564
-      ],
-      [
-        "telecommunications",
-        0.563
-      ],
-      [
-        "lte",
-        0.56
-      ],
-      [
-        "ethernet cable",
-        0.559
-      ],
-      [
-        "subscriber line",
-        0.555
-      ],
-      [
-        "antenna",
-        0.554
-      ],
-      [
-        "antennas",
-        0.547
-      ],
-      [
-        "optical transceiver",
-        0.547
-      ],
-      [
-        "marconi",
-        0.542
-      ],
-      [
-        "radiotelegraph",
-        0.542
-      ],
-      [
-        "gsm",
-        0.539
-      ],
-      [
-        "structured wiring",
-        0.539
-      ],
-      [
-        "usb adapter",
-        0.534
-      ],
-      [
-        "wireless telegraphy",
-        0.533
-      ],
-      [
-        "transceiver",
-        0.532
-      ],
-      [
-        "catv",
-        0.532
-      ],
-      [
-        "microcell",
-        0.529
-      ],
-      [
-        "tkip",
-        0.529
-      ],
-      [
-        "telecommunication",
-        0.527
-      ],
-      [
-        "radio shack",
-        0.522
-      ]
-    ],
     "xp": [
       [
         "yp",
@@ -15256,89 +12548,6 @@
     ]
   },
   "restaurant": {
-    "3-course": [],
-    "Appetizers": [
-      [
-        "savouries",
-        0.783
-      ],
-      [
-        "antipasto",
-        0.752
-      ],
-      [
-        "shrimp cocktail",
-        0.647
-      ],
-      [
-        "potato skins",
-        0.642
-      ],
-      [
-        "entrees",
-        0.639
-      ],
-      [
-        "amuse bouche",
-        0.639
-      ],
-      [
-        "crudites",
-        0.631
-      ],
-      [
-        "appetizer platter",
-        0.607
-      ],
-      [
-        "entr\u00e9e",
-        0.599
-      ],
-      [
-        "canap\u00e9s",
-        0.582
-      ],
-      [
-        "canapes",
-        0.572
-      ],
-      [
-        "tapas",
-        0.571
-      ],
-      [
-        "entr\u00e9es",
-        0.563
-      ],
-      [
-        "entree",
-        0.56
-      ],
-      [
-        "snacks",
-        0.556
-      ],
-      [
-        "meze",
-        0.548
-      ],
-      [
-        "oeuvres",
-        0.533
-      ],
-      [
-        "crudit\u00e9s",
-        0.521
-      ],
-      [
-        "aperitif",
-        0.506
-      ],
-      [
-        "crostini",
-        0.501
-      ]
-    ],
     "BBQ": [
       [
         "barbecuing",
@@ -15447,44 +12656,6 @@
       [
         "kalbi",
         0.502
-      ]
-    ],
-    "Bistros": [
-      [
-        "caf\u00e9s",
-        0.627
-      ],
-      [
-        "restaurants",
-        0.604
-      ],
-      [
-        "bistro",
-        0.584
-      ],
-      [
-        "boutiques",
-        0.578
-      ],
-      [
-        "cafes",
-        0.55
-      ],
-      [
-        "eateries",
-        0.539
-      ],
-      [
-        "brasserie",
-        0.53
-      ],
-      [
-        "coffeehouses",
-        0.515
-      ],
-      [
-        "nightspots",
-        0.505
       ]
     ],
     "Cafe": [
@@ -15647,100 +12818,6 @@
       [
         "caffe latte",
         0.531
-      ]
-    ],
-    "Chef": [
-      [
-        "cuisinier",
-        0.799
-      ],
-      [
-        "cooks",
-        0.754
-      ],
-      [
-        "cheffy",
-        0.717
-      ],
-      [
-        "culinary arts",
-        0.693
-      ],
-      [
-        "cuisine",
-        0.659
-      ],
-      [
-        "cordon bleu",
-        0.651
-      ],
-      [
-        "cook",
-        0.642
-      ],
-      [
-        "cookery",
-        0.64
-      ],
-      [
-        "fancy food",
-        0.628
-      ],
-      [
-        "culinary",
-        0.623
-      ],
-      [
-        "haute cuisine",
-        0.621
-      ],
-      [
-        "kitchen",
-        0.61
-      ],
-      [
-        "fry cook",
-        0.595
-      ],
-      [
-        "cooking",
-        0.587
-      ],
-      [
-        "burger flipper",
-        0.553
-      ],
-      [
-        "saucier",
-        0.553
-      ],
-      [
-        "tasting menu",
-        0.539
-      ],
-      [
-        "kitchens",
-        0.535
-      ],
-      [
-        "restauranteur",
-        0.52
-      ],
-      [
-        "oven mitts",
-        0.517
-      ],
-      [
-        "masterchef",
-        0.509
-      ],
-      [
-        "restaurateur",
-        0.504
-      ],
-      [
-        "gastronome",
-        0.503
       ]
     ],
     "Dessert": [
@@ -16127,284 +13204,6 @@
         0.516
       ]
     ],
-    "Dining": [
-      [
-        "tasting menu",
-        0.754
-      ],
-      [
-        "dine",
-        0.704
-      ],
-      [
-        "fast casual",
-        0.657
-      ],
-      [
-        "dining room",
-        0.646
-      ],
-      [
-        "dining out",
-        0.639
-      ],
-      [
-        "dinette",
-        0.627
-      ],
-      [
-        "dinning room",
-        0.625
-      ],
-      [
-        "diners",
-        0.622
-      ],
-      [
-        "tableside",
-        0.622
-      ],
-      [
-        "triclinium",
-        0.606
-      ],
-      [
-        "diner",
-        0.598
-      ],
-      [
-        "dine out",
-        0.586
-      ],
-      [
-        "dined",
-        0.586
-      ],
-      [
-        "resturant",
-        0.585
-      ],
-      [
-        "dinning",
-        0.581
-      ],
-      [
-        "restaurant",
-        0.569
-      ],
-      [
-        "eatery",
-        0.568
-      ],
-      [
-        "dinner",
-        0.555
-      ],
-      [
-        "dinners",
-        0.55
-      ],
-      [
-        "cuisine",
-        0.55
-      ],
-      [
-        "dining hall",
-        0.549
-      ],
-      [
-        "table manners",
-        0.546
-      ],
-      [
-        "steak house",
-        0.546
-      ],
-      [
-        "meal",
-        0.534
-      ],
-      [
-        "seafood restaurant",
-        0.525
-      ],
-      [
-        "resteraunt",
-        0.522
-      ],
-      [
-        "fancy food",
-        0.521
-      ],
-      [
-        "matzo meal",
-        0.516
-      ],
-      [
-        "buffet",
-        0.516
-      ],
-      [
-        "eateries",
-        0.515
-      ],
-      [
-        "lunching",
-        0.511
-      ],
-      [
-        "table",
-        0.507
-      ],
-      [
-        "refectory",
-        0.505
-      ],
-      [
-        "eating",
-        0.505
-      ],
-      [
-        "dining room furniture",
-        0.501
-      ]
-    ],
-    "Dinner": [
-      [
-        "suppers",
-        0.799
-      ],
-      [
-        "luncheon",
-        0.754
-      ],
-      [
-        "lunch",
-        0.716
-      ],
-      [
-        "dine",
-        0.702
-      ],
-      [
-        "meal",
-        0.687
-      ],
-      [
-        "lunched",
-        0.662
-      ],
-      [
-        "lunches",
-        0.656
-      ],
-      [
-        "brunch",
-        0.655
-      ],
-      [
-        "lunching",
-        0.651
-      ],
-      [
-        "matzo meal",
-        0.65
-      ],
-      [
-        "lunchable",
-        0.643
-      ],
-      [
-        "brinner",
-        0.64
-      ],
-      [
-        "luncheonette",
-        0.637
-      ],
-      [
-        "dinnertime",
-        0.599
-      ],
-      [
-        "dined",
-        0.596
-      ],
-      [
-        "banquet",
-        0.591
-      ],
-      [
-        "brunches",
-        0.584
-      ],
-      [
-        "repast",
-        0.578
-      ],
-      [
-        "supping",
-        0.565
-      ],
-      [
-        "dining",
-        0.555
-      ],
-      [
-        "suppertime",
-        0.543
-      ],
-      [
-        "potluck",
-        0.531
-      ],
-      [
-        "banquets",
-        0.516
-      ],
-      [
-        "pot luck",
-        0.512
-      ],
-      [
-        "dine out",
-        0.511
-      ]
-    ],
-    "Entrees": [
-      [
-        "entree",
-        0.677
-      ],
-      [
-        "entr\u00e9e",
-        0.657
-      ],
-      [
-        "appetizers",
-        0.639
-      ],
-      [
-        "appetizer",
-        0.567
-      ],
-      [
-        "antipasto",
-        0.532
-      ],
-      [
-        "pastas",
-        0.512
-      ],
-      [
-        "salads",
-        0.503
-      ],
-      [
-        "prix fixe",
-        0.501
-      ]
-    ],
     "Food": [
       [
         "hush puppies",
@@ -16547,188 +13346,6 @@
         0.506
       ]
     ],
-    "Grill": [
-      [
-        "grilling",
-        0.781
-      ],
-      [
-        "bar and grill",
-        0.773
-      ],
-      [
-        "grille",
-        0.741
-      ],
-      [
-        "london broil",
-        0.729
-      ],
-      [
-        "barbecue",
-        0.713
-      ],
-      [
-        "barbeque",
-        0.703
-      ],
-      [
-        "grilled",
-        0.702
-      ],
-      [
-        "carne asada",
-        0.691
-      ],
-      [
-        "radiator grille",
-        0.688
-      ],
-      [
-        "bbq",
-        0.688
-      ],
-      [
-        "broil",
-        0.687
-      ],
-      [
-        "barbecued",
-        0.685
-      ],
-      [
-        "barbecuing",
-        0.672
-      ],
-      [
-        "barbequed",
-        0.651
-      ],
-      [
-        "grilles",
-        0.645
-      ],
-      [
-        "barbacoa",
-        0.644
-      ],
-      [
-        "chargrilled",
-        0.641
-      ],
-      [
-        "broiled",
-        0.632
-      ],
-      [
-        "grillwork",
-        0.626
-      ],
-      [
-        "rotisserie",
-        0.626
-      ],
-      [
-        "barbecues",
-        0.625
-      ],
-      [
-        "churrasco",
-        0.607
-      ],
-      [
-        "broils",
-        0.607
-      ],
-      [
-        "hibachi",
-        0.607
-      ],
-      [
-        "bbqs",
-        0.605
-      ],
-      [
-        "steaks",
-        0.601
-      ],
-      [
-        "griddle",
-        0.601
-      ],
-      [
-        "yakiniku",
-        0.593
-      ],
-      [
-        "churrascaria",
-        0.588
-      ],
-      [
-        "roast chicken",
-        0.586
-      ],
-      [
-        "broiler",
-        0.583
-      ],
-      [
-        "broiling",
-        0.582
-      ],
-      [
-        "barbecue grill",
-        0.574
-      ],
-      [
-        "kamado",
-        0.557
-      ],
-      [
-        "cookout",
-        0.557
-      ],
-      [
-        "steakhouse",
-        0.555
-      ],
-      [
-        "steak",
-        0.545
-      ],
-      [
-        "barbeques",
-        0.541
-      ],
-      [
-        "griddles",
-        0.537
-      ],
-      [
-        "roast",
-        0.525
-      ],
-      [
-        "fish fry",
-        0.522
-      ],
-      [
-        "chophouse",
-        0.515
-      ],
-      [
-        "burgers",
-        0.512
-      ],
-      [
-        "braai",
-        0.512
-      ],
-      [
-        "cookouts",
-        0.503
-      ]
-    ],
     "Izakaya": [
       [
         "sushi bar",
@@ -16837,216 +13454,6 @@
       [
         "tasting menu",
         0.501
-      ]
-    ],
-    "Lunch": [
-      [
-        "luncheon",
-        0.781
-      ],
-      [
-        "lunchtime",
-        0.763
-      ],
-      [
-        "luncheonette",
-        0.74
-      ],
-      [
-        "at noon",
-        0.718
-      ],
-      [
-        "dinner",
-        0.716
-      ],
-      [
-        "lunchbreak",
-        0.678
-      ],
-      [
-        "dinners",
-        0.639
-      ],
-      [
-        "brunch",
-        0.631
-      ],
-      [
-        "supper",
-        0.63
-      ],
-      [
-        "meal",
-        0.606
-      ],
-      [
-        "breakfast",
-        0.586
-      ],
-      [
-        "lunch break",
-        0.585
-      ],
-      [
-        "brinner",
-        0.576
-      ],
-      [
-        "brunches",
-        0.563
-      ],
-      [
-        "lunchroom",
-        0.558
-      ],
-      [
-        "matzo meal",
-        0.557
-      ],
-      [
-        "dine",
-        0.556
-      ],
-      [
-        "dinnertime",
-        0.555
-      ],
-      [
-        "afternoon tea",
-        0.551
-      ],
-      [
-        "midday",
-        0.546
-      ],
-      [
-        "suppers",
-        0.541
-      ],
-      [
-        "continental breakfast",
-        0.532
-      ],
-      [
-        "breakfasted",
-        0.527
-      ],
-      [
-        "snack",
-        0.526
-      ],
-      [
-        "suppertime",
-        0.524
-      ],
-      [
-        "brekkie",
-        0.522
-      ],
-      [
-        "breakfasts",
-        0.522
-      ],
-      [
-        "breakfasting",
-        0.502
-      ]
-    ],
-    "Meal": [
-      [
-        "meals",
-        0.787
-      ],
-      [
-        "repast",
-        0.701
-      ],
-      [
-        "dinner",
-        0.687
-      ],
-      [
-        "dinners",
-        0.657
-      ],
-      [
-        "supper",
-        0.645
-      ],
-      [
-        "mealtime",
-        0.634
-      ],
-      [
-        "lunch",
-        0.606
-      ],
-      [
-        "lunches",
-        0.586
-      ],
-      [
-        "suppers",
-        0.578
-      ],
-      [
-        "dine",
-        0.57
-      ],
-      [
-        "mealtimes",
-        0.569
-      ],
-      [
-        "prandial",
-        0.564
-      ],
-      [
-        "lunchable",
-        0.551
-      ],
-      [
-        "lunching",
-        0.546
-      ],
-      [
-        "brinner",
-        0.546
-      ],
-      [
-        "food",
-        0.535
-      ],
-      [
-        "dining",
-        0.534
-      ],
-      [
-        "lunched",
-        0.526
-      ],
-      [
-        "potato skins",
-        0.511
-      ],
-      [
-        "eat",
-        0.508
-      ],
-      [
-        "dinnertime",
-        0.508
-      ]
-    ],
-    "Nobu": [
-      [
-        "katsuya",
-        0.664
-      ],
-      [
-        "sushi",
-        0.564
       ]
     ],
     "Pizza": [
@@ -17227,192 +13634,6 @@
       [
         "gelateria",
         0.501
-      ]
-    ],
-    "RESTAURANT": [
-      [
-        "diner",
-        0.776
-      ],
-      [
-        "bistro",
-        0.774
-      ],
-      [
-        "restauranteur",
-        0.773
-      ],
-      [
-        "tasting menu",
-        0.756
-      ],
-      [
-        "eateries",
-        0.747
-      ],
-      [
-        "diners",
-        0.746
-      ],
-      [
-        "estaminet",
-        0.746
-      ],
-      [
-        "brasserie",
-        0.732
-      ],
-      [
-        "taverna",
-        0.732
-      ],
-      [
-        "steakhouse",
-        0.72
-      ],
-      [
-        "ristorante",
-        0.72
-      ],
-      [
-        "restaurants",
-        0.713
-      ],
-      [
-        "greasy spoon",
-        0.706
-      ],
-      [
-        "burger flipper",
-        0.705
-      ],
-      [
-        "oyster bar",
-        0.698
-      ],
-      [
-        "pizza parlor",
-        0.686
-      ],
-      [
-        "fast casual",
-        0.685
-      ],
-      [
-        "restaurateur",
-        0.66
-      ],
-      [
-        "gastropub",
-        0.657
-      ],
-      [
-        "steak house",
-        0.649
-      ],
-      [
-        "horeca",
-        0.638
-      ],
-      [
-        "osteria",
-        0.637
-      ],
-      [
-        "cafe",
-        0.63
-      ],
-      [
-        "trattoria",
-        0.629
-      ],
-      [
-        "waiters",
-        0.627
-      ],
-      [
-        "joe's",
-        0.622
-      ],
-      [
-        "clam shack",
-        0.617
-      ],
-      [
-        "resteraunt",
-        0.616
-      ],
-      [
-        "pizzeria",
-        0.615
-      ],
-      [
-        "sushi bar",
-        0.614
-      ],
-      [
-        "chophouse",
-        0.612
-      ],
-      [
-        "tavern",
-        0.611
-      ],
-      [
-        "tableside",
-        0.597
-      ],
-      [
-        "waitresses",
-        0.594
-      ],
-      [
-        "dining out",
-        0.592
-      ],
-      [
-        "golden arches",
-        0.579
-      ],
-      [
-        "salad bar",
-        0.578
-      ],
-      [
-        "macca's",
-        0.578
-      ],
-      [
-        "waitstaff",
-        0.572
-      ],
-      [
-        "sidewalk cafe",
-        0.571
-      ],
-      [
-        "caf\u00e9",
-        0.571
-      ],
-      [
-        "luncheonette",
-        0.571
-      ],
-      [
-        "dine out",
-        0.57
-      ],
-      [
-        "dining",
-        0.569
-      ],
-      [
-        "pub",
-        0.568
-      ],
-      [
-        "wine bar",
-        0.562
       ]
     ],
     "Restaurant": [
@@ -17601,538 +13822,34 @@
         0.562
       ]
     ],
-    "Restaurants": [
+    "Shabu-Shabu": [
       [
-        "restaurant",
-        0.713
+        "methedrine",
+        0.691
       ],
       [
-        "eateries",
-        0.663
+        "sukiyaki",
+        0.602
       ],
       [
-        "resturant",
-        0.645
+        "sisig",
+        0.566
       ],
       [
-        "resto",
-        0.639
+        "methamphetamine",
+        0.564
       ],
       [
-        "menus",
-        0.613
-      ],
-      [
-        "eatery",
-        0.61
-      ],
-      [
-        "bistros",
-        0.604
-      ],
-      [
-        "restauranteur",
-        0.599
-      ],
-      [
-        "places",
-        0.599
-      ],
-      [
-        "diners",
-        0.594
-      ],
-      [
-        "establishments",
-        0.577
-      ],
-      [
-        "tasting menu",
-        0.575
-      ],
-      [
-        "gastropub",
-        0.559
-      ],
-      [
-        "steak house",
-        0.559
-      ],
-      [
-        "fast casual",
-        0.558
-      ],
-      [
-        "burger flipper",
-        0.547
-      ],
-      [
-        "brasserie",
-        0.545
-      ],
-      [
-        "steakhouse",
-        0.544
-      ],
-      [
-        "caf\u00e9s",
-        0.539
-      ],
-      [
-        "waiters",
-        0.536
-      ],
-      [
-        "ristorante",
-        0.534
-      ],
-      [
-        "pubs",
-        0.533
-      ],
-      [
-        "pizza parlor",
-        0.526
-      ],
-      [
-        "bistro",
-        0.522
-      ],
-      [
-        "diner",
-        0.519
-      ],
-      [
-        "waitresses",
-        0.518
-      ],
-      [
-        "taverna",
-        0.512
-      ],
-      [
-        "restaurateur",
-        0.511
-      ],
-      [
-        "oyster bar",
-        0.505
-      ],
-      [
-        "clam shack",
-        0.505
-      ],
-      [
-        "hotels",
-        0.505
-      ],
-      [
-        "golden arches",
-        0.504
-      ],
-      [
-        "greasy spoon",
-        0.502
-      ],
-      [
-        "cuisines",
-        0.501
-      ]
-    ],
-    "Sakagura": [
-      [
-        "miyamoto",
-        0.7
-      ],
-      [
-        "matsuno",
-        0.689
-      ],
-      [
-        "konno",
-        0.672
-      ],
-      [
-        "yoshida",
-        0.659
-      ],
-      [
-        "kitamura",
-        0.654
-      ],
-      [
-        "eguchi",
-        0.65
-      ],
-      [
-        "morishita",
-        0.645
-      ],
-      [
-        "ishii",
-        0.645
-      ],
-      [
-        "sakurai",
-        0.643
-      ],
-      [
-        "mikami",
-        0.643
-      ],
-      [
-        "kamiya",
-        0.639
-      ],
-      [
-        "ueda",
-        0.638
-      ],
-      [
-        "sugiura",
-        0.637
-      ],
-      [
-        "nishimura",
-        0.637
-      ],
-      [
-        "kaneko",
-        0.636
-      ],
-      [
-        "saeki",
-        0.636
-      ],
-      [
-        "kawamura",
-        0.634
-      ],
-      [
-        "higuchi",
-        0.632
-      ],
-      [
-        "hayashi",
-        0.63
-      ],
-      [
-        "shimizu",
-        0.63
-      ],
-      [
-        "nobuo",
-        0.626
-      ],
-      [
-        "miwa",
-        0.624
-      ],
-      [
-        "igarashi",
-        0.623
-      ],
-      [
-        "yokoyama",
-        0.619
-      ],
-      [
-        "matsuzaki",
-        0.619
-      ],
-      [
-        "hideo",
-        0.619
-      ],
-      [
-        "nakagawa",
-        0.619
-      ],
-      [
-        "satoru",
-        0.617
-      ],
-      [
-        "sasaki",
-        0.616
-      ],
-      [
-        "yamamura",
-        0.616
-      ],
-      [
-        "yamaoka",
-        0.616
-      ],
-      [
-        "nakano",
-        0.616
-      ],
-      [
-        "kataoka",
-        0.616
-      ],
-      [
-        "nishiyama",
-        0.616
-      ],
-      [
-        "takahashi",
-        0.615
-      ],
-      [
-        "shimada",
-        0.615
-      ],
-      [
-        "hirai",
-        0.614
-      ],
-      [
-        "yoshikawa",
-        0.614
-      ],
-      [
-        "yamazaki",
-        0.613
-      ],
-      [
-        "sakamoto",
-        0.613
-      ],
-      [
-        "kawashima",
-        0.612
-      ],
-      [
-        "tsuda",
-        0.612
-      ],
-      [
-        "yano",
-        0.612
-      ],
-      [
-        "mochizuki",
-        0.611
-      ],
-      [
-        "okamoto",
-        0.611
-      ],
-      [
-        "takada",
-        0.611
-      ],
-      [
-        "matsuda",
-        0.611
-      ],
-      [
-        "yamane",
-        0.609
-      ],
-      [
-        "kawahara",
-        0.608
-      ]
-    ],
-    "Seafood": [
-      [
-        "shellfish",
-        0.716
-      ],
-      [
-        "shrimp",
-        0.644
-      ],
-      [
-        "finfish",
-        0.618
-      ],
-      [
-        "saltwater fish",
-        0.618
-      ],
-      [
-        "shrimping",
-        0.6
-      ],
-      [
-        "fishmonger's",
-        0.597
-      ],
-      [
-        "fishmongers",
-        0.592
-      ],
-      [
-        "crabmeat",
-        0.592
-      ],
-      [
-        "king prawn",
-        0.591
-      ],
-      [
-        "rock lobster",
-        0.588
-      ],
-      [
-        "spiny lobster",
-        0.579
-      ],
-      [
-        "shrimps",
-        0.579
-      ],
-      [
-        "lobster",
-        0.574
-      ],
-      [
-        "crab cake",
-        0.572
-      ],
-      [
-        "oysters",
-        0.562
-      ],
-      [
-        "crab",
-        0.561
-      ],
-      [
-        "fisheries",
-        0.554
-      ],
-      [
-        "cioppino",
-        0.554
-      ],
-      [
-        "prawn",
-        0.553
-      ],
-      [
-        "stone crab",
-        0.552
-      ],
-      [
-        "lobster tail",
+        "methamphetamines",
         0.55
       ],
       [
-        "king crab",
-        0.55
+        "methamphetamine hydrochloride",
+        0.549
       ],
       [
-        "dungeness crab",
-        0.547
-      ],
-      [
-        "groundfish",
-        0.547
-      ],
-      [
-        "crab legs",
-        0.545
-      ],
-      [
-        "mollusks",
-        0.543
-      ],
-      [
-        "fishmarket",
-        0.541
-      ],
-      [
-        "fish",
-        0.541
-      ],
-      [
-        "blue crab",
+        "teppanyaki",
         0.536
-      ],
-      [
-        "delta smelt",
-        0.535
-      ],
-      [
-        "mussels",
-        0.534
-      ],
-      [
-        "crabs",
-        0.533
-      ],
-      [
-        "lobsters",
-        0.53
-      ],
-      [
-        "scampi",
-        0.529
-      ],
-      [
-        "crab claw",
-        0.526
-      ],
-      [
-        "oysters rockefeller",
-        0.524
-      ],
-      [
-        "crawfish",
-        0.523
-      ],
-      [
-        "crustacean",
-        0.523
-      ],
-      [
-        "langoustine",
-        0.521
-      ],
-      [
-        "scallops",
-        0.517
-      ],
-      [
-        "bay scallop",
-        0.516
-      ],
-      [
-        "tiger prawn",
-        0.515
-      ],
-      [
-        "prawns",
-        0.514
-      ],
-      [
-        "fish chowder",
-        0.514
-      ],
-      [
-        "fishery",
-        0.513
-      ],
-      [
-        "bluefin tuna",
-        0.512
-      ],
-      [
-        "chow mein",
-        0.511
-      ],
-      [
-        "surimi",
-        0.51
-      ],
-      [
-        "lobsterman",
-        0.51
       ]
     ],
     "Steak": [
@@ -18301,164 +14018,6 @@
         0.581
       ]
     ],
-    "Steakhouse": [
-      [
-        "churrascaria",
-        0.771
-      ],
-      [
-        "steak house",
-        0.76
-      ],
-      [
-        "restaurant",
-        0.72
-      ],
-      [
-        "steak",
-        0.694
-      ],
-      [
-        "carne asada",
-        0.665
-      ],
-      [
-        "steaks",
-        0.65
-      ],
-      [
-        "eatery",
-        0.645
-      ],
-      [
-        "resto",
-        0.626
-      ],
-      [
-        "bistro",
-        0.622
-      ],
-      [
-        "resturant",
-        0.621
-      ],
-      [
-        "ribeye steak",
-        0.621
-      ],
-      [
-        "entrec\u00f4te",
-        0.601
-      ],
-      [
-        "porterhouse",
-        0.597
-      ],
-      [
-        "tasting menu",
-        0.597
-      ],
-      [
-        "ribeye",
-        0.588
-      ],
-      [
-        "diner",
-        0.582
-      ],
-      [
-        "bar and grill",
-        0.582
-      ],
-      [
-        "brasserie",
-        0.581
-      ],
-      [
-        "porterhouse steak",
-        0.578
-      ],
-      [
-        "diners",
-        0.573
-      ],
-      [
-        "ristorante",
-        0.558
-      ],
-      [
-        "grill",
-        0.555
-      ],
-      [
-        "tavern",
-        0.553
-      ],
-      [
-        "roadhouse",
-        0.545
-      ],
-      [
-        "restaurants",
-        0.544
-      ],
-      [
-        "sirloin steak",
-        0.542
-      ],
-      [
-        "taverna",
-        0.54
-      ],
-      [
-        "eateries",
-        0.536
-      ],
-      [
-        "filet mignon",
-        0.534
-      ],
-      [
-        "burgers",
-        0.532
-      ],
-      [
-        "hanger steak",
-        0.532
-      ],
-      [
-        "churrasco",
-        0.525
-      ],
-      [
-        "flank steak",
-        0.524
-      ],
-      [
-        "oyster bar",
-        0.524
-      ],
-      [
-        "sushi bar",
-        0.524
-      ],
-      [
-        "restauranteur",
-        0.516
-      ],
-      [
-        "pizza parlor",
-        0.515
-      ],
-      [
-        "fast casual",
-        0.504
-      ],
-      [
-        "burger flipper",
-        0.501
-      ]
-    ],
     "Sushi": [
       [
         "maguro",
@@ -18603,112 +14162,6 @@
       [
         "biriyani",
         0.505
-      ]
-    ],
-    "Yakitori": [
-      [
-        "tonkatsu",
-        0.64
-      ],
-      [
-        "teppanyaki",
-        0.636
-      ],
-      [
-        "tonkotsu",
-        0.611
-      ],
-      [
-        "yakiniku",
-        0.609
-      ],
-      [
-        "karaage",
-        0.595
-      ],
-      [
-        "teppan",
-        0.584
-      ],
-      [
-        "sashimi",
-        0.584
-      ],
-      [
-        "shish kebab",
-        0.583
-      ],
-      [
-        "takoyaki",
-        0.578
-      ],
-      [
-        "katsu",
-        0.578
-      ],
-      [
-        "okonomiyaki",
-        0.577
-      ],
-      [
-        "teriyaki",
-        0.556
-      ],
-      [
-        "sushi",
-        0.553
-      ],
-      [
-        "sukiyaki",
-        0.551
-      ],
-      [
-        "shabu shabu",
-        0.551
-      ],
-      [
-        "nigiri",
-        0.548
-      ],
-      [
-        "kaiseki",
-        0.542
-      ],
-      [
-        "donburi",
-        0.542
-      ],
-      [
-        "hibachi",
-        0.541
-      ],
-      [
-        "izakaya",
-        0.54
-      ],
-      [
-        "katsudon",
-        0.538
-      ],
-      [
-        "maguro",
-        0.537
-      ],
-      [
-        "yakisoba",
-        0.532
-      ],
-      [
-        "shish",
-        0.523
-      ],
-      [
-        "tempura",
-        0.516
-      ],
-      [
-        "pork cutlet",
-        0.502
       ]
     ],
     "ambiance": [
@@ -19127,198 +14580,6 @@
       [
         "parioli",
         0.505
-      ]
-    ],
-    "bakery": [
-      [
-        "patisserie",
-        0.79
-      ],
-      [
-        "pastry shop",
-        0.781
-      ],
-      [
-        "cake shop",
-        0.746
-      ],
-      [
-        "p\u00e2tisserie",
-        0.686
-      ],
-      [
-        "pastries",
-        0.667
-      ],
-      [
-        "bakers",
-        0.653
-      ],
-      [
-        "confectioner's",
-        0.65
-      ],
-      [
-        "patissier",
-        0.643
-      ],
-      [
-        "dunkin donuts",
-        0.64
-      ],
-      [
-        "blaa",
-        0.634
-      ],
-      [
-        "pastry chef",
-        0.61
-      ],
-      [
-        "baked goods",
-        0.602
-      ],
-      [
-        "ice cream shop",
-        0.594
-      ],
-      [
-        "pastry",
-        0.588
-      ],
-      [
-        "baker",
-        0.572
-      ],
-      [
-        "cakes",
-        0.572
-      ],
-      [
-        "bakes",
-        0.559
-      ],
-      [
-        "sweetshop",
-        0.548
-      ],
-      [
-        "baking",
-        0.543
-      ],
-      [
-        "breadmaker",
-        0.543
-      ],
-      [
-        "breads",
-        0.538
-      ],
-      [
-        "pastry flour",
-        0.534
-      ],
-      [
-        "bake bread",
-        0.53
-      ],
-      [
-        "coffee cake",
-        0.53
-      ],
-      [
-        "confectionary",
-        0.522
-      ],
-      [
-        "confections",
-        0.515
-      ],
-      [
-        "deli",
-        0.511
-      ],
-      [
-        "confectionery",
-        0.508
-      ],
-      [
-        "delicatessen",
-        0.507
-      ],
-      [
-        "coffeecake",
-        0.506
-      ],
-      [
-        "bagels",
-        0.503
-      ]
-    ],
-    "banquet": [
-      [
-        "banquet hall",
-        0.738
-      ],
-      [
-        "feast",
-        0.69
-      ],
-      [
-        "feasting",
-        0.689
-      ],
-      [
-        "feaster",
-        0.643
-      ],
-      [
-        "bandying",
-        0.624
-      ],
-      [
-        "feasts",
-        0.594
-      ],
-      [
-        "dinner",
-        0.591
-      ],
-      [
-        "dinners",
-        0.586
-      ],
-      [
-        "luncheon",
-        0.577
-      ],
-      [
-        "feasted",
-        0.57
-      ],
-      [
-        "gala",
-        0.565
-      ],
-      [
-        "fete",
-        0.545
-      ],
-      [
-        "wedding reception",
-        0.544
-      ],
-      [
-        "celebration",
-        0.524
-      ],
-      [
-        "festivities",
-        0.517
-      ],
-      [
-        "supper",
-        0.511
       ]
     ],
     "bar": [
@@ -20345,84 +15606,6 @@
         0.538
       ]
     ],
-    "bibimbap": [
-      [
-        "bulgogi",
-        0.711
-      ],
-      [
-        "gochujang",
-        0.666
-      ],
-      [
-        "banchan",
-        0.664
-      ],
-      [
-        "jjigae",
-        0.639
-      ],
-      [
-        "japchae",
-        0.633
-      ],
-      [
-        "kimchee",
-        0.588
-      ],
-      [
-        "kimchi",
-        0.586
-      ],
-      [
-        "kalbi",
-        0.566
-      ],
-      [
-        "katsudon",
-        0.564
-      ],
-      [
-        "galbi",
-        0.559
-      ],
-      [
-        "kimbap",
-        0.548
-      ],
-      [
-        "donburi",
-        0.544
-      ],
-      [
-        "pad thai",
-        0.541
-      ],
-      [
-        "korean",
-        0.529
-      ],
-      [
-        "karaage",
-        0.524
-      ],
-      [
-        "nasi goreng",
-        0.52
-      ],
-      [
-        "chow mein",
-        0.509
-      ],
-      [
-        "stir fried",
-        0.507
-      ],
-      [
-        "tonkotsu",
-        0.507
-      ]
-    ],
     "bistro": [
       [
         "brasserie",
@@ -20775,204 +15958,6 @@
         0.502
       ]
     ],
-    "brasserie": [
-      [
-        "bistro",
-        0.797
-      ],
-      [
-        "restaurant",
-        0.732
-      ],
-      [
-        "estaminet",
-        0.731
-      ],
-      [
-        "gastropub",
-        0.686
-      ],
-      [
-        "eatery",
-        0.679
-      ],
-      [
-        "resto",
-        0.665
-      ],
-      [
-        "cafe",
-        0.632
-      ],
-      [
-        "brewpub",
-        0.629
-      ],
-      [
-        "tasting menu",
-        0.617
-      ],
-      [
-        "oyster bar",
-        0.614
-      ],
-      [
-        "beanery",
-        0.611
-      ],
-      [
-        "pub",
-        0.605
-      ],
-      [
-        "eateries",
-        0.601
-      ],
-      [
-        "tavern",
-        0.598
-      ],
-      [
-        "caf\u00e9",
-        0.593
-      ],
-      [
-        "diner",
-        0.587
-      ],
-      [
-        "steakhouse",
-        0.581
-      ],
-      [
-        "cafes",
-        0.581
-      ],
-      [
-        "taverna",
-        0.579
-      ],
-      [
-        "wine bar",
-        0.575
-      ],
-      [
-        "greasy spoon",
-        0.575
-      ],
-      [
-        "resturant",
-        0.574
-      ],
-      [
-        "diners",
-        0.571
-      ],
-      [
-        "sushi bar",
-        0.57
-      ],
-      [
-        "sidewalk cafe",
-        0.564
-      ],
-      [
-        "chophouse",
-        0.563
-      ],
-      [
-        "creperie",
-        0.558
-      ],
-      [
-        "taverns",
-        0.549
-      ],
-      [
-        "rathskeller",
-        0.547
-      ],
-      [
-        "micro brewery",
-        0.546
-      ],
-      [
-        "restaurants",
-        0.545
-      ],
-      [
-        "alehouse",
-        0.54
-      ],
-      [
-        "taphouse",
-        0.54
-      ],
-      [
-        "restauranteur",
-        0.536
-      ],
-      [
-        "osteria",
-        0.535
-      ],
-      [
-        "bistros",
-        0.53
-      ],
-      [
-        "joe's",
-        0.529
-      ],
-      [
-        "taproom",
-        0.529
-      ],
-      [
-        "izakaya",
-        0.529
-      ],
-      [
-        "bar",
-        0.521
-      ],
-      [
-        "ristorante",
-        0.517
-      ],
-      [
-        "pizza parlor",
-        0.514
-      ],
-      [
-        "microbrewery",
-        0.514
-      ],
-      [
-        "brewery",
-        0.512
-      ],
-      [
-        "trattoria",
-        0.512
-      ],
-      [
-        "coffeehouse",
-        0.512
-      ],
-      [
-        "taberna",
-        0.511
-      ],
-      [
-        "coffee shop",
-        0.503
-      ],
-      [
-        "caff",
-        0.501
-      ]
-    ],
     "brunch": [
       [
         "brinner",
@@ -21186,144 +16171,6 @@
       ]
     ],
     "bruschetta": [
-      [
-        "crostini",
-        0.717
-      ],
-      [
-        "antipasto",
-        0.656
-      ],
-      [
-        "parmigiana",
-        0.64
-      ],
-      [
-        "margherita pizza",
-        0.633
-      ],
-      [
-        "caprese",
-        0.631
-      ],
-      [
-        "focaccia",
-        0.621
-      ],
-      [
-        "burrata",
-        0.618
-      ],
-      [
-        "garlic sauce",
-        0.61
-      ],
-      [
-        "garlic bread",
-        0.598
-      ],
-      [
-        "pesto",
-        0.589
-      ],
-      [
-        "tapenade",
-        0.586
-      ],
-      [
-        "caponata",
-        0.583
-      ],
-      [
-        "margherita",
-        0.561
-      ],
-      [
-        "marinara",
-        0.559
-      ],
-      [
-        "puttanesca",
-        0.556
-      ],
-      [
-        "panino",
-        0.546
-      ],
-      [
-        "amatriciana",
-        0.546
-      ],
-      [
-        "pistou",
-        0.541
-      ],
-      [
-        "mozzarella",
-        0.538
-      ],
-      [
-        "baba ganoush",
-        0.536
-      ],
-      [
-        "ciabatta",
-        0.534
-      ],
-      [
-        "caesar salad",
-        0.522
-      ],
-      [
-        "aioli",
-        0.52
-      ],
-      [
-        "appetizer platter",
-        0.519
-      ],
-      [
-        "appetizer",
-        0.518
-      ],
-      [
-        "pasta sauce",
-        0.517
-      ],
-      [
-        "garlic butter",
-        0.517
-      ],
-      [
-        "grilled cheese sandwich",
-        0.515
-      ],
-      [
-        "flatbreads",
-        0.515
-      ],
-      [
-        "pomodoro",
-        0.514
-      ],
-      [
-        "frittata",
-        0.512
-      ],
-      [
-        "bocconcini",
-        0.509
-      ],
-      [
-        "provolone",
-        0.507
-      ],
-      [
-        "cobb salad",
-        0.501
-      ]
-    ],
-    "bruschettas": [
       [
         "crostini",
         0.717
@@ -21717,286 +16564,6 @@
       [
         "patties",
         0.51
-      ]
-    ],
-    "burgers": [
-      [
-        "cheeseburgers",
-        0.788
-      ],
-      [
-        "cheeseburger",
-        0.77
-      ],
-      [
-        "burger king",
-        0.743
-      ],
-      [
-        "hamburger steak",
-        0.71
-      ],
-      [
-        "cheese sandwich",
-        0.695
-      ],
-      [
-        "fries",
-        0.694
-      ],
-      [
-        "chili cheese",
-        0.69
-      ],
-      [
-        "steaks",
-        0.65
-      ],
-      [
-        "fatburger",
-        0.65
-      ],
-      [
-        "quarter pounder",
-        0.633
-      ],
-      [
-        "steak fries",
-        0.63
-      ],
-      [
-        "beef patty",
-        0.609
-      ],
-      [
-        "special sauce",
-        0.605
-      ],
-      [
-        "carne asada",
-        0.603
-      ],
-      [
-        "steak",
-        0.602
-      ],
-      [
-        "sloppy joe",
-        0.591
-      ],
-      [
-        "patty melt",
-        0.586
-      ],
-      [
-        "taco bell",
-        0.582
-      ],
-      [
-        "curly fries",
-        0.581
-      ],
-      [
-        "ground beef",
-        0.58
-      ],
-      [
-        "ribeye steak",
-        0.579
-      ],
-      [
-        "tacos",
-        0.57
-      ],
-      [
-        "chicken nuggets",
-        0.569
-      ],
-      [
-        "fuddruckers",
-        0.56
-      ],
-      [
-        "salisbury steak",
-        0.552
-      ],
-      [
-        "burritos",
-        0.549
-      ],
-      [
-        "mcdonald's",
-        0.546
-      ],
-      [
-        "french fries",
-        0.546
-      ],
-      [
-        "blt",
-        0.544
-      ],
-      [
-        "grilled",
-        0.541
-      ],
-      [
-        "fajitas",
-        0.541
-      ],
-      [
-        "chicken sandwich",
-        0.539
-      ],
-      [
-        "cheesesteak",
-        0.536
-      ],
-      [
-        "sirloin steak",
-        0.536
-      ],
-      [
-        "taco",
-        0.535
-      ],
-      [
-        "golden arches",
-        0.533
-      ],
-      [
-        "steakhouse",
-        0.532
-      ],
-      [
-        "sandwich shop",
-        0.527
-      ],
-      [
-        "grills",
-        0.527
-      ],
-      [
-        "burrito",
-        0.524
-      ],
-      [
-        "patties",
-        0.523
-      ],
-      [
-        "riblet",
-        0.521
-      ],
-      [
-        "sirloin",
-        0.518
-      ],
-      [
-        "ribeye",
-        0.515
-      ],
-      [
-        "flip burgers",
-        0.515
-      ]
-    ],
-    "busboy": [
-      [
-        "waitress",
-        0.795
-      ],
-      [
-        "waiters",
-        0.723
-      ],
-      [
-        "waitresses",
-        0.711
-      ],
-      [
-        "carhop",
-        0.704
-      ],
-      [
-        "waitstaff",
-        0.699
-      ],
-      [
-        "busboys",
-        0.615
-      ],
-      [
-        "barback",
-        0.615
-      ],
-      [
-        "headwaiter",
-        0.609
-      ],
-      [
-        "resturant",
-        0.601
-      ],
-      [
-        "ma\u00eetre d",
-        0.6
-      ],
-      [
-        "waitressing",
-        0.595
-      ],
-      [
-        "bellhop",
-        0.589
-      ],
-      [
-        "bartender",
-        0.587
-      ],
-      [
-        "cocktail waitress",
-        0.578
-      ],
-      [
-        "barmaid",
-        0.577
-      ],
-      [
-        "bellboy",
-        0.577
-      ],
-      [
-        "bellhops",
-        0.554
-      ],
-      [
-        "bartenders",
-        0.546
-      ],
-      [
-        "bellman",
-        0.544
-      ],
-      [
-        "barman",
-        0.533
-      ],
-      [
-        "bartend",
-        0.524
-      ],
-      [
-        "bellboys",
-        0.513
-      ],
-      [
-        "bartending",
-        0.511
-      ],
-      [
-        "sous chef",
-        0.505
       ]
     ],
     "cafe": [
@@ -23063,92 +17630,6 @@
         0.504
       ]
     ],
-    "chefs": [
-      [
-        "executive chef",
-        0.744
-      ],
-      [
-        "sous chef",
-        0.722
-      ],
-      [
-        "master chef",
-        0.701
-      ],
-      [
-        "cuisinier",
-        0.69
-      ],
-      [
-        "cheffy",
-        0.669
-      ],
-      [
-        "cuisine",
-        0.613
-      ],
-      [
-        "culinary arts",
-        0.603
-      ],
-      [
-        "fancy food",
-        0.602
-      ],
-      [
-        "haute cuisine",
-        0.597
-      ],
-      [
-        "culinary",
-        0.594
-      ],
-      [
-        "cordon bleu",
-        0.583
-      ],
-      [
-        "cookery",
-        0.576
-      ],
-      [
-        "foodies",
-        0.57
-      ],
-      [
-        "kitchens",
-        0.558
-      ],
-      [
-        "gourmets",
-        0.548
-      ],
-      [
-        "kitchen",
-        0.545
-      ],
-      [
-        "cook",
-        0.54
-      ],
-      [
-        "tasting menu",
-        0.525
-      ],
-      [
-        "masterchef",
-        0.511
-      ],
-      [
-        "fry cook",
-        0.507
-      ],
-      [
-        "cooking",
-        0.507
-      ]
-    ],
     "chilaquiles": [
       [
         "enchiladas",
@@ -23347,177 +17828,6 @@
         0.556
       ]
     ],
-    "chili": [
-      [
-        "pasilla",
-        0.798
-      ],
-      [
-        "chillis",
-        0.747
-      ],
-      [
-        "chile pepper",
-        0.737
-      ],
-      [
-        "guajillo",
-        0.711
-      ],
-      [
-        "jalapeno pepper",
-        0.711
-      ],
-      [
-        "jalapeno",
-        0.705
-      ],
-      [
-        "habanero",
-        0.7
-      ],
-      [
-        "chilli pepper",
-        0.695
-      ],
-      [
-        "chillies",
-        0.687
-      ],
-      [
-        "chili sauce",
-        0.685
-      ],
-      [
-        "piment",
-        0.684
-      ],
-      [
-        "chipotle",
-        0.676
-      ],
-      [
-        "bell pepper",
-        0.663
-      ],
-      [
-        "hot sauce",
-        0.658
-      ],
-      [
-        "mulato",
-        0.657
-      ],
-      [
-        "huevos rancheros",
-        0.655
-      ],
-      [
-        "jalapenos",
-        0.651
-      ],
-      [
-        "scotch bonnet",
-        0.649
-      ],
-      [
-        "capsicum",
-        0.644
-      ],
-      [
-        "pico de gallo",
-        0.637
-      ],
-      [
-        "jalfrezi",
-        0.637
-      ],
-      [
-        "cayenne",
-        0.634
-      ],
-      [
-        "jalape\u00f1o",
-        0.631
-      ],
-      [
-        "pepper sauce",
-        0.63
-      ],
-      [
-        "cayenne pepper",
-        0.627
-      ],
-      [
-        "hoisin",
-        0.626
-      ],
-      [
-        "peppers",
-        0.61
-      ],
-      [
-        "hoisin sauce",
-        0.609
-      ],
-      [
-        "habaneros",
-        0.603
-      ],
-      [
-        "frito pie",
-        0.602
-      ],
-      [
-        "ancho",
-        0.59
-      ],
-      [
-        "pepper",
-        0.583
-      ],
-      [
-        "tabasco",
-        0.583
-      ],
-      [
-        "jalape\u00f1os",
-        0.581
-      ],
-      [
-        "tabasco sauce",
-        0.578
-      ],
-      [
-        "malagueta",
-        0.577
-      ],
-      [
-        "chili cheese",
-        0.575
-      ],
-      [
-        "sriracha",
-        0.574
-      ],
-      [
-        "spicy",
-        0.572
-      ],
-      [
-        "paprika",
-        0.56
-      ],
-      [
-        "piquillo",
-        0.554
-      ],
-      [
-        "poblano",
-        0.553
-      ]
-    ],
-    "chopsticks": [],
     "chow": [
       [
         "chow chow",
@@ -23586,188 +17896,6 @@
       [
         "shih",
         0.501
-      ]
-    ],
-    "cocktail": [
-      [
-        "dom pedro",
-        0.75
-      ],
-      [
-        "mocktail",
-        0.727
-      ],
-      [
-        "martini",
-        0.717
-      ],
-      [
-        "cuba libre",
-        0.703
-      ],
-      [
-        "vodka martini",
-        0.701
-      ],
-      [
-        "martinis",
-        0.696
-      ],
-      [
-        "dry martini",
-        0.69
-      ],
-      [
-        "appletini",
-        0.684
-      ],
-      [
-        "mai tai",
-        0.677
-      ],
-      [
-        "shirley temple",
-        0.674
-      ],
-      [
-        "cocktail party",
-        0.665
-      ],
-      [
-        "sazerac",
-        0.66
-      ],
-      [
-        "mixology",
-        0.656
-      ],
-      [
-        "pi\u00f1a colada",
-        0.651
-      ],
-      [
-        "mojito",
-        0.645
-      ],
-      [
-        "margarita",
-        0.642
-      ],
-      [
-        "blue lagoon",
-        0.642
-      ],
-      [
-        "mixologist",
-        0.634
-      ],
-      [
-        "vodka tonic",
-        0.608
-      ],
-      [
-        "mojitos",
-        0.607
-      ],
-      [
-        "pisco sour",
-        0.607
-      ],
-      [
-        "highball",
-        0.605
-      ],
-      [
-        "daiquiri",
-        0.604
-      ],
-      [
-        "margaritas",
-        0.602
-      ],
-      [
-        "bloody mary",
-        0.589
-      ],
-      [
-        "tiki bar",
-        0.585
-      ],
-      [
-        "lemon drop",
-        0.583
-      ],
-      [
-        "negroni",
-        0.578
-      ],
-      [
-        "gimlets",
-        0.578
-      ],
-      [
-        "michelada",
-        0.576
-      ],
-      [
-        "dirty martini",
-        0.576
-      ],
-      [
-        "rusty nail",
-        0.57
-      ],
-      [
-        "cocktail lounge",
-        0.57
-      ],
-      [
-        "swizzle stick",
-        0.565
-      ],
-      [
-        "tequila sunrise",
-        0.561
-      ],
-      [
-        "gimlet",
-        0.559
-      ],
-      [
-        "julep",
-        0.554
-      ],
-      [
-        "cape codder",
-        0.551
-      ],
-      [
-        "mint julep",
-        0.548
-      ],
-      [
-        "hot toddy",
-        0.54
-      ],
-      [
-        "drinks",
-        0.535
-      ],
-      [
-        "swizzle",
-        0.525
-      ],
-      [
-        "galliano",
-        0.525
-      ],
-      [
-        "vodka",
-        0.524
-      ],
-      [
-        "pernod",
-        0.523
       ]
     ],
     "cocktails": [
@@ -26324,24 +20452,6 @@
         0.503
       ]
     ],
-    "dinning": [
-      [
-        "din",
-        0.676
-      ],
-      [
-        "dins",
-        0.65
-      ],
-      [
-        "dining",
-        0.581
-      ],
-      [
-        "dinning room",
-        0.504
-      ]
-    ],
     "dish": [
       [
         "eggs benedict",
@@ -27256,180 +21366,6 @@
         0.505
       ]
     ],
-    "eateries": [
-      [
-        "restaurant",
-        0.747
-      ],
-      [
-        "resto",
-        0.69
-      ],
-      [
-        "joe's",
-        0.664
-      ],
-      [
-        "restaurants",
-        0.663
-      ],
-      [
-        "bistro",
-        0.662
-      ],
-      [
-        "diners",
-        0.657
-      ],
-      [
-        "diner",
-        0.651
-      ],
-      [
-        "greasy spoon",
-        0.639
-      ],
-      [
-        "gastropub",
-        0.632
-      ],
-      [
-        "estaminet",
-        0.629
-      ],
-      [
-        "restauranteur",
-        0.628
-      ],
-      [
-        "trattoria",
-        0.611
-      ],
-      [
-        "brasserie",
-        0.601
-      ],
-      [
-        "tasting menu",
-        0.599
-      ],
-      [
-        "resturant",
-        0.592
-      ],
-      [
-        "cafes",
-        0.586
-      ],
-      [
-        "taverna",
-        0.581
-      ],
-      [
-        "fast casual",
-        0.581
-      ],
-      [
-        "cafe",
-        0.58
-      ],
-      [
-        "pizza parlor",
-        0.578
-      ],
-      [
-        "ristorante",
-        0.576
-      ],
-      [
-        "burger flipper",
-        0.57
-      ],
-      [
-        "steak house",
-        0.563
-      ],
-      [
-        "restaurateur",
-        0.553
-      ],
-      [
-        "slow food",
-        0.551
-      ],
-      [
-        "beanery",
-        0.549
-      ],
-      [
-        "pizzeria",
-        0.544
-      ],
-      [
-        "osteria",
-        0.543
-      ],
-      [
-        "clam shack",
-        0.541
-      ],
-      [
-        "bistros",
-        0.539
-      ],
-      [
-        "steakhouse",
-        0.536
-      ],
-      [
-        "sidewalk cafe",
-        0.527
-      ],
-      [
-        "caf\u00e9",
-        0.527
-      ],
-      [
-        "delicatessens",
-        0.522
-      ],
-      [
-        "dine out",
-        0.521
-      ],
-      [
-        "oyster bar",
-        0.52
-      ],
-      [
-        "deli",
-        0.518
-      ],
-      [
-        "golden arches",
-        0.517
-      ],
-      [
-        "dining",
-        0.515
-      ],
-      [
-        "macca's",
-        0.51
-      ],
-      [
-        "taqueria",
-        0.507
-      ],
-      [
-        "sandwich shop",
-        0.504
-      ],
-      [
-        "dining out",
-        0.501
-      ]
-    ],
     "eats": [
       [
         "eat",
@@ -28140,88 +22076,6 @@
         0.506
       ]
     ],
-    "foodie": [
-      [
-        "gastronome",
-        0.795
-      ],
-      [
-        "gourmet",
-        0.772
-      ],
-      [
-        "chowhound",
-        0.746
-      ],
-      [
-        "foodies",
-        0.741
-      ],
-      [
-        "epicure",
-        0.738
-      ],
-      [
-        "gourmand",
-        0.705
-      ],
-      [
-        "foody",
-        0.675
-      ],
-      [
-        "culinary",
-        0.609
-      ],
-      [
-        "epicurean",
-        0.594
-      ],
-      [
-        "food",
-        0.559
-      ],
-      [
-        "haute cuisine",
-        0.552
-      ],
-      [
-        "cuisine",
-        0.552
-      ],
-      [
-        "gastronomic",
-        0.55
-      ],
-      [
-        "gastronomy",
-        0.549
-      ],
-      [
-        "fancy food",
-        0.534
-      ],
-      [
-        "locavore",
-        0.534
-      ],
-      [
-        "gastronomical",
-        0.522
-      ],
-      [
-        "cheffy",
-        0.516
-      ],
-      [
-        "culinary arts",
-        0.515
-      ],
-      [
-        "foodporn",
-        0.505
-      ]
-    ],
     "foods": [
       [
         "foodstuffs",
@@ -28648,28 +22502,6 @@
       [
         "slow food",
         0.504
-      ]
-    ],
-    "hospitality": [
-      [
-        "hospitable",
-        0.576
-      ],
-      [
-        "warm welcome",
-        0.518
-      ],
-      [
-        "hospitium",
-        0.514
-      ],
-      [
-        "horeca",
-        0.512
-      ],
-      [
-        "lodging",
-        0.503
       ]
     ],
     "hostess": [
@@ -29538,132 +23370,6 @@
         0.778
       ]
     ],
-    "margaritas": [
-      [
-        "mojitos",
-        0.723
-      ],
-      [
-        "mojito",
-        0.694
-      ],
-      [
-        "michelada",
-        0.666
-      ],
-      [
-        "daiquiri",
-        0.658
-      ],
-      [
-        "pina colada",
-        0.655
-      ],
-      [
-        "tequila",
-        0.652
-      ],
-      [
-        "daiquiris",
-        0.643
-      ],
-      [
-        "cocktails",
-        0.63
-      ],
-      [
-        "mai tai",
-        0.628
-      ],
-      [
-        "martinis",
-        0.62
-      ],
-      [
-        "tequila sunrise",
-        0.616
-      ],
-      [
-        "cocktail",
-        0.602
-      ],
-      [
-        "martini",
-        0.601
-      ],
-      [
-        "coladas",
-        0.6
-      ],
-      [
-        "sangria",
-        0.598
-      ],
-      [
-        "vodka martini",
-        0.595
-      ],
-      [
-        "cuba libre",
-        0.588
-      ],
-      [
-        "pi\u00f1a colada",
-        0.574
-      ],
-      [
-        "mocktail",
-        0.561
-      ],
-      [
-        "limeade",
-        0.557
-      ],
-      [
-        "tequilas",
-        0.555
-      ],
-      [
-        "colada",
-        0.549
-      ],
-      [
-        "pisco sour",
-        0.541
-      ],
-      [
-        "singapore sling",
-        0.537
-      ],
-      [
-        "shrimp cocktail",
-        0.533
-      ],
-      [
-        "appletini",
-        0.528
-      ],
-      [
-        "shirley temple",
-        0.527
-      ],
-      [
-        "mezcal",
-        0.525
-      ],
-      [
-        "bloody mary",
-        0.521
-      ],
-      [
-        "tacos",
-        0.504
-      ],
-      [
-        "blue lagoon",
-        0.501
-      ]
-    ],
     "martinis": [
       [
         "appletini",
@@ -30320,164 +24026,6 @@
         0.503
       ]
     ],
-    "menus": [
-      [
-        "prix fixe",
-        0.766
-      ],
-      [
-        "submenu",
-        0.643
-      ],
-      [
-        "submenus",
-        0.629
-      ],
-      [
-        "restaurants",
-        0.613
-      ],
-      [
-        "carte",
-        0.612
-      ],
-      [
-        "resturant",
-        0.602
-      ],
-      [
-        "tasting menu",
-        0.597
-      ],
-      [
-        "\u00e0 la carte",
-        0.582
-      ],
-      [
-        "la carte",
-        0.578
-      ],
-      [
-        "restaurant",
-        0.556
-      ],
-      [
-        "diners",
-        0.518
-      ],
-      [
-        "salad bar",
-        0.516
-      ],
-      [
-        "fast casual",
-        0.502
-      ]
-    ],
-    "napkin": [
-      [
-        "tablecloth",
-        0.674
-      ],
-      [
-        "tablecloths",
-        0.643
-      ],
-      [
-        "sudarium",
-        0.641
-      ],
-      [
-        "towel",
-        0.621
-      ],
-      [
-        "dishtowel",
-        0.601
-      ],
-      [
-        "serviettes",
-        0.601
-      ],
-      [
-        "placemat",
-        0.592
-      ],
-      [
-        "handkerchief",
-        0.553
-      ],
-      [
-        "bath towel",
-        0.525
-      ],
-      [
-        "towelette",
-        0.522
-      ],
-      [
-        "handkerchiefs",
-        0.522
-      ],
-      [
-        "hanky",
-        0.512
-      ],
-      [
-        "washcloth",
-        0.506
-      ],
-      [
-        "hankie",
-        0.502
-      ]
-    ],
-    "napkins": [
-      [
-        "serviette",
-        0.796
-      ],
-      [
-        "serviettes",
-        0.727
-      ],
-      [
-        "tablecloths",
-        0.71
-      ],
-      [
-        "tablecloth",
-        0.684
-      ],
-      [
-        "placemats",
-        0.609
-      ],
-      [
-        "placemat",
-        0.572
-      ],
-      [
-        "towel",
-        0.527
-      ],
-      [
-        "towels",
-        0.525
-      ],
-      [
-        "picnic baskets",
-        0.513
-      ],
-      [
-        "dishtowel",
-        0.513
-      ],
-      [
-        "handkerchiefs",
-        0.511
-      ]
-    ],
     "nigiri": [
       [
         "maguro",
@@ -30532,6 +24080,7 @@
         0.506
       ]
     ],
+    "non-veg": [],
     "noodle": [
       [
         "fideo",
@@ -30868,36 +24417,6 @@
         0.516
       ]
     ],
-    "nosh": [
-      [
-        "noshing",
-        0.771
-      ],
-      [
-        "nibbles",
-        0.538
-      ],
-      [
-        "snacker",
-        0.531
-      ],
-      [
-        "munchies",
-        0.522
-      ],
-      [
-        "munchy",
-        0.511
-      ],
-      [
-        "snacky",
-        0.506
-      ],
-      [
-        "nibble",
-        0.502
-      ]
-    ],
     "omakase": [
       [
         "kaiseki",
@@ -30972,16 +24491,6 @@
       [
         "boiled egg",
         0.502
-      ]
-    ],
-    "omlette": [
-      [
-        "text messaging",
-        0.551
-      ],
-      [
-        "h8",
-        0.515
       ]
     ],
     "oysters": [
@@ -31170,52 +24679,6 @@
       [
         "cassoulet",
         0.501
-      ]
-    ],
-    "paninis": [
-      [
-        "panino",
-        0.657
-      ],
-      [
-        "sandwiches",
-        0.652
-      ],
-      [
-        "panini",
-        0.639
-      ],
-      [
-        "grilled cheese sandwich",
-        0.621
-      ],
-      [
-        "toasties",
-        0.595
-      ],
-      [
-        "calzones",
-        0.584
-      ],
-      [
-        "quesadillas",
-        0.553
-      ],
-      [
-        "pastas",
-        0.519
-      ],
-      [
-        "frittatas",
-        0.515
-      ],
-      [
-        "quiches",
-        0.51
-      ],
-      [
-        "flatbreads",
-        0.51
       ]
     ],
     "pasta": [
@@ -32178,6 +25641,118 @@
         0.572
       ]
     ],
+    "pot-stickers": [
+      [
+        "pot",
+        0.652
+      ],
+      [
+        "pots",
+        0.602
+      ],
+      [
+        "potful",
+        0.571
+      ],
+      [
+        "dutch oven",
+        0.544
+      ],
+      [
+        "stockpot",
+        0.539
+      ],
+      [
+        "sess",
+        0.526
+      ],
+      [
+        "beanpot",
+        0.509
+      ],
+      [
+        "potpie",
+        0.509
+      ],
+      [
+        "kettles",
+        0.501
+      ]
+    ],
+    "pre-fixe": [
+      [
+        "pre",
+        0.517
+      ]
+    ],
+    "pre-theatre": [
+      [
+        "pre",
+        0.517
+      ]
+    ],
+    "prix-fixe": [
+      [
+        "prix",
+        0.749
+      ],
+      [
+        "prix goncourt",
+        0.655
+      ],
+      [
+        "award",
+        0.631
+      ],
+      [
+        "awards",
+        0.629
+      ],
+      [
+        "prix fixe",
+        0.619
+      ],
+      [
+        "award ceremony",
+        0.616
+      ],
+      [
+        "awarded",
+        0.555
+      ],
+      [
+        "prize",
+        0.553
+      ],
+      [
+        "prizes",
+        0.545
+      ],
+      [
+        "prizegiving",
+        0.544
+      ],
+      [
+        "awardee",
+        0.524
+      ],
+      [
+        "awarding",
+        0.522
+      ],
+      [
+        "awards ceremony",
+        0.516
+      ],
+      [
+        "emmy award",
+        0.509
+      ],
+      [
+        "prizewinner",
+        0.501
+      ]
+    ],
     "pub": [
       [
         "taverns",
@@ -32372,200 +25947,6 @@
         0.526
       ]
     ],
-    "quesadilla": [
-      [
-        "tortilla",
-        0.768
-      ],
-      [
-        "taquito",
-        0.72
-      ],
-      [
-        "burrito",
-        0.717
-      ],
-      [
-        "tostada",
-        0.71
-      ],
-      [
-        "fajitas",
-        0.71
-      ],
-      [
-        "tacos",
-        0.695
-      ],
-      [
-        "nachos",
-        0.691
-      ],
-      [
-        "chilaquiles",
-        0.69
-      ],
-      [
-        "fajita",
-        0.688
-      ],
-      [
-        "enchiladas",
-        0.683
-      ],
-      [
-        "frijoles",
-        0.673
-      ],
-      [
-        "pupusa",
-        0.667
-      ],
-      [
-        "enchilada",
-        0.66
-      ],
-      [
-        "queso",
-        0.657
-      ],
-      [
-        "huevos rancheros",
-        0.653
-      ],
-      [
-        "taquitos",
-        0.644
-      ],
-      [
-        "tortillas",
-        0.639
-      ],
-      [
-        "chimichanga",
-        0.636
-      ],
-      [
-        "tostado",
-        0.634
-      ],
-      [
-        "taco",
-        0.626
-      ],
-      [
-        "tortilla chip",
-        0.625
-      ],
-      [
-        "guacamole",
-        0.623
-      ],
-      [
-        "burritos",
-        0.622
-      ],
-      [
-        "taco salad",
-        0.622
-      ],
-      [
-        "gordita",
-        0.62
-      ],
-      [
-        "taco bell",
-        0.596
-      ],
-      [
-        "nacho",
-        0.589
-      ],
-      [
-        "refried beans",
-        0.586
-      ],
-      [
-        "cheese sandwich",
-        0.577
-      ],
-      [
-        "chimichangas",
-        0.568
-      ],
-      [
-        "cotija",
-        0.566
-      ],
-      [
-        "tex mex",
-        0.564
-      ],
-      [
-        "chili cheese",
-        0.556
-      ],
-      [
-        "guac",
-        0.544
-      ],
-      [
-        "tortilla chips",
-        0.542
-      ],
-      [
-        "chalupa",
-        0.541
-      ],
-      [
-        "chipotle",
-        0.54
-      ],
-      [
-        "jalape\u00f1o",
-        0.539
-      ],
-      [
-        "jalape\u00f1os",
-        0.536
-      ],
-      [
-        "chalupas",
-        0.536
-      ],
-      [
-        "dorito",
-        0.527
-      ],
-      [
-        "empanada",
-        0.521
-      ],
-      [
-        "jalapeno",
-        0.521
-      ],
-      [
-        "jalapenos",
-        0.521
-      ],
-      [
-        "chorizo",
-        0.517
-      ],
-      [
-        "cubano",
-        0.516
-      ],
-      [
-        "taqueria",
-        0.516
-      ],
-      [
-        "refried",
-        0.514
-      ]
-    ],
     "ravioli": [
       [
         "agnolotti",
@@ -32754,56 +26135,6 @@
       [
         "capellini",
         0.529
-      ]
-    ],
-    "restaraunts": [
-      [
-        "potato",
-        0.662
-      ],
-      [
-        "potatoe",
-        0.615
-      ],
-      [
-        "potatoes",
-        0.569
-      ],
-      [
-        "baked potato",
-        0.539
-      ],
-      [
-        "potatos",
-        0.536
-      ],
-      [
-        "brunswick stew",
-        0.522
-      ],
-      [
-        "resturant",
-        0.52
-      ],
-      [
-        "tater",
-        0.513
-      ],
-      [
-        "potato soup",
-        0.508
-      ],
-      [
-        "tater tot",
-        0.508
-      ],
-      [
-        "potato salad",
-        0.507
-      ],
-      [
-        "fries",
-        0.506
       ]
     ],
     "restaurant": [
@@ -33130,60 +26461,6 @@
         0.501
       ]
     ],
-    "restraunt": [
-      [
-        "restraining",
-        0.795
-      ],
-      [
-        "restraints",
-        0.773
-      ],
-      [
-        "restrained",
-        0.747
-      ],
-      [
-        "constraining",
-        0.626
-      ],
-      [
-        "constrain",
-        0.587
-      ],
-      [
-        "restricting",
-        0.57
-      ],
-      [
-        "constrains",
-        0.563
-      ],
-      [
-        "restrainer",
-        0.536
-      ],
-      [
-        "restrictive",
-        0.522
-      ],
-      [
-        "gilded cage",
-        0.517
-      ],
-      [
-        "restrict",
-        0.51
-      ],
-      [
-        "confine",
-        0.507
-      ],
-      [
-        "confining",
-        0.506
-      ]
-    ],
     "restuarant": [
       [
         "resturant",
@@ -33410,204 +26687,6 @@
       [
         "osteria",
         0.504
-      ]
-    ],
-    "risotto": [
-      [
-        "gnocchi",
-        0.703
-      ],
-      [
-        "arborio rice",
-        0.692
-      ],
-      [
-        "gnudi",
-        0.682
-      ],
-      [
-        "polenta",
-        0.662
-      ],
-      [
-        "ravioli",
-        0.66
-      ],
-      [
-        "agnolotti",
-        0.652
-      ],
-      [
-        "tortellini",
-        0.626
-      ],
-      [
-        "pasta",
-        0.616
-      ],
-      [
-        "rag\u00f9",
-        0.616
-      ],
-      [
-        "tagliatelle",
-        0.611
-      ],
-      [
-        "rigatoni",
-        0.61
-      ],
-      [
-        "velout\u00e9",
-        0.607
-      ],
-      [
-        "pappardelle",
-        0.604
-      ],
-      [
-        "ragout",
-        0.602
-      ],
-      [
-        "fettuccine",
-        0.593
-      ],
-      [
-        "arborio",
-        0.59
-      ],
-      [
-        "carbonara",
-        0.586
-      ],
-      [
-        "orzo",
-        0.585
-      ],
-      [
-        "fettucini",
-        0.584
-      ],
-      [
-        "zuppa",
-        0.58
-      ],
-      [
-        "cannelloni",
-        0.575
-      ],
-      [
-        "cavatelli",
-        0.571
-      ],
-      [
-        "spaghettini",
-        0.569
-      ],
-      [
-        "fettuccine alfredo",
-        0.567
-      ],
-      [
-        "ziti",
-        0.566
-      ],
-      [
-        "penne",
-        0.563
-      ],
-      [
-        "ragu",
-        0.561
-      ],
-      [
-        "minestrone",
-        0.555
-      ],
-      [
-        "cappelletti",
-        0.552
-      ],
-      [
-        "bechamel",
-        0.552
-      ],
-      [
-        "fettucine",
-        0.551
-      ],
-      [
-        "porcini",
-        0.551
-      ],
-      [
-        "orecchiette",
-        0.55
-      ],
-      [
-        "osso buco",
-        0.55
-      ],
-      [
-        "fusilli",
-        0.55
-      ],
-      [
-        "bucatini",
-        0.548
-      ],
-      [
-        "lobster thermidor",
-        0.545
-      ],
-      [
-        "linguine",
-        0.545
-      ],
-      [
-        "vongole",
-        0.545
-      ],
-      [
-        "bolognese",
-        0.545
-      ],
-      [
-        "gratin",
-        0.539
-      ],
-      [
-        "fettuccini",
-        0.537
-      ],
-      [
-        "lasagna",
-        0.536
-      ],
-      [
-        "manicotti",
-        0.535
-      ],
-      [
-        "macaroni cheese",
-        0.533
-      ],
-      [
-        "carbone",
-        0.526
-      ],
-      [
-        "lasagne",
-        0.524
-      ],
-      [
-        "cioppino",
-        0.523
-      ],
-      [
-        "linguini",
-        0.521
       ]
     ],
     "salad": [
@@ -34918,28 +27997,6 @@
         0.602
       ]
     ],
-    "sceney": [
-      [
-        "scenery",
-        0.607
-      ],
-      [
-        "scenester",
-        0.595
-      ],
-      [
-        "mise en scene",
-        0.564
-      ],
-      [
-        "mise en sc\u00e8ne",
-        0.516
-      ],
-      [
-        "scene stealer",
-        0.509
-      ]
-    ],
     "seafood": [
       [
         "shellfish",
@@ -35138,78 +28195,98 @@
         0.51
       ]
     ],
-    "seafoods": [
+    "short-order": [
       [
-        "shellfish",
-        0.644
+        "shorting",
+        0.733
       ],
       [
-        "lobster",
+        "shortish",
+        0.713
+      ],
+      [
+        "shorted",
+        0.699
+      ],
+      [
+        "telescoped",
+        0.661
+      ],
+      [
+        "shorter",
+        0.643
+      ],
+      [
+        "brachy",
+        0.631
+      ],
+      [
+        "shortie",
+        0.625
+      ],
+      [
+        "shorten",
+        0.617
+      ],
+      [
+        "shortened",
+        0.617
+      ],
+      [
+        "ultrashort",
+        0.596
+      ],
+      [
+        "shortens",
+        0.594
+      ],
+      [
+        "shorty",
+        0.571
+      ],
+      [
+        "short termist",
         0.569
       ],
       [
-        "lobster tail",
-        0.563
+        "shortest",
+        0.564
       ],
       [
-        "oysters",
-        0.548
+        "shortleaf",
+        0.558
       ],
       [
-        "lobsters",
+        "short term",
+        0.542
+      ],
+      [
+        "squatty",
         0.538
       ],
       [
-        "rock lobster",
-        0.537
+        "shortening",
+        0.52
       ],
       [
-        "crab cake",
-        0.532
+        "longish",
+        0.516
       ],
       [
-        "cioppino",
-        0.528
+        "shortener",
+        0.511
       ],
       [
-        "clam shack",
-        0.528
-      ],
-      [
-        "steak house",
-        0.526
-      ],
-      [
-        "oysters rockefeller",
-        0.522
-      ],
-      [
-        "lobstering",
-        0.522
-      ],
-      [
-        "resteraunt",
-        0.518
-      ],
-      [
-        "spiny lobster",
-        0.517
-      ],
-      [
-        "crabmeat",
+        "briefness",
         0.508
       ],
       [
-        "eatery",
-        0.507
-      ],
-      [
-        "lobsterman",
-        0.503
-      ],
-      [
-        "saltwater fish",
+        "anceps",
         0.502
+      ],
+      [
+        "long",
+        0.501
       ]
     ],
     "shrimp": [
@@ -35446,64 +28523,6 @@
       [
         "granola bar",
         0.501
-      ]
-    ],
-    "snacks": [
-      [
-        "snacked",
-        0.743
-      ],
-      [
-        "snacking",
-        0.686
-      ],
-      [
-        "potato skins",
-        0.668
-      ],
-      [
-        "snacker",
-        0.654
-      ],
-      [
-        "munchy",
-        0.636
-      ],
-      [
-        "munchies",
-        0.595
-      ],
-      [
-        "refreshments",
-        0.576
-      ],
-      [
-        "cheetos",
-        0.569
-      ],
-      [
-        "appetizers",
-        0.556
-      ],
-      [
-        "snack food",
-        0.556
-      ],
-      [
-        "puffed rice",
-        0.534
-      ],
-      [
-        "beverages",
-        0.512
-      ],
-      [
-        "hors d oeuvres",
-        0.512
-      ],
-      [
-        "trail mix",
-        0.508
       ]
     ],
     "sommelier": [
@@ -35878,104 +28897,6 @@
       [
         "chicken casserole",
         0.526
-      ]
-    ],
-    "souvlaki": [
-      [
-        "kabob",
-        0.742
-      ],
-      [
-        "doner kebab",
-        0.723
-      ],
-      [
-        "kabobs",
-        0.722
-      ],
-      [
-        "gyros",
-        0.719
-      ],
-      [
-        "shawarma",
-        0.711
-      ],
-      [
-        "kebab",
-        0.709
-      ],
-      [
-        "kebabs",
-        0.705
-      ],
-      [
-        "kebap",
-        0.685
-      ],
-      [
-        "shish kebab",
-        0.681
-      ],
-      [
-        "meze",
-        0.678
-      ],
-      [
-        "shish",
-        0.638
-      ],
-      [
-        "tzatziki",
-        0.631
-      ],
-      [
-        "moussaka",
-        0.624
-      ],
-      [
-        "kafta",
-        0.62
-      ],
-      [
-        "falafel",
-        0.609
-      ],
-      [
-        "gyro",
-        0.583
-      ],
-      [
-        "felafel",
-        0.58
-      ],
-      [
-        "mezze",
-        0.577
-      ],
-      [
-        "baklava",
-        0.546
-      ],
-      [
-        "taverna",
-        0.546
-      ],
-      [
-        "shwarma",
-        0.538
-      ],
-      [
-        "falafels",
-        0.536
-      ],
-      [
-        "spanakopita",
-        0.533
-      ],
-      [
-        "pitta bread",
-        0.509
       ]
     ],
     "steak": [
@@ -36616,208 +29537,26 @@
         0.507
       ]
     ],
-    "tacos": [
+    "take-out": [
       [
-        "burritos",
-        0.777
+        "take",
+        0.581
       ],
       [
-        "burrito",
-        0.746
-      ],
-      [
-        "taco bell",
-        0.736
-      ],
-      [
-        "taqueria",
-        0.733
-      ],
-      [
-        "fajitas",
-        0.725
-      ],
-      [
-        "taquitos",
-        0.702
-      ],
-      [
-        "nachos",
-        0.695
-      ],
-      [
-        "quesadilla",
-        0.695
-      ],
-      [
-        "enchiladas",
-        0.683
-      ],
-      [
-        "tortilla",
-        0.682
-      ],
-      [
-        "chilaquiles",
-        0.677
-      ],
-      [
-        "fajita",
-        0.676
-      ],
-      [
-        "tex mex",
-        0.675
-      ],
-      [
-        "taquito",
-        0.673
-      ],
-      [
-        "frijoles",
-        0.671
-      ],
-      [
-        "tortillas",
-        0.658
-      ],
-      [
-        "quesadillas",
-        0.648
-      ],
-      [
-        "chalupas",
-        0.639
-      ],
-      [
-        "chimichanga",
-        0.637
-      ],
-      [
-        "tostada",
-        0.629
-      ],
-      [
-        "huevos rancheros",
-        0.622
-      ],
-      [
-        "enchilada",
-        0.619
-      ],
-      [
-        "refried beans",
-        0.611
-      ],
-      [
-        "nacho",
-        0.597
-      ],
-      [
-        "guacamole",
-        0.591
-      ],
-      [
-        "migas",
-        0.585
-      ],
-      [
-        "tamales",
-        0.583
-      ],
-      [
-        "chipotle",
-        0.58
-      ],
-      [
-        "tortilla chip",
-        0.579
-      ],
-      [
-        "pupusa",
-        0.576
-      ],
-      [
-        "taco salad",
-        0.572
-      ],
-      [
-        "burgers",
-        0.57
-      ],
-      [
-        "chimichangas",
-        0.57
-      ],
-      [
-        "gordita",
-        0.559
-      ],
-      [
-        "mexican",
-        0.557
-      ],
-      [
-        "mexicano",
-        0.555
-      ],
-      [
-        "tostado",
-        0.553
-      ],
-      [
-        "chili cheese",
-        0.552
-      ],
-      [
-        "guac",
-        0.545
-      ],
-      [
-        "chalupa",
+        "takes",
         0.543
       ],
       [
-        "queso",
-        0.537
+        "takest",
+        0.539
       ],
       [
-        "chilis",
+        "taketh",
         0.526
       ],
       [
-        "refried",
-        0.525
-      ],
-      [
-        "cotija",
-        0.524
-      ],
-      [
-        "dorito",
-        0.522
-      ],
-      [
-        "tamal",
-        0.513
-      ],
-      [
-        "mexicans",
-        0.512
-      ],
-      [
-        "tortilla chips",
+        "take over",
         0.511
-      ]
-    ],
-    "takeaway": [
-      [
-        "carryout",
-        0.764
-      ],
-      [
-        "takeout",
-        0.717
       ]
     ],
     "takeout": [
@@ -37003,68 +29742,6 @@
       ],
       [
         "gastropub",
-        0.502
-      ]
-    ],
-    "tartare": [
-      [
-        "steak tartare",
-        0.7
-      ],
-      [
-        "carpaccio",
-        0.682
-      ],
-      [
-        "tartar sauce",
-        0.583
-      ],
-      [
-        "tournedos",
-        0.567
-      ],
-      [
-        "bearnaise",
-        0.556
-      ],
-      [
-        "aioli",
-        0.554
-      ],
-      [
-        "b\u00e9arnaise",
-        0.539
-      ],
-      [
-        "b\u00e9arnaise sauce",
-        0.535
-      ],
-      [
-        "tataki",
-        0.532
-      ],
-      [
-        "bearnaise sauce",
-        0.523
-      ],
-      [
-        "filet mignon",
-        0.518
-      ],
-      [
-        "ceviche",
-        0.513
-      ],
-      [
-        "garlic sauce",
-        0.512
-      ],
-      [
-        "tartar",
-        0.505
-      ],
-      [
-        "confit",
         0.502
       ]
     ],
@@ -37360,76 +30037,6 @@
       [
         "afters",
         0.507
-      ]
-    ],
-    "trattoria": [
-      [
-        "ristorante",
-        0.79
-      ],
-      [
-        "osteria",
-        0.747
-      ],
-      [
-        "pizzeria",
-        0.687
-      ],
-      [
-        "pizza parlor",
-        0.66
-      ],
-      [
-        "eatery",
-        0.636
-      ],
-      [
-        "restaurant",
-        0.629
-      ],
-      [
-        "bistro",
-        0.619
-      ],
-      [
-        "eateries",
-        0.611
-      ],
-      [
-        "taverna",
-        0.598
-      ],
-      [
-        "cucina",
-        0.59
-      ],
-      [
-        "resto",
-        0.574
-      ],
-      [
-        "enoteca",
-        0.553
-      ],
-      [
-        "tasting menu",
-        0.547
-      ],
-      [
-        "wine bar",
-        0.52
-      ],
-      [
-        "restauranteur",
-        0.52
-      ],
-      [
-        "diner",
-        0.519
-      ],
-      [
-        "brasserie",
-        0.512
       ]
     ],
     "udon": [
@@ -38186,200 +30793,6 @@
       [
         "horseradish",
         0.536
-      ]
-    ],
-    "weeknight": [
-      [
-        "weekday",
-        0.769
-      ],
-      [
-        "weeknights",
-        0.721
-      ],
-      [
-        "night",
-        0.699
-      ],
-      [
-        "weekdays",
-        0.688
-      ],
-      [
-        "evenings",
-        0.679
-      ],
-      [
-        "nights",
-        0.672
-      ],
-      [
-        "evening",
-        0.666
-      ],
-      [
-        "m f",
-        0.637
-      ],
-      [
-        "saturday night",
-        0.634
-      ],
-      [
-        "nighttime",
-        0.634
-      ],
-      [
-        "nightly",
-        0.629
-      ],
-      [
-        "fridays",
-        0.613
-      ],
-      [
-        "nighter",
-        0.607
-      ],
-      [
-        "midweek",
-        0.606
-      ],
-      [
-        "wednesdays",
-        0.601
-      ],
-      [
-        "friday",
-        0.589
-      ],
-      [
-        "mondays",
-        0.588
-      ],
-      [
-        "workweek",
-        0.588
-      ],
-      [
-        "saturdays",
-        0.587
-      ],
-      [
-        "week",
-        0.585
-      ],
-      [
-        "hump day",
-        0.581
-      ],
-      [
-        "afternoons",
-        0.581
-      ],
-      [
-        "saturday",
-        0.578
-      ],
-      [
-        "weekends",
-        0.577
-      ],
-      [
-        "thursdays",
-        0.571
-      ],
-      [
-        "daytime",
-        0.57
-      ],
-      [
-        "monday",
-        0.566
-      ],
-      [
-        "sundays",
-        0.564
-      ],
-      [
-        "wednesday",
-        0.562
-      ],
-      [
-        "late night",
-        0.562
-      ],
-      [
-        "nocturnally",
-        0.56
-      ],
-      [
-        "workday",
-        0.557
-      ],
-      [
-        "humpday",
-        0.552
-      ],
-      [
-        "mornings",
-        0.552
-      ],
-      [
-        "tonight",
-        0.548
-      ],
-      [
-        "thursday",
-        0.547
-      ],
-      [
-        "sunday",
-        0.546
-      ],
-      [
-        "tuesdays",
-        0.54
-      ],
-      [
-        "wee hours",
-        0.534
-      ],
-      [
-        "afternoon",
-        0.53
-      ],
-      [
-        "day",
-        0.529
-      ],
-      [
-        "midafternoon",
-        0.518
-      ],
-      [
-        "weekend",
-        0.513
-      ],
-      [
-        "night out",
-        0.513
-      ],
-      [
-        "morning",
-        0.511
-      ],
-      [
-        "tuesday",
-        0.51
-      ],
-      [
-        "midnights",
-        0.506
-      ],
-      [
-        "midnight",
-        0.505
       ]
     ],
     "wine": [
