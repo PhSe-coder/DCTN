@@ -88,9 +88,9 @@ class FDGRClassifer(LightningModule, LossWeight):
         ha_loss = outputs.loss["ha_loss"]
         club_loss = outputs.loss["club_loss"]
         vad_loss = outputs.loss["vad_loss"]
-        sub_loss = orthogonal_loss + reconstruct_loss + ha_loss + club_loss + vad_loss
-        # sub_loss = reconstruct_loss + ha_loss + club_loss + vad_loss
-        loss = ce_loss + self.coff * sub_loss
+        # sub_loss = orthogonal_loss + reconstruct_loss + ha_loss + club_loss + vad_loss
+        sub_loss = 0.01 * reconstruct_loss + 0.01 * ha_loss + 0.001 * club_loss + 0.01 * vad_loss
+        loss = ce_loss +  sub_loss
         self.manual_backward(loss)
         opt.step()
         self.log('train_loss', loss.item())
