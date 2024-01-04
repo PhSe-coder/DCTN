@@ -123,7 +123,7 @@ class FDGRModel(nn.Module):
         self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
         self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
         self.conv1 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
-        self.conv2 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
+        # self.conv2 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
         self.span_extractor = EndpointSpanExtractor(h_dim,
                                                     combination="x,y",
                                                     num_width_embeddings=4,
@@ -159,9 +159,9 @@ class FDGRModel(nn.Module):
             for adj_mat in graph_ids
         ])
         h = self.conv1(g, ha.view(-1, self.h_dim))
-        h = self.conv2(g, h.view(-1, self.h_dim))
+        # h = self.conv2(g, h.view(-1, self.h_dim))
         # sequence representetion
-        mean = torch.mul(ha.view(batch_size, -1, self.h_dim),
+        mean = torch.mul(h.view(batch_size, -1, self.h_dim),
                          (att_mask / att_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         # emb = torch.mul(h.view(batch_size, -1, self.h_dim),
         #                 (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
