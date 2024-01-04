@@ -1,7 +1,7 @@
 data:
   class_path: ABSADataModule
   init_args:
-    batch_size: 16
+    batch_size: 32
     num_workers: 24
     vad_lexicon_file: ./NRC-VAD-Lexicon.txt
     train_file: ./processed/dataset/restaurant.train.txt
@@ -14,7 +14,7 @@ model:
   init_args:
     h_dim: 100
     coff: 0.1
-    lr: 2e-5
+    lr: 3e-5
     num_labels: 3
 seed_everything: 42
 trainer:
