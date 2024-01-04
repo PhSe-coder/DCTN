@@ -48,7 +48,7 @@ def most_common_words(sentences: List[Sentence]) -> List[str]:
 
 
 @limits(3600, 3600)
-@retry(tries=3)
+@retry(tries=10)
 def get_synonym(word: str, low=0.5, high=0.8) -> List[Tuple[str, int]]:
     """Generate synonyms via ConceptNet5
 
@@ -82,7 +82,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     for file in glob(osp.join(args.data_dir, "**.train.txt")):
         documents = [line.rsplit("***", maxsplit=1)[0] for line in open(file, "r")]
-        sentences = annotation_plus(documents)
+        docs = []
+        for doc in documents:
+            if doc not in docs:
+                docs.append(doc)
+        sentences = annotation_plus(docs)
         common_words = most_common_words(sentences)
         domain = get_domain(file)
         domain_vec = ft.get_word_vector(domain)

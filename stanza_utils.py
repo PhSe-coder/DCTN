@@ -7,13 +7,14 @@ stanza.download("en")
 # set tokenize_pretokenized=True to prevent further tokenization or sentence segmentation
 # see more: https://stanfordnlp.github.io/stanza/tokenize.html#start-with-pretokenized-text
 nlp = stanza.Pipeline("en",
-                      processors='tokenize,pos,depparse,lemma',
-                      verbose=False,
+                      processors={'tokenize': 'spacy'},
                       use_gpu=True,
                       tokenize_pretokenized=True,
+                      tokenize_no_ssplit=True,
                       download_method=DownloadMethod.REUSE_RESOURCES)
 
 __all__ = ['annotation', 'annotation_plus', 'Sentence']
+
 
 def annotation(text: str) -> Sentence:
     """sentence annotation
