@@ -1,5 +1,324 @@
 {
   "laptop": {
+    "320GB": [],
+    "4GB": [
+      [
+        "programming",
+        0.744
+      ],
+      [
+        "metaprogramming",
+        0.694
+      ],
+      [
+        "cobol",
+        0.672
+      ],
+      [
+        "programing",
+        0.659
+      ],
+      [
+        "nvi",
+        0.65
+      ],
+      [
+        "hll",
+        0.647
+      ],
+      [
+        "object oriented",
+        0.644
+      ],
+      [
+        "programmers",
+        0.643
+      ],
+      [
+        "programmer",
+        0.625
+      ],
+      [
+        "smalltalk",
+        0.625
+      ],
+      [
+        "computer programming",
+        0.622
+      ],
+      [
+        "fortran",
+        0.597
+      ],
+      [
+        "programming language",
+        0.592
+      ],
+      [
+        "qbasic",
+        0.592
+      ],
+      [
+        "mvcc",
+        0.577
+      ],
+      [
+        "pharo",
+        0.555
+      ],
+      [
+        "toplevel",
+        0.548
+      ],
+      [
+        "computer programmer",
+        0.547
+      ],
+      [
+        "extreme programming",
+        0.546
+      ],
+      [
+        "remoting",
+        0.544
+      ],
+      [
+        "scripting language",
+        0.543
+      ],
+      [
+        "raii",
+        0.54
+      ],
+      [
+        "programer",
+        0.534
+      ],
+      [
+        "obj",
+        0.531
+      ],
+      [
+        "debugger",
+        0.53
+      ],
+      [
+        "pl sql",
+        0.528
+      ],
+      [
+        "errno",
+        0.528
+      ],
+      [
+        "vbscript",
+        0.525
+      ],
+      [
+        "actionscript",
+        0.519
+      ],
+      [
+        "intertype",
+        0.519
+      ],
+      [
+        "rexx",
+        0.512
+      ],
+      [
+        "application programming interface",
+        0.511
+      ],
+      [
+        "clojure",
+        0.51
+      ],
+      [
+        "decompiler",
+        0.51
+      ],
+      [
+        "opc ua",
+        0.51
+      ],
+      [
+        "pythonic",
+        0.508
+      ],
+      [
+        "visual basic",
+        0.503
+      ],
+      [
+        "refactoring",
+        0.501
+      ],
+      [
+        "event driven",
+        0.501
+      ]
+    ],
+    "4gb": [
+      [
+        "programming",
+        0.744
+      ],
+      [
+        "metaprogramming",
+        0.694
+      ],
+      [
+        "cobol",
+        0.672
+      ],
+      [
+        "programing",
+        0.659
+      ],
+      [
+        "nvi",
+        0.65
+      ],
+      [
+        "hll",
+        0.647
+      ],
+      [
+        "object oriented",
+        0.644
+      ],
+      [
+        "programmers",
+        0.643
+      ],
+      [
+        "programmer",
+        0.625
+      ],
+      [
+        "smalltalk",
+        0.625
+      ],
+      [
+        "computer programming",
+        0.622
+      ],
+      [
+        "fortran",
+        0.597
+      ],
+      [
+        "programming language",
+        0.592
+      ],
+      [
+        "qbasic",
+        0.592
+      ],
+      [
+        "mvcc",
+        0.577
+      ],
+      [
+        "pharo",
+        0.555
+      ],
+      [
+        "toplevel",
+        0.548
+      ],
+      [
+        "computer programmer",
+        0.547
+      ],
+      [
+        "extreme programming",
+        0.546
+      ],
+      [
+        "remoting",
+        0.544
+      ],
+      [
+        "scripting language",
+        0.543
+      ],
+      [
+        "raii",
+        0.54
+      ],
+      [
+        "programer",
+        0.534
+      ],
+      [
+        "obj",
+        0.531
+      ],
+      [
+        "debugger",
+        0.53
+      ],
+      [
+        "pl sql",
+        0.528
+      ],
+      [
+        "errno",
+        0.528
+      ],
+      [
+        "vbscript",
+        0.525
+      ],
+      [
+        "actionscript",
+        0.519
+      ],
+      [
+        "intertype",
+        0.519
+      ],
+      [
+        "rexx",
+        0.512
+      ],
+      [
+        "application programming interface",
+        0.511
+      ],
+      [
+        "clojure",
+        0.51
+      ],
+      [
+        "decompiler",
+        0.51
+      ],
+      [
+        "opc ua",
+        0.51
+      ],
+      [
+        "pythonic",
+        0.508
+      ],
+      [
+        "visual basic",
+        0.503
+      ],
+      [
+        "refactoring",
+        0.501
+      ],
+      [
+        "event driven",
+        0.501
+      ]
+    ],
+    "500gb": [],
+    "8GB": [],
     "ASUS": [
       [
         "asuncion",
@@ -803,6 +1122,72 @@
       [
         "aaaah",
         0.504
+      ]
+    ],
+    "GUI": [
+      [
+        "draggable",
+        0.691
+      ],
+      [
+        "graphical user interface",
+        0.683
+      ],
+      [
+        "system tray",
+        0.639
+      ],
+      [
+        "ui",
+        0.635
+      ],
+      [
+        "user interface",
+        0.589
+      ],
+      [
+        "virtual desktop",
+        0.583
+      ],
+      [
+        "dropdown",
+        0.56
+      ],
+      [
+        "graphical",
+        0.541
+      ],
+      [
+        "yui",
+        0.54
+      ],
+      [
+        "taskbar",
+        0.534
+      ],
+      [
+        "navbar",
+        0.532
+      ],
+      [
+        "listview",
+        0.526
+      ],
+      [
+        "tabbed",
+        0.51
+      ],
+      [
+        "start menu",
+        0.505
+      ],
+      [
+        "graphical interface",
+        0.502
+      ],
+      [
+        "scrollbars",
+        0.501
       ]
     ],
     "Garageband": [
@@ -2903,72 +3288,6 @@
         0.503
       ]
     ],
-    "Notebooks": [
-      [
-        "laptops",
-        0.697
-      ],
-      [
-        "jotter",
-        0.68
-      ],
-      [
-        "ultrabook",
-        0.652
-      ],
-      [
-        "laptop",
-        0.636
-      ],
-      [
-        "laptop computer",
-        0.622
-      ],
-      [
-        "netbook",
-        0.619
-      ],
-      [
-        "memo pad",
-        0.606
-      ],
-      [
-        "notepads",
-        0.598
-      ],
-      [
-        "laptop computers",
-        0.597
-      ],
-      [
-        "cahier",
-        0.567
-      ],
-      [
-        "ultraportable",
-        0.566
-      ],
-      [
-        "palmtop",
-        0.552
-      ],
-      [
-        "notepad",
-        0.551
-      ],
-      [
-        "desktops",
-        0.548
-      ],
-      [
-        "pens",
-        0.51
-      ],
-      [
-        "pencils",
-        0.502
-      ]
-    ],
     "OS": [
       [
         "mac os",
@@ -4227,7 +4546,6 @@
       ]
     ],
     "Win7": [],
-    "Winblows": [],
     "Windows": [
       [
         "ntfs",
@@ -4336,6 +4654,20 @@
       [
         "desktop",
         0.503
+      ]
+    ],
+    "XP": [
+      [
+        "yp",
+        0.755
+      ],
+      [
+        "exp",
+        0.539
+      ],
+      [
+        "role playing games",
+        0.511
       ]
     ],
     "acer": [
@@ -5198,6 +5530,206 @@
         0.514
       ]
     ],
+    "chiclet": [
+      [
+        "chicklet",
+        0.783
+      ],
+      [
+        "chiclet keyboard",
+        0.718
+      ],
+      [
+        "chiclets",
+        0.553
+      ],
+      [
+        "chicle",
+        0.52
+      ]
+    ],
+    "chipset": [
+      [
+        "chip",
+        0.699
+      ],
+      [
+        "chipmaker",
+        0.697
+      ],
+      [
+        "mainboard",
+        0.671
+      ],
+      [
+        "southbridge",
+        0.664
+      ],
+      [
+        "motherboard",
+        0.662
+      ],
+      [
+        "motherboards",
+        0.659
+      ],
+      [
+        "intel",
+        0.652
+      ],
+      [
+        "mobo",
+        0.643
+      ],
+      [
+        "northbridge",
+        0.639
+      ],
+      [
+        "microchip",
+        0.638
+      ],
+      [
+        "cpu",
+        0.623
+      ],
+      [
+        "computer hardware",
+        0.613
+      ],
+      [
+        "celeron",
+        0.61
+      ],
+      [
+        "microprocessor",
+        0.594
+      ],
+      [
+        "non volatile memory",
+        0.569
+      ],
+      [
+        "marvell",
+        0.566
+      ],
+      [
+        "gpu",
+        0.564
+      ],
+      [
+        "processor",
+        0.563
+      ],
+      [
+        "mpu",
+        0.562
+      ],
+      [
+        "microcontroller",
+        0.555
+      ],
+      [
+        "coprocessor",
+        0.555
+      ],
+      [
+        "microchips",
+        0.552
+      ],
+      [
+        "chips",
+        0.551
+      ],
+      [
+        "overclock",
+        0.55
+      ],
+      [
+        "fpga",
+        0.546
+      ],
+      [
+        "sdram",
+        0.545
+      ],
+      [
+        "integrated circuits",
+        0.542
+      ],
+      [
+        "pentium",
+        0.541
+      ],
+      [
+        "dimm",
+        0.536
+      ],
+      [
+        "supermicro",
+        0.534
+      ],
+      [
+        "overclocking",
+        0.534
+      ],
+      [
+        "microcode",
+        0.531
+      ],
+      [
+        "bios",
+        0.527
+      ],
+      [
+        "agp",
+        0.526
+      ],
+      [
+        "nonvolatile memory",
+        0.525
+      ],
+      [
+        "microprocessors",
+        0.524
+      ],
+      [
+        "cow chip",
+        0.523
+      ],
+      [
+        "pci",
+        0.521
+      ],
+      [
+        "amd",
+        0.515
+      ],
+      [
+        "so dimm",
+        0.515
+      ],
+      [
+        "silicon photonics",
+        0.511
+      ],
+      [
+        "asic",
+        0.507
+      ],
+      [
+        "silicon wafer",
+        0.506
+      ],
+      [
+        "vram",
+        0.505
+      ],
+      [
+        "quad core",
+        0.504
+      ]
+    ],
     "computer": [
       [
         "computers",
@@ -5592,6 +6124,40 @@
         0.561
       ]
     ],
+    "cursor": [
+      [
+        "caret",
+        0.603
+      ],
+      [
+        "scrollbar",
+        0.553
+      ],
+      [
+        "scrollbars",
+        0.533
+      ],
+      [
+        "mouseover",
+        0.532
+      ],
+      [
+        "tooltip",
+        0.532
+      ],
+      [
+        "pointer",
+        0.528
+      ],
+      [
+        "scroll wheel",
+        0.518
+      ],
+      [
+        "scrollable",
+        0.505
+      ]
+    ],
     "dell": [
       [
         "compaq",
@@ -5608,56 +6174,6 @@
       [
         "hewlett packard",
         0.517
-      ]
-    ],
-    "desk": [
-      [
-        "deskside",
-        0.684
-      ],
-      [
-        "desk drawer",
-        0.604
-      ],
-      [
-        "coffee cups",
-        0.578
-      ],
-      [
-        "paperclips",
-        0.565
-      ],
-      [
-        "worktable",
-        0.561
-      ],
-      [
-        "escritoire",
-        0.557
-      ],
-      [
-        "office",
-        0.545
-      ],
-      [
-        "furniture store",
-        0.544
-      ],
-      [
-        "swivel chair",
-        0.54
-      ],
-      [
-        "buro",
-        0.509
-      ],
-      [
-        "desktop",
-        0.504
-      ],
-      [
-        "credenza",
-        0.504
       ]
     ],
     "desktop": [
@@ -7046,149 +7562,173 @@
         0.504
       ]
     ],
-    "gigabyte": [
+    "grafics": [
       [
-        "gb",
-        0.785
+        "metrobus",
+        0.717
       ],
       [
-        "megabytes",
-        0.742
+        "subway",
+        0.706
       ],
       [
-        "gigabit",
-        0.734
+        "bus",
+        0.687
       ],
       [
-        "gigabytes",
-        0.714
+        "subways",
+        0.676
       ],
       [
-        "terabyte",
-        0.704
+        "superbus",
+        0.672
       ],
       [
-        "megabyte",
-        0.692
+        "motorbus",
+        0.66
       ],
       [
-        "gigabits",
-        0.658
+        "underground railroad",
+        0.645
       ],
       [
-        "mb",
-        0.65
+        "buses",
+        0.644
       ],
       [
-        "megabit",
-        0.642
+        "bused",
+        0.622
       ],
       [
-        "megabits",
-        0.595
+        "rapid transit",
+        0.611
       ],
       [
-        "motherboard",
-        0.586
+        "busses",
+        0.61
       ],
       [
-        "extended memory",
-        0.579
+        "subway station",
+        0.609
       ],
       [
-        "mb s",
-        0.579
+        "multibus",
+        0.605
       ],
       [
-        "mobo",
-        0.577
+        "autobus",
+        0.6
       ],
       [
-        "motherboards",
+        "mass rapid transit",
+        0.591
+      ],
+      [
+        "waterbus",
+        0.59
+      ],
+      [
+        "metro",
+        0.585
+      ],
+      [
+        "light rail",
+        0.584
+      ],
+      [
+        "tram",
+        0.581
+      ],
+      [
+        "trolleybus",
         0.575
       ],
       [
-        "dimm",
-        0.571
+        "bus rapid transit",
+        0.553
       ],
       [
-        "mbps",
-        0.57
+        "trams",
+        0.552
       ],
       [
-        "ahci",
-        0.557
+        "passenger terminal",
+        0.55
       ],
       [
-        "ssd",
-        0.556
+        "streetcar",
+        0.55
       ],
       [
-        "kilobyte",
-        0.545
+        "busway",
+        0.544
       ],
       [
-        "ghz",
-        0.545
+        "bus terminal",
+        0.539
       ],
       [
-        "sata",
-        0.538
+        "motorcoach",
+        0.539
       ],
       [
-        "computer hardware",
-        0.537
+        "tramcar",
+        0.536
       ],
       [
-        "vram",
-        0.532
-      ],
-      [
-        "mainboard",
+        "mass transit",
         0.53
       ],
       [
-        "giga",
-        0.527
+        "bus stop",
+        0.529
       ],
       [
-        "serial ata",
+        "jitney",
         0.523
       ],
       [
-        "gbps",
-        0.522
+        "bus stops",
+        0.518
       ],
       [
-        "sdram",
-        0.521
-      ],
-      [
-        "terabit",
+        "transitway",
         0.516
       ],
       [
-        "kilobit",
+        "commuters",
+        0.516
+      ],
+      [
+        "graffiti",
         0.515
       ],
       [
-        "usb",
+        "bussed",
         0.512
       ],
       [
-        "gigahertz",
-        0.51
+        "metrocard",
+        0.512
       ],
       [
-        "hdd",
-        0.508
+        "streetcars",
+        0.509
       ],
       [
-        "pentium",
+        "tramway",
         0.503
       ],
       [
-        "terabytes",
+        "commuter rail",
+        0.503
+      ],
+      [
+        "interurban",
+        0.503
+      ],
+      [
+        "horsecar",
         0.501
       ]
     ],
@@ -7402,6 +7942,24 @@
       [
         "tougher",
         0.501
+      ]
+    ],
+    "hardwar": [
+      [
+        "ironmongery",
+        0.622
+      ],
+      [
+        "ironware",
+        0.611
+      ],
+      [
+        "ironmonger",
+        0.546
+      ],
+      [
+        "lumber yard",
+        0.524
       ]
     ],
     "hardware": [
@@ -8312,188 +8870,6 @@
       [
         "imogen",
         0.536
-      ]
-    ],
-    "internet": [
-      [
-        "metasearch engine",
-        0.794
-      ],
-      [
-        "interweb",
-        0.789
-      ],
-      [
-        "nntp",
-        0.769
-      ],
-      [
-        "habbo",
-        0.711
-      ],
-      [
-        "i2",
-        0.683
-      ],
-      [
-        "tbt",
-        0.683
-      ],
-      [
-        "serp",
-        0.681
-      ],
-      [
-        "cyberspace",
-        0.677
-      ],
-      [
-        "iunno",
-        0.669
-      ],
-      [
-        "clearnet",
-        0.668
-      ],
-      [
-        "pagerank",
-        0.66
-      ],
-      [
-        "fup",
-        0.657
-      ],
-      [
-        "goatse",
-        0.653
-      ],
-      [
-        "internetting",
-        0.653
-      ],
-      [
-        "dyk",
-        0.647
-      ],
-      [
-        "internetwork",
-        0.644
-      ],
-      [
-        "web",
-        0.627
-      ],
-      [
-        "gtld",
-        0.62
-      ],
-      [
-        "bitnet",
-        0.618
-      ],
-      [
-        "netiquette",
-        0.616
-      ],
-      [
-        "manosphere",
-        0.613
-      ],
-      [
-        "dogecoin",
-        0.612
-      ],
-      [
-        "usenet",
-        0.611
-      ],
-      [
-        "openmind",
-        0.611
-      ],
-      [
-        "hth",
-        0.606
-      ],
-      [
-        "nginx",
-        0.605
-      ],
-      [
-        "clickbait",
-        0.597
-      ],
-      [
-        "search engines",
-        0.594
-      ],
-      [
-        "hsts",
-        0.59
-      ],
-      [
-        "domain name system",
-        0.589
-      ],
-      [
-        "https",
-        0.588
-      ],
-      [
-        "icq",
-        0.586
-      ],
-      [
-        "network neutrality",
-        0.583
-      ],
-      [
-        "ietf",
-        0.58
-      ],
-      [
-        "freenet",
-        0.579
-      ],
-      [
-        "sk8er",
-        0.575
-      ],
-      [
-        "online",
-        0.57
-      ],
-      [
-        "fqdn",
-        0.568
-      ],
-      [
-        "imap",
-        0.565
-      ],
-      [
-        "xss",
-        0.564
-      ],
-      [
-        "snapchat",
-        0.564
-      ],
-      [
-        "webspace",
-        0.564
-      ],
-      [
-        "webhosting",
-        0.561
-      ],
-      [
-        "social bookmarking",
-        0.56
-      ],
-      [
-        "keyword stuffing",
-        0.56
       ]
     ],
     "ipad": [
@@ -11555,196 +11931,6 @@
         0.598
       ]
     ],
-    "phones": [
-      [
-        "cellphone",
-        0.798
-      ],
-      [
-        "phoned",
-        0.777
-      ],
-      [
-        "handset",
-        0.773
-      ],
-      [
-        "cell phones",
-        0.765
-      ],
-      [
-        "landline telephone",
-        0.762
-      ],
-      [
-        "cell phone",
-        0.756
-      ],
-      [
-        "cellular telephone",
-        0.749
-      ],
-      [
-        "dial phone",
-        0.747
-      ],
-      [
-        "handphone",
-        0.744
-      ],
-      [
-        "cordless phone",
-        0.737
-      ],
-      [
-        "telephones",
-        0.734
-      ],
-      [
-        "blackberry smartphone",
-        0.722
-      ],
-      [
-        "mobile phone",
-        0.704
-      ],
-      [
-        "cellular phone",
-        0.689
-      ],
-      [
-        "telephone",
-        0.687
-      ],
-      [
-        "mobile phones",
-        0.686
-      ],
-      [
-        "picturephone",
-        0.686
-      ],
-      [
-        "cellular phones",
-        0.675
-      ],
-      [
-        "landline",
-        0.675
-      ],
-      [
-        "smartphone",
-        0.672
-      ],
-      [
-        "phoning",
-        0.665
-      ],
-      [
-        "cellular",
-        0.664
-      ],
-      [
-        "phablet",
-        0.661
-      ],
-      [
-        "mobiles",
-        0.659
-      ],
-      [
-        "handsfree",
-        0.652
-      ],
-      [
-        "speakerphone",
-        0.643
-      ],
-      [
-        "phoner",
-        0.642
-      ],
-      [
-        "smartphones",
-        0.64
-      ],
-      [
-        "call forwarding",
-        0.634
-      ],
-      [
-        "mobile",
-        0.628
-      ],
-      [
-        "camera phone",
-        0.625
-      ],
-      [
-        "cameraphone",
-        0.625
-      ],
-      [
-        "telephony",
-        0.624
-      ],
-      [
-        "phonebox",
-        0.623
-      ],
-      [
-        "ringback",
-        0.619
-      ],
-      [
-        "dual sim",
-        0.617
-      ],
-      [
-        "n##",
-        0.617
-      ],
-      [
-        "landlines",
-        0.615
-      ],
-      [
-        "keitai",
-        0.614
-      ],
-      [
-        "carphone",
-        0.606
-      ],
-      [
-        "telephoned",
-        0.594
-      ],
-      [
-        "wcdma",
-        0.591
-      ],
-      [
-        "long term evolution",
-        0.59
-      ],
-      [
-        "telephoning",
-        0.587
-      ],
-      [
-        "at t",
-        0.583
-      ],
-      [
-        "gsm",
-        0.582
-      ],
-      [
-        "ringtones",
-        0.582
-      ]
-    ],
     "printer": [
       [
         "laserjet",
@@ -11949,6 +12135,36 @@
         0.506
       ]
     ],
+    "quad-core": [
+      [
+        "quad",
+        0.658
+      ],
+      [
+        "quads",
+        0.613
+      ],
+      [
+        "quadrat",
+        0.578
+      ],
+      [
+        "quadruplet",
+        0.564
+      ],
+      [
+        "quadrangle",
+        0.555
+      ],
+      [
+        "quadrilateral",
+        0.522
+      ],
+      [
+        "quadruple",
+        0.505
+      ]
+    ],
     "radeon": [
       [
         "rade",
@@ -11965,6 +12181,44 @@
       [
         "rader",
         0.514
+      ]
+    ],
+    "reboot": [
+      [
+        "rebooted",
+        0.793
+      ],
+      [
+        "restart",
+        0.759
+      ],
+      [
+        "restarts",
+        0.707
+      ],
+      [
+        "restarting",
+        0.666
+      ],
+      [
+        "bootup",
+        0.621
+      ],
+      [
+        "reinitialize",
+        0.584
+      ],
+      [
+        "reinstall",
+        0.537
+      ],
+      [
+        "booting",
+        0.527
+      ],
+      [
+        "reset",
+        0.521
       ]
     ],
     "router": [
@@ -12521,6 +12775,96 @@
       [
         "nec",
         0.526
+      ]
+    ],
+    "touch-pad": [
+      [
+        "tactile sensation",
+        0.778
+      ],
+      [
+        "toucheth",
+        0.689
+      ],
+      [
+        "multitouch",
+        0.652
+      ],
+      [
+        "touching",
+        0.629
+      ],
+      [
+        "multi touch",
+        0.62
+      ],
+      [
+        "tactility",
+        0.613
+      ],
+      [
+        "toucher",
+        0.601
+      ],
+      [
+        "france telecom",
+        0.599
+      ],
+      [
+        "tactile",
+        0.59
+      ],
+      [
+        "tactus",
+        0.587
+      ],
+      [
+        "touchscreen",
+        0.584
+      ],
+      [
+        "haptic",
+        0.571
+      ],
+      [
+        "touchable",
+        0.569
+      ],
+      [
+        "touch screen",
+        0.566
+      ],
+      [
+        "touchtone",
+        0.56
+      ],
+      [
+        "touched",
+        0.555
+      ],
+      [
+        "feely",
+        0.544
+      ],
+      [
+        "itouch",
+        0.524
+      ],
+      [
+        "haptics",
+        0.523
+      ],
+      [
+        "human machine interface",
+        0.522
+      ],
+      [
+        "in touch",
+        0.513
+      ],
+      [
+        "touchy",
+        0.511
       ]
     ],
     "touchpad": [
@@ -15530,6 +15874,36 @@
       [
         "wine bar",
         0.562
+      ]
+    ],
+    "Shabu-Shabu": [
+      [
+        "methedrine",
+        0.691
+      ],
+      [
+        "sukiyaki",
+        0.602
+      ],
+      [
+        "sisig",
+        0.566
+      ],
+      [
+        "methamphetamine",
+        0.564
+      ],
+      [
+        "methamphetamines",
+        0.55
+      ],
+      [
+        "methamphetamine hydrochloride",
+        0.549
+      ],
+      [
+        "teppanyaki",
+        0.536
       ]
     ],
     "Steak": [
@@ -21903,6 +22277,144 @@
         0.503
       ]
     ],
+    "cuisin": [
+      [
+        "cuisines",
+        0.783
+      ],
+      [
+        "haute cuisine",
+        0.751
+      ],
+      [
+        "cuisinier",
+        0.743
+      ],
+      [
+        "chef",
+        0.727
+      ],
+      [
+        "chefs",
+        0.692
+      ],
+      [
+        "chef de partie",
+        0.673
+      ],
+      [
+        "cooks",
+        0.665
+      ],
+      [
+        "nouvelle cuisine",
+        0.658
+      ],
+      [
+        "culinary arts",
+        0.656
+      ],
+      [
+        "cookery",
+        0.643
+      ],
+      [
+        "executive chef",
+        0.634
+      ],
+      [
+        "cantonese cuisine",
+        0.63
+      ],
+      [
+        "sous chef",
+        0.627
+      ],
+      [
+        "culinary",
+        0.615
+      ],
+      [
+        "master chef",
+        0.613
+      ],
+      [
+        "cheffy",
+        0.595
+      ],
+      [
+        "cooking",
+        0.595
+      ],
+      [
+        "kitchen",
+        0.592
+      ],
+      [
+        "tasting menu",
+        0.59
+      ],
+      [
+        "fry cook",
+        0.587
+      ],
+      [
+        "cuisinart",
+        0.578
+      ],
+      [
+        "cook",
+        0.577
+      ],
+      [
+        "cookware",
+        0.574
+      ],
+      [
+        "gourmet",
+        0.573
+      ],
+      [
+        "burger flipper",
+        0.556
+      ],
+      [
+        "gastronome",
+        0.536
+      ],
+      [
+        "cooking utensils",
+        0.53
+      ],
+      [
+        "cooker",
+        0.528
+      ],
+      [
+        "kitchens",
+        0.524
+      ],
+      [
+        "gastronomy",
+        0.524
+      ],
+      [
+        "dishes",
+        0.518
+      ],
+      [
+        "cordon bleu",
+        0.509
+      ],
+      [
+        "foodie",
+        0.507
+      ],
+      [
+        "oven mitts",
+        0.507
+      ]
+    ],
     "cuisine": [
       [
         "haute cuisine",
@@ -26033,112 +26545,6 @@
         0.502
       ]
     ],
-    "lunch-": [
-      [
-        "lunchtime",
-        0.794
-      ],
-      [
-        "luncheonette",
-        0.766
-      ],
-      [
-        "luncheon",
-        0.739
-      ],
-      [
-        "lunchbreak",
-        0.717
-      ],
-      [
-        "lunchroom",
-        0.713
-      ],
-      [
-        "lunchbox",
-        0.695
-      ],
-      [
-        "at noon",
-        0.668
-      ],
-      [
-        "lunch break",
-        0.667
-      ],
-      [
-        "lunchrooms",
-        0.639
-      ],
-      [
-        "lunch box",
-        0.638
-      ],
-      [
-        "lunch pail",
-        0.633
-      ],
-      [
-        "dinner",
-        0.578
-      ],
-      [
-        "dinnertime",
-        0.57
-      ],
-      [
-        "snack",
-        0.562
-      ],
-      [
-        "lunchboxes",
-        0.562
-      ],
-      [
-        "lunchables",
-        0.559
-      ],
-      [
-        "dinners",
-        0.554
-      ],
-      [
-        "cafeteria",
-        0.547
-      ],
-      [
-        "suppertime",
-        0.533
-      ],
-      [
-        "brunch",
-        0.53
-      ],
-      [
-        "midday",
-        0.527
-      ],
-      [
-        "snacky",
-        0.527
-      ],
-      [
-        "meal",
-        0.522
-      ],
-      [
-        "noontime",
-        0.509
-      ],
-      [
-        "breaktime",
-        0.505
-      ],
-      [
-        "supper",
-        0.505
-      ]
-    ],
     "maitre": [
       [
         "ma\u00eetre",
@@ -26929,6 +27335,7 @@
         0.506
       ]
     ],
+    "non-veg": [],
     "noodle": [
       [
         "fideo",
@@ -28611,6 +29018,112 @@
       [
         "thali",
         0.572
+      ]
+    ],
+    "pot-stickers": [
+      [
+        "pot",
+        0.652
+      ],
+      [
+        "pots",
+        0.602
+      ],
+      [
+        "potful",
+        0.571
+      ],
+      [
+        "dutch oven",
+        0.544
+      ],
+      [
+        "stockpot",
+        0.539
+      ],
+      [
+        "sess",
+        0.526
+      ],
+      [
+        "beanpot",
+        0.509
+      ],
+      [
+        "potpie",
+        0.509
+      ],
+      [
+        "kettles",
+        0.501
+      ]
+    ],
+    "pre-theatre": [
+      [
+        "pre",
+        0.517
+      ]
+    ],
+    "prix-fixe": [
+      [
+        "prix",
+        0.749
+      ],
+      [
+        "prix goncourt",
+        0.655
+      ],
+      [
+        "award",
+        0.631
+      ],
+      [
+        "awards",
+        0.629
+      ],
+      [
+        "prix fixe",
+        0.619
+      ],
+      [
+        "award ceremony",
+        0.616
+      ],
+      [
+        "awarded",
+        0.555
+      ],
+      [
+        "prize",
+        0.553
+      ],
+      [
+        "prizes",
+        0.545
+      ],
+      [
+        "prizegiving",
+        0.544
+      ],
+      [
+        "awardee",
+        0.524
+      ],
+      [
+        "awarding",
+        0.522
+      ],
+      [
+        "awards ceremony",
+        0.516
+      ],
+      [
+        "emmy award",
+        0.509
+      ],
+      [
+        "prizewinner",
+        0.501
       ]
     ],
     "pub": [
@@ -31307,6 +31820,100 @@
         0.502
       ]
     ],
+    "short-order": [
+      [
+        "shorting",
+        0.733
+      ],
+      [
+        "shortish",
+        0.713
+      ],
+      [
+        "shorted",
+        0.699
+      ],
+      [
+        "telescoped",
+        0.661
+      ],
+      [
+        "shorter",
+        0.643
+      ],
+      [
+        "brachy",
+        0.631
+      ],
+      [
+        "shortie",
+        0.625
+      ],
+      [
+        "shorten",
+        0.617
+      ],
+      [
+        "shortened",
+        0.617
+      ],
+      [
+        "ultrashort",
+        0.596
+      ],
+      [
+        "shortens",
+        0.594
+      ],
+      [
+        "shorty",
+        0.571
+      ],
+      [
+        "short termist",
+        0.569
+      ],
+      [
+        "shortest",
+        0.564
+      ],
+      [
+        "shortleaf",
+        0.558
+      ],
+      [
+        "short term",
+        0.542
+      ],
+      [
+        "squatty",
+        0.538
+      ],
+      [
+        "shortening",
+        0.52
+      ],
+      [
+        "longish",
+        0.516
+      ],
+      [
+        "shortener",
+        0.511
+      ],
+      [
+        "briefness",
+        0.508
+      ],
+      [
+        "anceps",
+        0.502
+      ],
+      [
+        "long",
+        0.501
+      ]
+    ],
     "shrimp": [
       [
         "scampi",
@@ -32229,6 +32836,28 @@
       [
         "dining",
         0.507
+      ]
+    ],
+    "take-out": [
+      [
+        "take",
+        0.581
+      ],
+      [
+        "takes",
+        0.543
+      ],
+      [
+        "takest",
+        0.539
+      ],
+      [
+        "taketh",
+        0.526
+      ],
+      [
+        "take over",
+        0.511
       ]
     ],
     "takeout": [
