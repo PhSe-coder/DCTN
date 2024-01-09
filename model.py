@@ -33,17 +33,15 @@ class FDGRPretrainedModel(nn.Module):
         self.hidden_size: int = config.hidden_size
         # feature disentanglement module
         self.ha_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-                                        nn.ReLU(), nn.Linear(config.hidden_size, self.ha_dim),
-                                        nn.ReLU(), nn.LayerNorm(self.ha_dim, 1e-12))
+                                        nn.ReLU(), nn.Linear(config.hidden_size, self.ha_dim))
         self.hc_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-                                        nn.ReLU(), nn.Linear(config.hidden_size, self.hc_dim),
-                                        nn.ReLU(), nn.LayerNorm(self.hc_dim, 1e-12))
+                                        nn.ReLU(), nn.Linear(config.hidden_size, self.hc_dim))
         self.decoder = nn.Sequential(nn.Linear(self.ha_dim + self.hc_dim, config.hidden_size),
-                                     nn.ReLU(), nn.Linear(config.hidden_size, config.hidden_size),
-                                     nn.ReLU(), nn.LayerNorm(config.hidden_size, 1e-12))
+                                     nn.ReLU(), nn.Linear(config.hidden_size, config.hidden_size))
         self.mse = nn.MSELoss()
         self.mi_loss = InfoNCE(self.ha_dim, self.ha_dim)
         self.club_loss = vCLUB()
+        self.dropout = nn.Dropout(0.1)
         self.v_layer = nn.Linear(self.hc_dim, self.hc_dim)
         self.a_layer = nn.Linear(self.hc_dim, self.hc_dim)
         self.d_layer = nn.Linear(self.hc_dim, self.hc_dim)

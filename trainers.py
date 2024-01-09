@@ -24,7 +24,7 @@ class ABSADataModule(LightningDataModule):
 
     def __post_init__(self):
         super().__init__()
-        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=100)
+        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=128)
         self.vad_laxicon: Dict[str, Tuple[float, float, float]] = {}
         with open(self.vad_lexicon_file, "r") as f:
             for line in f:
@@ -75,14 +75,14 @@ class PretraninedABSADataModule(LightningDataModule):
 
     def __post_init__(self):
         super().__init__()
-        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=100)
+        self.tokenizer = BertTokenizer.from_pretrained(self.pretrained_model, model_max_length=128)
         self.dataloader = partial(DataLoader,
                                   batch_size=self.batch_size,
                                   num_workers=self.num_workers)
 
     def setup(self, stage):
         if stage == 'fit':
-            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file, self.target,
+            source = ModelDataset(self.source_trainw_file, self.k2t_file, self.t2k_file, self.target,
                                   self.tokenizer)
             target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
                                   self.tokenizer, False)

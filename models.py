@@ -48,7 +48,7 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.num_labels = num_labels
         self.lr = lr
         self.coff = coff
-        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
+        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=128)
         config = BertConfig.from_pretrained(pretrained_model_name, num_labels=num_labels)
         config.name_or_path = pretrained_model_name
         self.model = FDGRModel(config, h_dim)
@@ -75,7 +75,7 @@ class FDGRClassifer(LightningModule, LossWeight):
             'weight_decay':
             0.0
         }]
-        return BertAdam(pretrained_params, self.lr, 0.0, self.trainer.estimated_stepping_batches)
+        return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
 
     def training_step(self, train_batch, batch_idx):
         batch_rate: float = (1.0 * batch_idx + self.trainer.num_training_batches *
@@ -154,7 +154,7 @@ class BertClassifier(LightningModule):
         self.lr = lr
         self.automatic_optimization = False
         self.model = BertForTokenClassification(pretrained_model_name, num_labels)
-        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=100)
+        self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=128)
         self.valid_out = []
         self.test_out = []
 

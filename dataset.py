@@ -217,14 +217,14 @@ class ModelDataset(Dataset):
 
 
 if __name__ == "__main__":
-    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", model_max_length=100)
+    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", model_max_length=128)
     vad_laxicon: Dict[str, Tuple[float, float, float]] = {}
     with open("NRC-VAD-Lexicon.txt", "r") as f:
         for line in f:
             word, v, a, d = line.split('\t')
             vad_laxicon[word] = (float(v), float(a), float(d))
-    dataset = ModelDataset("./processed/dataset/restaurant.train.txt", vad_laxicon, tokenizer,
-                           "./processed/dataset/restaurant.contrast.train.txt")
+    dataset = ModelDataset("./processed/dataset/laptop.test.txt", vad_laxicon, tokenizer,
+                           "./processed/dataset/laptop.test.txt")
     from torch.utils.data import DataLoader
     from tqdm import tqdm
     from lightning import seed_everything
