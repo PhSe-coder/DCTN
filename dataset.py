@@ -187,7 +187,8 @@ class ModelDataset(Dataset):
                 "valid_mask": as_tensor(valid_mask),
                 "gold_labels": as_tensor(polarity),
                 "aspect_ids": as_tensor(as_tensor(label_ids) > 0).int(),
-                "span_indices": (as_tensor(label_ids) > 0).nonzero().squeeze(1)[[0, -1]].unsqueeze(0),
+                "span_indices": (as_tensor(label_ids) > 0).nonzero().squeeze(1)[[0,
+                                                                                 -1]].unsqueeze(0),
                 "pos_ids": as_tensor(pos_ids),
                 "dep_ids": as_tensor(dep_ids),
                 "graph_ids": torch.from_numpy(graph_ids),
@@ -222,12 +223,12 @@ if __name__ == "__main__":
         for line in f:
             word, v, a, d = line.split('\t')
             vad_laxicon[word] = (float(v), float(a), float(d))
-    dataset = ModelDataset("./processed/dataset/restaurant.train.txt",
-                           "./processed/dataset/restaurant.contrast.train.txt", vad_laxicon, tokenizer)
+    dataset = ModelDataset("./processed/dataset/restaurant.train.txt", vad_laxicon, tokenizer,
+                           "./processed/dataset/restaurant.contrast.train.txt")
     from torch.utils.data import DataLoader
     from tqdm import tqdm
     from lightning import seed_everything
     seed_everything(42)
-    dataloader = DataLoader(dataset, 16, True, num_workers=24)
+    dataloader = DataLoader(dataset, 16, True, num_workers=0)
     for batch in tqdm(dataloader):
         pass
