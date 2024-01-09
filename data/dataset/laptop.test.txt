@@ -3,19 +3,19 @@ tech support would not fix the problem unless I bought your plan for $ 150 plus 
 Set up was easy .***T-POS T-POS O O O
 Did not enjoy the new Windows 8 and touchscreen functions .***O O O O O T-NEG T-NEG O O O O
 Did not enjoy the new Windows 8 and touchscreen functions .***O O O O O O O O T-NEG T-NEG O
-Other than not being a fan of click pads ( industry standard these days ) and the lousy internal speakers , it 's hard for me to find things about this notebook I do n't like , especially considering the $ 350 price tag .***O O O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O
-Other than not being a fan of click pads ( industry standard these days ) and the lousy internal speakers , it 's hard for me to find things about this notebook I do n't like , especially considering the $ 350 price tag .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O
-Other than not being a fan of click pads ( industry standard these days ) and the lousy internal speakers , it 's hard for me to find things about this notebook I do n't like , especially considering the $ 350 price tag .***O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+Other than not being a fan of click pads -LRB- industry standard these days -RRB- and the lousy internal speakers , it 's hard for me to find things about this notebook I do n't like , especially considering the $ 350 price tag .***O O O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O
+Other than not being a fan of click pads -LRB- industry standard these days -RRB- and the lousy internal speakers , it 's hard for me to find things about this notebook I do n't like , especially considering the $ 350 price tag .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O
+Other than not being a fan of click pads -LRB- industry standard these days -RRB- and the lousy internal speakers , it 's hard for me to find things about this notebook I do n't like , especially considering the $ 350 price tag .***O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
 No installation disk ( DVD ) is included .***O T-NEU T-NEU T-NEU T-NEU T-NEU O O O
 It 's fast , light , and simple to use .***O O O O O O O O O T-POS O
 Works well , and I am extremely happy to be back to an apple OS .***T-POS O O O O O O O O O O O O O O O
 Works well , and I am extremely happy to be back to an apple OS .***O O O O O O O O O O O O O T-POS T-POS O
 Sure it 's not light and slim but the features make up for it 100 % .***O O O O O O O O O T-POS O O O O O O O
-I am pleased with the fast log on , speedy WiFi connection and the long battery life ( > 6 hrs ) .***O O O O O O T-POS T-POS O O O O O O O O O O O O O O O
-I am pleased with the fast log on , speedy WiFi connection and the long battery life ( > 6 hrs ) .***O O O O O O O O O O T-POS T-POS O O O O O O O O O O O
-I am pleased with the fast log on , speedy WiFi connection and the long battery life ( > 6 hrs ) .***O O O O O O O O O O O O O O O T-POS T-POS O O O O O O
+I am pleased with the fast log on , speedy WiFi connection and the long battery life -LRB- > 6 hrs -RRB- .***O O O O O O T-POS T-POS O O O O O O O O O O O O O O O
+I am pleased with the fast log on , speedy WiFi connection and the long battery life -LRB- > 6 hrs -RRB- .***O O O O O O O O O O T-POS T-POS O O O O O O O O O O O
+I am pleased with the fast log on , speedy WiFi connection and the long battery life -LRB- > 6 hrs -RRB- .***O O O O O O O O O O O O O O O T-POS T-POS O O O O O O
 The Apple engineers have not yet discovered the delete key .***O O O O O O O O T-NEG T-NEG O
-Made interneting ( part of my business ) very difficult to maintain .***O T-NEG O O O O O O O O O O O
+Made interneting -LRB- part of my business -RRB- very difficult to maintain .***O T-NEG O O O O O O O O O O O
 Luckily , for all of us contemplating the decision , the Mac Mini is priced just right .***O O O O O O O O O O O O O O T-POS O O O
 Super light , super sexy and everything just works .***O O O O O O O O T-POS O
 Only problem that I had was that the track pad was not very good for me , I only had a problem once or twice with it , But probably my computer was a bit defective .***O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O
@@ -23,7 +23,7 @@ It is super fast and has outstanding graphics .***O O O O O O O T-POS O
 But the mountain lion is just too slow .***O O T-NEG T-NEG O O O O O
 Strong build though which really adds to its durability .***O O O O O O O O T-POS O
 Strong build though which really adds to its durability .***O T-POS O O O O O O O O
-The battery life is excellent- 6 - 7 hours without charging .***O T-POS T-POS O O O O O O O O O
+The battery life is excellent - 6-7 hours without charging .***O T-POS T-POS O O O O O O O O
 I 've had my computer for 2 weeks already and it works perfectly .***O O O O O O O O O O O T-POS O O
 And I may be the only one but I am really liking Windows 8 .***O O O O O O O O O O O O T-POS T-POS O
 The baterry is very longer .***O T-POS O O O O
@@ -57,25 +57,25 @@ MS Office 2011 for Mac is wonderful , well worth it .***T-POS T-POS T-POS T-POS 
 But the performance of Mac Mini is a huge disappointment .***O O T-NEG O O O O O O O O
 They do n't just look good ; they deliver excellent performance .***O O O O T-POS O O O O O O O
 They do n't just look good ; they deliver excellent performance .***O O O O O O O O O O T-POS O
-I have had it over a year now with out a Glitch of any kind .. I love the lit up keys and screen display ... this thing is Fast and clear as can be .***O O O O O O O O O O O O O O O O O O O T-POS T-POS T-POS O O O O O O O O O O O O O O
-I have had it over a year now with out a Glitch of any kind .. I love the lit up keys and screen display ... this thing is Fast and clear as can be .***O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O O O O O O O O O O O
+I have had it over a year now with out a Glitch of any kind . . I love the lit up keys and screen display ... this thing is Fast and clear as can be .***O O O O O O O O O O O O O O O O O O O O T-POS T-POS T-POS O O O O O O O O O O O O O O
+I have had it over a year now with out a Glitch of any kind . . I love the lit up keys and screen display ... this thing is Fast and clear as can be .***O O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O O O O O O O O O O O
 The Mountain Lion OS is not hard to figure out if you are familiar with Microsoft Windows .***O T-POS T-POS T-POS O O O O O O O O O O O O O O
 The Mountain Lion OS is not hard to figure out if you are familiar with Microsoft Windows .***O O O O O O O O O O O O O O O T-NEU T-NEU O
-However , I can refute that OSX is " FAST " .***O O O O O O T-NEG O O O O O
+However , I can refute that OSX is `` FAST `` .***O O O O O O T-NEG O O O O O
 Enjoy using Microsoft Office !***O O T-POS T-POS O
 Incredible graphics and brilliant colors .***O T-POS O O O O
 Incredible graphics and brilliant colors .***O O O O T-POS O
-Built - in apps are purely amazing .***T-POS T-POS T-POS T-POS O O O O
+Built-in apps are purely amazing .***T-POS T-POS O O O O
 Cons : Screen resolution .***O O T-NEG T-NEG O
 From the speed to the multi touch gestures this operating system beats Windows easily .***O O O O O O O O O T-POS T-POS O O O O
 From the speed to the multi touch gestures this operating system beats Windows easily .***O O O O O O O O O O O O T-NEG O O
 From the speed to the multi touch gestures this operating system beats Windows easily .***O O T-POS O O O O O O O O O O O O
 From the speed to the multi touch gestures this operating system beats Windows easily .***O O O O O T-POS T-POS T-POS O O O O O O O
 I really like the size and I 'm a fan of the ACERS .***O O O O T-POS O O O O O O O O O
-I opted for the SquareTrade 3 - Year Computer Accidental Protection Warranty ( $ 1500 - 2000 ) which also support " accidents " like drops and spills that are NOT covered by AppleCare .***O O O O T-POS T-POS T-POS T-POS T-POS T-POS T-POS T-POS O O O O O O O O O O O O O O O O O O O O O O O
-I opted for the SquareTrade 3 - Year Computer Accidental Protection Warranty ( $ 1500 - 2000 ) which also support " accidents " like drops and spills that are NOT covered by AppleCare .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG O
+I opted for the SquareTrade 3-Year Computer Accidental Protection Warranty -LRB- $ 1500-2000 -RRB- which also support `` accidents `` like drops and spills that are NOT covered by AppleCare .***O O O O T-POS T-POS T-POS T-POS T-POS T-POS O O O O O O O O O O O O O O O O O O O O O
+I opted for the SquareTrade 3-Year Computer Accidental Protection Warranty -LRB- $ 1500-2000 -RRB- which also support `` accidents `` like drops and spills that are NOT covered by AppleCare .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG O
 It 's light and easy to transport .***O O O O O O T-POS O
-Once you get past learning how to use the poorly designed Windows 8 Set - Up you may feel frustrated .***O O O O O O O O O O O T-NEG T-NEG T-NEG T-NEG T-NEG O O O O O
+Once you get past learning how to use the poorly designed Windows 8 Set-Up you may feel frustrated .***O O O O O O O O O O O T-NEG T-NEG T-NEG O O O O O
 It 's been time for a new laptop , and the only debate was which size of the Mac laptops , and whether to spring for the retina display .***O O O O O O O O O O O O O O O T-NEU O O O O O O O O O O O O O O
 It 's been time for a new laptop , and the only debate was which size of the Mac laptops , and whether to spring for the retina display .***O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU O
 The reason why I choose apple MacBook because of their design and the aluminum casing .***O O O O O O O O O O T-POS O O O O O
@@ -83,10 +83,10 @@ The reason why I choose apple MacBook because of their design and the aluminum c
 The aluminum body sure makes it stand out .***O T-POS T-POS O O O O O O
 It is very easy to integrate bluetooth devices , and USB devices are recognized almost instantly .***O O O O O T-POS T-POS T-POS O O O O O O O O O
 It is very easy to integrate bluetooth devices , and USB devices are recognized almost instantly .***O O O O O O O O O O T-POS T-POS O O O O O
-And the fact that Apple is driving the 13 " RMBP with the Intel4000 graphic chip seems underpowered ( to me .***O O O O O O O O O O O O O T-NEG T-NEG T-NEG O O O O O O
-Apple removed the DVD drive Firewire port ( will work with adapter ) and put the SDXC slot in a silly position on the back .***O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O
-Apple removed the DVD drive Firewire port ( will work with adapter ) and put the SDXC slot in a silly position on the back .***O O O O O O O O O O O T-NEU O O O O O O O O O O O O O O
-Apple removed the DVD drive Firewire port ( will work with adapter ) and put the SDXC slot in a silly position on the back .***O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O
+And the fact that Apple is driving the 13 `` RMBP with the Intel4000 graphic chip seems underpowered -LRB- to me .***O O O O O O O O O O O O O T-NEG T-NEG T-NEG O O O O O O
+Apple removed the DVD drive Firewire port -LRB- will work with adapter -RRB- and put the SDXC slot in a silly position on the back .***O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O
+Apple removed the DVD drive Firewire port -LRB- will work with adapter -RRB- and put the SDXC slot in a silly position on the back .***O O O O O O O O O O O T-NEU O O O O O O O O O O O O O O
+Apple removed the DVD drive Firewire port -LRB- will work with adapter -RRB- and put the SDXC slot in a silly position on the back .***O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O
 The durability of the laptop will make it worth the money .***O T-POS O O O O O O O O O O
 Well designed and fast .***O T-POS O O O
 But I was completely wrong , this computer is UNBELIEVABLE amazing and easy to use .***O O O O O O O O O O O O O O T-POS O
@@ -106,10 +106,10 @@ great price free shipping what else can i ask for ! !***O O O T-POS O O O O O O 
 This mouse is terrific .***O T-POS O O O
 It is really thick around the battery .***O O O O O O T-NEU O
 And windows 7 works like a charm .***O T-POS T-POS O O O O O
-:) Great product , great price , great delivery , and great service .***O O O O O T-POS O O O O O O O O
-:) Great product , great price , great delivery , and great service .***O O O O O O O O T-POS O O O O O
-:) Great product , great price , great delivery , and great service .***O O O O O O O O O O O O T-POS O
-:] It arrived so fast and customer service was great .***O O O O O O T-POS T-POS O O O
+: -RRB- Great product , great price , great delivery , and great service .***O O O O O O T-POS O O O O O O O O
+: -RRB- Great product , great price , great delivery , and great service .***O O O O O O O O O T-POS O O O O O
+: -RRB- Great product , great price , great delivery , and great service .***O O O O O O O O O O O O O T-POS O
+: ] It arrived so fast and customer service was great .***O O O O O O O T-POS T-POS O O O
 tried windows 8 and hated it ! ! !***O T-NEG T-NEG O O O O O O
 Set up was a breeze .***T-POS T-POS O O O O
 But I do NOT like Win8 .***O O O O O T-NEG O
@@ -122,7 +122,7 @@ I found the mini to be : Exceptionally easy to set up***O O O O O O O O O O T-PO
 Having USB3 is why I bought this Mini .***O T-POS O O O O O O O
 The sound is nice and loud ; I do n't have any problems with hearing anything .***O T-POS O O O O O O O O O O O O O O O
 It is very slim , the track pad is very much impressed with me .***O O O O O O T-POS T-POS O O O O O O O
-The settings are not user - friendly either .***O T-NEG O O O O O O O
+The settings are not user-friendly either .***O T-NEG O O O O O
 Thank goodness for OpenOffice !***O O O T-POS O
 Awesome form factor , great battery life , wonderful UX .***O T-POS T-POS O O O O O O O O
 Awesome form factor , great battery life , wonderful UX .***O O O O O T-POS T-POS O O O O
@@ -134,9 +134,9 @@ I 've already upgraded o Mavericks and I am impressed with everything about this
 Not as fast as I would have expect for an i5 .***O O O O O O O O O O T-NEG O
 thanks for great service and shipping !***O O O T-POS O O O
 thanks for great service and shipping !***O O O O O T-POS O
-The performance seems quite good , and built - in applications like iPhoto work great with my phone and camera .***O T-POS O O O O O O O O O O O O O O O O O O O
-The performance seems quite good , and built - in applications like iPhoto work great with my phone and camera .***O O O O O O O T-POS T-POS T-POS T-POS O O O O O O O O O O
-The performance seems quite good , and built - in applications like iPhoto work great with my phone and camera .***O O O O O O O O O O O O T-POS O O O O O O O O
+The performance seems quite good , and built-in applications like iPhoto work great with my phone and camera .***O T-POS O O O O O O O O O O O O O O O O O
+The performance seems quite good , and built-in applications like iPhoto work great with my phone and camera .***O O O O O O O T-POS T-POS O O O O O O O O O O
+The performance seems quite good , and built-in applications like iPhoto work great with my phone and camera .***O O O O O O O O O O T-POS O O O O O O O O
 I did swap out the hard drive for a Samsung 830 SSD which I highly recommend .***O O O O O T-NEU T-NEU O O O O O O O O O O
 I did swap out the hard drive for a Samsung 830 SSD which I highly recommend .***O O O O O O O O O T-POS T-POS T-POS O O O O O
 Starts up in a hurry and everything is ready to go .***T-POS T-POS O O O O O O O O O O
@@ -151,7 +151,7 @@ HOWEVER I chose two day shipping and it took over a week to arrive .***O O O O O
 it 's exactly what i wanted , and it has all the new features and whatnot .***O O O O O O O O O O O O O T-POS O O O
 Can you buy any laptop that matches the quality of a MacBook ?***O O O O O O O O T-POS O O O O
 It feels cheap , the keyboard is not very sensitive .***O O O O O T-NEG O O O O O
-Though please note that sometimes it crashes , and the sound quality is nt superb .***O O O O O O O O O O T-NEG T-NEG O O O O
+Though please note that sometimes it crashes , and the sound quality isnt superb .***O O O O O O O O O O T-NEG T-NEG O O O
 It is very easy to navigate even for a novice .***O O O O O T-POS O O O O O
 Does everything I need it to , has a wonderful battery life and I could n't be happier .***O O O O O O O O O O T-POS T-POS O O O O O O O
 Great Performance and Quality .***O T-POS O O O
@@ -164,9 +164,9 @@ I did add a SSD drive and memory***O O O O O O O T-NEU
 On start up it asks endless questions just so itune can sell you more of their products .***O T-NEG T-NEG O O O O O O O O O O O O O O O
 On start up it asks endless questions just so itune can sell you more of their products .***O O O O O O O O O T-NEG O O O O O O O O
 I Have been a Pc user for a very long time now but I will get used to this new OS .***O O O O O O O O O O O O O O O O O O O O T-NEU O
-One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone / iPod touch cables .***O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone / iPod touch cables .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O
-One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone / iPod touch cables .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG O O O O O O O O
+One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone/iPod touch cables .***O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone/iPod touch cables .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O
+One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone/iPod touch cables .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG O O O O O O
 I bought it to my son who uses it for graphic design .***O O O O O O O O O O T-NEU T-NEU O
 I never tried any external mics with that iMac .***O O O O T-NEU T-NEU O O O O
 The new os is great on my macbook pro !***O O T-POS O O O O O O O
@@ -197,18 +197,18 @@ I 'm using this computer for word processing , web browsing , some gaming , and 
 I 'm using this computer for word processing , web browsing , some gaming , and I 'm learning programming .***O O O O O O O O O O O O O O O O O O O T-NEU O
 My wife was so excited to open the box , but quickly came to see that it did not function as it should .***O O O O O O O O O O O O O O O O O O O T-NEG O O O O
 I wanted a computer that was quite , fast , and that had overall great performance .***O O O O O O O O O O O O O O O T-NEU O
-Apple " Help " is a mixed bag .***T-NEG T-NEG T-NEG T-NEG O O O O O
+Apple `` Help '' is a mixed bag .***T-NEG T-NEG T-NEG T-NEG O O O O O
 It suddenly can not work .***O O O O T-NEG O
 Harddrive was in poor condition , had to replace it .***T-NEG O O O O O O O O O O
-The on / off switch is a bit obscure in the rear corner .***O T-NEG T-NEG T-NEG T-NEG O O O O O O O O O
+The on/off switch is a bit obscure in the rear corner .***O T-NEG T-NEG O O O O O O O O O
 My only complaint is the total lack of instructions that come with the mac mini .***O O O O O O O O T-NEG O O O O O O O
 The only task that this computer would not be good enough for would be gaming , otherwise the integrated Intel 4000 graphics work well for other tasks .***O O O O O O O O O O O O O O T-NEG O O O O O O O O O O O O O
-I use it mostly for content creation ( Audio , video , photo editing ) and its reliable .***O O O O O T-POS T-POS O O O O O O O O O O O O
-I use it mostly for content creation ( Audio , video , photo editing ) and its reliable .***O O O O O O O O T-POS O O O O O O O O O O
-I use it mostly for content creation ( Audio , video , photo editing ) and its reliable .***O O O O O O O O O O T-POS O O O O O O O O
-I use it mostly for content creation ( Audio , video , photo editing ) and its reliable .***O O O O O O O O O O O O T-POS T-POS O O O O O
+I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .***O O O O O T-POS T-POS O O O O O O O O O O O O
+I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .***O O O O O O O O T-POS O O O O O O O O O O
+I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .***O O O O O O O O O O T-POS O O O O O O O O
+I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .***O O O O O O O O O O O O T-POS T-POS O O O O O
 Screen is bright and gorgeous .***T-POS O O O O O
-The only solution is to turn the brightness down , etc .***O O O O O O O T-NEU O O O O
+The only solution is to turn the brightness down , etc . .***O O O O O O O T-NEU O O O O O
 If you want more information on macs I suggest going to apple.com and heading towards the macbook page for more information on the applications .***O O O O O O O O O O O O O O O O O O O O O O O T-NEU O
 It is robust , with a friendly use as all Apple products .***O O O O O O O T-POS O O O O O
 It is fast and easy to use .***O O O O O O T-POS O
@@ -235,8 +235,8 @@ USB3 Peripherals are noticably less expensive than the ThunderBolt ones .***T-PO
 USB3 Peripherals are noticably less expensive than the ThunderBolt ones .***O O O O O O O O T-NEG O O
 And mine had broke but I sent it in under warranty - no problems .***O O O O O O O O O O T-POS O O O O
 It 's fast , light , and is perfect for media editing , which is mostly why I bought it in the first place .***O O O O O O O O O O T-POS T-POS O O O O O O O O O O O O O
-The battery lasts as advertised ( give or take 15 - 20 minutes ) , and the entire user experience is very elegant .***O T-POS O O O O O O O O O O O O O O O O O O O O O O
-The battery lasts as advertised ( give or take 15 - 20 minutes ) , and the entire user experience is very elegant .***O O O O O O O O O O O O O O O O O O T-POS T-POS O O O O
+The battery lasts as advertised -LRB- give or take 15-20 minutes -RRB- , and the entire user experience is very elegant .***O T-POS O O O O O O O O O O O O O O O O O O O O
+The battery lasts as advertised -LRB- give or take 15-20 minutes -RRB- , and the entire user experience is very elegant .***O O O O O O O O O O O O O O O O T-POS T-POS O O O O
 Thanks for the fast shipment and great price .***O O O O T-POS O O O O
 Thanks for the fast shipment and great price .***O O O O O O O T-POS O
 ! Excelent performance , usability , presentation and time response .***O O T-POS O O O O O O O O
@@ -245,11 +245,11 @@ Thanks for the fast shipment and great price .***O O O O O O O T-POS O
 ! Excelent performance , usability , presentation and time response .***O O O O O O O O T-POS T-POS O
 The smaller size was a bonus because of space restrictions .***O O T-POS O O O O O O O O
 I blame the Mac OS .***O O O T-NEG T-NEG O
-In fact I still use manyLegacy programs ( Appleworks , FileMaker Pro , Quicken , Photoshop etc ) !***O O O O O O T-NEU O O O O O O O O O O O O
-In fact I still use manyLegacy programs ( Appleworks , FileMaker Pro , Quicken , Photoshop etc ) !***O O O O O O O O T-NEU O O O O O O O O O O
-In fact I still use manyLegacy programs ( Appleworks , FileMaker Pro , Quicken , Photoshop etc ) !***O O O O O O O O O O T-NEU T-NEU O O O O O O O
-In fact I still use manyLegacy programs ( Appleworks , FileMaker Pro , Quicken , Photoshop etc ) !***O O O O O O O O O O O O O T-NEU O O O O O
-In fact I still use manyLegacy programs ( Appleworks , FileMaker Pro , Quicken , Photoshop etc ) !***O O O O O O O O O O O O O O O T-NEU O O O
+In fact I still use many Legacy programs -LRB- Appleworks , FileMaker Pro , Quicken , Photoshop etc -RRB- !***O O O O O O T-NEU T-NEU O O O O O O O O O O O O
+In fact I still use manyLegacy programs -LRB- Appleworks , FileMaker Pro , Quicken , Photoshop etc -RRB- !***O O O O O O O O T-NEU O O O O O O O O O O
+In fact I still use manyLegacy programs -LRB- Appleworks , FileMaker Pro , Quicken , Photoshop etc -RRB- !***O O O O O O O O O O T-NEU T-NEU O O O O O O O
+In fact I still use manyLegacy programs -LRB- Appleworks , FileMaker Pro , Quicken , Photoshop etc -RRB- !***O O O O O O O O O O O O O T-NEU O O O O O
+In fact I still use manyLegacy programs -LRB- Appleworks , FileMaker Pro , Quicken , Photoshop etc -RRB- !***O O O O O O O O O O O O O O O T-NEU O O O
 I like the operating system .***O O O T-POS T-POS O
 I love the form factor .***O O O T-POS T-POS O
 It 's fast at loading the internet .***O O O O T-POS T-POS T-POS O
@@ -274,21 +274,21 @@ It looks and feels solid , with a flawless finish .***O T-POS O O O O O O O O O
 It looks and feels solid , with a flawless finish .***O O O T-POS O O O O O O O
 Price was higher when purchased on MAC when compared to price showing on PC when I bought this product .***T-NEG O O O O O O O O O O O O O O O O O O O
 Price was higher when purchased on MAC when compared to price showing on PC when I bought this product .***O O O O O O O O O O T-POS O O O O O O O O O
-Then the system would many times not power down without a forced power - off .***O O T-NEG O O O O O O O O O O O O O
-Then the system would many times not power down without a forced power - off .***O O O O O O O T-NEG T-NEG O O O O O O O
+Then the system would many times not power down without a forced power-off .***O O T-NEG O O O O O O O O O O O
+Then the system would many times not power down without a forced power-off .***O O O O O O O T-NEG T-NEG O O O O O
 The configuration is perfect for my needs .***O T-POS O O O O O O
 and the speakers is the worst ever .***O O T-NEG O O O O O
-Its the best , its got the looks , super easy to use and love all you can do with the trackpad ! ..***O O O O O O O T-POS O O O O O O O O O O O O O O O O
-Its the best , its got the looks , super easy to use and love all you can do with the trackpad ! ..***O O O O O O O O O O O O T-POS O O O O O O O O O O O
-Its the best , its got the looks , super easy to use and love all you can do with the trackpad ! ..***O O O O O O O O O O O O O O O O O O O O O T-POS O O
+Its the best , its got the looks , super easy to use and love all you can do with the trackpad ! . .***O O O O O O O T-POS O O O O O O O O O O O O O O O O O
+Its the best , its got the looks , super easy to use and love all you can do with the trackpad ! . .***O O O O O O O O O O O O T-POS O O O O O O O O O O O O
+Its the best , its got the looks , super easy to use and love all you can do with the trackpad ! . .***O O O O O O O O O O O O O O O O O O O O O T-POS O O O
 Web surfuring is smooth and seamless .***T-POS T-POS O O O O O
 I 'm overall pleased with the interface and the portability of this product .***O O O O O O T-POS O O O O O O O
 I 'm overall pleased with the interface and the portability of this product .***O O O O O O O O O T-POS O O O O
 This item is a beautiful piece , it works well , it is easy to carry and handle .***O O O O O O O O T-POS O O O O O O O O O O
 This item is a beautiful piece , it works well , it is easy to carry and handle .***O O O O O O O O O O O O O O O T-POS O O O
 This item is a beautiful piece , it works well , it is easy to carry and handle .***O O O O O O O O O O O O O O O O O T-POS O
-It was also suffering from hardware ( keyboard ) issues , relatively slow performance and shortening battery lifetime .***O O O O O O O O O O O O O T-NEG O O O O O
-It was also suffering from hardware ( keyboard ) issues , relatively slow performance and shortening battery lifetime .***O O O O O O O O O O O O O O O O T-NEG T-NEG O
+It was also suffering from hardware -LRB- keyboard -RRB- issues , relatively slow performance and shortening battery lifetime .***O O O O O O O O O O O O O T-NEG O O O O O
+It was also suffering from hardware -LRB- keyboard -RRB- issues , relatively slow performance and shortening battery lifetime .***O O O O O O O O O O O O O O O O T-NEG T-NEG O
 It was also suffering from hardware ( keyboard ) issues , relatively slow performance and shortening battery lifetime .***O O O O O T-NEG T-NEG T-NEG T-NEG O O O O O O O O O O
 Runs good and does the job , ca n't complain about that !***T-POS O O O O O O O O O O O O
 It 's silent and has a very small footprint on my desk .***O O O O O O O O T-POS O O O O
@@ -296,25 +296,25 @@ The exterior is absolutely gorgeous .***O T-POS O O O O
 It has a very high performance , just for what I needed for .***O O O O O T-POS O O O O O O O O
 Apple is aware of this issue and this is either old stock or a defective design involving the intel 4000 graphics chipset .***O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O
 Apple is aware of this issue and this is either old stock or a defective design involving the intel 4000 graphics chipset .***O O O O O O O O O O O O O O O T-NEU O O O O O O O
-OSX Mountain Lion   soon to upgrade to Mavericks .***T-NEU T-NEU T-NEU O O O O O O O
-OSX Mountain Lion   soon to upgrade to Mavericks .***O O O O O O O O T-NEU O
-I just bought the new MacBook Pro , the 13 " model , and I ca n't believe Apple keeps making the same mistake with regard to USB ports .***O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O
+OSX Mountain Lion soon to upgrade to Mavericks .***T-NEU T-NEU T-NEU O O O O O O
+OSX Mountain Lion soon to upgrade to Mavericks .***O O O O O O O T-NEU O
+I just bought the new MacBook Pro , the 13 `` model , and I ca n't believe Apple keeps making the same mistake with regard to USB ports .***O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O
 It wakes in less than a second when I open the lid .***O O O O O O O O O O O T-NEU O
 It wakes in less than a second when I open the lid .***O T-POS O O O O O O O O O O O
 It is the perfect size and speed for me .***O O O O T-POS O O O O O
 It is the perfect size and speed for me .***O O O O O O T-POS O O O
 THE CUSTOMER SERVICE IS TERRIFIC ! !***O T-POS T-POS O O O O
-My last laptop was a 17 " ASUS gaming machine , which performed admirably , but having since built my own desktop and really settling into the college life , I found myself wanting something smaller and less cumbersome , not to mention that the ASUS had been slowly developing problems ever since I bought it about 4 years ago .***O O O O O O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-However , it did not have any scratches , ZERO battery cycle count ( pretty surprised ) , and all the hardware seemed to be working perfectly .***O O O O O O O O O O T-POS T-POS T-POS O O O O O O O O O O O O O O O
-However , it did not have any scratches , ZERO battery cycle count ( pretty surprised ) , and all the hardware seemed to be working perfectly .***O O O O O O O O O O O O O O O O O O O O O T-POS O O O O O O
+My last laptop was a 17 `` ASUS gaming machine , which performed admirably , but having since built my own desktop and really settling into the college life , I found myself wanting something smaller and less cumbersome , not to mention that the ASUS had been slowly developing problems ever since I bought it about 4 years ago .***O O O O O O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+However , it did not have any scratches , ZERO battery cycle count -LRB- pretty surprised -RRB- , and all the hardware seemed to be working perfectly .***O O O O O O O O O O T-POS T-POS T-POS O O O O O O O O O O O O O O O
+However , it did not have any scratches , ZERO battery cycle count -LRB- pretty surprised -RRB- , and all the hardware seemed to be working perfectly .***O O O O O O O O O O O O O O O O O O O O O T-POS O O O O O O
 After fumbling around with the OS I started searching the internet for a fix and found a number of forums on fixing the issue .***O O O O O T-NEG O O O O O O O O O O O O O O O O O O O
 And as for all the fancy finger swipes -- I just gave up and attached a mouse .***O O O O O O T-NEG T-NEG O O O O O O O O O O
 And as for all the fancy finger swipes -- I just gave up and attached a mouse .***O O O O O O O O O O O O O O O O T-NEU O
 I needed a laptop with big storage , a nice screen and fast so I can photoshop without any problem .***O O O O O O T-NEU O O O O O O O O O O O O O O
 I needed a laptop with big storage , a nice screen and fast so I can photoshop without any problem .***O O O O O O O O O O T-NEU O O O O O O O O O O
 I needed a laptop with big storage , a nice screen and fast so I can photoshop without any problem .***O O O O O O O O O O O O O O O O T-NEU O O O O
-I like coming back to Mac OS but this laptop is lacking in speaker quality compared to my $ 400   old HP laptop .***O O O O O T-POS T-POS O O O O O O O O O O O O O O O O O O
-I like coming back to Mac OS but this laptop is lacking in speaker quality compared to my $ 400   old HP laptop .***O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O
+I like coming back to Mac OS but this laptop is lacking in speaker quality compared to my $ 400 old HP laptop .***O O O O O T-POS T-POS O O O O O O O O O O O O O O O O O
+I like coming back to Mac OS but this laptop is lacking in speaker quality compared to my $ 400 old HP laptop .***O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O
 Shipped very quickly and safely .***T-POS O O O O O
 The thunderbolt port is awesome !***O T-POS T-POS O O O
 The performance is definitely superior to any computer I 've ever put my hands on .***O T-POS O O O O O O O O O O O O O O
@@ -323,19 +323,19 @@ It 's great for streaming video and other entertainment uses .***O O O O O O O O
 I like the design and its features but there are somethings I think needs to be improved .***O O O T-POS O O O O O O O O O O O O O O
 I like the design and its features but there are somethings I think needs to be improved .***O O O O O O T-POS O O O O O O O O O O O
 There were small problems with Mac office .***O O O O O T-NEG T-NEG O
-I understand I should call Apple Tech Support about any variables(which is my purpose of writing this con ) as variables could be a bigger future problem .***O O O O O T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O
-I ordered my 2012 mac mini after being disappointed with spec of the new 27 " Imacs .***O O O O O O O O O O T-NEG O O O O O O O
+I understand I should call Apple Tech Support about any variables -LRB- which is my purpose of writing this con -RRB- as variables could be a bigger future problem .***O O O O O T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O
+I ordered my 2012 mac mini after being disappointed with spec of the new 27 `` Imacs .***O O O O O O O O O O T-NEG O O O O O O O
 It still works and it 's extremely user friendly , so I would recommend it for new computer user and also for those who are just looking for a more efficient way to do things***O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
 Its fast , easy to use and it looks great .***O O O O O T-POS O O O O O
 Its fast , easy to use and it looks great .***O O O O O O O O T-POS O O
-( but Office can be purchased ) IF I ever need a laptop again I am for sure purchasing another Toshiba ! !***O O T-NEU O O O O O O O O O O O O O O O O O O O O
+-LRB- but Office can be purchased -RRB- IF I ever need a laptop again I am for sure purchasing another Toshiba ! !***O O T-NEU O O O O O O O O O O O O O O O O O O O O
 I have n't tried the one with retina display ... Maybe in the future .***O O O O O O O T-NEU T-NEU O O O O O O
 Performance is much much better on the Pro , especially if you install an SSD on it .***T-POS O O O O O O O O O O O O O O O O O
 Performance is much much better on the Pro , especially if you install an SSD on it .***O O O O O O O O O O O O O O T-POS O O O
 Note , however , that any existing MagSafe accessories you have will not work with the MagSafe 2 connection .***O O O O O O O T-NEU T-NEU O O O O O O O O O O O
 Note , however , that any existing MagSafe accessories you have will not work with the MagSafe 2 connection .***O O O O O O O O O O O O O O O O T-NEG T-NEG T-NEG O
-The only thing I dislike is the touchpad , alot of the times its unresponsive and does things I do nt want it too , I would recommend using a mouse with it .***O O O O O O O T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O
-The only thing I dislike is the touchpad , alot of the times its unresponsive and does things I do nt want it too , I would recommend using a mouse with it .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O O O
+The only thing I dislike is the touchpad , alot of the times its unresponsive and does things I dont want it too , I would recommend using a mouse with it .***O O O O O O O T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O
+The only thing I dislike is the touchpad , alot of the times its unresponsive and does things I dont want it too , I would recommend using a mouse with it .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O O O
 The Mac mini is about 8x smaller than my old computer which is a huge bonus and runs very quiet , actually the fans are n't audible unlike my old pc***O O O O O O O O O O O O O O O O O T-POS O O O O O O O O O O O O O
 The Mac mini is about 8x smaller than my old computer which is a huge bonus and runs very quiet , actually the fans are n't audible unlike my old pc***O O O O O O O O O O O O O O O O O O O O O O O T-POS O O O O O O O
 MAYBE The Mac OS improvement were not The product they Want to offer .***O O T-NEG T-NEG O O O O O O O O O O
@@ -344,13 +344,13 @@ It 's absolutely wonderful and worth the price !***O O O O O O O T-POS O
 I am please with the products ease of use ; out of the box ready ; appearance and functionality .***O O O O O O O O T-POS O O O O O O O O O O O
 I am please with the products ease of use ; out of the box ready ; appearance and functionality .***O O O O O O O O O O O O O O O O T-POS O O O
 I am please with the products ease of use ; out of the box ready ; appearance and functionality .***O O O O O O O O O O O O O O O O O O T-POS O
-Perfect for all my graphic design classes I 'm taking this year in college :-)***O O O O T-POS T-POS O O O O O O O O O
+Perfect for all my graphic design classes I 'm taking this year in college : - -RRB-***O O O O T-POS T-POS O O O O O O O O O O O
 I will not be using that slot again .***O O O O O O T-NEG O O
 The OS is fast and fluid , everything is organized and it 's just beautiful .***O T-POS O O O O O O O O O O O O O O
 They are simpler to use .***O O O O T-POS O
-! so nice .. stable .. fast .. now i got my SSD !***O O O O O O O O O O O O T-POS O
-Also , in using the built - in camera , my voice recording for my vlog sounds like the interplanetary transmissions in the " Star Wars " saga .***O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O
-Also , in using the built - in camera , my voice recording for my vlog sounds like the interplanetary transmissions in the " Star Wars " saga .***O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O
+! so nice . . stable . . fast . . now i got my SSD !***O O O O O O O O O O O O O O O T-POS O
+Also , in using the built-in camera , my voice recording for my vlog sounds like the interplanetary transmissions in the `` Star Wars `` saga .***O O O O O T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O
+Also , in using the built-in camera , my voice recording for my vlog sounds like the interplanetary transmissions in the `` Star Wars `` saga .***O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O O O
 I love the quick start up .***O O O O T-POS T-POS O
 You just can not beat the functionality of an Apple device .***O O O O O O T-POS O O O O O
 Yet my mac continues to function properly .***O O O O O T-POS O O
@@ -368,34 +368,35 @@ Came with iPhoto and garage band already loaded .***O O O O T-NEU T-NEU O O O
 Logic board utterly fried , cried , and laid down and died .***T-POS T-POS O O O O O O O O O O O
 The sound was crappy even when you turn up the volume still the same results .***O T-NEG O O O O O O O O O O O O O O
 The sound was crappy even when you turn up the volume still the same results .***O O O O O O O O O O T-NEG O O O O O
-OSX Lion is a great performer .. extremely fast and reliable .***T-POS T-POS O O O O O O O O O O
+OSX Lion is a great performer . . extremely fast and reliable .***T-POS T-POS O O O O O O O O O O O
 Having heard from friends and family about how reliable a Mac product is , I never expected to have an application crash within the first month , but I did .***O O O O O O O O O O O O O O O O O O O O T-NEG O O O O O O O O O O
 The Macbook pro 's physical form is wonderful .***O O O O T-POS T-POS O O O
-The Mini 's body has n't changed since late 2010- and for a good reason .***O O O T-POS O O O O O O O O O O O O
+The Mini 's body has n't changed since late 2010 - and for a good reason .***O O O T-POS O O O O O O O O O O O O O
 The unibody construction really does feel lot more solid than Apple 's previous laptops .***O T-POS T-POS O O O O O O O O O O O O
 3D rendering slows it down considerably .***T-NEG T-NEG O O O O O
 Got this Mac Mini with OS X Mountain Lion for my wife .***O O O O O T-NEU T-NEU T-NEU T-NEU O O O O
-fast , great screen , beautiful apps for a laptop;priced at 1100 on the apple website;amazon had it for 1098 + tax -   plus i had a 10 % off coupon from amazon - cost me 998 plus tax- 1070- OTD !***O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-fast , great screen , beautiful apps for a laptop;priced at 1100 on the apple website;amazon had it for 1098 + tax -   plus i had a 10 % off coupon from amazon - cost me 998 plus tax- 1070- OTD !***O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-fast , great screen , beautiful apps for a laptop;priced at 1100 on the apple website;amazon had it for 1098 + tax -   plus i had a 10 % off coupon from amazon - cost me 998 plus tax- 1070- OTD !***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O O O O O O O
+fast , great screen , beautiful apps for a laptop ; priced at 1100 on the apple website ; amazon had it for 1098 + tax - plus i had a 10 % off coupon from amazon-cost me 998 plus tax - 1070 - OTD !***O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+fast , great screen , beautiful apps for a laptop ; priced at 1100 on the apple website ; amazon had it for 1098 + tax - plus i had a 10 % off coupon from amazon-cost me 998 plus tax - 1070 - OTD !***O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+fast , great screen , beautiful apps for a laptop ; priced at 1100 on the apple website ; amazon had it for 1098 + tax - plus i had a 10 % off coupon from amazon-cost me 998 plus tax - 1070 - OTD !***O O O O O O O O O O O T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+fast , great screen , beautiful apps for a laptop ; priced at 1100 on the apple website ; amazon had it for 1098 + tax - plus i had a 10 % off coupon from amazon - cost me 998 plus tax - 1070 - OTD !***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O O O O O O O O O
 12.44 seconds to boot .***O O O T-NEU O
 All the ports are much needed since this is my main computer .***O O T-NEU O O O O O O O O O O
-The Like New condition of the iMac MC309LL / A on Amazon is at $ 900 + level only , and it is a Quad - Core 2.5 GHz CPU ( similar to the $ 799 Mini ) , with Radeon HD 6750 M 512 MB graphic card ( this mini is integrated Intel 4000 card ) , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-The Like New condition of the iMac MC309LL / A on Amazon is at $ 900 + level only , and it is a Quad - Core 2.5 GHz CPU ( similar to the $ 799 Mini ) , with Radeon HD 6750 M 512 MB graphic card ( this mini is integrated Intel 4000 card ) , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-The Like New condition of the iMac MC309LL / A on Amazon is at $ 900 + level only , and it is a Quad - Core 2.5 GHz CPU ( similar to the $ 799 Mini ) , with Radeon HD 6750 M 512 MB graphic card ( this mini is integrated Intel 4000 card ) , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O
-The Like New condition of the iMac MC309LL / A on Amazon is at $ 900 + level only , and it is a Quad - Core 2.5 GHz CPU ( similar to the $ 799 Mini ) , with Radeon HD 6750 M 512 MB graphic card ( this mini is integrated Intel 4000 card ) , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O
-The Like New condition of the iMac MC309LL / A on Amazon is at $ 900 + level only , and it is a Quad - Core 2.5 GHz CPU ( similar to the $ 799 Mini ) , with Radeon HD 6750 M 512 MB graphic card ( this mini is integrated Intel 4000 card ) , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS O
+The Like New condition of the iMac MC309LL/A on Amazon is at $ 900 + level only , and it is a Quad-Core 2.5 GHz CPU -LRB- similar to the $ 799 Mini -RRB- , with Radeon HD 6750M 512MB graphic card -LRB- this mini is integrated Intel 4000 card -RRB- , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+The Like New condition of the iMac MC309LL/A on Amazon is at $ 900 + level only , and it is a Quad-Core 2.5 GHz CPU -LRB- similar to the $ 799 Mini -RRB- , with Radeon HD 6750M 512MB graphic card -LRB- this mini is integrated Intel 4000 card -RRB- , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+The Like New condition of the iMac MC309LL/A on Amazon is at $ 900 + level only , and it is a Quad-Core 2.5 GHz CPU -LRB- similar to the $ 799 Mini -RRB- , with Radeon HD 6750M 512MB graphic card -LRB- this mini is integrated Intel 4000 card -RRB- , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O
+The Like New condition of the iMac MC309LL/A on Amazon is at $ 900 + level only , and it is a Quad-Core 2.5 GHz CPU -LRB- similar to the $ 799 Mini -RRB- , with Radeon HD 6750M 512MB graphic card -LRB- this mini is integrated Intel 4000 card -RRB- , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O
+The Like New condition of the iMac MC309LL/A on Amazon is at $ 900 + level only , and it is a Quad-Core 2.5 GHz CPU -LRB- similar to the $ 799 Mini -RRB- , with Radeon HD 6750M 512MB graphic card -LRB- this mini is integrated Intel 4000 card -RRB- , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS O
 Put a cover on it and is a little better but that is my only complaint .***O O T-NEU O O O O O O O O O O O O O O
 Within a few hours I was using the gestures unconsciously .***O O O O O O O O T-POS O O
 This mac does come with an extender cable and I 'm using mine right now hoping the cable will stay nice for the many years I plan on using this mac .***O O O O O O T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O
 This mac does come with an extender cable and I 'm using mine right now hoping the cable will stay nice for the many years I plan on using this mac .***O O O O O O O O O O O O O O O O O T-POS O O O O O O O O O O O O O O
-The 2.9ghz dual - core i7 chip really out does itself .***O T-POS T-POS T-POS T-POS T-POS T-POS O O O O O
+The 2.9ghz dual-core i7 chip really out does itself .***O T-POS T-POS T-POS T-POS O O O O O
 It is pretty snappy and starts up in about 30 seconds which is good enough for me .***O O O O O T-POS T-POS O O O O O O O O O O O
 Not sure on Windows 8 .***O O O T-NEU T-NEU O
 My one complaint is that there was no internal CD drive .***O O O O O O O O T-NEG T-NEG T-NEG O
 This newer netbook has no hard drive or network lights .***O O O O O T-NEU T-NEU O O O O
 This newer netbook has no hard drive or network lights .***O O O O O O O O T-NEU T-NEU O
-I was having a though time deciding between the 13 " MacBook Air or the MacBook Pro 13 " ( Both baseline models , priced at 1,200 $ retail )***O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O O O O O
+I was having a though time deciding between the 13 `` MacBook Air or the MacBook Pro 13 `` -LRB- Both baseline models , priced at 1,200 $ retail -RRB-***O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O O O O O
 Not too expense and has enough storage for most users and many ports .***O O O O O O T-POS O O O O O O O
 Not too expense and has enough storage for most users and many ports .***O O O O O O O O O O O O T-POS O
 The audio volume is quite low and virtually unusable in a room with any background activity .***O T-NEG T-NEG O O O O O O O O O O O O O O
@@ -404,8 +405,8 @@ I was given a demonstration of Windows 8 .***O O O O O O T-NEU T-NEU O
 The MBP is beautiful has many wonderful capabilities .***O O O O O O O T-POS O
 I thought that it will be fine , if i do some settings .***O O O O O O O O O O O O T-NEU O
 Runs very smoothly .***T-POS O O O
-Boot - up slowed significantly after all Windows updates were installed .***T-NEG T-NEG T-NEG O O O O O O O O O
-Boot - up slowed significantly after all Windows updates were installed .***O O O O O O O T-NEG T-NEG O O O
+Boot-up slowed significantly after all Windows updates were installed .***T-NEG O O O O O O O O O
+Boot-up slowed significantly after all Windows updates were installed .***O O O O O T-NEG T-NEG O O O
 More likely it will require replacing the logic board once they admit they have a problem and come up with a solution .***O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O
 It was important that it was powerful enough to do all of the tasks he needed on the internet , word processing , graphic design and gaming .***O O O O O O O O O O O O O O O O O O T-POS O O O O O O O O O
 It was important that it was powerful enough to do all of the tasks he needed on the internet , word processing , graphic design and gaming .***O O O O O O O O O O O O O O O O O O O O T-POS T-POS O O O O O O
@@ -422,18 +423,18 @@ Since the machine 's slim profile is critical to me , that was a problem .***O O
 WiFi capability , disk drive and multiple USB ports to connect scale and printers was all that was required .***O O O T-POS T-POS O O O O O O O O O O O O O O O
 WiFi capability , disk drive and multiple USB ports to connect scale and printers was all that was required .***O O O O O O O T-POS T-POS O O O O O O O O O O O
 WiFi capability , disk drive and multiple USB ports to connect scale and printers was all that was required .***T-POS T-POS O O O O O O O O O O O O O O O O O O
-The SD card reader is slightly recessed and upside down ( the nail slot on the card can not be accessed ) , if this was a self ejecting slot this would not be an issue , but its not .***O T-NEG T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-The SD card reader is slightly recessed and upside down ( the nail slot on the card can not be accessed ) , if this was a self ejecting slot this would not be an issue , but its not .***O O O O O O O O O O O O T-NEG T-NEG T-NEG T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O
-The SD card reader is slightly recessed and upside down ( the nail slot on the card can not be accessed ) , if this was a self ejecting slot this would not be an issue , but its not .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG O O O O O O O O O O O
+The SD card reader is slightly recessed and upside down -LRB- the nail slot on the card can not be accessed -RRB- , if this was a self ejecting slot this would not be an issue , but its not .***O T-NEG T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+The SD card reader is slightly recessed and upside down -LRB- the nail slot on the card can not be accessed -RRB- , if this was a self ejecting slot this would not be an issue , but its not .***O O O O O O O O O O O O T-NEG T-NEG T-NEG T-NEG T-NEG O O O O O O O O O O O O O O O O O O O O O O O O
+The SD card reader is slightly recessed and upside down -LRB- the nail slot on the card can not be accessed -RRB- , if this was a self ejecting slot this would not be an issue , but its not .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG O O O O O O O O O O O
 Soft touch , anodized aluminum with laser cut precision and no flaws .***O T-POS O O O O O O O O O O O
 Soft touch , anodized aluminum with laser cut precision and no flaws .***O O O T-POS T-POS O O O O O O O O
 Simple details , crafted aluminium and real glass make this laptop blow away the other plastic ridden , bulky sticker filled laptops .***O O O O T-POS O O O O O O O O O O O O O O O O O O
 Simple details , crafted aluminium and real glass make this laptop blow away the other plastic ridden , bulky sticker filled laptops .***O O O O O O O T-POS O O O O O O O O O O O O O O O
 First of all yes this is a mac and it has that nice brushed aluminum .***O O O O O O O O O O O O O O T-POS O
-After all was said and done , I essentially used that $ 450 savings to buy 16 GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O
-After all was said and done , I essentially used that $ 450 savings to buy 16 GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O
-After all was said and done , I essentially used that $ 450 savings to buy 16 GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O O O
-After all was said and done , I essentially used that $ 450 savings to buy 16 GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU O
+After all was said and done , I essentially used that $ 450 savings to buy 16GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O
+After all was said and done , I essentially used that $ 450 savings to buy 16GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O
+After all was said and done , I essentially used that $ 450 savings to buy 16GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O O O
+After all was said and done , I essentially used that $ 450 savings to buy 16GB of RAM , TWO Seagate Momentus XT hybrid drives and an OWC upgrade kit to install the second hard drive .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU O
 The Dell Inspiron is fast and has a number pad on the keyboard , which I miss on my Apple laptops .***O O O O O O O O T-POS T-POS T-POS T-POS T-POS O O O O O O O O O
 I was concerned that the downgrade to the regular hard drive would make it unacceptably slow but I need not have worried - this machine is the fastest I have ever owned ...***O O O O O O O O T-POS T-POS T-POS O O O O O O O O O O O O O O O O O O O O O O
 This one still has the CD slot .***O O O O O T-NEU T-NEU O
@@ -459,10 +460,10 @@ Fan only comes on when you are playing a game .***T-NEU O O O O O O O O O O
 Fan only comes on when you are playing a game .***O O O O O O O T-NEU T-NEU T-NEU O
 Which it did not have , only 3 USB 2 ports .***O O O O O O O O T-NEU T-NEU T-NEU O
 No startup disk was not included but that may be my fault .***O T-NEU T-NEU O O O O O O O O O O
-There is no " tools " menu .***O O O T-NEU T-NEU T-NEU T-NEU O
+There is no `` tools '' menu .***O O O T-NEU T-NEU T-NEU T-NEU O
 It is very fast and has everything that I need except for a word program .***O O O O O O O O O O O O O T-NEG T-NEG O
-Needs a CD / DVD drive and a bigger power switch .***O O T-NEU T-NEU T-NEU T-NEU O O O O O O
-Needs a CD / DVD drive and a bigger power switch .***O O O O O O O O O T-NEG T-NEG O
+Needs a CD/DVD drive and a bigger power switch .***O O T-NEU T-NEU O O O O O O
+Needs a CD/DVD drive and a bigger power switch .***O O O O O O O T-NEG T-NEG O
 My laptop with Windows 7 crashed and I did not want Windows 8 .***O O O T-NEG T-NEG O O O O O O O O O
 My laptop with Windows 7 crashed and I did not want Windows 8 .***O O O O O O O O O O O T-NEG T-NEG O
 Easy to install also small to leave anywhere at your bedroom also very easy to configure for ADSl cable or wifi .***O O T-POS O O O O O O O O O O O O O O O O O O O
@@ -476,8 +477,8 @@ I am used to computers with windows so I am having a little difficulty finding m
 It just works out of the box and you have a lot of cool software included with the OS .***O O T-POS O O O O O O O O O O O O O O O O O
 It just works out of the box and you have a lot of cool software included with the OS .***O O O O O O O O O O O O O O T-POS O O O O O
 It just works out of the box and you have a lot of cool software included with the OS .***O O O O O O O O O O O O O O O O O O T-NEU O
-its as advertised on here ..... it works great and is not a waste of money !***O O O O O O O T-POS O O O O O O O O O
-Runs like a champ .....***T-POS O O O O
+its as advertised on here ... it works great and is not a waste of money !***O O O O O O O T-POS O O O O O O O O O
+Runs like a champ ...***T-POS O O O O
 Premium price for the OS more than anything else .***O T-POS O O O O O O O O
 Premium price for the OS more than anything else .***O O O O T-NEU O O O O O
 I was a little concerned about the touch pad based on reviews , but I 've found it fine to work with .***O O O O O O O T-POS T-POS O O O O O O O O O O O O O O
@@ -500,27 +501,27 @@ Additionally , there is barely a ventilation system in the computer , and even t
 Additionally , there is barely a ventilation system in the computer , and even the simple activity of watching videos let alone playing steam games causes the laptop to get very very hot , and in fact impossible to keep on lap .***O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O
 Chatting with Acer support , I was advised the problem was corrupted operating system files .***O O T-NEU T-NEU O O O O O O O O O O O O
 Chatting with Acer support , I was advised the problem was corrupted operating system files .***O O O O O O O O O O O O T-NEU T-NEU T-NEU O
-It 's been a couple weeks since the purchase and I 'm struggle with finding the correct keys ( but that was expected ) .***O O O O O O O O O O O O O O O O O T-NEU O O O O O O O
+It 's been a couple weeks since the purchase and I 'm struggle with finding the correct keys -LRB- but that was expected -RRB- .***O O O O O O O O O O O O O O O O O T-NEU O O O O O O O
 Many people complain about the new OS , and it 's urgent for Apple to fix it asap !***O O O O O O T-NEG O O O O O O O O O O O O
 Now that I have upgraded to Lion I am much happier about MAC OS and have just bought an iMac for office .***O O O O O O T-POS O O O O O O O O O O O O O O O O
 Now that I have upgraded to Lion I am much happier about MAC OS and have just bought an iMac for office .***O O O O O O O O O O O O T-POS T-POS O O O O O O O O O
 User upgradeable RAM and HDD .***O O T-POS O O O
 User upgradeable RAM and HDD .***O O O O T-POS O
-But I wanted the Pro for the CD / DVD player .***O O O O O O O T-POS T-POS T-POS T-POS O
+But I wanted the Pro for the CD/DVD player .***O O O O O O O T-POS T-POS O
 I was a little worry at first because I do n't have a lot of experience with os.x and windows has always been second nature to me after many years of using windows .***O O O O O O O O O O O O O O O O O T-NEU O O O O O O O O O O O O O O O O
 I was a little worry at first because I do n't have a lot of experience with os.x and windows has always been second nature to me after many years of using windows .***O O O O O O O O O O O O O O O O O O O T-POS O O O O O O O O O O O O O O
 I was a little worry at first because I do n't have a lot of experience with os.x and windows has always been second nature to me after many years of using windows .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU O
 With the softwares supporting the use of other OS makes it much better .***O O O O O O O O T-NEU O O O O O
 With the softwares supporting the use of other OS makes it much better .***O O T-NEU O O O O O O O O O O O
-I then upgraded to Mac OS X 10.8 " Mountain Lion " .***O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O
+I then upgraded to Mac OS X 10.8 `` Mountain Lion '' .***O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O
 I was considering buying the Air , but in reality , this one has a more powerful performance and seems much more convenient , even though it 's about .20 inch thicker and 2 lbs heavier .***O O O O O O O O O O O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O
-At home and the office it gets plugged into an external 24 " LCD screen , so built in screen size is not terribly important .***O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O
-At home and the office it gets plugged into an external 24 " LCD screen , so built in screen size is not terribly important .***O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O
+At home and the office it gets plugged into an external 24 `` LCD screen , so built in screen size is not terribly important .***O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O
+At home and the office it gets plugged into an external 24 '' LCD screen , so built in screen size is not terribly important .***O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O
 Just beware no DVD slot so when I went to install software I had on CD I could n't .***O O O O O O O O O O T-NEG T-NEG O O O O O O O O
 Just beware no DVD slot so when I went to install software I had on CD I could n't .***O O O T-NEU T-NEU O O O O O O O O O O O O O O O
 I bought it to be able to dedicate a small , portable laptop to my writing and was surprised to learn that I needed to buy a word processing program to do so .***O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O
-This version of MacBook Pro runs on a third - generation CPU ( " Ivy Bridge " ) , not the latest fourth - generation Haswell CPU the 2013 version has .***O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O
-This version of MacBook Pro runs on a third - generation CPU ( " Ivy Bridge " ) , not the latest fourth - generation Haswell CPU the 2013 version has .***O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O
+This version of MacBook Pro runs on a third-generation CPU ( `` Ivy Bridge '' ) , not the latest fourth-generation Haswell CPU the 2013 version has .***O O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O
+This version of MacBook Pro runs on a third-generation CPU -LRB- `` Ivy Bridge `` -RRB- , not the latest fourth-generation Haswell CPU the 2013 version has .***O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O
 No Cd Rom in the new version there 's no way I 'm spending that kind of money on something has less features than the older version .***O T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O
 No Cd Rom in the new version there 's no way I 'm spending that kind of money on something has less features than the older version .***O O O O O O O O O O O O O O O O O O O O O O T-NEG O O O O O
 the volume is really low to low for a laptopwas not expectin t volume to be so lowan i hate that about this computer***O T-NEG O O O O O O O O O O O O O O O O O O O O O O
@@ -528,9 +529,9 @@ the volume is really low to low for a laptopwas not expectin t volume to be so l
 and its not hard to accidentally bang it against something so i recommend getting a case to protect it .***O O O O O O O O O O O O O O O T-NEU O O O O
 I got this at an amazing price from Amazon and it arrived just in time .***O O O O O O T-POS O O O O O O O O O
 Every time I log into the system after a few hours , there is this endlessly frustrating process that I have to go through .***O O O T-NEG T-NEG T-NEG T-NEG O O O O O O O O O O O O O O O O O O
-Put a SSD and use a 21 " LED screen , this set up is silky smooth !***O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O
-Put a SSD and use a 21 " LED screen , this set up is silky smooth !***O O T-NEU O O O O O O O O O O O O O O O
-Put a SSD and use a 21 " LED screen , this set up is silky smooth !***O O O O O O O O O O O O T-POS T-POS O O O O
+Put a SSD and use a 21 '' LED screen , this set up is silky smooth !***O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O
+Put a SSD and use a 21 `` LED screen , this set up is silky smooth !***O O T-NEU O O O O O O O O O O O O O O O
+Put a SSD and use a 21 `` LED screen , this set up is silky smooth !***O O O O O O O O O O O O T-POS T-POS O O O O
 The case is now slightly larger than the previous generation , but the lack of an external power supply justifies the small increase in size .***O T-NEG O O O O O O O O O O O O O O O O O O O O O O O O
 The case is now slightly larger than the previous generation , but the lack of an external power supply justifies the small increase in size .***O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O O O
 I had to buy a wireless mouse to go with it , as I am old school and hate the pad , but knew that before I bought it , now it works great , need to get adjusted to the key board , as I am used to a bigger one and pounding .***O O O O O T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
@@ -546,13 +547,13 @@ Has all the other features I wanted including a VGA port , HDMI , ethernet and 3
 Has all the other features I wanted including a VGA port , HDMI , ethernet and 3 USB ports .***O O O O O O O O O O O O O O O O O T-NEU T-NEU O
 The only thing I dislike about this laptop are the rubber pads found on the bottom of the computer for grip .***O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O
 It 's a decent computer for the price and hopefully it will last a long time .***O O O O O O O T-NEU O O O O O O O O O
-The nicest   part is the low heat output and ultra quiet operation .***O O O O O O O T-POS T-POS O O O O O
-The nicest   part is the low heat output and ultra quiet operation .***O O O O O O O O O O O O T-POS O
-I will upgrade the ram myself ( because with this model you can you can do it ) later on .***O O T-POS T-POS T-POS O O O O O O O O O O O O O O O O
+The nicest part is the low heat output and ultra quiet operation .***O O O O O O T-POS T-POS O O O O O
+The nicest part is the low heat output and ultra quiet operation .***O O O O O O O O O O O T-POS O
+I will upgrade the ram myself -LRB- because with this model you can you can do it -RRB- later on .***O O T-POS T-POS T-POS O O O O O O O O O O O O O O O O
 The price is 200 dollars down .***O T-POS O O O O O
-this Mac Mini does not have a built - in mic , and it would seem that its Mac OS 10.9 does not handle external microphones properly .***O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O
-this Mac Mini does not have a built - in mic , and it would seem that its Mac OS 10.9 does not handle external microphones properly .***O O O O O O O O O O O O O O O O O O T-NEG T-NEG T-NEG O O O O O O O
-this Mac Mini does not have a built - in mic , and it would seem that its Mac OS 10.9 does not handle external microphones properly .***O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU O O
+this Mac Mini does not have a built-in mic , and it would seem that its Mac OS 10.9 does not handle external microphones properly .***O O O O O O O T-NEU T-NEU O O O O O O O O O O O O O O O O O
+this Mac Mini does not have a built-in mic , and it would seem that its Mac OS 10.9 does not handle external microphones properly .***O O O O O O O O O O O O O O O O T-NEG T-NEG T-NEG O O O O O O O
+this Mac Mini does not have a built-in mic , and it would seem that its Mac OS 10.9 does not handle external microphones properly .***O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU O O
 A lot of features and shortcuts on the MBP that I was never exposed to on a normal PC .***O O O T-NEU O O O O O O O O O O O O O O O O
 A lot of features and shortcuts on the MBP that I was never exposed to on a normal PC .***O O O O O T-NEU O O O O O O O O O O O O O O
 Was n't sure if I was going to like it much less love it so I went to a local best buy and played around with the IOS system on a Mac Pro and it was totally unique and different .***O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O O O O O O O O O O O O
@@ -562,19 +563,19 @@ working with Mac is so much easier , so many cool features .***T-POS O O O O O O
 working with Mac is so much easier , so many cool features .***O O O O O O O O O O O T-POS O
 I like the brightness and adjustments .***O O O T-POS O O O
 I like the brightness and adjustments .***O O O O O T-POS O
-I only wish this mac had a CD / DVD player built in .***O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O
+I only wish this mac had a CD/DVD player built in .***O O O O O O O T-NEU T-NEU O O O
 The only thing I miss is that my old Alienware laptop had backlit keys .***O O O O O O O O O O O O T-NEG T-NEG O
-The only thing I miss are the " Home / End " type keys and other things that I grew accustomed to after so long .***O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O
+The only thing I miss are the `` Home/End '' type keys and other things that I grew accustomed to after so long .***O O O O O O O T-NEU T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O
 So happy with this purchase , I just wish it came with Microsoft Word .***O O O O O O O O O O O O T-NEU T-NEU O
 It has enough memory and speed to run my business with all the flexibility that comes with a laptop .***O O O T-POS O O O O O O O O O O O O O O O O
 It has enough memory and speed to run my business with all the flexibility that comes with a laptop .***O O O O O T-POS O O O O O O O O O O O O O O
 It has enough memory and speed to run my business with all the flexibility that comes with a laptop .***O O O O O O O O O O O O O T-POS O O O O O O
-The speed , the simplicity , the design .. it is lightyears ahead of any PC I have ever owned .***O T-POS O O O O O O O O O O O O O O O O O O O
-The speed , the simplicity , the design .. it is lightyears ahead of any PC I have ever owned .***O O O O T-POS O O O O O O O O O O O O O O O O
-The speed , the simplicity , the design .. it is lightyears ahead of any PC I have ever owned .***O O O O O O O T-POS O O O O O O O O O O O O O
-The battery life is excellent , the display is excellent , and downloading apps is a   breeze .***O T-POS T-POS O O O O O O O O O O O O O O O O
-The battery life is excellent , the display is excellent , and downloading apps is a   breeze .***O O O O O O O T-POS O O O O O O O O O O O
-The battery life is excellent , the display is excellent , and downloading apps is a   breeze .***O O O O O O O O O O O O T-POS T-POS O O O O O
+The speed , the simplicity , the design . . it is lightyears ahead of any PC I have ever owned .***O T-POS O O O O O O O O O O O O O O O O O O O O
+The speed , the simplicity , the design . . it is lightyears ahead of any PC I have ever owned .***O O O O T-POS O O O O O O O O O O O O O O O O O
+The speed , the simplicity , the design . . it is lightyears ahead of any PC I have ever owned .***O O O O O O O T-POS O O O O O O O O O O O O O O
+The battery life is excellent , the display is excellent , and downloading apps is a breeze .***O T-POS T-POS O O O O O O O O O O O O O O O
+The battery life is excellent , the display is excellent , and downloading apps is a breeze .***O O O O O O O T-POS O O O O O O O O O O
+The battery life is excellent , the display is excellent , and downloading apps is a breeze .***O O O O O O O O O O O O T-POS T-POS O O O O
 The screen , the software and the smoothness of the operating system .***O T-POS O O O O O O O O O O O
 The screen , the software and the smoothness of the operating system .***O O O O T-POS O O O O O O O O
 The screen , the software and the smoothness of the operating system .***O O O O O O O O O O T-POS T-POS O
@@ -584,24 +585,25 @@ But with this laptop , the bass is very weak and the sound comes out sounding ti
 But with this laptop , the bass is very weak and the sound comes out sounding tinny .***O O O O O O O O O O O O T-NEG O O O O O
 The built quality is really good , I was so Happy and excited about this Product .***O T-POS T-POS O O O O O O O O O O O O O O
 I am loving the fast performance also .***O O O O O T-POS O O
-Further , this Mac Mini has a sloppy Bluetooth interface ( courtesy of the Mac OS ) and the range is poor .***O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O
-Further , this Mac Mini has a sloppy Bluetooth interface ( courtesy of the Mac OS ) and the range is poor .***O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O
-Further , this Mac Mini has a sloppy Bluetooth interface ( courtesy of the Mac OS ) and the range is poor .***O O O O O O O O O O O O O O O O O O O T-NEG O O O
+Further , this Mac Mini has a sloppy Bluetooth interface -LRB- courtesy of the Mac OS -RRB- and the range is poor .***O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O
+Further , this Mac Mini has a sloppy Bluetooth interface -LRB- courtesy of the Mac OS -RRB- and the range is poor .***O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O
+Further , this Mac Mini has a sloppy Bluetooth interface -LRB- courtesy of the Mac OS -RRB- and the range is poor .***O O O O O O O O O O O O O O O O O O O T-NEG O O O
 If you start on the far right side and scroll to your left the start menu will automatically come up .***O O O O O O O O O O O O O O T-NEU T-NEU O O O O O
 My only gripe would be the need to add more RAM .***O O O O O O O O O O T-NEG O
 Fine if you have a touch screen .***O O O O O T-NEU T-NEU O
-As far as user type - I dabble in everything from games ( WoW ) to Photoshop , but nothing professionally .***O O O O O O O O O O O T-NEU O O O O O O O O O O
-As far as user type - I dabble in everything from games ( WoW ) to Photoshop , but nothing professionally .***O O O O O O O O O O O O O O O O T-NEU O O O O O
-I re - seated the " WLAN " card inside and re - installed the LAN device drivers .***O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O
-I re - seated the " WLAN " card inside and re - installed the LAN device drivers .***O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O
+As far as user type - I dabble in everything from games -LRB- WoW -RRB- to Photoshop , but nothing professionally .***O O O O O O O O O O O T-NEU O O O O O O O O O O
+As far as user type - I dabble in everything from games -LRB- WoW -RRB- to Photoshop , but nothing professionally .***O O O O O O O O O O O O O O O O T-NEU O O O O O
+I re-seated the `` WLAN '' card inside and re-installed the LAN device drivers .***O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O
+I re-seated the `` WLAN `` card inside and re-installed the LAN device drivers .***O O O O O O O O O O O T-NEU T-NEU T-NEU O
 This by far beats any computer out on the market today built well , battery life AMAZING .***O O O O O O O O O O O T-POS O O O O O O
 This by far beats any computer out on the market today built well , battery life AMAZING .***O O O O O O O O O O O O O O T-POS T-POS O O
 The OS is easy , and offers all kinds of surprises .***O T-POS O O O O O O O O O O
 I had to get Apple Customer Support to correct the problem .***O O O O T-NEU T-NEU T-NEU O O O O O
-A veryimportant feature is Firewire 800 which in my experience works better then USB3 ( in PC enabled with USB3)I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O T-POS T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-A veryimportant feature is Firewire 800 which in my experience works better then USB3 ( in PC enabled with USB3)I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O
-A veryimportant feature is Firewire 800 which in my experience works better then USB3 ( in PC enabled with USB3)I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O
-A veryimportant feature is Firewire 800 which in my experience works better then USB3 ( in PC enabled with USB3)I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O
+A veryimportant feature is Firewire 800 which in my experience works better then USB3 -LRB- in PC enabled with USB3 -RRB- I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O T-POS T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+A veryimportant feature is Firewire 800 which in my experience works better then USB3 -LRB- in PC enabled with USB3 -RRB- I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O T-NEG O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+A veryimportant feature is Firewire 800 which in my experience works better then USB3 -LRB- in PC enabled with USB3 -RRB- I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O O O O O O O T-NEU O O O O O O O O O O O O O O O O O O O O O O
+A veryimportant feature is Firewire 800 which in my experience works better then USB3 -LRB- in PC enabled with USB3 -RRB- I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O
+A veryimportant feature is Firewire 800 which in my experience works better then USB3 -LRB- in PC enabled with USB3 -RRB- I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS T-POS O
 I like iTunes , the apparent security , the Mini form factor , all the nice graphics stuff .***O O T-POS O O O O O O O O O O O O O O O O
 I like iTunes , the apparent security , the Mini form factor , all the nice graphics stuff .***O O O O O O T-POS O O O O O O O O O O O O
 I like iTunes , the apparent security , the Mini form factor , all the nice graphics stuff .***O O O O O O O O O T-POS T-POS T-POS O O O O O O O
@@ -617,16 +619,17 @@ packing and everything was perfect***T-POS O O O O
 I called Toshiba where I gave them the serial number and they informed me that they were having issues with the mother boards .***O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU O
 I seem to be having repeat problems as the Mother Board in this one is diagnosed as faulty , related to the graphics card .***O O O O O O O O O T-NEG T-NEG O O O O O O O O O O O O O O
 I seem to be having repeat problems as the Mother Board in this one is diagnosed as faulty , related to the graphics card .***O O O O O O O O O O O O O O O O O O O O O O T-NEG T-NEG O
-It also comes with 4 G of RAM but if you 're like me you want to max that out so I immediately put 8 G of RAM in her and I 've never used a computer that performs better .***O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
-It also comes with 4 G of RAM but if you 're like me you want to max that out so I immediately put 8 G of RAM in her and I 've never used a computer that performs better .***O O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU T-NEU O O O O O O O O O O O O O
-It also comes with 4 G of RAM but if you 're like me you want to max that out so I immediately put 8 G of RAM in her and I 've never used a computer that performs better .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS O O
+It also comes with 4G of RAM but if you 're like me you want to max that out so I immediately put 8G of RAM in her and I 've never used a computer that performs better .***O O O O T-NEU T-NEU T-NEU O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+It also comes with 4G of RAM but if you 're like me you want to max that out so I immediately put 8G of RAM in her and I 've never used a computer that performs better .***O O O O O O O O O O O O O O O O O O O O O O O T-NEU T-NEU T-NEU O O O O O O O O O O O O O
+It also comes with 4G of RAM but if you 're like me you want to max that out so I immediately put 8G of RAM in her and I 've never used a computer that performs better .***O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O T-POS O O
 This computer is also awesome for my sons virtual home schooling .***O O O O O O O O T-POS T-POS T-POS O
 Cost is more as compared to other brands .***T-NEG O O O O O O O O
-also ... - excellent operating system- size and weight for optimal mobility- excellent durability of the battery- the functions provided by the trackpad is unmatched by any other brand-***O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O
-also ... - excellent operating system- size and weight for optimal mobility- excellent durability of the battery- the functions provided by the trackpad is unmatched by any other brand-***O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O
-also ... - excellent operating system- size and weight for optimal mobility- excellent durability of the battery- the functions provided by the trackpad is unmatched by any other brand-***O O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O
-also ... - excellent operating system- size and weight for optimal mobility- excellent durability of the battery- the functions provided by the trackpad is unmatched by any other brand-***O O O O O O O O O O O O O T-POS T-POS T-POS O O O O O O O O O O O O O
-also ... - excellent operating system- size and weight for optimal mobility- excellent durability of the battery- the functions provided by the trackpad is unmatched by any other brand-***O O O O O O O O O O O O O O O O O O T-POS T-POS T-POS T-POS T-POS O O O O O O
+also ... - excellent operating system - size and weight for optimal mobility - excellent durability of the battery - the functions provided by the trackpad is unmatched by any other brand -***O O O O T-POS T-POS O O O O O O O O O O O O O O O O O O O O O O O O O O O
+also ... - excellent operating system - size and weight for optimal mobility - excellent durability of the battery - the functions provided by the trackpad is unmatched by any other brand -***O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O O O
+also ... - excellent operating system - size and weight for optimal mobility - excellent durability of the battery - the functions provided by the trackpad is unmatched by any other brand -***O O O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O O O O
+also ... - excellent operating system - size and weight for optimal mobility - excellent durability of the battery - the functions provided by the trackpad is unmatched by any other brand -***O O O O O O O O O O O O T-POS O O O O O O O O O O O O O O O O O O O O
+also ... - excellent operating system - size and weight for optimal mobility - excellent durability of the battery - the functions provided by the trackpad is unmatched by any other brand -***O O O O O O O O O O O O O O O T-POS T-POS T-POS T-POS O O O O O O O O O O O O O O
+also ... - excellent operating system - size and weight for optimal mobility - excellent durability of the battery - the functions provided by the trackpad is unmatched by any other brand -***O O O O O O O O O O O O O O O O O O O O O T-POS T-POS T-POS T-POS T-POS O O O O O O O
 This hardware seems to be better than the iMac in that it is n't $ 1400 and smaller .***O T-POS O O O O O O O O O O O O O O O O O
 I 've had it for about 2 months now and found no issues with software or updates .***O O O O O O O O O O O O O O T-NEU O O O
 I 've had it for about 2 months now and found no issues with software or updates .***O O O O O O O O O O O O O O O O T-NEU O
