@@ -98,6 +98,6 @@ if __name__ == "__main__":
     makedirs(args.dest, exist_ok=True)
     synonyms: Dict[str, Dict[str, List[List[str | int]]]] = json.load(open(args.synonyms, 'r'))
     tokenizer: BertTokenizer = BertTokenizer.from_pretrained(args.pretrained_model,
-                                                             model_max_length=100)
+                                                             model_max_length=128)
     for file in glob(osp.join(args.src, "*.txt")):
         annotate(file, args.dest, synonyms, tokenizer)
