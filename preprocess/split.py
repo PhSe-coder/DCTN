@@ -19,9 +19,10 @@ def split(file: str, rate=0.8, seed=42):
     with open(file, "r") as f:
         data = f.readlines()
     train_size = int(rate * len(data))
-    test_size = len(data) - train_size
-    generator = torch.Generator().manual_seed(seed)
-    return random_split(data, [train_size, test_size], generator)
+    return data[:train_size], data[train_size:]
+    # test_size = len(data) - train_size
+    # generator = torch.Generator().manual_seed(seed)
+    # return random_split(data, [train_size, test_size], generator)
 
 
 if __name__ == "__main__":

@@ -82,11 +82,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     for file in glob(osp.join(args.data_dir, "**.train.txt")):
         documents = [line.rsplit("***", maxsplit=1)[0] for line in open(file, "r")]
-        docs = []
-        for doc in documents:
-            if doc not in docs:
-                docs.append(doc)
-        sentences = annotation_plus(docs)
+        sentences = annotation_plus(documents)
         common_words = most_common_words(sentences)
         domain = get_domain(file)
         domain_vec = ft.get_word_vector(domain)
