@@ -78,31 +78,24 @@ class FDGRClassifer(LightningModule, LossWeight):
         return BertAdam(pretrained_params, self.lr, 0.1, self.trainer.estimated_stepping_batches)
 
     def training_step(self, train_batch, batch_idx):
-        batch_rate: float = (1.0 * batch_idx + self.trainer.num_training_batches *
-                             self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
+        # batch_rate: float = (1.0 * batch_idx + self.trainer.num_training_batches *
+        #                      self.trainer.current_epoch) / self.trainer.estimated_stepping_batches
         opt = self.optimizers()
         opt.zero_grad()
         outputs = self.forward(**train_batch)
-        ce_loss = outputs.loss["ce_loss"]
-        orthogonal_loss = outputs.loss["orthogonal_loss"]
-        reconstruct_loss = outputs.loss["reconstruct_loss"]
-        ha_loss = outputs.loss["ha_loss"]
-        club_loss = outputs.loss["club_loss"]
-        vad_loss = outputs.loss["vad_loss"]
-        # sub_loss = orthogonal_loss + reconstruct_loss + ha_loss + club_loss + vad_loss
-        sub_loss = 0.01 * reconstruct_loss + 0.01 * ha_loss + 0.001 * club_loss + 0.01 * vad_loss
-        loss = ce_loss + sub_loss
+        weights = {
+            "ce_loss": 1,
+            "orthogonal_loss": 0.000,
+            "reconstruct_loss": 0.01,
+            "ha_loss": 0.01,
+            "club_loss": 0.001,
+            "vad_loss": 0.01
+        }
+        loss = sum([weights[k] * outputs.loss[k] for k in weights])
         self.manual_backward(loss)
         opt.step()
         self.log('train_loss', loss.item())
-        self.log_dict({
-            "ce_loss": ce_loss.item(),
-            "club_loss": club_loss.item(),
-            "orthogonal_loss": orthogonal_loss.item(),
-            "reconstruct_loss": reconstruct_loss.item(),
-            "ha_loss": ha_loss.item(),
-            "vad_loss": vad_loss.item()
-        })
+        self.log_dict(outputs.loss)
         return loss
 
     def validation_step(self, batch, batch_idx):
