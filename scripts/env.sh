@@ -7,4 +7,5 @@ pip install transformers==4.35.2 lightning==2.1.2 matplotlib==3.8.2 openpyxl==3.
 pip install -i https://pypi.org/simple jsonargparse[signatures]==4.27.1 stanza==1.7.0 notebook==7.0.6 tensorboard==2.15.1 tensorboardX==2.6.2.2
 pip install ratelimit retry
 pip uninstall psutil
+pip install scikit-learn==1.4.0
 # pip install omegaconf==2.3.0

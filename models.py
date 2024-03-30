@@ -1,3 +1,4 @@
+import os
 import torch
 from lightning.pytorch import LightningModule
 from transformers import BertTokenizer, BertConfig
@@ -26,6 +27,7 @@ class FDGRClassifer(LightningModule, LossWeight):
                  lr: float,
                  coff: float = 0.02,
                  h_dim: int = 300,
+                 affective_dim: int = 300,
                  pretrained_model_name: str = "bert-base-uncased"):
         """FDGR model classifier by pytorch lightning
 
@@ -51,9 +53,12 @@ class FDGRClassifer(LightningModule, LossWeight):
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_model_name, model_max_length=128)
         config = BertConfig.from_pretrained(pretrained_model_name, num_labels=num_labels)
         config.name_or_path = pretrained_model_name
-        self.model = FDGRModel(config, h_dim)
+        self.model = FDGRModel(config, h_dim, affective_dim)
         self.valid_out = []
         self.test_out = []
+        self.aspect_ha_out = []
+        self.aspect_hc_out = []
+        self.aspect_seq_out = []
 
     def on_train_start(self):
         self.logger.log_hyperparams(self.hparams)
@@ -87,7 +92,7 @@ class FDGRClassifer(LightningModule, LossWeight):
             "ce_loss": 1,
             "orthogonal_loss": 0.000,
             "reconstruct_loss": 0.01,
-            "ha_loss": 0.01,
+            "ha_loss": 0.02,
             "club_loss": 0.001,
             "vad_loss": 0.01
         }
@@ -121,6 +126,10 @@ class FDGRClassifer(LightningModule, LossWeight):
         batch = batch["original"]
         targets = batch.pop("gold_labels")
         logits = outputs.logits
+        emb, aspect_ha, aspect_hc, aspect_seq = outputs.hidden_states
+        self.aspect_ha_out.extend(aspect_ha.tolist())
+        self.aspect_hc_out.extend(aspect_hc.tolist())
+        self.aspect_seq_out.extend(aspect_seq.tolist())
         pred_list, gold_list = logits.argmax(dim=-1).tolist(), targets.tolist()
         self.test_out.append((pred_list, gold_list))
         return pred_list, gold_list
@@ -133,6 +142,11 @@ class FDGRClassifer(LightningModule, LossWeight):
         test_f1 = MulticlassF1Score(self.num_labels)(as_tensor(pred_Y), as_tensor(gold_Y))
         self.log("test_f1", test_f1)
         self.test_out.clear()
+        dir_name = "./processed/aspect_embeddings"
+        os.makedirs(dir_name, exist_ok=True)
+        import time
+        torch.save([self.aspect_ha_out, self.aspect_hc_out, self.aspect_seq_out],
+                   os.path.join(dir_name, f"aspects-{time.strftime('%Y_%m_%d_%H_%M_%S')}.pt"))
 
 
 class BertClassifier(LightningModule):

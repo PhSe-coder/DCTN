@@ -4,7 +4,7 @@ from typing import Dict, Optional, Tuple, Union
 import torch
 import torch.nn as nn
 import dgl
-from dgl.nn import GraphConv
+from dgl.nn import GATConv
 from torch import Tensor
 from transformers import BertModel, BertConfig
 from constants import DEPREL_DICT, POS_DICT
@@ -32,10 +32,16 @@ class FDGRPretrainedModel(nn.Module):
         self.hc_dim = h_dim
         self.hidden_size: int = config.hidden_size
         # feature disentanglement module
-        self.ha_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-                                        nn.ReLU(), nn.Linear(config.hidden_size, self.ha_dim))
-        self.hc_encoder = nn.Sequential(nn.Linear(config.hidden_size, config.hidden_size),
-                                        nn.ReLU(), nn.Linear(config.hidden_size, self.hc_dim))
+        self.ha_encoder = nn.Sequential(
+            nn.Linear(config.hidden_size, config.hidden_size),
+            nn.ReLU(),
+            nn.Linear(config.hidden_size, self.ha_dim),
+        )
+        self.hc_encoder = nn.Sequential(
+            nn.Linear(config.hidden_size, config.hidden_size),
+            nn.ReLU(),
+            nn.Linear(config.hidden_size, self.hc_dim),
+        )
         self.decoder = nn.Sequential(nn.Linear(self.ha_dim + self.hc_dim, config.hidden_size),
                                      nn.ReLU(), nn.Linear(config.hidden_size, config.hidden_size))
         self.mse = nn.MSELoss()
@@ -45,9 +51,9 @@ class FDGRPretrainedModel(nn.Module):
         self.v_layer = nn.Linear(self.hc_dim, self.hc_dim)
         self.a_layer = nn.Linear(self.hc_dim, self.hc_dim)
         self.d_layer = nn.Linear(self.hc_dim, self.hc_dim)
-        self.proj_v = nn.Linear(self.hc_dim, 1)
-        self.proj_a = nn.Linear(self.hc_dim, 1)
-        self.proj_d = nn.Linear(self.hc_dim, 1)
+        self.proj_v = nn.Sequential(nn.Linear(self.hc_dim, 1))
+        self.proj_a = nn.Sequential(nn.Linear(self.hc_dim, 1))
+        self.proj_d = nn.Sequential(nn.Linear(self.hc_dim, 1))
 
     def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
         if not self.training:
@@ -59,7 +65,7 @@ class FDGRPretrainedModel(nn.Module):
                                            attention_mask=attention_mask)[0]
             ha: Tensor = self.ha_encoder(seq_output)
             hc: Tensor = self.hc_encoder(seq_output)
-            return TokenClassifierOutput(hidden_states=(ha, hc))
+            return TokenClassifierOutput(hidden_states=(ha, hc, seq_output))
         assert torch.all(original['attention_mask'] == contrast['attention_mask']).item() == 1
         input_ids = torch.cat([original['input_ids'], contrast['input_ids']])
         token_type_ids = torch.cat([original['token_type_ids'], contrast['token_type_ids']])
@@ -108,31 +114,34 @@ class FDGRPretrainedModel(nn.Module):
             "ha_loss": ha_loss,
             "vad_loss": vad_loss
         },
-                                     hidden_states=(ha, hc))
+                                     hidden_states=(ha, hc, seq_output))
 
 
 class FDGRModel(nn.Module):
 
-    def __init__(self, config: BertConfig, h_dim: int):
+    def __init__(self, config: BertConfig, h_dim: int, affective_dim):
         super(FDGRModel, self).__init__()
         self.h_dim = h_dim
+        self.affective_dim = affective_dim
+        self.sum_dim = h_dim + affective_dim
         self.fdgr = FDGRPretrainedModel(config, h_dim)
         self.num_labels: int = config.num_labels
         self.pos_embedding = nn.Embedding(len(POS_DICT), 30, 0)
         self.dep_embedding = nn.Embedding(len(DEPREL_DICT), 30, 0)
-        self.conv1 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
+        self.affe_proj = nn.Linear(affective_dim, affective_dim)
+        self.conv1 = GATConv(h_dim, h_dim, 2, allow_zero_in_degree=True, activation=nn.GELU())
         # self.conv2 = GraphConv(h_dim, h_dim, allow_zero_in_degree=True)
         self.span_extractor = EndpointSpanExtractor(h_dim,
                                                     combination="x,y",
                                                     num_width_embeddings=4,
-                                                    span_width_embedding_dim=50,
+                                                    span_width_embedding_dim=20,
                                                     bucket_widths=True)
-        self.classifier = nn.Linear(3 * h_dim + 50, self.num_labels)
+        self.classifier = nn.Linear(2 * h_dim + 20, self.num_labels)
         self.loss_fct = nn.CrossEntropyLoss(ignore_index=-1)
 
     def forward(self, original: Dict[str, Tensor], contrast: Dict[str, Tensor] = None):
         outputs: TokenClassifierOutput = self.fdgr(original, contrast)
-        ha, hc = outputs.hidden_states
+        ha, hc, seq_output = outputs.hidden_states
         if self.training:
             att_mask = torch.cat([original['attention_mask'], contrast['attention_mask']])
             valid_mask = torch.cat([original['valid_mask'], contrast['valid_mask']])
@@ -141,6 +150,7 @@ class FDGRModel(nn.Module):
             graph_ids = torch.cat([original['graph_ids'], contrast['graph_ids']])
             aspect_ids = torch.cat([original['aspect_ids'], contrast['aspect_ids']])
             span_indices = torch.cat([original['span_indices'], contrast['span_indices']])
+            affective_ids = torch.cat([original['affective_ids'], contrast['affective_ids']])
         else:
             att_mask = original['attention_mask']
             valid_mask = original['valid_mask']
@@ -149,6 +159,7 @@ class FDGRModel(nn.Module):
             graph_ids = original['graph_ids']
             aspect_ids = original['aspect_ids']
             span_indices = original['span_indices']
+            affective_ids = original['affective_ids']
         batch_size = pos_ids.size(0)
         pos = self.pos_embedding(pos_ids)
         dep = self.dep_embedding(dep_ids)
@@ -156,21 +167,31 @@ class FDGRModel(nn.Module):
             dgl.graph(torch.nonzero(adj_mat, as_tuple=True), num_nodes=adj_mat.size(-1))
             for adj_mat in graph_ids
         ])
-        h = self.conv1(g, ha.view(-1, self.h_dim))
+        h = self.conv1(g, ha.view(-1, self.h_dim)).mean(dim=1)
         # h = self.conv2(g, h.view(-1, self.h_dim))
         # sequence representetion
-        mean = torch.mul(h.view(batch_size, -1, self.h_dim),
-                         (att_mask / att_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
+        affective = self.affe_proj(affective_ids)
+        h = h.view(batch_size, -1, self.h_dim) + 1 * affective
+        mean = torch.mul(h, (att_mask / att_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         # emb = torch.mul(h.view(batch_size, -1, self.h_dim),
         #                 (valid_mask / valid_mask.sum(-1, True)).unsqueeze(-1)).sum(1)
         spans = self.span_extractor(h.view(batch_size, -1, self.h_dim), span_indices,
                                     att_mask).squeeze(1)
-        emb = torch.cat([spans, mean], dim=-1)
+        # emb = torch.cat([spans, mean], dim=-1)
+        emb = spans
         logits: Tensor = self.classifier(emb)
         if self.training:
             outputs.loss["ce_loss"] = self.loss_fct(
                 logits, torch.cat([original['gold_labels'], contrast["gold_labels"]]))
-        return TokenClassifierOutput(logits=logits, loss=outputs.loss, hidden_states=emb)
+        aspect_ha = torch.mul(ha.view(batch_size, -1, self.h_dim),
+                              (aspect_ids / aspect_ids.sum(-1, True)).unsqueeze(-1)).sum(1)
+        aspect_hc = torch.mul(hc.view(batch_size, -1, self.h_dim),
+                              (aspect_ids / aspect_ids.sum(-1, True)).unsqueeze(-1)).sum(1)
+        aspect_seq = torch.mul(seq_output.view(batch_size, -1, seq_output.size(-1)),
+                               (aspect_ids / aspect_ids.sum(-1, True)).unsqueeze(-1)).sum(1)
+        return TokenClassifierOutput(logits=logits,
+                                     loss=outputs.loss,
+                                     hidden_states=(emb, aspect_ha, aspect_hc, aspect_seq))
 
 
 class BertForTokenClassification(nn.Module):
