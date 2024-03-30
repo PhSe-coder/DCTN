@@ -20,6 +20,8 @@ do
             --data.init_args.test_file ./processed/dataset/$tar_domain.test.txt \
             --seed_everything $seed
         fi
+        rm -rf /root/autodl-tmp/lightning_logs/*
     done
 done
+
 done
