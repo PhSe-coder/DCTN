@@ -8,4 +8,4 @@ pip install -i https://pypi.org/simple jsonargparse[signatures]==4.27.1 stanza==
 pip install ratelimit retry
 pip uninstall psutil
 pip install scikit-learn==1.4.0
-# pip install omegaconf==2.3.0
+pip install omegaconf==2.3.0
