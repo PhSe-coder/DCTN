@@ -18,7 +18,7 @@ model:
     coff: 0.1
     lr: 1e-5
     num_labels: 3
-seed_everything: 2024
+seed_everything: 42
 trainer:
   accelerator: gpu
   callbacks:
