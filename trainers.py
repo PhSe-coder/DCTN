@@ -14,6 +14,7 @@ from dataset import ModelDataset
 class ABSADataModule(LightningDataModule):
     batch_size: int
     vad_lexicon_file: str
+    affective_file: str
     num_workers: int = 0
     pretrained_model: str = "bert-base-uncased"
     train_file: str = None
@@ -30,6 +31,11 @@ class ABSADataModule(LightningDataModule):
             for line in f:
                 word, v, a, d = line.split('\t')
                 self.vad_laxicon[word] = (float(v), float(a), float(d))
+        self.affective_space: Dict[str, list[float]] = {}
+        with open(self.affective_file, "r", encoding="UTF-8-sig") as f:
+            for line in f:
+                items = line.strip().split(',')
+                self.affective_space[items[0]] = [float(item) for item in items[1:]]
         self.dataloader = partial(DataLoader,
                                   batch_size=self.batch_size,
                                   num_workers=self.num_workers)
@@ -37,16 +43,19 @@ class ABSADataModule(LightningDataModule):
     def setup(self, stage):
         if stage == 'fit':
             self.train_set = ModelDataset(self.train_file, self.vad_laxicon, self.tokenizer,
-                                          self.contrast_file, self.graph_suffix)
+                                          self.affective_space, self.contrast_file,
+                                          self.graph_suffix)
         if stage in ('fit', 'validate'):
             self.val_set = ModelDataset(self.validation_file,
                                         self.vad_laxicon,
                                         self.tokenizer,
+                                        self.affective_space,
                                         graph_suffix=self.graph_suffix)
         if stage == 'test':
             self.test_set = ModelDataset(self.test_file,
                                          self.vad_laxicon,
                                          self.tokenizer,
+                                         self.affective_space,
                                          graph_suffix=self.graph_suffix)
 
     def train_dataloader(self):
@@ -82,7 +91,7 @@ class PretraninedABSADataModule(LightningDataModule):
 
     def setup(self, stage):
         if stage == 'fit':
-            source = ModelDataset(self.source_trainw_file, self.k2t_file, self.t2k_file, self.target,
+            source = ModelDataset(self.source_train_file, self.k2t_file, self.t2k_file, self.target,
                                   self.tokenizer)
             target = ModelDataset(self.target_train_file, self.k2t_file, self.t2k_file, self.target,
                                   self.tokenizer, False)
@@ -96,6 +105,8 @@ class PretraninedABSADataModule(LightningDataModule):
 
 if __name__ == '__main__':
     torch.set_float32_matmul_precision('high')
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
     ln = LightningCLI(save_config_kwargs={"overwrite": True}, run=False)
     ln.trainer.fit(ln.model, datamodule=ln.datamodule)
     ln.trainer.test(ln.model, ckpt_path="last", datamodule=ln.datamodule)
